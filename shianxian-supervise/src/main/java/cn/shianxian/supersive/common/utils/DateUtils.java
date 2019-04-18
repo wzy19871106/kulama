@@ -17,8 +17,6 @@ public class DateUtils {
 
     private static final DateTimeFormatter yyyyMMddHHmmssFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private static final DateTimeFormatter yyyyMMddHHmmss = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-
     private static final DateTimeFormatter yyyyMMddFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static final ZoneId zoneId = ZoneOffset.systemDefault();
