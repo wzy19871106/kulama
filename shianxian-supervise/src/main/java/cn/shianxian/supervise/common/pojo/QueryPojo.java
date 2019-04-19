@@ -3,7 +3,7 @@ package cn.shianxian.supervise.common.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @Date: 2018/11/20 14:33
@@ -36,10 +36,10 @@ public class QueryPojo {
     /**
      * 开始时间
      */
-    private Date startTime;
+    private LocalDateTime startTime;
 
     /**
      * 结束时间
      */
-    private Date endTime;
+    private LocalDateTime endTime;
 }
