@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.common.utils.MD5Utils;
 import cn.shianxian.supervise.sys.dao.UserDao;
 import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
@@ -40,5 +41,15 @@ public class UserServiceImpl implements UserService {
         }
         List<User> users = this.userDao.selectByExample(example);
         return Result.data(page.getTotal(), users);
+    }
+
+
+    @Override
+    public Result updatePassword(String id, String password) {
+        User user = new User();
+        user.setUserTag(id);
+        user.setUserLoginPass(MD5Utils.md5(password));
+        this.userDao.updateByPrimaryKeySelective(user);
+        return Result.successMsg();
     }
 }

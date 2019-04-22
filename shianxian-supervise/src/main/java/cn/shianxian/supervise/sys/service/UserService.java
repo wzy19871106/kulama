@@ -13,4 +13,14 @@ public interface UserService {
      * @return
      */
     Result selectUserByPage(QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 修改密码
+     * @param id
+     * @param password
+     * @return
+     */
+    Result updatePassword(String id, String password);
+
 }
