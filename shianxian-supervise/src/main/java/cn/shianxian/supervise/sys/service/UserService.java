@@ -31,4 +31,13 @@ public interface UserService {
      * @return
      */
     Result saveOrUpdateUser(User user);
+
+
+    /**
+     * 登录
+     * @param username
+     * @param password
+     * @return
+     */
+    Result login(String username, String password);
 }

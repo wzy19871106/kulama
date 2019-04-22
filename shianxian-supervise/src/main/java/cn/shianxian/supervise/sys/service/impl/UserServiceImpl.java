@@ -6,6 +6,7 @@ import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.MD5Utils;
 import cn.shianxian.supervise.common.utils.UUIDGenerator;
+import cn.shianxian.supervise.exception.CommonException;
 import cn.shianxian.supervise.sys.dao.UserDao;
 import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
@@ -66,5 +67,28 @@ public class UserServiceImpl implements UserService {
             this.userDao.updateByPrimaryKeySelective(user);
         }
         return Result.successMsg();
+    }
+
+
+    @Override
+    public Result login(String username, String password) {
+        User user = new User();
+        user.setUserLoginName(username);
+        user.setUserLoginPass(password);
+        List<User> userList = this.userDao.select(user);
+        if (1 == userList.size()) {
+            User loginUser = userList.get(0);
+            loginUser.setUserLastTime(LocalDateTime.now());
+            this.userDao.updateByPrimaryKeySelective(user);
+            return Result.successMsg();
+        }
+        user.setUserLoginPass(null);
+        List<User> users = this.userDao.select(user);
+        if (1 == users.size()) {
+            User u = users.get(0);
+            u.setUserErrCount(u.getUserErrCount() + 1);
+            this.userDao.updateByPrimaryKeySelective(u);
+        }
+        throw new CommonException(Constants.FORBIDDEN, "用户名密码不正确");
     }
 }
