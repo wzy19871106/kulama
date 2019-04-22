@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.MD5Utils;
+import cn.shianxian.supervise.common.utils.UUIDGenerator;
 import cn.shianxian.supervise.sys.dao.UserDao;
 import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -50,6 +52,19 @@ public class UserServiceImpl implements UserService {
         user.setUserTag(id);
         user.setUserLoginPass(MD5Utils.md5(password));
         this.userDao.updateByPrimaryKeySelective(user);
+        return Result.successMsg();
+    }
+
+
+    @Override
+    public Result saveOrUpdateUser(User user) {
+        if (StringUtils.isEmpty(user.getUserTag())) {
+            user.setUserTag(UUIDGenerator.generatorUUID());
+            user.setCreateTime(LocalDateTime.now());
+            this.userDao.insertSelective(user);
+        } else {
+            this.userDao.updateByPrimaryKeySelective(user);
+        }
         return Result.successMsg();
     }
 }

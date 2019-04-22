@@ -3,6 +3,7 @@ package cn.shianxian.supervise.sys.service;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.sys.pojo.User;
 
 public interface UserService {
 
@@ -23,4 +24,11 @@ public interface UserService {
      */
     Result updatePassword(String id, String password);
 
+
+    /**
+     * 保存、修改用户
+     * @param user
+     * @return
+     */
+    Result saveOrUpdateUser(User user);
 }

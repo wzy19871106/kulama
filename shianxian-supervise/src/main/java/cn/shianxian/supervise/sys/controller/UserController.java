@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.exception.CommonException;
+import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,8 +15,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * 用户控制器
@@ -54,7 +58,7 @@ public class UserController {
      * 修改密码
      * @return
      */
-    @GetMapping("updatePassword")
+    @PostMapping("updatePassword")
     @ApiOperation(value = "修改密码接口", notes = "修改密码接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
@@ -72,4 +76,30 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 保存、修改用户
+     * @return
+     */
+    @PostMapping("saveOrUpdateUser")
+    @ApiOperation(value = "保存、修改用户接口", notes = "保存、修改用户接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "userTag", value = "用户标识"),
+            @ApiImplicitParam(paramType = "query", name = "userName", value = "用户姓名"),
+            @ApiImplicitParam(paramType = "query", name = "userNo", value = "用户身份证号"),
+            @ApiImplicitParam(paramType = "query", name = "userTel", value = "用户联系电话"),
+            @ApiImplicitParam(paramType = "query", name = "userLoginName", value = "用户登录名"),
+            @ApiImplicitParam(paramType = "query", name = "userLoginPass", value = "用户登录密码"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupTag", value = "所属数据权限模板标识"),
+            @ApiImplicitParam(paramType = "query", name = "picTag", value = "用户图片地址标识"),
+            @ApiImplicitParam(paramType = "query", name = "userDisabled", value = "用户是否启用"),
+            @ApiImplicitParam(paramType = "query", name = "userLastTime", value = "用户最后登陆时间"),
+            @ApiImplicitParam(paramType = "query", name = "userErrCount", value = "用户错误次数"),
+            @ApiImplicitParam(paramType = "query", name = "index", value = "用户流水号"),
+            @ApiImplicitParam(paramType = "query", name = "roleTag", value = "所属用户角色标识"),
+    })
+    public ResponseEntity<Result> saveOrUpdateUser(@Valid User user) {
+        Result result = this.userService.saveOrUpdateUser(user);
+        return ResponseEntity.ok(result);
+    }
 }

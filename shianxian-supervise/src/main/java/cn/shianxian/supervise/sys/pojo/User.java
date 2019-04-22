@@ -72,7 +72,7 @@ public class User extends BasePojo {
      * 用户是否启用
      */
     @Column(name = "userDisabled")
-    private String userDisabled;
+    private Integer userDisabled;
 
     /**
      * 用户最后登陆时间
