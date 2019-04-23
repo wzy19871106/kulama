@@ -102,7 +102,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Result deleteUserById(String id) {
-        this.userDao.deleteByPrimaryKey(id);
+        User user = new User();
+        user.setUserTag(id);
+        user.setUserDisabled(1);
+        this.userDao.updateByPrimaryKeySelective(user);
         log.info("删除用户：{}", id);
         return Result.successMsg();
     }

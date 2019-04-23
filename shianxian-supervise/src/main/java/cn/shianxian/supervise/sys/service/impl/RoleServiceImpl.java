@@ -62,7 +62,10 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     @Override
     public Result deleteRoleById(String id) {
-        this.roleDao.deleteByPrimaryKey(id);
+        Role role = new Role();
+        role.setRoleTag(id);
+        role.setRoleDisabled("1");
+        this.roleDao.updateByPrimaryKeySelective(role);
         log.info("删除角色：{}", id);
         return Result.successMsg();
     }
