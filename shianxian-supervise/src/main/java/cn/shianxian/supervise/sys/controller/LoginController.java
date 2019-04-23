@@ -28,7 +28,7 @@ public class LoginController {
      * @return
      */
     @PostMapping("login")
-    @ApiOperation(value = "分页查询用户接口", notes = "分页查询用户接口")
+    @ApiOperation(value = "用户登录接口", notes = "用户登录接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "username", value = "用户名"),
             @ApiImplicitParam(paramType = "query", name = "password", value = "密码（MD5加密）"),

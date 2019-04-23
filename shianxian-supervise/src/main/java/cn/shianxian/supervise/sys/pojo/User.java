@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 /**
@@ -29,6 +30,7 @@ public class User extends BasePojo {
     /**
      * 用户姓名
      */
+    @NotEmpty(message = "用户姓名不能为空！")
     @Column(name = "userName")
     private String userName;
 
@@ -47,12 +49,14 @@ public class User extends BasePojo {
     /**
      * 用户登录名
      */
+    @NotEmpty(message = "登录名不能为空！")
     @Column(name = "userLoginName")
     private String userLoginName;
 
     /**
      * 用户登录密码
      */
+    @NotEmpty(message = "密码不能为空！")
     @Column(name = "userLoginPass")
     private String userLoginPass;
 

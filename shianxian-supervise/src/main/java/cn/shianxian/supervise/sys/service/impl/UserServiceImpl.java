@@ -74,13 +74,13 @@ public class UserServiceImpl implements UserService {
     public Result login(String username, String password) {
         User user = new User();
         user.setUserLoginName(username);
-        user.setUserLoginPass(password);
+        user.setUserLoginPass(MD5Utils.md5(password));
         List<User> userList = this.userDao.select(user);
         if (1 == userList.size()) {
             User loginUser = userList.get(0);
             loginUser.setUserLastTime(LocalDateTime.now());
             this.userDao.updateByPrimaryKeySelective(user);
-            return Result.successMsg();
+            return Result.data(loginUser);
         }
         user.setUserLoginPass(null);
         List<User> users = this.userDao.select(user);
