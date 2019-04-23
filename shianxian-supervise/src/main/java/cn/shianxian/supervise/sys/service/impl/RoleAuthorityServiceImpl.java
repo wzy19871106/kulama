@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     private RoleAuthorityDao roleAuthorityDao;
 
 
+    @Transactional
     @Override
     public Result saveRoleAuthority(RoleAuthority roleAuthority) {
         if (StringUtils.isNotBlank(roleAuthority.getAuthoritys())) {
