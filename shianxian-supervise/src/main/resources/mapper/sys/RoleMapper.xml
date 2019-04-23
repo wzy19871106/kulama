@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.RoleDao">
+
+    <select id="selectAuthorityById" resultType="java.lang.String">
+        SELECT AuthorityName FROM t_role r
+        INNER JOIN t_roleauthority ra ON r.RoleTag = ra.RoleTag
+        INNER JOIN t_authoritydir a ON a.AuthorityTag = ra.AuthorityTag
+        WHERE r.RoleTag = #{id}
+    </select>
+
+</mapper>

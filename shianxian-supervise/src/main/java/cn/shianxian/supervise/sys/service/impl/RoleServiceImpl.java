@@ -66,4 +66,11 @@ public class RoleServiceImpl implements RoleService {
         log.info("删除角色：{}", id);
         return Result.successMsg();
     }
+
+
+    @Override
+    public Result selectAuthorityById(String id) {
+        List<String> list = this.roleDao.selectAuthorityById(id);
+        return Result.data(list);
+    }
 }

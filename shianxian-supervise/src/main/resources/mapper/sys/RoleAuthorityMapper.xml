@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.RoleAuthorityDao">
+
+    <insert id="insertBatch">
+        INSERT INTO
+        t_roleauthority(id, RoleTag, AuthorityTag, ModuleTag, CreateTime)
+        VALUES
+        <foreach collection="roleAuthorityList" item="item" separator="," index="index">
+            (
+            #{item.id},
+            #{item.roleTag},
+            #{item.authorityTag},
+            #{item.moduleTag},
+            #{item.createTime}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

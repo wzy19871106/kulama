@@ -11,10 +11,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -68,12 +65,26 @@ public class RoleController {
      * 删除角色
      * @return
      */
-    @GetMapping("deleteRoleById")
+    @DeleteMapping("deleteRoleById")
     @ApiOperation(value = "删除角色接口", notes = "删除角色接口")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> deleteRoleById(String id) {
         Result result = this.roleService.deleteRoleById(id);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 获取角色拥有的权限
+     * @return
+     */
+    @GetMapping("selectAuthorityById")
+    @ApiOperation(value = "获取角色拥有的权限接口", notes = "获取角色拥有的权限接口")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "角色id")
+    public ResponseEntity<Result> selectAuthorityById(String id) {
+        Result result = this.roleService.selectAuthorityById(id);
+        return ResponseEntity.ok(result);
+    }
+
 
 }

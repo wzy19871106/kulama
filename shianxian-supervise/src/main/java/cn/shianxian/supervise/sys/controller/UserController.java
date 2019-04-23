@@ -14,10 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -107,7 +104,7 @@ public class UserController {
      * 删除用户
      * @return
      */
-    @GetMapping("deleteUserById")
+    @DeleteMapping("deleteUserById")
     @ApiOperation(value = "删除用户接口", notes = "删除用户接口")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> deleteUserById(String id) {

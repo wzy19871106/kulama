@@ -30,4 +30,12 @@ public interface RoleService {
      * @return
      */
     Result deleteRoleById(String id);
+
+
+    /**
+     * 获取角色拥有的权限
+     * @param id
+     * @return
+     */
+    Result selectAuthorityById(String id);
 }
