@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseTypeDao">
+
+    <select id="insertSuperviseType">
+        CALL Proc_T_SuperviseType_Add(#{superviseType.parentTag}, #{superviseType.superviseTypeName}, #{superviseType.order}, #{superviseType.ifMenu})
+    </select>
+
+    <select id="updateSuperviseType">
+        CALL proc_T_SuperviseType_Edit_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.superviseTypeName}, #{superviseType.ifMenu}, #{superviseType.ifUse})
+    </select>
+
+    <select id="deleteSuperviseType">
+        CALL proc_T_SuperviseType_Remove_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseTypeById">
+        CALL proc_T_SuperviseType_Query_ByTag(#{id})
+    </select>
+
+    <select id="updateSuperviseTypeBySort">
+        CALL proc_T_SuperviseType_OrderDown_ByTag(#{id})
+    </select>
+
+</mapper>
