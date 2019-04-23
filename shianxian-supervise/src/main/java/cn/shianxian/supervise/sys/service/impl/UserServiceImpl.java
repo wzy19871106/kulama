@@ -12,8 +12,10 @@ import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -21,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -47,6 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Transactional
     @Override
     public Result updatePassword(String id, String password) {
         User user = new User();
@@ -57,6 +61,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
+    @Transactional
     @Override
     public Result saveOrUpdateUser(User user) {
         if (StringUtils.isEmpty(user.getUserTag())) {
@@ -80,6 +85,7 @@ public class UserServiceImpl implements UserService {
             User loginUser = userList.get(0);
             loginUser.setUserLastTime(LocalDateTime.now());
             this.userDao.updateByPrimaryKeySelective(user);
+            log.info("用户：{}登录", loginUser);
             return Result.data(loginUser);
         }
         user.setUserLoginPass(null);
@@ -90,5 +96,14 @@ public class UserServiceImpl implements UserService {
             this.userDao.updateByPrimaryKeySelective(u);
         }
         throw new CommonException(Constants.FORBIDDEN, "用户名密码不正确");
+    }
+
+
+    @Transactional
+    @Override
+    public Result deleteUserById(String id) {
+        this.userDao.deleteByPrimaryKey(id);
+        log.info("删除用户：{}", id);
+        return Result.successMsg();
     }
 }

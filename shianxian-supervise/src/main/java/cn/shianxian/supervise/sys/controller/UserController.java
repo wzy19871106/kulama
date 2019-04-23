@@ -42,7 +42,6 @@ public class UserController {
     @ApiOperation(value = "分页查询用户接口", notes = "分页查询用户接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
-            @ApiImplicitParam(paramType = "query", name = "orderNo", value = "单号"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
             @ApiImplicitParam(paramType = "query", name = "enable", value = "是否有效，1：有效0：无效。"),
             @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
@@ -100,6 +99,19 @@ public class UserController {
     })
     public ResponseEntity<Result> saveOrUpdateUser(@Valid User user) {
         Result result = this.userService.saveOrUpdateUser(user);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 删除用户
+     * @return
+     */
+    @GetMapping("deleteUserById")
+    @ApiOperation(value = "删除用户接口", notes = "删除用户接口")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
+    public ResponseEntity<Result> deleteUserById(String id) {
+        Result result = this.userService.deleteUserById(id);
         return ResponseEntity.ok(result);
     }
 }

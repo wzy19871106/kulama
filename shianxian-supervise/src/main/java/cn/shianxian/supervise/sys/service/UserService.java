@@ -40,4 +40,12 @@ public interface UserService {
      * @return
      */
     Result login(String username, String password);
+
+
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
+    Result deleteUserById(String id);
 }
