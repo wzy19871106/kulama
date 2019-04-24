@@ -9,10 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -30,22 +27,22 @@ public class SupervisetypeController {
 
 
     /**
-     * 保存、修改监管类型控制器
+     * 保存、修改监管类型
      * @return
      */
-    @PostMapping("saveOrUpdateSupervisetype")
-    @ApiOperation(value = "保存、修改监管类型控制器接口", notes = "保存、修改监管类型控制器接口")
+    @PostMapping("saveOrUpdateSuperviseType")
+    @ApiOperation(value = "保存、修改监管类型接口", notes = "保存、修改监管类型接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
             @ApiImplicitParam(paramType = "query", name = "parentTag", value = "父类型编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTypeName", value = "监管类型名"),
             @ApiImplicitParam(paramType = "query", name = "order", value = "监管类型位置"),
             @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
-            @ApiImplicitParam(paramType = "query", name = "ifMenu", value = "是否可以为该栏目添加信息"),
-            @ApiImplicitParam(paramType = "query", name = "ifUse", value = "栏目启用，可添加信息，可查历史数据；栏目禁用，不可添加新信息，但历史数据可以查询"),
-            @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "栏目禁用，不可添加新信息，历史数据不可查"),
+            @ApiImplicitParam(paramType = "query", name = "ifMenu", value = "是否可以为该栏目添加信息", dataType = "Boolean"),
+            @ApiImplicitParam(paramType = "query", name = "ifUse", value = "栏目启用，可添加信息，可查历史数据；栏目禁用，不可添加新信息，但历史数据可以查询", dataType = "Boolean"),
+            @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "栏目禁用，不可添加新信息，历史数据不可查", dataType = "Boolean"),
     })
-    public ResponseEntity<Result> saveOrUpdateSupervisetype(@Valid SuperviseType superviseType) {
+    public ResponseEntity<Result> saveOrUpdateSuperviseType(@Valid SuperviseType superviseType) {
         Result result = this.superviseTypeService.saveOrUpdateSuperviseType(superviseType);
         return ResponseEntity.ok(result);
     }
@@ -64,5 +61,34 @@ public class SupervisetypeController {
     }
 
 
+    /**
+     * 查询监管类型
+     * @return
+     */
+    @GetMapping("selectSuperviseType")
+    @ApiOperation(value = "查询监管类型", notes = "查询监管类型")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
+    })    public ResponseEntity<Result> selectSuperviseType(SuperviseType superviseType) {
+        Result result = this.superviseTypeService.selectSuperviseType(superviseType);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 修改监管类型排序
+     * @return
+     */
+    @PostMapping("updateSuperviseTypeBySort")
+    @ApiOperation(value = "修改监管类型排序接口", notes = "修改监管类型排序接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "type", value = "排序类型[1:升序，2:降序]"),
+    })
+    public ResponseEntity<Result> updateSuperviseTypeBySort(String id, int type) {
+        Result result = this.superviseTypeService.updateSuperviseTypeBySort(id, type);
+        return ResponseEntity.ok(result);
+    }
 
 }

@@ -20,4 +20,21 @@ public interface SuperviseTypeService {
      * @return
      */
     Result deleteSuperviseTypeById(String id);
+
+
+    /**
+     * 查询监管类型
+     * @param superviseType
+     * @return
+     */
+    Result selectSuperviseType(SuperviseType superviseType);
+
+
+    /**
+     * 修改监管类型排序
+     * @param id
+     * @param type
+     * @return
+     */
+    Result updateSuperviseTypeBySort(String id, int type);
 }

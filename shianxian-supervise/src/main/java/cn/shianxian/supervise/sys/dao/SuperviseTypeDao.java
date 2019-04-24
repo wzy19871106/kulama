@@ -40,7 +40,7 @@ public interface SuperviseTypeDao extends Mapper<SuperviseType> {
      * @param id
      * @return
      */
-    List<SuperviseType> selectSuperviseTypeById(@Param("id") String id, @Param("userGroupDataAuthority") String userGroupDataAuthority);
+    List<SuperviseType> selectSuperviseType(@Param("id") String id, @Param("userGroupDataAuthority") String userGroupDataAuthority);
 
 
     /**
