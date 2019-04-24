@@ -16,4 +16,20 @@ public interface RoleDao extends Mapper<Role> {
      * @return
      */
     List<String> selectAuthorityById(@Param("id") String id);
+
+
+    /**
+     * 保存角色
+     * @param role
+     * @return
+     */
+    String insertRole(@Param("role") Role role);
+
+
+    /**
+     * 修改角色
+     * @param role
+     * @return
+     */
+    String updateRole(@Param("role") Role role);
 }

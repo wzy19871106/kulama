@@ -2,10 +2,7 @@ package cn.shianxian.supervise.sys.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 
@@ -39,5 +36,12 @@ public class Role {
      */
     @Column(name = "RoleDisabled")
     private String RoleDisabled;
+
+
+    /**
+     * 模块权限JSON
+     */
+    @Transient
+    private String moduleAuthority;
 
 }

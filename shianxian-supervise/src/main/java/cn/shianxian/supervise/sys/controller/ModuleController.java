@@ -28,11 +28,11 @@ public class ModuleController {
 
 
     /**
-     * 根据id查询模块
+     * 查询模块
      * @return
      */
     @GetMapping("selectModule")
-    @ApiOperation(value = "根据id查询模块接口", notes = "根据id查询模块接口")
+    @ApiOperation(value = "查询模块接口", notes = "查询模块接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
@@ -95,4 +95,18 @@ public class ModuleController {
         Result result = this.moduleService.deleteModuleById(id);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 查询模块（树形）
+     * @return
+     */
+    @GetMapping("selectModuleByTree")
+    @ApiOperation(value = "查询模块（树形）", notes = "查询模块（树形）")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
+    public ResponseEntity<Result> selectModuleByTree(String id) {
+        Result result = this.moduleService.selectModuleByTree(id);
+        return ResponseEntity.ok(result);
+    }
+
 }

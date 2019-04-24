@@ -61,4 +61,11 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
 
+    @Override
+    public Result selectModuleByTree(String id) {
+        List<Module> modules = this.moduleDao.selectModuleByTree(id);
+        return Result.data(modules);
+    }
+
+
 }

@@ -9,4 +9,12 @@
         WHERE r.RoleTag = #{id}
     </select>
 
+    <select id="insertRole" resultType="java.lang.String">
+        CALL Proc_T_Role_Add(#{role.roleName}, #{role.moduleAuthority})
+    </select>
+
+    <select id="updateRole" resultType="java.lang.String">
+        CALL Proc_T_Role_Edit_ByRoleTag(#{role.roleTag}, #{role.roleName}, #{role.moduleAuthority})
+    </select>
+
 </mapper>

@@ -58,4 +58,11 @@ public interface ModuleDao extends Mapper<Module> {
      */
     List<Module> selectModuleByLike(@Param("queryPojo") QueryPojo queryPojo);
 
+
+    /**
+     * 查询模块（树形）
+     * @param id
+     * @return
+     */
+    List<Module> selectModuleByTree(String id);
 }

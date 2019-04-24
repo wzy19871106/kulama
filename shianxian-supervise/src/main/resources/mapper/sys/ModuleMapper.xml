@@ -42,4 +42,8 @@
         CALL proc_T_Module_Query_ByCondition(#{queryPojo.id}, #{queryPojo.name})
     </select>
 
+    <select id="selectModuleByTree" resultType="cn.shianxian.supervise.sys.pojo.Module">
+        CALL Proc_T_Module_QueryTree_ByModuleTag(#{id})
+    </select>
+
 </mapper>

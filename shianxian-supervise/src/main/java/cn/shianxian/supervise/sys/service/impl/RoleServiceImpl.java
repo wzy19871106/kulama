@@ -4,7 +4,6 @@ import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.common.utils.UUIDGenerator;
 import cn.shianxian.supervise.sys.dao.RoleDao;
 import cn.shianxian.supervise.sys.pojo.Role;
 import cn.shianxian.supervise.sys.service.RoleService;
@@ -32,11 +31,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Result saveOrUpdateRole(Role role) {
         if (StringUtils.isBlank(role.getRoleTag())) {
-            role.setRoleTag(UUIDGenerator.generatorUUID());
-            this.roleDao.insertSelective(role);
+            this.roleDao.insertRole(role);
             log.info("保存角色：{}", role);
         } else {
-            this.roleDao.updateByPrimaryKeySelective(role);
+            this.roleDao.updateRole(role);
             log.info("修改角色：{}", role);
         }
         return Result.successMsg();

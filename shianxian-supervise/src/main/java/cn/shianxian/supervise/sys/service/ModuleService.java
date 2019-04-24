@@ -35,4 +35,12 @@ public interface ModuleService {
      * @return
      */
     Result deleteModuleById(String id);
+
+
+    /**
+     * 查询模块（树形）
+     * @param id
+     * @return
+     */
+    Result selectModuleByTree(String id);
 }
