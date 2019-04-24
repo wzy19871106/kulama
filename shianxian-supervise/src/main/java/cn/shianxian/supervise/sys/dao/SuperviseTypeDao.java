@@ -40,13 +40,21 @@ public interface SuperviseTypeDao extends Mapper<SuperviseType> {
      * @param id
      * @return
      */
-    List<SuperviseType> selectSuperviseTypeById(@Param("id") String id);
+    List<SuperviseType> selectSuperviseTypeById(@Param("id") String id, @Param("userGroupDataAuthority") String userGroupDataAuthority);
 
 
     /**
-     * 根据id查询监管类型
+     * 监管类型向上排序
      * @param id
      * @return
      */
-    String updateSuperviseTypeBySort(@Param("id") String id);
+    String updateSuperviseTypeByUpSort(@Param("id") String id);
+
+
+    /**
+     * 监管类型向下排序
+     * @param id
+     * @return
+     */
+    String updateSuperviseTypeByDownSort(@Param("id") String id);
 }

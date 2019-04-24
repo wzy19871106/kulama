@@ -15,11 +15,14 @@
     </select>
 
     <select id="selectSuperviseTypeById">
-        CALL proc_T_SuperviseType_Query_ByTag(#{id})
+        CALL proc_T_SuperviseType_Query_ByTag(#{id}, #{userGroupDataAuthority})
     </select>
 
-    <select id="updateSuperviseTypeBySort">
+    <select id="updateSuperviseTypeByUpSort">
+        CALL proc_T_SuperviseType_OrderUp_ByTag(#{id})
+    </select>
+
+    <select id="updateSuperviseTypeByDownSort">
         CALL proc_T_SuperviseType_OrderDown_ByTag(#{id})
     </select>
-
 </mapper>

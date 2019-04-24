@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseDao">
+
+    <select id="insertSupervise">
+        CALL Proc_T_Supervise_Add
+        (
+        #{supervise.parentTag},
+        #{supervise.superviseTypeTag},
+        #{supervise.superviseName},
+        #{supervise.superviseBasis},
+        #{supervise.superviseMode},
+        #{supervise.superviseGuide},
+        #{supervise.score},
+        #{supervise.ifMenu},
+        #{supervise.ifUse}
+        )
+    </select>
+
+    <select id="updateSupervise">
+        CALL proc_T_Supervise_Edit_ByTag
+        (
+        #{supervise.superviseTag},
+        #{supervise.parentTag},
+        #{supervise.superviseTypeTag},
+        #{supervise.superviseName},
+        #{supervise.superviseBasis},
+        #{supervise.superviseMode},
+        #{supervise.superviseGuide},
+        #{supervise.score},
+        #{supervise.ifMenu},
+        #{supervise.ifUse}
+        )
+    </select>
+
+    <select id="deleteSupervise">
+        CALL proc_T_Supervise_Remove_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseById">
+        CALL proc_T_Supervise_Query_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseByType">
+        CALL proc_T_Supervise_Query_ByType(#{type})
+    </select>
+
+
+    <select id="updateSuperviseByUpSort">
+        CALL proc_T_Supervise_OrderUp_ByTag(#{id})
+    </select>
+
+    <select id="updateSuperviseByDownSort">
+        CALL proc_T_Supervise_OrderDown_ByTag(#{id})
+    </select>
+</mapper>

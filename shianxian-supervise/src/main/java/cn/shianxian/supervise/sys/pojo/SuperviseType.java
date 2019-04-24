@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 监管结果
+ */
 @Data
 @Table(name = "t_supervisetype")
 public class SuperviseType {
