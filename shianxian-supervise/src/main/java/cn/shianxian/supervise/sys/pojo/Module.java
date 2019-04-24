@@ -4,8 +4,10 @@ package cn.shianxian.supervise.sys.pojo;
 import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 模块
@@ -36,7 +38,7 @@ public class Module extends BasePojo {
     private String moduleName;
 
     /**
-     *图标
+     * 图标
      */
     @Column(name = "moduleIcon")
     private String moduleIcon;
@@ -77,16 +79,5 @@ public class Module extends BasePojo {
     @Column(name = "`index`")
     private Long index;
 
-    /**
-     * 子模块
-     */
-    @Transient
-    private List<Module> children;
-
-    /**
-     * 是否选中
-     */
-    @Transient
-    private boolean checked;
 
 }
