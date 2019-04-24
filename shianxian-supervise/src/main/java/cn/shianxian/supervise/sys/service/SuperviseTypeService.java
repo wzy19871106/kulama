@@ -16,10 +16,10 @@ public interface SuperviseTypeService {
 
     /**
      * 删除监管类型
-     * @param id
+     * @param ids
      * @return
      */
-    Result deleteSuperviseTypeById(String id);
+    Result deleteSuperviseTypeById(String ids);
 
 
     /**

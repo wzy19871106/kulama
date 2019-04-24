@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("supervisetype")
 @Api(description = "角色控制器")
-public class SupervisetypeController {
+public class SuperviseTypeController {
 
 
     @Autowired
@@ -54,9 +54,9 @@ public class SupervisetypeController {
      */
     @DeleteMapping("deleteSuperviseTypeById")
     @ApiOperation(value = "删除监管类型接口", notes = "删除监管类型接口")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
-    public ResponseEntity<Result> deleteSuperviseTypeById(String id) {
-        Result result = this.superviseTypeService.deleteSuperviseTypeById(id);
+    @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
+    public ResponseEntity<Result> deleteSuperviseTypeById(String ids) {
+        Result result = this.superviseTypeService.deleteSuperviseTypeById(ids);
         return ResponseEntity.ok(result);
     }
 

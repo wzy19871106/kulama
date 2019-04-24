@@ -35,8 +35,11 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
 
     @Transactional
     @Override
-    public Result deleteSuperviseTypeById(String id) {
-        this.superviseTypeDao.deleteSuperviseType(id);
+    public Result deleteSuperviseTypeById(String ids) {
+        String[] idArr = ids.split(",");
+        for (String id : idArr) {
+            this.superviseTypeDao.deleteSuperviseType(id);
+        }
         return Result.successMsg();
     }
 
