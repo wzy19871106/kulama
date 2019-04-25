@@ -82,33 +82,4 @@ public class SupervisePlanMainController {
         return ResponseEntity.ok(result);
     }
 
-
-//    /**
-//     * 修改计划任务排序
-//     * @return
-//     */
-//    @PutMapping("updateSuperviseBySort")
-//    @ApiOperation(value = "修改计划任务排序接口", notes = "修改计划任务排序接口")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(paramType = "query", name = "id", value = "计划任务编码"),
-//            @ApiImplicitParam(paramType = "query", name = "type", value = "排序内容[1:升序，2:降序]"),
-//    })
-//    public ResponseEntity<Result> updateSuperviseBySort(String id, int type) {
-//        Result result = this.superviseService.updateSuperviseBySort(id, type);
-//        return ResponseEntity.ok(result);
-//    }
-//
-//
-//    /**
-//     * 查询计划任务剩余分值
-//     * @return
-//     */
-//    @GetMapping("selectSuperviseScore")
-//    @ApiOperation(value = "查询计划任务剩余分值", notes = "查询计划任务剩余分值")
-//    @ApiImplicitParam(paramType = "query", name = "id", value = "计划任务编码")
-//    public ResponseEntity<Result> selectSuperviseScore(String id) {
-//        Result result = this.superviseService.selectSuperviseScore(id);
-//        return ResponseEntity.ok(result);
-//    }
-
 }

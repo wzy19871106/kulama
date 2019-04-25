@@ -19,9 +19,9 @@ public class QueryPojo {
     private String id;
 
     /**
-     * 单号
+     * 父id
      */
-    private String orderNo;
+    private String parentId;
 
     /**
      * 名称
