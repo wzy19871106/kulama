@@ -41,7 +41,7 @@ public class SuperviseResultController {
             @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
             @ApiImplicitParam(paramType = "query", name = "advice", value = "整改意见,该结果单项的整改意见"),
             @ApiImplicitParam(paramType = "query", name = "ifUse", value = "栏目启用，可添加信息，可查历史数据；栏目禁用，不可添加新信息，但历史数据可以查询", dataType = "Boolean"),
-            @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "栏目禁用，不可添加新信息，历史数据不可查(逻辑删除)", dataType = "Boolean"),
+            @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
     public ResponseEntity<Result> saveOrUpdateSuperviseResult(@Valid SuperviseResult superviseResult) {
         Result result = this.superviseResultService.saveOrUpdateSuperviseResult(superviseResult);

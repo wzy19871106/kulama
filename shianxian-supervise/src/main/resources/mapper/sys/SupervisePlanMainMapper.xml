@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.plan.dao.SupervisePlanMainDao">
+
+    <select id="selectSupervisePlanMainById" resultType="cn.shianxian.supervise.plan.pojo.SupervisePlanMain">
+        CALL proc_T_SuperviserPlan_Main_Query_ByTag(#{id})
+    </select>
+
+    <select id="insertSupervisePlanMain" resultType="java.lang.String">
+        CALL Proc_T_SuperviserPlan_Main_Add
+        (
+        #{supervisePlanMain.planTag},
+        #{supervisePlanMain.planName},
+        #{supervisePlanMain.startTime},
+        #{supervisePlanMain.endTime},
+        #{supervisePlanMain.ifPulic},
+        #{supervisePlanMain.remark},
+        #{supervisePlanMain.createTime},
+        #{supervisePlanMain.createUserTag},
+        #{supervisePlanMain.lastUpdateTime},
+        #{supervisePlanMain.lastUpdateUser}
+        )
+    </select>
+
+    <select id="updateSupervisePlanMain" resultType="java.lang.String">
+        CALL proc_T_SuperviserPlan_Main_Edit_ByTag
+        (
+        #{supervisePlanMain.planTag},
+        #{supervisePlanMain.planName},
+        #{supervisePlanMain.startTime},
+        #{supervisePlanMain.endTime},
+        #{supervisePlanMain.ifPulic},
+        #{supervisePlanMain.remark},
+        #{supervisePlanMain.createTime},
+        #{supervisePlanMain.createUserTag},
+        #{supervisePlanMain.lastUpdateTime},
+        #{supervisePlanMain.lastUpdateUser}
+        )
+    </select>
+
+    <select id="deleteSupervisePlanMainById" resultType="java.lang.String">
+        CALL proc_T_SuperviserPlan_Main_Remove_ByTag(#{id})
+    </select>
+
+    <select id="selectSupervisePlanMainByLike" resultType="cn.shianxian.supervise.plan.pojo.SupervisePlanMain">
+        CALL proc_T_SuperviserPlan_Main_Query_ByConditon
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name}
+        )
+    </select>
+</mapper>
