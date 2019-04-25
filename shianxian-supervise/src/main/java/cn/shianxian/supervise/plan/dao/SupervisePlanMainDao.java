@@ -12,7 +12,7 @@ import java.util.List;
 public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
 
     /**
-     * 根据id查询模块
+     * 根据id查询计划任务
      * @param id
      * @return
      */
@@ -20,7 +20,7 @@ public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
 
 
     /**
-     * 保存模块
+     * 保存计划任务
      * @param supervisePlanMain
      * @return
      */
@@ -28,7 +28,7 @@ public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
 
 
     /**
-     * 修改模块
+     * 修改计划任务
      * @param supervisePlanMain
      * @return
      */
@@ -36,7 +36,7 @@ public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
 
 
     /**
-     * 删除模块
+     * 删除计划任务
      * @param id
      * @return
      */
@@ -44,7 +44,7 @@ public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
 
 
     /**
-     * 模糊查询模块
+     * 模糊查询计划任务
      * @param queryPojo
      * @return
      */

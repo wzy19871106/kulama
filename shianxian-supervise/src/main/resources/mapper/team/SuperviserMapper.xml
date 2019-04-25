@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.team.dao.SuperviserDao">
+
+    <select id="selectSuperviserById" resultType="cn.shianxian.supervise.team.pojo.Superviser">
+        CALL proc_T_Superviser_Query_ByTag(#{id})
+    </select>
+
+    <select id="insertSuperviser" resultType="java.lang.String">
+        CALL Proc_T_Superviser_Add
+        (
+        #{Superviser.superviserTag},
+        #{Superviser.superviserName},
+        #{Superviser.teamTag},
+        #{Superviser.userNo},
+        #{Superviser.remark},
+        #{Superviser.ifUse},
+        #{Superviser.createTime},
+        #{Superviser.createUserTag},
+        #{Superviser.lastUpdateTime},
+        #{Superviser.lastUpdateUser}
+        )
+    </select>
+
+    <select id="updateSuperviser" resultType="java.lang.String">
+        CALL proc_T_Superviser_Edit_ByTag
+        (
+        #{Superviser.superviserTag},
+        #{Superviser.superviserName},
+        #{Superviser.teamTag},
+        #{Superviser.userNo},
+        #{Superviser.remark},
+        #{Superviser.ifUse},
+        #{Superviser.lastUpdateTime},
+        #{Superviser.lastUpdateUser}
+        )
+    </select>
+
+    <select id="deleteSuperviserById" resultType="java.lang.String">
+        CALL proc_T_Superviser_Remove_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviserByLike" resultType="cn.shianxian.supervise.team.pojo.Superviser">
+        CALL proc_T_Superviser_Query_ByConditon
+        (
+        #{queryPojo.parentId},
+        #{queryPojo.name}
+        )
+    </select>
+</mapper>
