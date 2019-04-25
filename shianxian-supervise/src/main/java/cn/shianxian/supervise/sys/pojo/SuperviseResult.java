@@ -64,12 +64,12 @@ public class SuperviseResult {
      * 是否启用
      */
     @Column(name = "ifUse")
-    private String ifUse;
+    private Boolean ifUse;
 
     /**
      * 是否删除
      */
     @Column(name = "ifDelete")
-    private String ifDelete;
+    private Boolean ifDelete;
 
 }

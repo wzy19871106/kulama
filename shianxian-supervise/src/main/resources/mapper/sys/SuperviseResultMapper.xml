@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseResultDao">
 
-    <select id="insertSuperviseResult">
-        CALL Proc_T_SuperviseResult_Add
+    <select id="insertSuperviseResult" resultType="java.lang.String">
+        CALL Proc_T_Supervise_Result_Add
         (
         #{superviseResult.resultTag},
         #{superviseResult.superviseTag},
@@ -15,8 +15,8 @@
         )
     </select>
 
-    <select id="updateSuperviseResult">
-        CALL proc_T_SuperviseResult_Edit_ByTag
+    <select id="updateSuperviseResult" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_Edit_ByTag
         (
         #{superviseResult.resultTag},
         #{superviseResult.superviseTag},
@@ -28,27 +28,23 @@
         )
     </select>
 
-    <select id="deleteSuperviseResult">
-        CALL proc_T_SuperviseResult_Remove_ByTag(#{id})
+    <select id="deleteSuperviseResult" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_Remove_ByTag(#{id})
     </select>
 
-    <select id="selectSuperviseResultById">
-        CALL proc_T_SuperviseResult_Query_ByTag(#{id})
+    <select id="selectSuperviseResultById" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
+        CALL proc_T_Supervise_Result_Query_ByTag(#{id})
     </select>
 
-    <select id="selectSuperviseResultBySuperviseTag">
+    <select id="selectSuperviseResultBySuperviseTag" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
         CALL proc_T_Supervise_Result_Query_By_SuperviseTag(#{superviseTag})
     </select>
 
-    <select id="selectScoreById">
-        CALL proc_T_Supervise_Query_Score_ByTag(#{id})
+    <select id="updateSuperviseResultByUpSort" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_OrderUp_ByTag(#{id})
     </select>
 
-    <select id="updateSuperviseResultByUpSort">
-        CALL proc_T_SuperviseResult_OrderUp_ByTag(#{id})
-    </select>
-
-    <select id="updateSuperviseResultByDownSort">
-        CALL proc_T_SuperviseResult_OrderDown_ByTag(#{id})
+    <select id="updateSuperviseResultByDownSort" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_OrderDown_ByTag(#{id})
     </select>
 </mapper>
