@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseDao">
 
-    <select id="insertSupervise">
+    <select id="insertSupervise" resultType="java.lang.String">
         CALL Proc_T_Supervise_Add
         (
         #{supervise.parentTag},
@@ -17,7 +17,7 @@
         )
     </select>
 
-    <select id="updateSupervise">
+    <select id="updateSupervise" resultType="java.lang.String">
         CALL proc_T_Supervise_Edit_ByTag
         (
         #{supervise.superviseTag},
@@ -33,24 +33,28 @@
         )
     </select>
 
-    <select id="deleteSupervise">
+    <select id="deleteSupervise" resultType="java.lang.String">
         CALL proc_T_Supervise_Remove_ByTag(#{id})
     </select>
 
-    <select id="selectSuperviseById">
+    <select id="selectSuperviseById" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
         CALL proc_T_Supervise_Query_ByTag(#{id})
     </select>
 
-    <select id="selectSuperviseByType">
+    <select id="selectSuperviseByType" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
         CALL proc_T_Supervise_Query_ByType(#{type})
     </select>
 
 
-    <select id="updateSuperviseByUpSort">
+    <select id="updateSuperviseByUpSort" resultType="java.lang.String">
         CALL proc_T_Supervise_OrderUp_ByTag(#{id})
     </select>
 
-    <select id="updateSuperviseByDownSort">
+    <select id="updateSuperviseByDownSort" resultType="java.lang.String">
         CALL proc_T_Supervise_OrderDown_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseScore" resultType="java.lang.String">
+        CALL proc_T_Supervise_Query_Score_ByTag(#{id})
     </select>
 </mapper>

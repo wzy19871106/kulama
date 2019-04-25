@@ -81,18 +81,18 @@ public class Supervise {
      * 是否可以添加监管结果信息
      */
     @Column(name = "ifMenu")
-    private String ifMenu;
+    private Boolean ifMenu;
 
     /**
      * 栏目启用，可添加信息，可查历史数据；栏目禁用，不可添加新信息，但历史数据可以查询
      */
     @Column(name = "ifUse")
-    private String ifUse;
+    private Boolean ifUse;
 
     /**
      * 栏目禁用，不可添加新信息，历史数据不可查(逻辑删除)
      */
     @Column(name = "ifDelete")
-    private String ifDelete;
+    private Boolean ifDelete;
 
 }

@@ -1,7 +1,6 @@
 package cn.shianxian.supervise.sys.dao;
 
 import cn.shianxian.supervise.sys.pojo.Supervise;
-import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -41,7 +40,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
      * @param id
      * @return
      */
-    List<SuperviseType> selectSuperviseById(@Param("id") String id);
+    List<Supervise> selectSuperviseById(@Param("id") String id);
 
 
     /**
@@ -49,7 +48,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
      * @param type
      * @return
      */
-    List<SuperviseType> selectSuperviseByType(@Param("type") String type);
+    List<Supervise> selectSuperviseByType(@Param("type") String type);
 
 
     /**
@@ -67,4 +66,11 @@ public interface SuperviseDao extends Mapper<Supervise> {
      */
     String updateSuperviseByDownSort(@Param("id") String id);
 
+
+    /**
+     * 查询监管内容剩余分值
+     * @param id
+     * @return
+     */
+    Double selectSuperviseScore(@Param("id") String id);
 }

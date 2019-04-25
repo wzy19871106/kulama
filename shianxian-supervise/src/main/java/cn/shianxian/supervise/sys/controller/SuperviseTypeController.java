@@ -17,8 +17,8 @@ import javax.validation.Valid;
  * 监管类型控制器
  */
 @RestController
-@RequestMapping("supervisetype")
-@Api(description = "角色控制器")
+@RequestMapping("superviseType")
+@Api(description = "监管类型控制器")
 public class SuperviseTypeController {
 
 
@@ -80,7 +80,7 @@ public class SuperviseTypeController {
      * 修改监管类型排序
      * @return
      */
-    @PostMapping("updateSuperviseTypeBySort")
+    @PutMapping("updateSuperviseTypeBySort")
     @ApiOperation(value = "修改监管类型排序接口", notes = "修改监管类型排序接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "监管类型编码"),
