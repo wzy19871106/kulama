@@ -31,7 +31,8 @@ public class SuperviseServiceImpl implements SuperviseService {
         List<Supervise> superviseList = new ArrayList<>();
         if (StringUtils.isNotBlank(supervise.getSuperviseTag())) {
             superviseList = this.superviseDao.selectSuperviseById(supervise.getSuperviseTag());
-        } else if (StringUtils.isNotBlank(supervise.getSuperviseTypeTag())) {
+        }
+        if (StringUtils.isNotBlank(supervise.getSuperviseTypeTag())) {
             superviseList = this.superviseDao.selectSuperviseByType(supervise.getSuperviseTypeTag());
         }
         return Result.data(page.getTotal(), superviseList);
@@ -69,7 +70,8 @@ public class SuperviseServiceImpl implements SuperviseService {
     public Result updateSuperviseBySort(String id, int type) {
         if (1 == type) {
             this.superviseDao.updateSuperviseByUpSort(id);
-        } else if (2 == type) {
+        }
+        if (2 == type) {
             this.superviseDao.updateSuperviseByDownSort(id);
         }
         return Result.successMsg();

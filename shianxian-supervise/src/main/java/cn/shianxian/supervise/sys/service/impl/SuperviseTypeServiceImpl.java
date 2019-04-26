@@ -60,7 +60,8 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
     public Result updateSuperviseTypeBySort(String id, int type) {
         if (1 == type) {
             this.superviseTypeDao.updateSuperviseTypeByUpSort(id);
-        } else if (2 == type) {
+        }
+        if (2 == type) {
             this.superviseTypeDao.updateSuperviseTypeByDownSort(id);
         }
         return Result.successMsg();

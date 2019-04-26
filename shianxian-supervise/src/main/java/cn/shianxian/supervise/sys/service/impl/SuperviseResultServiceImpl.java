@@ -58,7 +58,8 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         List<SuperviseResult> results = new ArrayList<>();
         if (StringUtils.isNotBlank(superviseResult.getResultTag())) {
             results = this.superviseResultDao.selectSuperviseResultById(superviseResult.getResultTag());
-        } else if (StringUtils.isNotBlank(superviseResult.getSuperviseTag())) {
+        }
+        if (StringUtils.isNotBlank(superviseResult.getSuperviseTag())) {
             results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(superviseResult.getSuperviseTag());
         }
         return Result.data(page.getTotal(), results);
@@ -70,7 +71,8 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
     public Result updateSuperviseResultBySort(String id, int type) {
         if (1 == type) {
             this.superviseResultDao.updateSuperviseResultByUpSort(id);
-        } else if (2 == type) {
+        }
+        if (2 == type) {
             this.superviseResultDao.updateSuperviseResultByDownSort(id);
         }
         return Result.successMsg();

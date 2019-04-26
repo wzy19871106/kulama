@@ -55,7 +55,8 @@ public class SupervisePlanSubServiceImpl implements SupervisePlanSubService {
         List<SupervisePlanSub> planSubsList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             planSubsList = this.supervisePlanSubDao.selectSupervisePlanSubById(queryPojo.getId());
-        } else if (StringUtils.isNotBlank(queryPojo.getName()) && null != queryPojo.getStartTime() && null != queryPojo.getEndTime()) {
+        }
+        if (StringUtils.isNotBlank(queryPojo.getName()) && null != queryPojo.getStartTime() && null != queryPojo.getEndTime()) {
             planSubsList = this.supervisePlanSubDao.selectSupervisePlanSubByLike(queryPojo);
         }
         return Result.data(page.getTotal(), planSubsList);
