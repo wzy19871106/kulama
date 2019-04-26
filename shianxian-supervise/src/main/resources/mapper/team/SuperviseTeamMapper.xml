@@ -9,28 +9,28 @@
     <select id="insertSuperviseTeam" resultType="java.lang.String">
         CALL Proc_T_SuperviseTeam_Add
         (
-        #{SuperviseTeam.teamTag},
-        #{SuperviseTeam.teamName},
-        #{SuperviseTeam.remark},
-        #{SuperviseTeam.createTime},
-        #{SuperviseTeam.createUserTag},
-        #{SuperviseTeam.lastUpdateTime},
-        #{SuperviseTeam.lastUpdateUser},
-        #{SuperviseTeam.ifUse}
+        #{superviseTeam.teamTag},
+        #{superviseTeam.teamName},
+        #{superviseTeam.remark},
+        #{superviseTeam.createTime},
+        #{superviseTeam.createUserTag},
+        #{superviseTeam.lastUpdateTime},
+        #{superviseTeam.lastUpdateUser},
+        #{superviseTeam.ifUse}
         )
     </select>
 
     <select id="updateSuperviseTeam" resultType="java.lang.String">
         CALL proc_T_SuperviseTeam_Edit_ByTag
         (
-        #{SuperviseTeam.teamTag},
-        #{SuperviseTeam.teamName},
-        #{SuperviseTeam.remark},
-        #{SuperviseTeam.createTime},
-        #{SuperviseTeam.createUserTag},
-        #{SuperviseTeam.lastUpdateTime},
-        #{SuperviseTeam.lastUpdateUser},
-        #{SuperviseTeam.ifUse}
+        #{superviseTeam.teamTag},
+        #{superviseTeam.teamName},
+        #{superviseTeam.remark},
+        #{superviseTeam.createTime},
+        #{superviseTeam.createUserTag},
+        #{superviseTeam.lastUpdateTime},
+        #{superviseTeam.lastUpdateUser},
+        #{superviseTeam.ifUse}
         )
     </select>
 
@@ -39,9 +39,8 @@
     </select>
 
     <select id="selectSuperviseTeamByLike" resultType="cn.shianxian.supervise.team.pojo.SuperviseTeam">
-        CALL proc_T_SuperviseTeam_Query_ByConditon
+        CALL proc_T_SuperviseTeam_Query_ByCondition
         (
-        #{queryPojo.parentId},
         #{queryPojo.name}
         )
     </select>
