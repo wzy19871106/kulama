@@ -39,7 +39,7 @@
     </select>
 
     <select id="selectModuleByLike" resultType="cn.shianxian.supervise.sys.pojo.Module">
-        CALL proc_T_Module_Query_ByCondition(#{queryPojo.id}, #{queryPojo.name})
+        CALL proc_T_Module_Query_ByCondition(#{queryPojo.parentId}, #{queryPojo.name})
     </select>
 
     <select id="selectModuleByTree" resultType="cn.shianxian.supervise.sys.pojo.Module">

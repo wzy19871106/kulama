@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.sys.service;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.Module;
@@ -10,7 +11,7 @@ public interface ModuleService {
      * 根据id查询模块
      * @return
      */
-    Result selectModule(QueryPojo queryPojo);
+    Result selectModule(QueryPojo queryPojo, Pages pages);
 
 
     /**

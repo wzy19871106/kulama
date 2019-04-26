@@ -1,10 +1,13 @@
 package cn.shianxian.supervise.sys.service.impl;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.ModuleDao;
 import cn.shianxian.supervise.sys.pojo.Module;
 import cn.shianxian.supervise.sys.service.ModuleService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +25,16 @@ public class ModuleServiceImpl implements ModuleService {
 
 
     @Override
-    public Result selectModule(QueryPojo queryPojo) {
+    public Result selectModule(QueryPojo queryPojo, Pages pages) {
+        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
         List<Module> modules = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             modules = this.moduleDao.selectModuleById(queryPojo.getId());
-        } else if (StringUtils.isNotBlank(queryPojo.getName())) {
-            queryPojo.setId("");
+        }
+        if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {
             modules = this.moduleDao.selectModuleByLike(queryPojo);
         }
-        return Result.data(modules);
+        return Result.data(page.getTotal(), modules);
     }
 
 

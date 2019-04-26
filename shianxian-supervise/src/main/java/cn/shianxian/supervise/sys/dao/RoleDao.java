@@ -32,4 +32,12 @@ public interface RoleDao extends Mapper<Role> {
      * @return
      */
     String updateRole(@Param("role") Role role);
+
+
+    /**
+     * 删除角色
+     * @param id
+     * @return
+     */
+    String deleteRoleById(@Param("id") String id);
 }

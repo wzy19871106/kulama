@@ -5,15 +5,28 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
-import java.util.List;
-
 @Repository
 public interface RoleAuthorityDao extends Mapper<RoleAuthority> {
 
+
     /**
-     * 批量添加权限
-     * @param roleAuthorityList
+     * 保存角色权限
+     * @param roleAuthority
      * @return
      */
-    int insertBatch(@Param("roleAuthorityList") List<RoleAuthority> roleAuthorityList);
+    String insertRoleAuthority(@Param("roleAuthority") RoleAuthority roleAuthority);
+
+
+    /**
+     * 修改角色权限
+     * @param roleAuthority
+     */
+    String updateRoleAuthority(@Param("roleAuthority") RoleAuthority roleAuthority);
+
+
+    /**
+     * 删除角色权限
+     * @param id
+     */
+    String deleteRoleAuthorityById(@Param("id") String id);
 }

@@ -17,4 +17,8 @@
         CALL Proc_T_Role_Edit_ByRoleTag(#{role.roleTag}, #{role.roleName}, #{role.moduleAuthority})
     </select>
 
+    <select id="deleteRoleById" resultType="java.lang.String">
+        CALL proc_T_Role_Remove_ByRoleTag(#{id})
+    </select>
+
 </mapper>

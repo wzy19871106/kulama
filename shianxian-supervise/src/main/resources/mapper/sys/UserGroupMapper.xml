@@ -2,12 +2,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.shianxian.supervise.sys.dao.UserGroupDao">
 
-    <select id="insertUserGroup">
-        CALL Proc_T_UserGroup_Add()
+    <select id="insertUserGroup" resultType="java.lang.String">
+        CALL Proc_T_UserGroup_Add
+        (
+        #{userGroup.userParentTag},
+        #{userGroup.userGroupName}
+        )
     </select>
 
-    <select id="updateUserGroup">
-        CALL proc_T_UserGroup_Edit_ByUserGroupTag()
+    <select id="updateUserGroup" resultType="java.lang.String">
+        CALL proc_T_UserGroup_Edit_ByUserGroupTag
+        (
+        #{userGroup.userGroupTag},
+        #{userGroup.userGroupName}
+        )
+    </select>
+
+    <select id="deleteUserGroupById" resultType="java.lang.String">
+        CALL proc_T_UserGroup_Remove_ByUserGroupTag(#{id})
+    </select>
+
+    <select id="selectUserGroupById" resultType="cn.shianxian.supervise.sys.pojo.UserGroup">
+        CALL proc_T_UserGroup_Query_ByUserGroupTag(#{id})
+    </select>
+
+    <select id="selectUserGroupByLike" resultType="cn.shianxian.supervise.sys.pojo.UserGroup">
+        CALL proc_T_UserGroup_Query_ByCondition
+        (
+        #{queryPojo.parentId},
+        #{queryPojo.name}
+        )
     </select>
 
 </mapper>

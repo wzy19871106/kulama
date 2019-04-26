@@ -2,19 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.shianxian.supervise.sys.dao.RoleAuthorityDao">
 
-    <insert id="insertBatch">
-        INSERT INTO
-        t_roleauthority(id, RoleTag, AuthorityTag, ModuleTag, CreateTime)
-        VALUES
-        <foreach collection="roleAuthorityList" item="item" separator="," index="index">
-            (
-            #{item.id},
-            #{item.roleTag},
-            #{item.authorityTag},
-            #{item.moduleTag},
-            #{item.createTime}
-            )
-        </foreach>
-    </insert>
+    <select id="insertRoleAuthority" resultType="java.lang.String">
+        CALL Proc_T_RoleAuthority_Add
+        (
+        #{roleAuthority.roleTag},
+        #{roleAuthority.moduleAuthority}
+        )
+    </select>
+
+    <select id="updateRoleAuthority" resultType="java.lang.String">
+        CALL Proc_T_RoleAuthority_Edit_ByRoleTag
+        (
+        #{roleAuthority.roleTag},
+        #{roleAuthority.moduleAuthority}
+        )
+    </select>
+
+    <select id="deleteRoleAuthorityById" resultType="java.lang.String">
+        CALL Proc_T_RoleAuthority_Remove_ByRoleTag(#{id})
+    </select>
 
 </mapper>

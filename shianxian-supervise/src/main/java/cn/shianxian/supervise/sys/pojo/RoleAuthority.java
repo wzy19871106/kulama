@@ -47,15 +47,8 @@ public class RoleAuthority {
     private LocalDateTime createTime;
 
     /**
-     * 权限id
+     * 模块权限
      */
     @Transient
-    private String authoritys;
-
-    /**
-     * 模块id
-     */
-    @Transient
-    private String modules;
-
+    private String moduleAuthority;
 }

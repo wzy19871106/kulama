@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.sys.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.Module;
@@ -35,10 +36,13 @@ public class ModuleController {
     @ApiOperation(value = "查询模块接口", notes = "查询模块接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
+            @ApiImplicitParam(paramType = "query", name = "parentId", value = "父id"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
-    public ResponseEntity<Result> selectModule(QueryPojo queryPojo) {
-        Result result = this.moduleService.selectModule(queryPojo);
+    public ResponseEntity<Result> selectModule(QueryPojo queryPojo, Pages pages) {
+        Result result = this.moduleService.selectModule(queryPojo, pages);
         return ResponseEntity.ok(result);
     }
 
