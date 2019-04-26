@@ -38,8 +38,16 @@
         CALL Proc_T_Module_Remove_ByModuleTag(#{id})
     </select>
 
-    <select id="selectModuleByLike" resultType="cn.shianxian.supervise.sys.pojo.Module">
-        CALL proc_T_Module_Query_ByCondition(#{queryPojo.parentId}, #{queryPojo.name})
+    <resultMap id="module" type="cn.shianxian.supervise.sys.pojo.Module"></resultMap>
+    <resultMap  id="pageCount" type="java.lang.Long">
+        <result column="PageCount"></result>
+    </resultMap>
+    <resultMap  id="totalCount" type="java.lang.Long">
+        <result column="TotalCount"></result>
+    </resultMap>
+
+    <select id="selectModuleByLike" statementType="CALLABLE"  resultMap="module,pageCount,totalCount">
+        CALL proc_T_Module_Query_ByCondition(#{queryPojo.parentId}, #{queryPojo.name}, #{pages.pageSize}, #{pages.pageNum})
     </select>
 
     <select id="selectModuleByTree" resultType="cn.shianxian.supervise.sys.pojo.Module">

@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.sys.dao;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.sys.pojo.Module;
 import org.apache.ibatis.annotations.Param;
@@ -56,7 +57,7 @@ public interface ModuleDao extends Mapper<Module> {
      * @param queryPojo
      * @return
      */
-    List<Module> selectModuleByLike(@Param("queryPojo") QueryPojo queryPojo);
+    List<List<?>> selectModuleByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
 
 
     /**
