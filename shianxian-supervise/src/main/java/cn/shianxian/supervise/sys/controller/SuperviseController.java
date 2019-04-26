@@ -75,7 +75,8 @@ public class SuperviseController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管项目编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
-    })    public ResponseEntity<Result> selectSupervise(Supervise supervise) {
+    })
+    public ResponseEntity<Result> selectSupervise(Supervise supervise) {
         Result result = this.superviseService.selectSupervise(supervise);
         return ResponseEntity.ok(result);
     }

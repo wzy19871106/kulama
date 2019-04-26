@@ -25,7 +25,7 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
     @Transactional
     @Override
     public Result saveOrUpdateSupervisePlanMain(SupervisePlanMain supervisePlanMain) {
-        if (StringUtils.isBlank(supervisePlanMain.getPlanTag())) {
+        if (null == supervisePlanMain.getPlanTag()) {
             this.supervisePlanMainDao.insertSupervisePlanMain(supervisePlanMain);
         } else {
             this.supervisePlanMainDao.updateSupervisePlanMain(supervisePlanMain);

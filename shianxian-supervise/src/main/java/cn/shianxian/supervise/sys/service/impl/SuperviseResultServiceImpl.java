@@ -24,12 +24,16 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
 
     @Transactional
     @Override
-    public Result saveOrUpdateSuperviseResult(SuperviseResult superviseResult) {
-        if (StringUtils.isBlank(superviseResult.getResultTag())) {
-            this.superviseResultDao.insertSuperviseResult(superviseResult);
-        } else {
-            this.superviseResultDao.updateSuperviseResult(superviseResult);
-        }
+    public Result saveSuperviseResult(SuperviseResult superviseResult) {
+        this.superviseResultDao.insertSuperviseResult(superviseResult);
+        return Result.successMsg();
+    }
+
+
+    @Transactional
+    @Override
+    public Result updateSuperviseResult(SuperviseResult superviseResult) {
+        this.superviseResultDao.updateSuperviseResult(superviseResult);
         return Result.successMsg();
     }
 

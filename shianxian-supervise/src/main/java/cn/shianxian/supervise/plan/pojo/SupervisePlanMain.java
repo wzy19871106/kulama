@@ -24,7 +24,7 @@ public class SupervisePlanMain extends BasePojo {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "`PlanTag`")
-    private String planTag;
+    private Long planTag;
 
     /**
      * 计划任务名称

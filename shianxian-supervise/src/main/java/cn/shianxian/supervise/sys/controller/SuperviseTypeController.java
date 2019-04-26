@@ -70,7 +70,8 @@ public class SuperviseTypeController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
             @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
-    })    public ResponseEntity<Result> selectSuperviseType(SuperviseType superviseType) {
+    })
+    public ResponseEntity<Result> selectSuperviseType(SuperviseType superviseType) {
         Result result = this.superviseTypeService.selectSuperviseType(superviseType);
         return ResponseEntity.ok(result);
     }

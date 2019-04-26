@@ -9,7 +9,6 @@
     <select id="insertSupervisePlanMain" resultType="java.lang.String">
         CALL Proc_T_SuperviserPlan_Main_Add
         (
-        #{supervisePlanMain.planTag},
         #{supervisePlanMain.planName},
         #{supervisePlanMain.startTime},
         #{supervisePlanMain.endTime},
@@ -43,7 +42,7 @@
     </select>
 
     <select id="selectSupervisePlanMainByLike" resultType="cn.shianxian.supervise.plan.pojo.SupervisePlanMain">
-        CALL proc_T_SuperviserPlan_Main_Query_ByConditon
+        CALL proc_T_SuperviserPlan_Main_Query_ByCondition
         (
         #{queryPojo.startTime},
         #{queryPojo.endTime},

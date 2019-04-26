@@ -5,12 +5,13 @@ import cn.shianxian.supervise.sys.pojo.SuperviseResult;
 
 public interface SuperviseResultService {
 
+
     /**
-     * 查询监管结果
+     * 保存、修改监管结果
      * @param superviseResult
      * @return
      */
-    Result selectSuperviseResult(SuperviseResult superviseResult);
+    Result saveSuperviseResult(SuperviseResult superviseResult);
 
 
     /**
@@ -18,7 +19,7 @@ public interface SuperviseResultService {
      * @param superviseResult
      * @return
      */
-    Result saveOrUpdateSuperviseResult(SuperviseResult superviseResult);
+    Result updateSuperviseResult(SuperviseResult superviseResult);
 
 
     /**
@@ -27,6 +28,14 @@ public interface SuperviseResultService {
      * @return
      */
     Result deleteSuperviseResultById(String ids);
+
+
+    /**
+     * 查询监管结果
+     * @param superviseResult
+     * @return
+     */
+    Result selectSuperviseResult(SuperviseResult superviseResult);
 
 
     /**

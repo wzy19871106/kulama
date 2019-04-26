@@ -27,11 +27,11 @@ public class SuperviseResultController {
 
 
     /**
-     * 保存、修改监管结果
+     * 保存监管结果
      * @return
      */
-    @PostMapping("saveOrUpdateSuperviseResult")
-    @ApiOperation(value = "保存、修改监管结果接口", notes = "保存、修改监管结果接口")
+    @PostMapping("saveSuperviseResult")
+    @ApiOperation(value = "保存监管结果接口", notes = "保存监管结果接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管内容编码（外）"),
@@ -43,8 +43,31 @@ public class SuperviseResultController {
             @ApiImplicitParam(paramType = "query", name = "ifUse", value = "栏目启用，可添加信息，可查历史数据；栏目禁用，不可添加新信息，但历史数据可以查询", dataType = "Boolean"),
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
-    public ResponseEntity<Result> saveOrUpdateSuperviseResult(@Valid SuperviseResult superviseResult) {
-        Result result = this.superviseResultService.saveOrUpdateSuperviseResult(superviseResult);
+    public ResponseEntity<Result> saveSuperviseResult(@Valid SuperviseResult superviseResult) {
+        Result result = this.superviseResultService.saveSuperviseResult(superviseResult);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 修改监管结果
+     * @return
+     */
+    @PostMapping("updateSuperviseResult")
+    @ApiOperation(value = "修改监管结果接口", notes = "修改监管结果接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管内容编码（外）"),
+            @ApiImplicitParam(paramType = "query", name = "resultValue", value = "监管结果"),
+            @ApiImplicitParam(paramType = "query", name = "order", value = "排序"),
+            @ApiImplicitParam(paramType = "query", name = "score", value = "结果分值"),
+            @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
+            @ApiImplicitParam(paramType = "query", name = "advice", value = "整改意见,该结果单项的整改意见"),
+            @ApiImplicitParam(paramType = "query", name = "ifUse", value = "栏目启用，可添加信息，可查历史数据；栏目禁用，不可添加新信息，但历史数据可以查询", dataType = "Boolean"),
+            @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
+    })
+    public ResponseEntity<Result> updateSuperviseResult(@Valid SuperviseResult superviseResult) {
+        Result result = this.superviseResultService.updateSuperviseResult(superviseResult);
         return ResponseEntity.ok(result);
     }
 
@@ -71,7 +94,8 @@ public class SuperviseResultController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管内容编码"),
-    })    public ResponseEntity<Result> selectSuperviseResult(SuperviseResult superviseResult) {
+    })
+    public ResponseEntity<Result> selectSuperviseResult(SuperviseResult superviseResult) {
         Result result = this.superviseResultService.selectSuperviseResult(superviseResult);
         return ResponseEntity.ok(result);
     }
