@@ -1,7 +1,6 @@
 package cn.shianxian.supervise.sys.pojo;
 
 
-import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Table(name = "T_User")
-public class User extends BasePojo {
+public class User {
 
 
     /**
@@ -101,5 +100,11 @@ public class User extends BasePojo {
      */
     @Column(name = "roleTag")
     private String roleTag;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "createTime")
+    private LocalDateTime createTime;
 
 }

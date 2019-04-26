@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.plan.pojo;
 
+import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @Table(name = "t_superviseplan_sub")
-public class SupervisePlanSub {
+public class SupervisePlanSub extends BasePojo {
 
 
     /**
@@ -65,30 +66,6 @@ public class SupervisePlanSub {
      */
     @Column(name = "`superviseTeamName`")
     private String superviseTeamName;
-
-    /**
-     * 创建日期
-     */
-    @Column(name = "`createTime`")
-    private LocalDateTime createTime;
-
-    /**
-     * 创建人
-     */
-    @Column(name = "`createUserTag`")
-    private String createUserTag;
-
-    /**
-     * 最后更新日期
-     */
-    @Column(name = "`lastUpdateTime`")
-    private LocalDateTime lastUpdateTime;
-
-    /**
-     * 最后更新人
-     */
-    @Column(name = "`lastUpdateUser`")
-    private String lastUpdateUser;
 
     /**
      * 完成情况

@@ -1,10 +1,10 @@
 package cn.shianxian.supervise.sys.pojo;
 
 
-import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 /**
@@ -12,7 +12,7 @@ import javax.persistence.*;
  */
 @Data
 @Table(name = "T_Roleauthority")
-public class RoleAuthority extends BasePojo {
+public class RoleAuthority {
 
     
     /**
@@ -41,6 +41,12 @@ public class RoleAuthority extends BasePojo {
     private String moduleTag;
 
     /**
+     * 创建时间
+     */
+    @Column(name = "createTime")
+    private LocalDateTime createTime;
+
+    /**
      * 权限id
      */
     @Transient
@@ -51,4 +57,5 @@ public class RoleAuthority extends BasePojo {
      */
     @Transient
     private String modules;
+
 }

@@ -1,20 +1,20 @@
 package cn.shianxian.supervise.sys.pojo;
 
 
-import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
 
 /**
  * 模块
  */
 @Data
 @Table(name = "t_module")
-public class Module extends BasePojo {
+public class Module {
 
 
     /**
@@ -79,5 +79,10 @@ public class Module extends BasePojo {
     @Column(name = "`index`")
     private Long index;
 
+    /**
+     * 创建时间
+     */
+    @Column(name = "createTime")
+    private LocalDateTime createTime;
 
 }

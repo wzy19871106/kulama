@@ -1,20 +1,20 @@
 package cn.shianxian.supervise.team.pojo;
 
 
+import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
 
 /**
  * 执法人员表
  */
 @Data
 @Table(name = "t_superviser")
-public class Superviser {
+public class Superviser extends BasePojo {
 
 
     /**
@@ -56,30 +56,6 @@ public class Superviser {
     private Boolean ifUse;
 
     /**
-     * 创建时间
-     */
-    @Column(name = "`createTime`")
-    private LocalDateTime createTime;
-
-    /**
-     * 创建人
-     */
-    @Column(name = "`createUser`")
-    private String createUser;
-
-    /**
-     * 最后更新日期
-     */
-    @Column(name = "`lastUpdateTime`")
-    private LocalDateTime lastUpdateTime;
-
-    /**
-     * 最后更新人
-     */
-    @Column(name = "`lastUpdateUser`")
-    private String lastUpdateUser;
-
-    /**
      * 图片信息
      */
     @Column(name = "`picTag`")
@@ -96,6 +72,5 @@ public class Superviser {
      */
     @Column(name = "`ifDelete`")
     private Boolean ifDelete;
-
 
 }
