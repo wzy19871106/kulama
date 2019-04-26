@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.team.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.team.pojo.SuperviseTeam;
@@ -97,9 +98,11 @@ public class SuperviseTeamController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
-    public ResponseEntity<Result> selectSuperviseTeam(QueryPojo queryPojo) {
-        Result result = this.superviseTeamService.selectSuperviseTeam(queryPojo);
+    public ResponseEntity<Result> selectSuperviseTeam(QueryPojo queryPojo, Pages pages) {
+        Result result = this.superviseTeamService.selectSuperviseTeam(queryPojo, pages);
         return ResponseEntity.ok(result);
     }
 

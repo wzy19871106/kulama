@@ -1,10 +1,13 @@
 package cn.shianxian.supervise.plan.service.impl;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.plan.dao.SupervisePlanMainDao;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanMain;
 import cn.shianxian.supervise.plan.service.SupervisePlanMainService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +49,14 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
 
 
     @Override
-    public Result selectSupervisePlanMain(QueryPojo queryPojo) {
+    public Result selectSupervisePlanMain(QueryPojo queryPojo, Pages pages) {
+        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
         List<SupervisePlanMain> planMainList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             planMainList = this.supervisePlanMainDao.selectSupervisePlanMainById(queryPojo.getId());
         } else if (StringUtils.isNotBlank(queryPojo.getName()) && null != queryPojo.getStartTime() && null != queryPojo.getEndTime()) {
             planMainList = this.supervisePlanMainDao.selectSupervisePlanMainByLike(queryPojo);
         }
-        return Result.data(planMainList);
+        return Result.data(page.getTotal(), planMainList);
     }
 }

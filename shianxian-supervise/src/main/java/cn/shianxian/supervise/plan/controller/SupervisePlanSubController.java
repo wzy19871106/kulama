@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.plan.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanSub;
@@ -80,9 +81,11 @@ public class SupervisePlanSubController {
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
             @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
             @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
-    public ResponseEntity<Result> selectSupervisePlanSub(QueryPojo queryPojo) {
-        Result result = this.supervisePlanSubService.selectSupervisePlanSub(queryPojo);
+    public ResponseEntity<Result> selectSupervisePlanSub(QueryPojo queryPojo, Pages pages) {
+        Result result = this.supervisePlanSubService.selectSupervisePlanSub(queryPojo, pages);
         return ResponseEntity.ok(result);
     }
 

@@ -43,6 +43,8 @@ public class UserController {
             @ApiImplicitParam(paramType = "query", name = "enable", value = "是否有效，1：有效0：无效。"),
             @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
             @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectUserByPage(QueryPojo queryPojo, Pages pages) {
         Result result = this.userService.selectUserByPage(queryPojo, pages);

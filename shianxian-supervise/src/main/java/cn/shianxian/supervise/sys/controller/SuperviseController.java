@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.sys.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.Supervise;
 import cn.shianxian.supervise.sys.service.SuperviseService;
@@ -75,9 +76,11 @@ public class SuperviseController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管项目编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
-    public ResponseEntity<Result> selectSupervise(Supervise supervise) {
-        Result result = this.superviseService.selectSupervise(supervise);
+    public ResponseEntity<Result> selectSupervise(Supervise supervise, Pages pages) {
+        Result result = this.superviseService.selectSupervise(supervise, pages);
         return ResponseEntity.ok(result);
     }
 

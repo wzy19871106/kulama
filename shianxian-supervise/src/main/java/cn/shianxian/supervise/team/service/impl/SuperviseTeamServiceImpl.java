@@ -1,10 +1,13 @@
 package cn.shianxian.supervise.team.service.impl;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.team.dao.SuperviseTeamDao;
 import cn.shianxian.supervise.team.pojo.SuperviseTeam;
 import cn.shianxian.supervise.team.service.SuperviseTeamService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +55,8 @@ public class SuperviseTeamServiceImpl implements SuperviseTeamService {
 
 
     @Override
-    public Result selectSuperviseTeam(QueryPojo queryPojo) {
+    public Result selectSuperviseTeam(QueryPojo queryPojo, Pages pages) {
+        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
         List<SuperviseTeam> superviseTeams = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             superviseTeams = this.superviseTeamDao.selectSuperviseTeamById(queryPojo.getId());
@@ -60,6 +64,6 @@ public class SuperviseTeamServiceImpl implements SuperviseTeamService {
         if (StringUtils.isNotBlank(queryPojo.getName())) {
             superviseTeams = this.superviseTeamDao.selectSuperviseTeamByLike(queryPojo);
         }
-        return Result.data(superviseTeams);
+        return Result.data(page.getTotal(), superviseTeams);
     }
 }

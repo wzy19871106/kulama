@@ -1,10 +1,13 @@
 package cn.shianxian.supervise.team.service.impl;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.team.dao.SuperviserDao;
 import cn.shianxian.supervise.team.pojo.Superviser;
 import cn.shianxian.supervise.team.service.SuperviserService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +54,8 @@ public class SuperviserServiceImpl implements SuperviserService {
 
 
     @Override
-    public Result selectSuperviser(QueryPojo queryPojo) {
+    public Result selectSuperviser(QueryPojo queryPojo, Pages pages) {
+        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
         List<Superviser> superviserList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             superviserList = this.superviserDao.selectSuperviserById(queryPojo.getId());
@@ -59,7 +63,7 @@ public class SuperviserServiceImpl implements SuperviserService {
         if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {
             superviserList = this.superviserDao.selectSuperviserByLike(queryPojo);
         }
-        return Result.data(superviserList);
+        return Result.data(page.getTotal(), superviserList);
     }
 
 }

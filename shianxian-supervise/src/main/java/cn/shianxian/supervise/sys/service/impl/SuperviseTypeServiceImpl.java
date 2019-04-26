@@ -1,9 +1,12 @@
 package cn.shianxian.supervise.sys.service.impl;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.SuperviseTypeDao;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import cn.shianxian.supervise.sys.service.SuperviseTypeService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,9 +48,10 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
 
 
     @Override
-    public Result selectSuperviseType(SuperviseType superviseType) {
+    public Result selectSuperviseType(SuperviseType superviseType, Pages pages) {
+        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
         List<SuperviseType> superviseTypes = this.superviseTypeDao.selectSuperviseType(superviseType.getSuperviseTypeTag(), superviseType.getUserGroupDataAuthority());
-        return Result.data(superviseTypes);
+        return Result.data(page.getTotal(), superviseTypes);
     }
 
 

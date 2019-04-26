@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.team.service;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.team.pojo.Superviser;
@@ -36,5 +37,5 @@ public interface SuperviserService {
      * @param queryPojo
      * @return
      */
-    Result selectSuperviser(QueryPojo queryPojo);
+    Result selectSuperviser(QueryPojo queryPojo, Pages pages);
 }
