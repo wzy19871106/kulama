@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.plan.dao;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanSub;
 import org.apache.ibatis.annotations.Param;
@@ -48,6 +49,6 @@ public interface SupervisePlanSubDao extends Mapper<SupervisePlanSub> {
      * @param queryPojo
      * @return
      */
-    List<SupervisePlanSub> selectSupervisePlanSubByLike(@Param("queryPojo") QueryPojo queryPojo);
+    List<List<?>> selectSupervisePlanSubByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
 
 }

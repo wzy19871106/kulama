@@ -41,12 +41,17 @@
         CALL proc_T_SuperviserPlan_Main_Remove_ByTag(#{id})
     </select>
 
-    <select id="selectSupervisePlanMainByLike" resultType="cn.shianxian.supervise.plan.pojo.SupervisePlanMain">
+    <resultMap id="planMain" type="cn.shianxian.supervise.plan.pojo.SupervisePlanMain"></resultMap>
+
+    <select id="selectSupervisePlanMainByLike" resultMap="planMain,pageCount,totalCount">
         CALL proc_T_SuperviserPlan_Main_Query_ByCondition
         (
         #{queryPojo.startTime},
         #{queryPojo.endTime},
-        #{queryPojo.name}
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
         )
     </select>
+
 </mapper>
