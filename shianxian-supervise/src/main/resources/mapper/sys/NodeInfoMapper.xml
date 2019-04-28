@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.NodeInfoDao">
+
+    <select id="insertNodeInfo" resultType="java.lang.String">
+        CALL Proc_T_NodeInfo_Add
+        (
+        #{nodeInfo.nodeName},
+        #{nodeInfo.nodeNo},
+        #{nodeInfo.nodeTel},
+        #{nodeInfo.industryTag},
+        #{nodeInfo.nodeProvice},
+        #{nodeInfo.nodeCity},
+        #{nodeInfo.nodeArea},
+        #{nodeInfo.nodeVillage}
+        )
+    </select>
+
+    <select id="updateNodeInfo" resultType="java.lang.String">
+        CALL proc_T_NodeInfo_Edit_ByNodeTag
+        (
+        #{nodeInfo.nodeTag},
+        #{nodeInfo.nodeName}
+        )
+    </select>
+
+    <resultMap id="nodeInfo" type="cn.shianxian.supervise.sys.pojo.NodeInfo"></resultMap>
+    <resultMap  id="pageCount" type="java.lang.Long">
+        <result column="PageCount"></result>
+    </resultMap>
+    <resultMap  id="totalCount" type="java.lang.Long">
+        <result column="TotalCount"></result>
+    </resultMap>
+
+    <select id="selectNodeInfoByLike" resultMap="nodeInfo,pageCount,totalCount">
+        CALL proc_T_NodeInfo_Edit_ByNodeTag
+        (
+        #{nodeInfo.nodeTag},
+        #{nodeInfo.industryTag},
+        #{nodeInfo.userDataUsedAuthoritySet},
+        #{nodeInfo.nodeName},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectNodeInfoById" resultType="cn.shianxian.supervise.sys.pojo.NodeInfo">
+        CALL proc_T_NodeInfo_Query_ByNodeTag(#{id})
+    </select>
+
+    <select id="selectNodeInfoByAuthority" resultType="cn.shianxian.supervise.sys.pojo.NodeInfo">
+        CALL proc_T_NodeInfo_Query_ByUserGroupDataAuthority(#{authority})
+    </select>
+
+    <select id="selectNodeInfoTreeByLike" resultMap="nodeInfo,pageCount,totalCount">
+        CALL proc_T_NodeInfo_QueryTree_ByCondition
+        (
+        #{nodeInfo.nodeTag},
+        #{nodeInfo.industryTag},
+        #{nodeInfo.userDataUsedAuthoritySet},
+        #{nodeInfo.nodeName},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="deleteNodeInfoById" resultType="java.lang.String">
+        CALL proc_T_NodeInfo_Remove_ByNodeTag(#{id})
+    </select>
+
+    <select id="insertNodeInfoAndAuthority" resultType="java.lang.String">
+        CALL proc_T_NodeInfo_UserGroupDataAuthority_Add
+        (
+        #{nodeInfo.nodeTag},
+        #{nodeInfo.userDataUsedAuthoritySet}
+        )
+    </select>
+
+    <select id="updateNodeInfoAndAuthority" resultType="java.lang.String">
+        CALL proc_T_NodeInfo_UserGroupDataAuthority_Edit_ByNodeTag
+        (
+        #{nodeInfo.nodeTag},
+        #{nodeInfo.userDataUsedAuthoritySet}
+        )
+    </select>
+
+</mapper>
