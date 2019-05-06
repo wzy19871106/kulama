@@ -51,7 +51,7 @@ public class SuperviseTeamServiceImpl implements SuperviseTeamService {
 
     @Override
     public Result selectSuperviseTeam(QueryPojo queryPojo, Pages pages) {
-        Object superviseTeams = new Object();
+        Object superviseTeams = null;
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             superviseTeams = this.superviseTeamDao.selectSuperviseTeamById(queryPojo.getId());
         } else if (StringUtils.isNotBlank(queryPojo.getName())) {

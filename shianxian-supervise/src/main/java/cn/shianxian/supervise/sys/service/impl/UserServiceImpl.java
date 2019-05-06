@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result selectUserByPage(User user, Pages pages) {
-        Object users = new Object();
+        Object users = null;
         if (StringUtils.isNotBlank(user.getUserTag())) {
             users = this.userDao.selectUserById(user.getUserTag());
         } else if (StringUtils.isNoneBlank(user.getUserName(), user.getRoleTag(), user.getUserGroupTag())) {

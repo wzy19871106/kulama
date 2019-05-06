@@ -27,7 +27,7 @@
     <resultMap id="nodeInfo" type="cn.shianxian.supervise.sys.pojo.NodeInfo"></resultMap>
 
     <select id="selectNodeInfoByLike" resultMap="nodeInfo,pageCount,totalCount">
-        CALL proc_T_NodeInfo_Edit_ByNodeTag
+        CALL proc_T_NodeInfo_Query_ByCondition
         (
         #{nodeInfo.nodeTag},
         #{nodeInfo.industryTag},
@@ -62,16 +62,8 @@
         CALL proc_T_NodeInfo_Remove_ByNodeTag(#{id})
     </select>
 
-    <select id="insertNodeInfoAndAuthority" resultType="java.lang.String">
+    <select id="updateAuthorityById" resultType="java.lang.String">
         CALL proc_T_NodeInfo_UserGroupDataAuthority_Add
-        (
-        #{nodeInfo.nodeTag},
-        #{nodeInfo.userDataUsedAuthoritySet}
-        )
-    </select>
-
-    <select id="updateNodeInfoAndAuthority" resultType="java.lang.String">
-        CALL proc_T_NodeInfo_UserGroupDataAuthority_Edit_ByNodeTag
         (
         #{nodeInfo.nodeTag},
         #{nodeInfo.userDataUsedAuthoritySet}

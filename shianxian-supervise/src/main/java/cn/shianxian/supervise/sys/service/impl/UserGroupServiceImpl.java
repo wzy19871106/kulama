@@ -46,7 +46,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Override
     public Result selectUserGroup(QueryPojo queryPojo, Pages pages) {
-        Object userGroupList = new Object();
+        Object userGroupList = null;
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             userGroupList = this.userGroupDao.selectUserGroupById(queryPojo.getId());
         } else if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {

@@ -69,18 +69,11 @@ public interface NodeInfoDao extends Mapper<NodeInfo> {
 
 
     /**
-     * 新增节点权限
-     * @param nodeInfo
-     * @return
-     */
-    String insertNodeInfoAndAuthority(@Param("nodeInfo") NodeInfo nodeInfo);
-
-
-    /**
      * 修改节点权限
      * @param nodeInfo
      * @return
      */
-    String updateNodeInfoAndAuthority(@Param("nodeInfo") NodeInfo nodeInfo);
+    String updateAuthorityById(@Param("nodeInfo") NodeInfo nodeInfo);
+
 
 }

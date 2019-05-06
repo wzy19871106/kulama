@@ -50,7 +50,7 @@ public class SuperviserServiceImpl implements SuperviserService {
 
     @Override
     public Result selectSuperviser(QueryPojo queryPojo, Pages pages) {
-        Object superviserList = new Object();
+        Object superviserList = null;
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             superviserList = this.superviserDao.selectSuperviserById(queryPojo.getId());
         } else if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {
