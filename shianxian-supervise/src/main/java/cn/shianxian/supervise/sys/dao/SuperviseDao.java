@@ -12,7 +12,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
 
 
     /**
-     * 保存监管结果
+     * 保存监管内容
      * @param supervise
      * @return
      */
@@ -20,7 +20,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
 
 
     /**
-     * 修改监管结果
+     * 修改监管内容
      * @param supervise
      * @return
      */
@@ -28,7 +28,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
 
 
     /**
-     * 删除监管结果
+     * 删除监管内容
      * @param id
      * @return
      */
@@ -36,7 +36,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
 
 
     /**
-     * 根据id查询监管结果
+     * 根据id查询监管内容
      * @param id
      * @return
      */
@@ -44,7 +44,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
 
 
     /**
-     * 根据监管内容编码查询监管结果
+     * 根据监管内容编码查询监管内容
      * @param type
      * @return
      */
@@ -52,7 +52,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
 
 
     /**
-     * 监管结果向上排序
+     * 监管内容向上排序
      * @param id
      * @return
      */
@@ -60,7 +60,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
 
 
     /**
-     * 监管结果向下排序
+     * 监管内容向下排序
      * @param id
      * @return
      */

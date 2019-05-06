@@ -53,8 +53,9 @@ public class RoleController {
     @GetMapping("selectRoleByPage")
     @ApiOperation(value = "分页查询角色接口", notes = "分页查询角色接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectRoleByPage(QueryPojo queryPojo, Pages pages) {
         Result result = this.roleService.selectRoleByPage(queryPojo, pages);
@@ -73,19 +74,5 @@ public class RoleController {
         Result result = this.roleService.deleteRoleById(id);
         return ResponseEntity.ok(result);
     }
-
-
-    /**
-     * 获取角色拥有的权限
-     * @return
-     */
-    @GetMapping("selectAuthorityById")
-    @ApiOperation(value = "获取角色拥有的权限接口", notes = "获取角色拥有的权限接口")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "角色id")
-    public ResponseEntity<Result> selectAuthorityById(String id) {
-        Result result = this.roleService.selectAuthorityById(id);
-        return ResponseEntity.ok(result);
-    }
-
 
 }

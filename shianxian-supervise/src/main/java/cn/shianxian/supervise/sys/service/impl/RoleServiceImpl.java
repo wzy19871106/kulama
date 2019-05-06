@@ -1,20 +1,16 @@
 package cn.shianxian.supervise.sys.service.impl;
 
-import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.RoleDao;
 import cn.shianxian.supervise.sys.pojo.Role;
 import cn.shianxian.supervise.sys.service.RoleService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -43,17 +39,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Result selectRoleByPage(QueryPojo queryPojo, Pages pages) {
-        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
-        Example example = new Example(Role.class);
-        Example.Criteria criteria = example.createCriteria();
-        if (StringUtils.isNotBlank(queryPojo.getId())) {
-            criteria.andEqualTo("roleTag", queryPojo.getId());
-        }
-        if (StringUtils.isNotBlank(queryPojo.getName())) {
-            criteria.orLike("roleName", Constants.PER_CENT + queryPojo.getName() + Constants.PER_CENT);
-        }
-        List<Role> roles = this.roleDao.selectByExample(example);
-        return Result.data(page.getTotal(), roles);
+        List<List<?>> roles = this.roleDao.selectRoleByLike(queryPojo, pages);
+        return Result.data(roles);
     }
 
 
@@ -66,9 +53,4 @@ public class RoleServiceImpl implements RoleService {
     }
 
 
-    @Override
-    public Result selectAuthorityById(String id) {
-        List<String> list = this.roleDao.selectAuthorityById(id);
-        return Result.data(list);
-    }
 }

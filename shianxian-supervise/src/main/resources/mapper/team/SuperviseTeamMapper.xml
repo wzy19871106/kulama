@@ -38,10 +38,14 @@
         CALL proc_T_SuperviseTeam_Remove_ByTag(#{id})
     </select>
 
-    <select id="selectSuperviseTeamByLike" resultType="cn.shianxian.supervise.team.pojo.SuperviseTeam">
+    <resultMap id="superviseTeam" type="cn.shianxian.supervise.team.pojo.SuperviseTeam"></resultMap>
+
+    <select id="selectSuperviseTeamByLike" resultMap="superviseTeam,pageCount,totalCount">
         CALL proc_T_SuperviseTeam_Query_ByCondition
         (
-        #{queryPojo.name}
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
         )
     </select>
 </mapper>

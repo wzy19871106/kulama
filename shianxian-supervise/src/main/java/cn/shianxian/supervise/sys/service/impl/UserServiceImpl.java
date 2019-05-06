@@ -8,8 +8,6 @@ import cn.shianxian.supervise.exception.CommonException;
 import cn.shianxian.supervise.sys.dao.UserDao;
 import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,14 +27,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result selectUserByPage(User user, Pages pages) {
-        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
-        List<User> users = new ArrayList<>();
+        Object users = new Object();
         if (StringUtils.isNotBlank(user.getUserTag())) {
             users = this.userDao.selectUserById(user.getUserTag());
         } else if (StringUtils.isNoneBlank(user.getUserName(), user.getRoleTag(), user.getUserGroupTag())) {
-            users = this.userDao.selectUserByLike(user);
+            users = this.userDao.selectUserByLike(user, pages);
         }
-        return Result.data(page.getTotal(), users);
+        return Result.data(users);
     }
 
 

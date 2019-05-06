@@ -35,12 +35,16 @@
         CALL proc_T_User_Query_ByUserTag(#{id})
     </select>
 
-    <select id="selectUserByLike" resultType="cn.shianxian.supervise.sys.pojo.User">
+    <resultMap id="user" type="cn.shianxian.supervise.sys.pojo.User"></resultMap>
+
+    <select id="selectUserByLike" resultMap="user,pageCount,totalCount">
         CALL proc_T_User_Query_ByCondition
         (
         #{user.roleTag},
         #{user.userGroupTag},
-        #{user.userName}
+        #{user.userName},
+        #{pages.pageSize},
+        #{pages.pageNum}
         )
     </select>
 </mapper>

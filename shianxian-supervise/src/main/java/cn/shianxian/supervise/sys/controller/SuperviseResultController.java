@@ -95,8 +95,6 @@ public class SuperviseResultController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管内容编码"),
-            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
-            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectSuperviseResult(SuperviseResult superviseResult, Pages pages) {
         Result result = this.superviseResultService.selectSuperviseResult(superviseResult, pages);

@@ -2,13 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.shianxian.supervise.sys.dao.RoleDao">
 
-    <select id="selectAuthorityById" resultType="java.lang.String">
-        SELECT AuthorityName FROM t_role r
-        INNER JOIN t_roleauthority ra ON r.RoleTag = ra.RoleTag
-        INNER JOIN t_authoritydir a ON a.AuthorityTag = ra.AuthorityTag
-        WHERE r.RoleTag = #{id}
-    </select>
-
     <select id="insertRole" resultType="java.lang.String">
         CALL Proc_T_Role_Add(#{role.roleName}, #{role.moduleAuthority})
     </select>
@@ -21,4 +14,14 @@
         CALL proc_T_Role_Remove_ByRoleTag(#{id})
     </select>
 
+    <resultMap id="role" type="cn.shianxian.supervise.sys.pojo.Role"></resultMap>
+
+    <select id="selectRoleByLike" resultMap="role,pageCount,totalCount">
+        CALL proc_T_Role_Query_ByCondition
+        (
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
 </mapper>

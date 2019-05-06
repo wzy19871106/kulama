@@ -41,6 +41,8 @@ public class UserController {
             @ApiImplicitParam(paramType = "query", name = "userName", value = "用户姓名"),
             @ApiImplicitParam(paramType = "query", name = "userGroupTag", value = "所属数据权限模板标识"),
             @ApiImplicitParam(paramType = "query", name = "roleTag", value = "所属用户角色标识"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectUserByPage(User user, Pages pages) {
         Result result = this.userService.selectUserByPage(user, pages);

@@ -71,8 +71,6 @@ public class SuperviseTypeController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
             @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
-            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
-            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectSuperviseType(SuperviseType superviseType, Pages pages) {
         Result result = this.superviseTypeService.selectSuperviseType(superviseType, pages);

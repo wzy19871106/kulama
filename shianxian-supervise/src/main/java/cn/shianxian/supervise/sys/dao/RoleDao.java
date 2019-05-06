@@ -1,5 +1,7 @@
 package cn.shianxian.supervise.sys.dao;
 
+import cn.shianxian.supervise.common.pojo.Pages;
+import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.sys.pojo.Role;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -40,4 +42,13 @@ public interface RoleDao extends Mapper<Role> {
      * @return
      */
     String deleteRoleById(@Param("id") String id);
+
+
+    /**
+     * 模糊查询角色
+     * @param queryPojo
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectRoleByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("queryPojo") Pages pages);
 }

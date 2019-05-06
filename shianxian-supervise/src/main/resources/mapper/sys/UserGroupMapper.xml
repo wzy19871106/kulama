@@ -26,11 +26,15 @@
         CALL proc_T_UserGroup_Query_ByUserGroupTag(#{id})
     </select>
 
-    <select id="selectUserGroupByLike" resultType="cn.shianxian.supervise.sys.pojo.UserGroup">
+    <resultMap id="userGroup" type="cn.shianxian.supervise.sys.pojo.UserGroup"></resultMap>
+
+    <select id="selectUserGroupByLike" resultMap="userGroup,pageCount,totalCount">
         CALL proc_T_UserGroup_Query_ByCondition
         (
         #{queryPojo.parentId},
-        #{queryPojo.name}
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
         )
     </select>
 

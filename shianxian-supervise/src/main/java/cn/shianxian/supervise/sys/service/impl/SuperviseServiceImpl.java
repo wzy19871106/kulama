@@ -5,8 +5,6 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.SuperviseDao;
 import cn.shianxian.supervise.sys.pojo.Supervise;
 import cn.shianxian.supervise.sys.service.SuperviseService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +25,6 @@ public class SuperviseServiceImpl implements SuperviseService {
 
     @Override
     public Result selectSupervise(Supervise supervise, Pages pages) {
-        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
         List<Supervise> superviseList = new ArrayList<>();
         if (StringUtils.isNotBlank(supervise.getSuperviseTag())) {
             superviseList = this.superviseDao.selectSuperviseById(supervise.getSuperviseTag());
@@ -35,7 +32,7 @@ public class SuperviseServiceImpl implements SuperviseService {
         if (StringUtils.isNotBlank(supervise.getSuperviseTypeTag())) {
             superviseList = this.superviseDao.selectSuperviseByType(supervise.getSuperviseTypeTag());
         }
-        return Result.data(page.getTotal(), superviseList);
+        return Result.data(superviseList);
 
     }
 

@@ -76,6 +76,8 @@ public class UserGroupController {
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectUserGroup(QueryPojo queryPojo, Pages pages) {
         Result result = this.userGroupService.selectUserGroup(queryPojo, pages);

@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.sys.dao;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.sys.pojo.UserGroup;
 import org.apache.ibatis.annotations.Param;
@@ -45,5 +46,5 @@ public interface UserGroupDao extends Mapper<UserGroup> {
      * 模糊查询用户组
      * @param queryPojo
      */
-    List<UserGroup> selectUserGroupByLike(@Param("queryPojo") QueryPojo queryPojo);
+    List<List<?>> selectUserGroupByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
 }

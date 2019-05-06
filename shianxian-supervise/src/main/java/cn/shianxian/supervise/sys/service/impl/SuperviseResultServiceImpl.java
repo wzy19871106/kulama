@@ -5,8 +5,6 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.SuperviseResultDao;
 import cn.shianxian.supervise.sys.pojo.SuperviseResult;
 import cn.shianxian.supervise.sys.service.SuperviseResultService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +52,6 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
 
     @Override
     public Result selectSuperviseResult(SuperviseResult superviseResult, Pages pages) {
-        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
         List<SuperviseResult> results = new ArrayList<>();
         if (StringUtils.isNotBlank(superviseResult.getResultTag())) {
             results = this.superviseResultDao.selectSuperviseResultById(superviseResult.getResultTag());
@@ -62,7 +59,7 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         if (StringUtils.isNotBlank(superviseResult.getSuperviseTag())) {
             results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(superviseResult.getSuperviseTag());
         }
-        return Result.data(page.getTotal(), results);
+        return Result.data(results);
     }
 
 

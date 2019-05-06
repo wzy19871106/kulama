@@ -6,16 +6,11 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.UserGroupDao;
 import cn.shianxian.supervise.sys.pojo.UserGroup;
 import cn.shianxian.supervise.sys.service.UserGroupService;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -51,14 +46,12 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Override
     public Result selectUserGroup(QueryPojo queryPojo, Pages pages) {
-        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
-        List<UserGroup> userGroupList = new ArrayList<>();
+        Object userGroupList = new Object();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             userGroupList = this.userGroupDao.selectUserGroupById(queryPojo.getId());
+        } else if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {
+            userGroupList = this.userGroupDao.selectUserGroupByLike(queryPojo, pages);
         }
-        if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {
-            userGroupList = this.userGroupDao.selectUserGroupByLike(queryPojo);
-        }
-        return Result.data(page.getTotal(), userGroupList);
+        return Result.data(userGroupList);
     }
 }

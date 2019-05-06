@@ -9,6 +9,7 @@
     <select id="checkModule" resultType="java.lang.String">
         CALL Proc_T_Module_Exist_ByModuleURLModuleTag(#{module.moduleTag}, #{module.moduleUrl})
     </select>
+
     <select id="insertModule" resultType="java.lang.String">
         CALL Proc_T_Module_Add
         (
@@ -39,14 +40,8 @@
     </select>
 
     <resultMap id="module" type="cn.shianxian.supervise.sys.pojo.Module"></resultMap>
-    <resultMap  id="pageCount" type="java.lang.Long">
-        <result column="PageCount"></result>
-    </resultMap>
-    <resultMap  id="totalCount" type="java.lang.Long">
-        <result column="TotalCount"></result>
-    </resultMap>
 
-    <select id="selectModuleByLike" statementType="CALLABLE"  resultMap="module,pageCount,totalCount">
+    <select id="selectModuleByLike" resultMap="module,pageCount,totalCount">
         CALL proc_T_Module_Query_ByCondition(#{queryPojo.parentId}, #{queryPojo.name}, #{pages.pageSize}, #{pages.pageNum})
     </select>
 

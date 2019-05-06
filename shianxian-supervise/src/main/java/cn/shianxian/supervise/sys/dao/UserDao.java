@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.sys.dao;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.sys.pojo.User;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -48,6 +49,6 @@ public interface UserDao extends Mapper<User> {
      * @param user
      * @return
      */
-    List<User> selectUserByLike(@Param("user") User user);
+    List<List<?>> selectUserByLike(@Param("user") User user, @Param("pages") Pages pages);
 
 }
