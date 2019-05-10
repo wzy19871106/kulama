@@ -61,9 +61,16 @@ public interface ModuleDao extends Mapper<Module> {
 
 
     /**
-     * 查询模块（树形）
+     * 查询模块（根据树形排序数据）
      * @param id
      * @return
      */
     List<Module> selectModuleByTree(String id);
+
+
+    /**
+     * 查询模块（树形）
+     * @return
+     */
+    String selectModuleTree();
 }

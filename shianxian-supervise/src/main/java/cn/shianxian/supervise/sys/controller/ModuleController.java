@@ -102,14 +102,26 @@ public class ModuleController {
 
 
     /**
-     * 查询模块（树形）
+     * 查询模块（根据树形排序数据）
      * @return
      */
     @GetMapping("selectModuleByTree")
-    @ApiOperation(value = "查询模块（树形）", notes = "查询模块（树形）")
+    @ApiOperation(value = "查询模块（根据树形排序数据）", notes = "查询模块（根据树形排序数据）")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> selectModuleByTree(String id) {
         Result result = this.moduleService.selectModuleByTree(id);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 查询模块（树形）
+     * @return
+     */
+    @GetMapping("selectModuleTree")
+    @ApiOperation(value = "查询模块（树形）", notes = "查询模块（树形）")
+    public ResponseEntity<Result> selectModuleTree() {
+        Result result = this.moduleService.selectModuleTree();
         return ResponseEntity.ok(result);
     }
 

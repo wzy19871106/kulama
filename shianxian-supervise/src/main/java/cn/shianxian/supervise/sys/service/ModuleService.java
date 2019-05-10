@@ -39,9 +39,16 @@ public interface ModuleService {
 
 
     /**
-     * 查询模块（树形）
+     * 查询模块（根据树形排序数据）
      * @param id
      * @return
      */
     Result selectModuleByTree(String id);
+
+
+    /**
+     * 查询模块（树形）
+     * @return
+     */
+    Result selectModuleTree();
 }

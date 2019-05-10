@@ -49,4 +49,7 @@
         CALL Proc_T_Module_QueryTree_ByModuleTag(#{id})
     </select>
 
+    <select id="selectModuleTree" resultType="java.lang.String">
+        CALL proc_T_Module_QueryTreeJson()
+    </select>
 </mapper>
