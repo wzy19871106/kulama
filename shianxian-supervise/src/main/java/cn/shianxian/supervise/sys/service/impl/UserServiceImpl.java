@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         Object users = null;
         if (StringUtils.isNotBlank(user.getUserTag())) {
             users = this.userDao.selectUserById(user.getUserTag());
-        } else if (StringUtils.isNoneEmpty(user.getUserName(), user.getRoleTag(), user.getUserGroupTag())) {
+        } else if (null != user.getUserName() && null != user.getRoleTag() && null != user.getUserGroupTag()) {
             users = this.userDao.selectUserByLike(user, pages);
         }
         return Result.data(users);

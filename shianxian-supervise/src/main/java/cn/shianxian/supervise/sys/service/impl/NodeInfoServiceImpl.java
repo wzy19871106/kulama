@@ -47,10 +47,10 @@ public class NodeInfoServiceImpl implements NodeInfoService {
         Object nodeInfos = null;
         if (StringUtils.isNotBlank(nodeInfo.getNodeTag())) {
             nodeInfos = this.nodeInfoDao.selectNodeInfoById(nodeInfo.getNodeTag());
-        } else if (StringUtils.isNoneEmpty(nodeInfo.getNodeTag(),
-                nodeInfo.getNodeName(),
-                nodeInfo.getIndustryTag(),
-                nodeInfo.getUserDataUsedAuthoritySet())) {
+        } else if (null != nodeInfo.getNodeTag() &&
+                null != nodeInfo.getNodeName() &&
+                null != nodeInfo.getIndustryTag() &&
+                null != nodeInfo.getUserDataUsedAuthoritySet()) {
             nodeInfos = this.nodeInfoDao.selectNodeInfoByLike(nodeInfo, pages);
         }
         return Result.data(nodeInfos);

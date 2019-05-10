@@ -50,7 +50,7 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             List<SupervisePlanMain> planMainList = this.supervisePlanMainDao.selectSupervisePlanMainById(queryPojo.getId());
             return Result.data(planMainList);
-        } else if (StringUtils.isNoneEmpty(queryPojo.getName()) && null != queryPojo.getStartTime() && null != queryPojo.getEndTime()) {
+        } else if (null != queryPojo.getName() && null != queryPojo.getStartTime() && null != queryPojo.getEndTime()) {
             List<List<?>> list = this.supervisePlanMainDao.selectSupervisePlanMainByLike(queryPojo, pages);
             return Result.data(list);
         }
