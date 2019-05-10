@@ -53,7 +53,7 @@ public class SuperviserServiceImpl implements SuperviserService {
         Object superviserList = null;
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             superviserList = this.superviserDao.selectSuperviserById(queryPojo.getId());
-        } else if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {
+        } else if (StringUtils.isNoneEmpty(queryPojo.getParentId(), queryPojo.getName())) {
             superviserList = this.superviserDao.selectSuperviserByLike(queryPojo, pages);
         }
         return Result.data(superviserList);

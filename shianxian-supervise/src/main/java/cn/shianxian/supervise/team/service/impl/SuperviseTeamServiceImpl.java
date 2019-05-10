@@ -54,7 +54,7 @@ public class SuperviseTeamServiceImpl implements SuperviseTeamService {
         Object superviseTeams = null;
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             superviseTeams = this.superviseTeamDao.selectSuperviseTeamById(queryPojo.getId());
-        } else if (StringUtils.isNotBlank(queryPojo.getName())) {
+        } else if (StringUtils.isNoneEmpty(queryPojo.getName())) {
             superviseTeams = this.superviseTeamDao.selectSuperviseTeamByLike(queryPojo, pages);
         }
         return Result.data(superviseTeams);

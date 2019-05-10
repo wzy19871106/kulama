@@ -49,7 +49,7 @@ public class UserGroupServiceImpl implements UserGroupService {
         Object userGroupList = null;
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             userGroupList = this.userGroupDao.selectUserGroupById(queryPojo.getId());
-        } else if (StringUtils.isNoneBlank(queryPojo.getParentId(), queryPojo.getName())) {
+        } else if (StringUtils.isNoneEmpty(queryPojo.getParentId(), queryPojo.getName())) {
             userGroupList = this.userGroupDao.selectUserGroupByLike(queryPojo, pages);
         }
         return Result.data(userGroupList);
