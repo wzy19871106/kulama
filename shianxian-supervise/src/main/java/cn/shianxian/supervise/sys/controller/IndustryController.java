@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 经济行业
  */
 @RestController
-@RequestMapping("module")
+@RequestMapping("industry")
 @Api(description = "经济行业控制器")
 public class IndustryController {
 
