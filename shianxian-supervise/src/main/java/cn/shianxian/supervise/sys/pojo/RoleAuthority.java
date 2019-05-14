@@ -46,6 +46,13 @@ public class RoleAuthority {
     @Column(name = "createTime")
     private LocalDateTime createTime;
 
+
+    /**
+     * 角色id数组
+     */
+    @Transient
+    private String[] ids;
+
     /**
      * 模块权限
      */

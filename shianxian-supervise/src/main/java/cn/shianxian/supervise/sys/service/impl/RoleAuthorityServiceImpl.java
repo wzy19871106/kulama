@@ -24,7 +24,13 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     @Transactional
     @Override
     public Result saveRoleAuthority(RoleAuthority roleAuthority) {
-        this.roleAuthorityDao.insertRoleAuthority(roleAuthority);
+        if (null != roleAuthority.getIds()) {
+            String[] ids = roleAuthority.getIds();
+            for (String id : ids) {
+                roleAuthority.setRoleTag(id);
+                this.roleAuthorityDao.insertRoleAuthority(roleAuthority);
+            }
+        }
         return Result.successMsg();
     }
 

@@ -32,7 +32,7 @@ public class RoleAuthorityController {
     @PostMapping("saveRoleAuthority")
     @ApiOperation(value = "保存角色权限接口", notes = "保存角色权限接口")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "roleTag", value = "角色标识"),
+            @ApiImplicitParam(paramType = "query", name = "ids", value = "角色id数组"),
             @ApiImplicitParam(paramType = "query", name = "moduleAuthority", value = "模块权限(JSON格式)"),
     })
     public ResponseEntity<Result> saveRoleAuthority(@Valid RoleAuthority roleAuthority) {
