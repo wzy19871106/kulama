@@ -22,4 +22,9 @@
         CALL Proc_T_RoleAuthority_Remove_ByRoleTag(#{id})
     </select>
 
+    <select id="selectAuthorityByRoleId" resultType="cn.shianxian.supervise.sys.pojo.RoleAuthority">
+        CALL Proc_T_RoleAuthority_Query_ByRoleTag(#{id})
+    </select>
+
+
 </mapper>

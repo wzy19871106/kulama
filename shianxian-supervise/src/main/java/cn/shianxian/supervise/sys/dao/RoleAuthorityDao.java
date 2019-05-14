@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 @Repository
 public interface RoleAuthorityDao extends Mapper<RoleAuthority> {
 
@@ -29,4 +31,12 @@ public interface RoleAuthorityDao extends Mapper<RoleAuthority> {
      * @param id
      */
     String deleteRoleAuthorityById(@Param("id") String id);
+
+
+    /**
+     * 根据角色id查询权限
+     * @param id
+     * @return
+     */
+    List<RoleAuthority> selectAuthorityByRoleId(String id);
 }

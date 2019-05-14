@@ -28,4 +28,12 @@ public interface RoleAuthorityService {
      * @return
      */
     Result deleteRoleAuthorityById(String ids);
+
+
+    /**
+     * 根据角色id查询权限
+     * @param id
+     * @return
+     */
+    Result selectAuthorityByRoleId(String id);
 }

@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 public class RoleAuthorityServiceImpl implements RoleAuthorityService {
@@ -42,5 +45,22 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
             this.roleAuthorityDao.deleteRoleAuthorityById(id);
         }
         return Result.successMsg();
+    }
+
+
+    @Override
+    public Result selectAuthorityByRoleId(String id) {
+        // 查询角色权限
+        List<RoleAuthority> list = this.roleAuthorityDao.selectAuthorityByRoleId(id);
+        // 拼接数据，模块id + 权限id
+        List<String> ids = new ArrayList<>();
+        for (RoleAuthority roleAuthority : list) {
+            String authorityTag = roleAuthority.getAuthorityTag();
+            String[] authIds = authorityTag.split(",");
+            for (String authId : authIds) {
+                ids.add(roleAuthority.getModuleTag() + authId);
+            }
+        }
+        return Result.data(ids);
     }
 }

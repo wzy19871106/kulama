@@ -70,5 +70,15 @@ public class RoleAuthorityController {
     }
 
 
+    /**
+     * 根据角色id查询权限
+     * @return
+     */
+    @GetMapping("selectAuthorityByRoleId")
+    @ApiOperation(value = "根据角色id查询权限", notes = "根据角色id查询权限")
+    public ResponseEntity<Result> selectAuthorityByRoleId(String id) {
+        Result result = this.roleAuthorityService.selectAuthorityByRoleId(id);
+        return ResponseEntity.ok(result);
+    }
 
 }
