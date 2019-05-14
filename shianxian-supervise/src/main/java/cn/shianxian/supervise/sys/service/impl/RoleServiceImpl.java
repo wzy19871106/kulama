@@ -37,16 +37,15 @@ public class RoleServiceImpl implements RoleService {
             for (AuthorityDTO a : authorityList) {
                 if (map.containsKey(a.getParent())) {
                     List<String> list = map.get(a.getParent());
-                    list.add(a.getValue().substring(a.getParent().length() - 1));
+                    list.add(a.getValue().substring(a.getParent().length()));
                     map.put(a.getParent(), list);
                 } else {
                     List<String> list = new ArrayList<>();
-                    list.add(a.getValue().substring(0, a.getParent().length() - 1));
+                    list.add(a.getValue().substring(a.getParent().length()));
                     map.put(a.getParent(), list);
                 }
             }
         }
-        System.out.println(JSON.toJSONString(map));
         role.setModuleAuthority(JSON.toJSONString(map));
         if (StringUtils.isBlank(role.getRoleTag())) {
             this.roleDao.insertRole(role);
