@@ -51,4 +51,11 @@ public interface ModuleService {
      * @return
      */
     Result selectModuleTree();
+
+
+    /**
+     * 查询模块权限（树形）
+     * @return
+     */
+    Result selectModuleAuthorityTree();
 }

@@ -52,4 +52,8 @@
     <select id="selectModuleTree" resultType="java.lang.String">
         CALL proc_T_Module_QueryTreeJson()
     </select>
+
+    <select id="selectModuleAuthorityTree" resultType="java.lang.String">
+        CALL proc_T_Module_Authority_QueryTreeJson()
+    </select>
 </mapper>

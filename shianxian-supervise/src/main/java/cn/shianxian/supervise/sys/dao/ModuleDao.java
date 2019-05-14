@@ -73,4 +73,11 @@ public interface ModuleDao extends Mapper<Module> {
      * @return
      */
     String selectModuleTree();
+
+
+    /**
+     * 查询模块权限（树形）
+     * @return
+     */
+    String selectModuleAuthorityTree();
 }

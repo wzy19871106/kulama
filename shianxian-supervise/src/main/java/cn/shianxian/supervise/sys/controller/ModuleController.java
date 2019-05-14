@@ -125,4 +125,16 @@ public class ModuleController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 查询模块权限（树形）
+     * @return
+     */
+    @GetMapping("selectModuleAuthorityTree")
+    @ApiOperation(value = "查询模块权限（树形）", notes = "查询模块权限（树形）")
+    public ResponseEntity<Result> selectModuleAuthorityTree() {
+        Result result = this.moduleService.selectModuleAuthorityTree();
+        return ResponseEntity.ok(result);
+    }
+
 }

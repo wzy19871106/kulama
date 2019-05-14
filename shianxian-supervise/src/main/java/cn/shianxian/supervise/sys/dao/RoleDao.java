@@ -10,15 +10,8 @@ import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 
 @Repository
-public interface RoleDao extends Mapper<Role> {
-
-    /**
-     * 获取角色拥有的权限
-     * @param id
-     * @return
-     */
-    List<String> selectAuthorityById(@Param("id") String id);
-
+public interface
+RoleDao extends Mapper<Role> {
 
     /**
      * 保存角色
@@ -50,5 +43,5 @@ public interface RoleDao extends Mapper<Role> {
      * @param pages
      * @return
      */
-    List<List<?>> selectRoleByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("queryPojo") Pages pages);
+    List<List<?>> selectRoleByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
 }
