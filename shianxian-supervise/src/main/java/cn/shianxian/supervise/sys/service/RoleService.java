@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.Role;
+import org.springframework.http.ResponseEntity;
 
 public interface RoleService {
 
@@ -29,6 +30,6 @@ public interface RoleService {
      * @param id
      * @return
      */
-    Result deleteRoleById(String id);
+    ResponseEntity<Result> deleteRoleById(String id);
 
 }

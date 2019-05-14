@@ -9,6 +9,8 @@ import cn.shianxian.supervise.sys.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,10 +48,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Transactional
     @Override
-    public Result deleteRoleById(String id) {
-        this.roleDao.deleteRoleById(id);
+    public ResponseEntity<Result> deleteRoleById(String id) {
+        String res = this.roleDao.deleteRoleById(id);
+        if ("R003".equals(res)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("角色不允许删除！"));
+        }
         log.info("删除角色：{}", id);
-        return Result.successMsg();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

@@ -71,8 +71,7 @@ public class RoleController {
     @ApiOperation(value = "删除角色接口", notes = "删除角色接口")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> deleteRoleById(String id) {
-        Result result = this.roleService.deleteRoleById(id);
-        return ResponseEntity.ok(result);
+        return this.roleService.deleteRoleById(id);
     }
 
 }
