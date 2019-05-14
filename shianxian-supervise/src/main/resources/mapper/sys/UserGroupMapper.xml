@@ -6,7 +6,8 @@
         CALL Proc_T_UserGroup_Add
         (
         #{userGroup.userParentTag},
-        #{userGroup.userGroupName}
+        #{userGroup.userGroupName},
+        #{userGroup.userGroupDisabled}
         )
     </select>
 

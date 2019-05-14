@@ -41,7 +41,7 @@ public class UserGroup {
      * 数据权限是否启用
      */
     @Column(name = "userGroupDisabled")
-    private String userGroupDisabled;
+    private Integer userGroupDisabled;
 
     /**
      * 数据权限模板的维度模板
