@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.RoleAuthorityDao;
 import cn.shianxian.supervise.sys.pojo.RoleAuthority;
 import cn.shianxian.supervise.sys.service.RoleAuthorityService;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -21,9 +23,14 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     private RoleAuthorityDao roleAuthorityDao;
 
 
+
+
     @Transactional
     @Override
     public Result saveRoleAuthority(RoleAuthority roleAuthority) {
+        RoleServiceImpl roleService = new RoleServiceImpl();
+        Map<String, List<String>> map = roleService.getAuthority(roleAuthority.getModuleAuthority());
+        roleAuthority.setModuleAuthority(JSON.toJSONString(map));
         if (null != roleAuthority.getIds()) {
             String[] ids = roleAuthority.getIds();
             for (String id : ids) {
@@ -38,6 +45,9 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     @Transactional
     @Override
     public Result updateRoleAuthority(RoleAuthority roleAuthority) {
+        RoleServiceImpl roleService = new RoleServiceImpl();
+        Map<String, List<String>> map = roleService.getAuthority(roleAuthority.getModuleAuthority());
+        roleAuthority.setModuleAuthority(JSON.toJSONString(map));
         this.roleAuthorityDao.updateRoleAuthority(roleAuthority);
         return Result.successMsg();
     }

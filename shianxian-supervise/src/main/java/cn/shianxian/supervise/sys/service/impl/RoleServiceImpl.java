@@ -16,7 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -27,13 +30,11 @@ public class RoleServiceImpl implements RoleService {
     private RoleDao roleDao;
 
 
-    @Transactional
-    @Override
-    public Result saveOrUpdateRole(Role role) {
+    public Map<String, List<String>> getAuthority(String roleAuthority) {
         // 前端传过来的数据拼json
         Map<String, List<String>> map = new HashMap<>();
-        if (StringUtils.isNotBlank(role.getModuleAuthority())) {
-            List<AuthorityDTO> authorityList = JSON.parseArray(role.getModuleAuthority(), AuthorityDTO.class);
+        if (StringUtils.isNotBlank(roleAuthority)) {
+            List<AuthorityDTO> authorityList = JSON.parseArray(roleAuthority, AuthorityDTO.class);
             for (AuthorityDTO a : authorityList) {
                 if (map.containsKey(a.getParent())) {
                     List<String> list = map.get(a.getParent());
@@ -46,6 +47,15 @@ public class RoleServiceImpl implements RoleService {
                 }
             }
         }
+        return map;
+    }
+
+
+    @Transactional
+    @Override
+    public Result saveOrUpdateRole(Role role) {
+        // 前端传过来的数据拼json
+        Map<String, List<String>> map = getAuthority(role.getModuleAuthority());
         role.setModuleAuthority(JSON.toJSONString(map));
         if (StringUtils.isBlank(role.getRoleTag())) {
             this.roleDao.insertRole(role);
