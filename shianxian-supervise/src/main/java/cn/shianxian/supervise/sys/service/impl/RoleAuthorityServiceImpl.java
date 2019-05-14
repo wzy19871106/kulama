@@ -23,8 +23,6 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     private RoleAuthorityDao roleAuthorityDao;
 
 
-
-
     @Transactional
     @Override
     public Result saveRoleAuthority(RoleAuthority roleAuthority) {
