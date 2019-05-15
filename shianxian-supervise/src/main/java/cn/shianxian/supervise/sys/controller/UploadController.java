@@ -45,7 +45,7 @@ public class UploadController {
     /**
      * 服务器上传文件
      *
-     * @param multipartFile
+     * @param file
      * @return
      */
     @PostMapping("img")
@@ -54,14 +54,15 @@ public class UploadController {
             @ApiImplicitParam(paramType = "query", name = "key", value = "文件名，可传可不传，如果文件名在服务器存在会删除该文件，然后存储。请带上后缀名。"),
             @ApiImplicitParam(paramType = "query", name = "path", value = "文件路径", required = true),
     })
-    public ResponseEntity<Result> uploadImg(@ApiParam(value = "要上传的文件", required = true) MultipartFile multipartFile, @RequestParam(value = "key", required = false) String key, @RequestParam(value = "path", required = false) String path) throws IOException {
-        String fileSuffix = CommonUtils.getFileSuffix(multipartFile.getOriginalFilename());
+    public ResponseEntity<Result> uploadImg(@ApiParam(value = "要上传的文件", required = true) MultipartFile file, @RequestParam(value = "key", required = false) String key, @RequestParam(value = "path", required = false) String path) throws IOException {
+        String fileSuffix = CommonUtils.getFileSuffix(file.getOriginalFilename());
         if (!fileType.contains(fileSuffix)) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("请上传图片！"));
         }
         if (path.indexOf("/") < 0) {
             path = path + "/";
         }
+        String fileName = UUIDGenerator.generatorUUID();
         // 如果是修改图片，先把之前的图片删除
         if (StringUtils.isNotEmpty(key)) {
             // 删除临时文件
@@ -69,17 +70,17 @@ public class UploadController {
             if (oldFile.exists()) {
                 oldFile.delete();
             }
+            fileName = key.substring(0, key.lastIndexOf("."));
         }
         File f = new File(uploadPath + path);
         if (!f.exists()) {
             f.mkdirs();
             log.info("创建文件夹：{}" + path);
         }
-        String fileName = UUIDGenerator.generatorUUID();
         fileName = fileName + fileSuffix;
         String filepath = uploadPath + path + fileName;
         File tmpFile = new File(filepath);
-        multipartFile.transferTo(tmpFile);
+        file.transferTo(tmpFile);
         log.info("上传文件成功：{}" + fileName);
         return ResponseEntity.ok(Result.data(uploadUrl + path + fileName));
     }
