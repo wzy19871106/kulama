@@ -5,7 +5,7 @@
     <select id="insertUserGroup" resultType="java.lang.String">
         CALL Proc_T_UserGroup_Add
         (
-        #{userGroup.userParentTag},
+        #{userGroup.parentTag},
         #{userGroup.userGroupName},
         #{userGroup.userGroupDisabled},
         #{userGroup.picTag}
