@@ -30,4 +30,12 @@ public interface UserGroupService {
      * @return
      */
     Result selectUserGroup(QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 查询用户组（树形）
+     * @param id
+     * @return
+     */
+    Result selectUserGroupTree(String id);
 }

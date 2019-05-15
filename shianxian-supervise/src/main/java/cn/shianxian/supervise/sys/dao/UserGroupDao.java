@@ -47,4 +47,12 @@ public interface UserGroupDao extends Mapper<UserGroup> {
      * @param queryPojo
      */
     List<List<?>> selectUserGroupByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
+
+
+    /**
+     * 查询用户组（树形）
+     * @param id
+     * @return
+     */
+    String selectUserGroupTree(@Param("id") String id);
 }

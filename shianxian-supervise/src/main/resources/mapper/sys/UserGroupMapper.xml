@@ -39,4 +39,8 @@
         )
     </select>
 
+    <select id="selectUserGroupTree" resultType="java.lang.String">
+        CALL proc_T_UserGroup_QueryTreeJson_ByUserGroupTag(#{id})
+    </select>
+
 </mapper>

@@ -76,13 +76,23 @@ public class UserGroupController {
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
-            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
-            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectUserGroup(QueryPojo queryPojo, Pages pages) {
         Result result = this.userGroupService.selectUserGroup(queryPojo, pages);
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 查询用户组（树形）
+     * @return
+     */
+    @GetMapping("selectUserGroupTree")
+    @ApiOperation(value = "查询用户组（树形）", notes = "查询用户组（树形）")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
+    public ResponseEntity<Result> selectUserGroupTree(String id) {
+        Result result = this.userGroupService.selectUserGroupTree(id);
+        return ResponseEntity.ok(result);
+    }
 
 }
