@@ -16,7 +16,8 @@
         CALL proc_T_UserGroup_Edit_ByUserGroupTag
         (
         #{userGroup.userGroupTag},
-        #{userGroup.userGroupName}
+        #{userGroup.userGroupName},
+        #{userGroup.picTag}
         )
     </select>
 

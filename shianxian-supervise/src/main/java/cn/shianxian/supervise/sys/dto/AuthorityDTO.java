@@ -13,10 +13,15 @@ public class AuthorityDTO {
     /**
      * 名称id
      */
-    private String value;
+    private String id;
 
     /**
      * 父id
      */
-    private String parent;
+    private String parentId;
+
+    /**
+     * 子集
+     */
+    private AuthorityDTO children;
 }

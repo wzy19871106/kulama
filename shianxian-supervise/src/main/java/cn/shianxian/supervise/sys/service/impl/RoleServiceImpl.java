@@ -36,14 +36,14 @@ public class RoleServiceImpl implements RoleService {
         if (StringUtils.isNotBlank(roleAuthority)) {
             List<AuthorityDTO> authorityList = JSON.parseArray(roleAuthority, AuthorityDTO.class);
             for (AuthorityDTO a : authorityList) {
-                if (map.containsKey(a.getParent())) {
-                    List<String> list = map.get(a.getParent());
-                    list.add(a.getValue().substring(a.getParent().length()));
-                    map.put(a.getParent(), list);
+                if (map.containsKey(a.getParentId())) {
+                    List<String> list = map.get(a.getParentId());
+                    list.add(a.getId().substring(a.getParentId().length()));
+                    map.put(a.getParentId(), list);
                 } else {
                     List<String> list = new ArrayList<>();
-                    list.add(a.getValue().substring(a.getParent().length()));
-                    map.put(a.getParent(), list);
+                    list.add(a.getId().substring(a.getParentId().length()));
+                    map.put(a.getParentId(), list);
                 }
             }
         }
