@@ -58,8 +58,7 @@ public class UserGroupController {
     @ApiOperation(value = "删除用户组", notes = "删除用户组")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids")
     public ResponseEntity<Result> deleteUserGroupById(String ids) {
-        Result result = this.userGroupService.deleteUserGroupById(ids);
-        return ResponseEntity.ok(result);
+        return this.userGroupService.deleteUserGroupById(ids);
     }
 
 

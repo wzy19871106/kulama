@@ -9,6 +9,8 @@ import cn.shianxian.supervise.sys.service.UserGroupService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,12 +37,15 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Transactional
     @Override
-    public Result deleteUserGroupById(String ids) {
+    public ResponseEntity<Result> deleteUserGroupById(String ids) {
         String[] idArr = ids.split(",");
         for (String id : idArr) {
-            this.userGroupDao.deleteUserGroupById(id);
+            String flag = this.userGroupDao.deleteUserGroupById(id);
+            if (!"R001".equals(flag)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+            }
         }
-        return Result.successMsg();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

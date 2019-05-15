@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.UserGroup;
+import org.springframework.http.ResponseEntity;
 
 public interface UserGroupService {
 
@@ -20,7 +21,7 @@ public interface UserGroupService {
      * @param ids
      * @return
      */
-    Result deleteUserGroupById(String ids);
+    ResponseEntity<Result> deleteUserGroupById(String ids);
 
 
     /**
