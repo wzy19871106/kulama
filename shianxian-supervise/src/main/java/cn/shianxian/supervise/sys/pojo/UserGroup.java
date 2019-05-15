@@ -3,10 +3,7 @@ package cn.shianxian.supervise.sys.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -67,4 +64,11 @@ public class UserGroup {
     @Column(name = "createTime")
     private LocalDateTime createTime;
 
+
+    /**
+     * 父名称
+     */
+    @Transient
+    @Column(name = "parentName")
+    private String parentName;
 }
