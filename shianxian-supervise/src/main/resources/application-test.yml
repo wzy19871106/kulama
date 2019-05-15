@@ -83,7 +83,7 @@ agora:
 # 上传配置
 upload:
   url: http://10.18.9.150/
-  path: /data/m/
+  path: /data/
 
 # 日志
 logging:
