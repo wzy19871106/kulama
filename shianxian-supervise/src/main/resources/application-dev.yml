@@ -80,6 +80,11 @@ agora:
   certificate: 1101
   account: 1101
 
+# 上传配置
+upload:
+  url: http://10.18.9.150/
+  path: D:/m/
+
 # 日志
 logging:
   level:
