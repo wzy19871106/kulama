@@ -36,7 +36,7 @@ public class UserGroupController {
     @ApiOperation(value = "保存、修改用户组接口", notes = "保存、修改用户组接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "userGroupTag", value = "数据权限标识"),
-            @ApiImplicitParam(paramType = "query", name = "userParentTag", value = "父数据权限标识"),
+            @ApiImplicitParam(paramType = "query", name = "parentTag", value = "父数据权限标识"),
             @ApiImplicitParam(paramType = "query", name = "userGroupName", value = "数据权限名称"),
             @ApiImplicitParam(paramType = "query", name = "userGroupDisabled", value = "数据权限是否启用"),
             @ApiImplicitParam(paramType = "query", name = "userDataAuthority", value = "数据权限模板的维度模板"),

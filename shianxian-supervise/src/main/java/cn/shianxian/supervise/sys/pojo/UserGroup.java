@@ -28,8 +28,8 @@ public class UserGroup {
     /**
      * 父数据权限标识
      */
-    @Column(name = "userParentTag")
-    private String userParentTag;
+    @Column(name = "parentTag")
+    private String parentTag;
 
     /**
      * 数据权限名称
