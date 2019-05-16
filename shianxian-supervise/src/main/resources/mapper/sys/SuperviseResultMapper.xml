@@ -47,4 +47,9 @@
     <select id="updateSuperviseResultByDownSort" resultType="java.lang.String">
         CALL proc_T_Supervise_Result_OrderDown_ByTag(#{id})
     </select>
+
+    <select id="selectSuperviseResultByTypeId" resultType="cn.shianxian.supervise.sys.dto.SuperviseResultDTO">
+        CALL proc_T_Supervise_Result_Query_ByType(#{typeId})
+    </select>
+
 </mapper>

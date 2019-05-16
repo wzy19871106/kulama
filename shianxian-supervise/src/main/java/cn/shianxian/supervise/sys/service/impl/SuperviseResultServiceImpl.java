@@ -3,6 +3,7 @@ package cn.shianxian.supervise.sys.service.impl;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.SuperviseResultDao;
+import cn.shianxian.supervise.sys.dto.SuperviseResultDTO;
 import cn.shianxian.supervise.sys.pojo.SuperviseResult;
 import cn.shianxian.supervise.sys.service.SuperviseResultService;
 import lombok.extern.slf4j.Slf4j;
@@ -73,5 +74,12 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
             this.superviseResultDao.updateSuperviseResultByDownSort(id);
         }
         return Result.successMsg();
+    }
+
+
+    @Override
+    public Result selectSuperviseResultByTypeId(String typeId) {
+        List<SuperviseResultDTO> list = this.superviseResultDao.selectSuperviseResultByTypeId(typeId);
+        return Result.data(list);
     }
 }

@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.sys.dao;
 
+import cn.shianxian.supervise.sys.dto.SuperviseResultDTO;
 import cn.shianxian.supervise.sys.pojo.SuperviseResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -66,4 +67,11 @@ public interface SuperviseResultDao extends Mapper<SuperviseResult> {
      */
     String updateSuperviseResultByDownSort(@Param("id") String id);
 
+
+    /**
+     * 根据监管类型返回所有监管选项结果
+     * @param typeId
+     * @return
+     */
+    List<SuperviseResultDTO> selectSuperviseResultByTypeId(@Param("typeId") String typeId);
 }
