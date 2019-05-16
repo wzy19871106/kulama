@@ -26,6 +26,7 @@ public class CorsConfig {
         List<String> list = new ArrayList<>();
         // 本地测试
         list.add("http://127.0.0.1:8083");
+        list.add("http://supervise.dev.shianxian.cn");
         config.setAllowedOrigins(list);
         // 允许访问的头信息,*表示全部
         config.addAllowedHeader("*");
