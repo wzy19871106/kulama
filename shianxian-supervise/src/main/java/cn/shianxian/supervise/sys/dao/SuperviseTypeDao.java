@@ -57,4 +57,12 @@ public interface SuperviseTypeDao extends Mapper<SuperviseType> {
      * @return
      */
     String updateSuperviseTypeByDownSort(@Param("id") String id);
+
+
+    /**
+     * 查询监管类型（树形）
+     * @param superviseType
+     * @return
+     */
+    String selectSuperviseTypeTree(@Param("superviseType") SuperviseType superviseType);
 }

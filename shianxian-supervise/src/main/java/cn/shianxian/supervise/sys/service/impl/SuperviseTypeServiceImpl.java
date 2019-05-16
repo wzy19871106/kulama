@@ -64,4 +64,11 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
         return Result.successMsg();
     }
 
+
+    @Override
+    public Result selectSuperviseTypeTree(SuperviseType superviseType) {
+        String tree = this.superviseTypeDao.selectSuperviseTypeTree(superviseType);
+        return Result.data(tree);
+    }
+
 }

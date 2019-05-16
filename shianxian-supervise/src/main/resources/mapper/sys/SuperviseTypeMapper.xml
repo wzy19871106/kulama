@@ -25,4 +25,8 @@
     <select id="updateSuperviseTypeByDownSort" resultType="java.lang.String">
         CALL proc_T_SuperviseType_OrderDown_ByTag(#{id})
     </select>
+
+    <select id="selectSuperviseTypeTree" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_QueryTreeJson_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
 </mapper>

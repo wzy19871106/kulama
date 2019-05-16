@@ -38,4 +38,12 @@ public interface SuperviseTypeService {
      * @return
      */
     Result updateSuperviseTypeBySort(String id, int type);
+
+
+    /**
+     * 查询监管类型（树形）
+     * @param superviseType
+     * @return
+     */
+    Result selectSuperviseTypeTree(SuperviseType superviseType);
 }
