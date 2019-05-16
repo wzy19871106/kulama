@@ -3,7 +3,7 @@
 <mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseTypeDao">
 
     <select id="insertSuperviseType" resultType="java.lang.String">
-        CALL Proc_T_SuperviseType_Add(#{superviseType.parentTag}, #{superviseType.superviseTypeName}, #{superviseType.order}, #{superviseType.ifMenu})
+        CALL Proc_T_SuperviseType_Add(#{superviseType.parentTag}, #{superviseType.superviseTypeName}, #{superviseType.ifUse}, #{superviseType.ifMenu})
     </select>
 
     <select id="updateSuperviseType" resultType="java.lang.String">
