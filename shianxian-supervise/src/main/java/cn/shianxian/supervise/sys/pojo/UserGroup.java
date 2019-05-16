@@ -69,6 +69,5 @@ public class UserGroup {
      * 父名称
      */
     @Transient
-    @Column(name = "parentName")
     private String parentName;
 }
