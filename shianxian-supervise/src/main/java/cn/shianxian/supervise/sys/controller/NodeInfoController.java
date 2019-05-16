@@ -63,9 +63,9 @@ public class NodeInfoController {
      */
     @DeleteMapping("deleteNodeInfoById")
     @ApiOperation(value = "删除节点", notes = "删除节点")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
-    public ResponseEntity<Result> deleteNodeInfoById(String id) {
-        Result result = this.nodeInfoService.deleteNodeInfoById(id);
+    @ApiImplicitParam(paramType = "query", name = "ids", value = "ids")
+    public ResponseEntity<Result> deleteNodeInfoById(String ids) {
+        Result result = this.nodeInfoService.deleteNodeInfoById(ids);
         return ResponseEntity.ok(result);
     }
 

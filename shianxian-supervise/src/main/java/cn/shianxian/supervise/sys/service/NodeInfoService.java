@@ -17,10 +17,10 @@ public interface NodeInfoService {
 
     /**
      * 删除节点
-     * @param id
+     * @param ids
      * @return
      */
-    Result deleteNodeInfoById(String id);
+    Result deleteNodeInfoById(String ids);
 
 
     /**

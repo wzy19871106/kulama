@@ -36,8 +36,11 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
     @Transactional
     @Override
-    public Result deleteNodeInfoById(String id) {
-        this.nodeInfoDao.deleteNodeInfoById(id);
+    public Result deleteNodeInfoById(String ids) {
+        String[] idArr = ids.split(",");
+        for (String id : idArr) {
+            this.nodeInfoDao.deleteNodeInfoById(id);
+        }
         return Result.successMsg();
     }
 
