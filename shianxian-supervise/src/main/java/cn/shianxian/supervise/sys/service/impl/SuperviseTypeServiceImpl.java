@@ -83,4 +83,15 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
         return Result.data(superviseType);
     }
 
+
+    @Override
+    public Result superviseTypeAuthority(SuperviseType superviseType, int type) {
+        if (1 == type) {
+            this.superviseTypeDao.saveSuperviseTypeAuthority(superviseType);
+        } else if (2 == type) {
+            this.superviseTypeDao.updateSuperviseTypeAuthority(superviseType);
+        }
+        return Result.successMsg();
+    }
+
 }

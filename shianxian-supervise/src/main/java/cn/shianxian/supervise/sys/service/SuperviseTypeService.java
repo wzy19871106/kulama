@@ -55,4 +55,13 @@ public interface SuperviseTypeService {
      * @return
      */
     Result selectSuperviseTypeById(String id);
+
+
+    /**
+     * 保存、修改监管类型权限
+     * @param superviseType
+     * @param type
+     * @return
+     */
+    Result superviseTypeAuthority(SuperviseType superviseType, int type);
 }

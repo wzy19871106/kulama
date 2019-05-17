@@ -29,4 +29,13 @@
     <select id="selectSuperviseTypeTree" resultType="java.lang.String">
         CALL proc_T_SuperviseType_QueryTreeJson_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
     </select>
+
+    <select id="saveSuperviseTypeAuthority" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_UserGroupDataAuthority_Add(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
+    <select id="updateSuperviseTypeAuthority" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_UserGroupDataAuthority_Edit_ByNodeTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
 </mapper>

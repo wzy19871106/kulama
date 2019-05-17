@@ -65,4 +65,19 @@ public interface SuperviseTypeDao extends Mapper<SuperviseType> {
      * @return
      */
     String selectSuperviseTypeTree(@Param("superviseType") SuperviseType superviseType);
+
+
+    /**
+     * 保存监管类型权限
+     * @param superviseType
+     * @return
+     */
+    String saveSuperviseTypeAuthority(@Param("superviseType") SuperviseType superviseType);
+
+
+    /**
+     * 保存、修改监管类型权限
+     * @param superviseType
+     */
+    String updateSuperviseTypeAuthority(@Param("superviseType") SuperviseType superviseType);
 }
