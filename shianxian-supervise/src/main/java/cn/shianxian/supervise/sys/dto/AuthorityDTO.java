@@ -2,6 +2,8 @@ package cn.shianxian.supervise.sys.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class AuthorityDTO {
 
@@ -23,5 +25,5 @@ public class AuthorityDTO {
     /**
      * 子集
      */
-    private AuthorityDTO children;
+    private List<AuthorityDTO> children;
 }
