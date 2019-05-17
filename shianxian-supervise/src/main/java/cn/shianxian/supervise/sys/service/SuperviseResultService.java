@@ -13,7 +13,7 @@ public interface SuperviseResultService {
      * @param superviseResult
      * @return
      */
-    Result saveSuperviseResult(SuperviseResult superviseResult);
+    ResponseEntity<Result> saveSuperviseResult(SuperviseResult superviseResult);
 
 
     /**

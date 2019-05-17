@@ -45,8 +45,7 @@ public class SuperviseResultController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
     public ResponseEntity<Result> saveSuperviseResult(@Valid SuperviseResult superviseResult) {
-        Result result = this.superviseResultService.saveSuperviseResult(superviseResult);
-        return ResponseEntity.ok(result);
+        return this.superviseResultService.saveSuperviseResult(superviseResult);
     }
 
 
@@ -54,7 +53,7 @@ public class SuperviseResultController {
      * 修改监管结果
      * @return
      */
-    @PostMapping("updateSuperviseResult")
+    @PutMapping("updateSuperviseResult")
     @ApiOperation(value = "修改监管结果接口", notes = "修改监管结果接口")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),

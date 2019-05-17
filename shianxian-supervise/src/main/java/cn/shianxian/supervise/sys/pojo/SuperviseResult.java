@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * 监管结果
@@ -22,6 +23,7 @@ public class SuperviseResult {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "resultTag")
+    @NotEmpty(message = "编码不能为空！")
     private String resultTag;
 
     /**

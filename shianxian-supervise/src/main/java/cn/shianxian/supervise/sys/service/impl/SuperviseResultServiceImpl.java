@@ -28,9 +28,13 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
 
     @Transactional
     @Override
-    public Result saveSuperviseResult(SuperviseResult superviseResult) {
+    public ResponseEntity<Result> saveSuperviseResult(SuperviseResult superviseResult) {
+        SuperviseResult result = this.superviseResultDao.selectByPrimaryKey(superviseResult.getResultTag());
+        if (null != result) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Result.msg("编码已存在！"));
+        }
         this.superviseResultDao.insertSuperviseResult(superviseResult);
-        return Result.successMsg();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 
