@@ -8,6 +8,8 @@ import cn.shianxian.supervise.sys.service.NodeInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,12 +38,15 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
     @Transactional
     @Override
-    public Result deleteNodeInfoById(String ids) {
+    public ResponseEntity<Result> deleteNodeInfoById(String ids) {
         String[] idArr = ids.split(",");
         for (String id : idArr) {
-            this.nodeInfoDao.deleteNodeInfoById(id);
+            String flag = this.nodeInfoDao.deleteNodeInfoById(id);
+            if (!"R001".equals(flag)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+            }
         }
-        return Result.successMsg();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

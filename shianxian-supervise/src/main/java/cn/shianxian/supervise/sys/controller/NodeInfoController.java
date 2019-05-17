@@ -65,8 +65,7 @@ public class NodeInfoController {
     @ApiOperation(value = "删除节点", notes = "删除节点")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids")
     public ResponseEntity<Result> deleteNodeInfoById(String ids) {
-        Result result = this.nodeInfoService.deleteNodeInfoById(ids);
-        return ResponseEntity.ok(result);
+        return this.nodeInfoService.deleteNodeInfoById(ids);
     }
 
 
