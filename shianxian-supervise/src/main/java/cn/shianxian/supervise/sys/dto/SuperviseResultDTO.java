@@ -55,4 +55,10 @@ public class SuperviseResultDTO {
      * 备注
      */
     private String remark;
+
+    /**
+     * 整改意见,该结果单项的整改意见
+     */
+    private String advice;
+
 }
