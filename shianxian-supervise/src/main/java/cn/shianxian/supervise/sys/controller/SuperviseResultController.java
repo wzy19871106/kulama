@@ -107,7 +107,7 @@ public class SuperviseResultController {
      */
     @GetMapping("selectSuperviseResultByTypeId")
     @ApiOperation(value = "根据监管类型返回所有监管选项结果", notes = "根据监管类型返回所有监管选项结果")
-    @ApiImplicitParam(paramType = "query", name = "typeId", value = "监管结果编码")
+    @ApiImplicitParam(paramType = "query", name = "typeId", value = "监管类型编码")
     public ResponseEntity<Result> selectSuperviseResultByTypeId(String typeId) {
         Result result = this.superviseResultService.selectSuperviseResultByTypeId(typeId);
         return ResponseEntity.ok(result);
