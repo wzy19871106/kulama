@@ -76,4 +76,11 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
         return Result.data(tree);
     }
 
+
+    @Override
+    public Result selectSuperviseTypeById(String id) {
+        SuperviseType superviseType = this.superviseTypeDao.selectByPrimaryKey(id);
+        return Result.data(superviseType);
+    }
+
 }

@@ -109,4 +109,15 @@ public class SuperviseTypeController {
     }
 
 
+    /**
+     * 根据id查询监管类型
+     * @return
+     */
+    @GetMapping("selectSuperviseTypeById")
+    @ApiOperation(value = "根据id查询监管类型", notes = "根据id查询监管类型")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "监管类型编码")
+    public ResponseEntity<Result> selectSuperviseTypeById(String id) {
+        Result result = this.superviseTypeService.selectSuperviseTypeById(id);
+        return ResponseEntity.ok(result);
+    }
 }
