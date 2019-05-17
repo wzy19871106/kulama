@@ -1,6 +1,5 @@
 package cn.shianxian.supervise.sys.controller;
 
-import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.Supervise;
 import cn.shianxian.supervise.sys.service.SuperviseService;
@@ -77,8 +76,8 @@ public class SuperviseController {
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管项目编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
     })
-    public ResponseEntity<Result> selectSupervise(Supervise supervise, Pages pages) {
-        Result result = this.superviseService.selectSupervise(supervise, pages);
+    public ResponseEntity<Result> selectSupervise(Supervise supervise) {
+        Result result = this.superviseService.selectSupervise(supervise);
         return ResponseEntity.ok(result);
     }
 
@@ -108,6 +107,19 @@ public class SuperviseController {
     @ApiImplicitParam(paramType = "query", name = "id", value = "监管内容编码")
     public ResponseEntity<Result> selectSuperviseScore(String id) {
         Result result = this.superviseService.selectSuperviseScore(id);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据类型查询监管内容（树形）
+     * @return
+     */
+    @GetMapping("selectSuperviseTree")
+    @ApiOperation(value = "根据类型查询监管内容（树形）", notes = "根据类型查询监管内容（树形）")
+    @ApiImplicitParam(paramType = "query", name = "type", value = "监管类型编码")
+    public ResponseEntity<Result> selectSuperviseTree(String type) {
+        Result result = this.superviseService.selectSuperviseTree(type);
         return ResponseEntity.ok(result);
     }
 

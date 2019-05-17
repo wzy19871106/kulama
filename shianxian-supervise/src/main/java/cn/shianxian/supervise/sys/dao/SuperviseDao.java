@@ -73,4 +73,12 @@ public interface SuperviseDao extends Mapper<Supervise> {
      * @return
      */
     Double selectSuperviseScore(@Param("id") String id);
+
+
+    /**
+     * 根据类型查询监管内容（树形）
+     * @param type
+     * @return
+     */
+    String selectSuperviseTree(@Param("type") String type);
 }

@@ -57,4 +57,9 @@
     <select id="selectSuperviseScore" resultType="java.lang.String">
         CALL proc_T_Supervise_Query_Score_ByTag(#{id})
     </select>
+
+    <select id="selectSuperviseTree" resultType="java.lang.String">
+        CALL proc_T_Supervise_QueryTreeJson_ByType(#{type})
+    </select>
+
 </mapper>

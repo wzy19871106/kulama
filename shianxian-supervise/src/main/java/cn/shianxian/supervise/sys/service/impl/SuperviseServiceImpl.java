@@ -1,6 +1,5 @@
 package cn.shianxian.supervise.sys.service.impl;
 
-import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.SuperviseDao;
 import cn.shianxian.supervise.sys.pojo.Supervise;
@@ -24,7 +23,7 @@ public class SuperviseServiceImpl implements SuperviseService {
 
 
     @Override
-    public Result selectSupervise(Supervise supervise, Pages pages) {
+    public Result selectSupervise(Supervise supervise) {
         List<Supervise> superviseList = new ArrayList<>();
         if (StringUtils.isNotBlank(supervise.getSuperviseTag())) {
             superviseList = this.superviseDao.selectSuperviseById(supervise.getSuperviseTag());
@@ -79,5 +78,12 @@ public class SuperviseServiceImpl implements SuperviseService {
     public Result selectSuperviseScore(String id) {
         Double score = this.superviseDao.selectSuperviseScore(id);
         return Result.data(score);
+    }
+
+
+    @Override
+    public Result selectSuperviseTree(String type) {
+        String tree = this.superviseDao.selectSuperviseTree(type);
+        return Result.data(tree);
     }
 }
