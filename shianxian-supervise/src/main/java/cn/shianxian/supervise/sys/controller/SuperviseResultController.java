@@ -81,8 +81,7 @@ public class SuperviseResultController {
     @ApiOperation(value = "删除监管结果接口", notes = "删除监管结果接口")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSuperviseResultById(String ids) {
-        Result result = this.superviseResultService.deleteSuperviseResultById(ids);
-        return ResponseEntity.ok(result);
+        return this.superviseResultService.deleteSuperviseResultById(ids);
     }
 
 

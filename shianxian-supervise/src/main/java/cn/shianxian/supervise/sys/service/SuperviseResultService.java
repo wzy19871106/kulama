@@ -3,6 +3,7 @@ package cn.shianxian.supervise.sys.service;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.SuperviseResult;
+import org.springframework.http.ResponseEntity;
 
 public interface SuperviseResultService {
 
@@ -28,7 +29,7 @@ public interface SuperviseResultService {
      * @param ids
      * @return
      */
-    Result deleteSuperviseResultById(String ids);
+    ResponseEntity<Result> deleteSuperviseResultById(String ids);
 
 
     /**

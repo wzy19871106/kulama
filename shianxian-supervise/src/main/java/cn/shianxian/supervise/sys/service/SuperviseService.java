@@ -2,6 +2,7 @@ package cn.shianxian.supervise.sys.service;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.Supervise;
+import org.springframework.http.ResponseEntity;
 
 public interface SuperviseService {
 
@@ -27,7 +28,7 @@ public interface SuperviseService {
      * @param ids
      * @return
      */
-    Result deleteSuperviseById(String ids);
+    ResponseEntity<Result> deleteSuperviseById(String ids);
 
 
     /**
