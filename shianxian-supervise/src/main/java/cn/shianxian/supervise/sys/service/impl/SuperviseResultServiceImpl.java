@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -62,14 +61,17 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
 
     @Override
     public Result selectSuperviseResult(SuperviseResult superviseResult, Pages pages) {
-        List<SuperviseResult> results = new ArrayList<>();
         if (StringUtils.isNotBlank(superviseResult.getResultTag())) {
-            results = this.superviseResultDao.selectSuperviseResultById(superviseResult.getResultTag());
+            List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultById(superviseResult.getResultTag());
+            return Result.data(results);
+        } else if (StringUtils.isNotBlank(superviseResult.getSuperviseTag())) {
+            List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(superviseResult.getSuperviseTag());
+            return Result.data(results);
+        } else if (StringUtils.isNotBlank(superviseResult.getSuperviseTypeTag())) {
+            List<SuperviseResultDTO> results = this.superviseResultDao.selectSuperviseResultByTypeId(superviseResult.getSuperviseTypeTag());
+            return Result.data(results);
         }
-        if (StringUtils.isNotBlank(superviseResult.getSuperviseTag())) {
-            results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(superviseResult.getSuperviseTag());
-        }
-        return Result.data(results);
+        return Result.data(null);
     }
 
 
@@ -85,10 +87,4 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         return Result.successMsg();
     }
 
-
-    @Override
-    public Result selectSuperviseResultByTypeId(String typeId) {
-        List<SuperviseResultDTO> list = this.superviseResultDao.selectSuperviseResultByTypeId(typeId);
-        return Result.data(list);
-    }
 }

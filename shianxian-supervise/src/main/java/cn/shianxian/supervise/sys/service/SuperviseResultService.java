@@ -49,10 +49,4 @@ public interface SuperviseResultService {
     Result updateSuperviseResultBySort(String id, int type);
 
 
-    /**
-     * 根据监管类型返回所有监管选项结果
-     * @param typeId
-     * @return
-     */
-    Result selectSuperviseResultByTypeId(String typeId);
 }

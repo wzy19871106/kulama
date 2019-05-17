@@ -36,8 +36,12 @@
         CALL proc_T_Supervise_Result_Query_ByTag(#{id})
     </select>
 
+    <select id="selectSuperviseResultByTypeId" resultType="cn.shianxian.supervise.sys.dto.SuperviseResultDTO">
+        CALL proc_T_Supervise_Result_Query_ByType(#{id})
+    </select>
+
     <select id="selectSuperviseResultBySuperviseTag" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
-        CALL proc_T_Supervise_Result_Query_By_SuperviseTag(#{superviseTag})
+        CALL proc_T_Supervise_Result_Query_By_SuperviseTag(#{id})
     </select>
 
     <select id="updateSuperviseResultByUpSort" resultType="java.lang.String">
@@ -48,8 +52,6 @@
         CALL proc_T_Supervise_Result_OrderDown_ByTag(#{id})
     </select>
 
-    <select id="selectSuperviseResultByTypeId" resultType="cn.shianxian.supervise.sys.dto.SuperviseResultDTO">
-        CALL proc_T_Supervise_Result_Query_ByType(#{typeId})
-    </select>
+
 
 </mapper>

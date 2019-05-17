@@ -3,10 +3,7 @@ package cn.shianxian.supervise.sys.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -73,5 +70,11 @@ public class SuperviseResult {
      */
     @Column(name = "ifDelete")
     private Boolean ifDelete;
+
+    /**
+     * 监管类型id
+     */
+    @Transient
+    private String superviseTypeTag;
 
 }

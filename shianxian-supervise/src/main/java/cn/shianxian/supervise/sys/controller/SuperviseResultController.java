@@ -91,24 +91,12 @@ public class SuperviseResultController {
     @GetMapping("selectSuperviseResult")
     @ApiOperation(value = "查询监管结果", notes = "查询监管结果")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管内容编码"),
+            @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
     })
     public ResponseEntity<Result> selectSuperviseResult(SuperviseResult superviseResult, Pages pages) {
         Result result = this.superviseResultService.selectSuperviseResult(superviseResult, pages);
-        return ResponseEntity.ok(result);
-    }
-
-
-    /**
-     * 根据监管类型返回所有监管选项结果
-     * @return
-     */
-    @GetMapping("selectSuperviseResultByTypeId")
-    @ApiOperation(value = "根据监管类型返回所有监管选项结果", notes = "根据监管类型返回所有监管选项结果")
-    @ApiImplicitParam(paramType = "query", name = "typeId", value = "监管类型编码")
-    public ResponseEntity<Result> selectSuperviseResultByTypeId(String typeId) {
-        Result result = this.superviseResultService.selectSuperviseResultByTypeId(typeId);
         return ResponseEntity.ok(result);
     }
 

@@ -45,11 +45,19 @@ public interface SuperviseResultDao extends Mapper<SuperviseResult> {
 
 
     /**
-     * 根据监管内容编码查询监管结果
-     * @param superviseTag
+     * 根据监管类型返回所有监管选项结果
+     * @param id
      * @return
      */
-    List<SuperviseResult> selectSuperviseResultBySuperviseTag(@Param("superviseTag") String superviseTag);
+    List<SuperviseResultDTO> selectSuperviseResultByTypeId(@Param("id") String id);
+
+
+    /**
+     * 根据监管内容编码查询监管结果
+     * @param id
+     * @return
+     */
+    List<SuperviseResult> selectSuperviseResultBySuperviseTag(@Param("id") String id);
 
 
     /**
@@ -68,10 +76,4 @@ public interface SuperviseResultDao extends Mapper<SuperviseResult> {
     String updateSuperviseResultByDownSort(@Param("id") String id);
 
 
-    /**
-     * 根据监管类型返回所有监管选项结果
-     * @param typeId
-     * @return
-     */
-    List<SuperviseResultDTO> selectSuperviseResultByTypeId(@Param("typeId") String typeId);
 }
