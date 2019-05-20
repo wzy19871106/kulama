@@ -77,4 +77,10 @@ public class SuperviseResult {
     @Transient
     private String superviseTypeTag;
 
+    /**
+     * 监管内容
+     */
+    @Transient
+    private String superviseName;
+
 }
