@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * 企业备案表
  */
-@Table(name = "Companyinfo")
+@Table(name = "t_Companyinfo")
 @Data
 public class CompanyInfo {
 

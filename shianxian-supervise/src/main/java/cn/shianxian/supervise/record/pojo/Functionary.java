@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 /**
  * 企业负责人表
  */
-@Table(name = "Functionary")
+@Table(name = "t_Functionary")
 @Data
 public class Functionary {
 

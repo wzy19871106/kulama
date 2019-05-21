@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 /**
  * 企业备案表
  */
-@Table(name = "CompanyinfoForaduit")
+@Table(name = "t_CompanyinfoForaduit")
 @Data
 public class CompanyInfoForaduit {
 
