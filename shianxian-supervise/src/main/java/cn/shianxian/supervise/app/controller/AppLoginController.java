@@ -9,7 +9,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -33,7 +32,7 @@ public class AppLoginController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "微信appId"),
     })
-    public ResponseEntity<Result> appLogin(@RequestParam() String id) {
+    public ResponseEntity<Result> appLogin(String id) {
         return this.functionaryService.appLogin(id);
     }
 
