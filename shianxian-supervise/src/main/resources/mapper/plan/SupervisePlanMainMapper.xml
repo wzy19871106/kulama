@@ -54,4 +54,18 @@
         )
     </select>
 
+    <resultMap id="plan" type="cn.shianxian.supervise.plan.vo.SupervisePlanVO"></resultMap>
+
+    <select id="selectSupervisePlanByNode" resultMap="plan,pageCount,totalCount">
+        CALL Proc_T_SuperviserPlan_Query_ByNode
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSupervisePlanDetailByIds" resultMap="plan">
+        CALL proc_T_SuperviserPlanDetail_Query_ByIDS(#{planTag})
+    </select>
 </mapper>

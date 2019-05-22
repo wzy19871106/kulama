@@ -30,4 +30,21 @@ public interface SupervisePlanMainService {
      * @return
      */
     Result selectSupervisePlanMain(QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 根据节点id查询计划任务
+     * @param nodeTag
+     * @param pages
+     * @return
+     */
+    Result selectSupervisePlanByNode(String nodeTag, Pages pages);
+
+
+    /**
+     * 据子类型编码查询所有监管内容，按类型分组展示
+     * @param planTag
+     * @return
+     */
+    Result selectSupervisePlanDetailByIds(Integer planTag);
 }

@@ -6,6 +6,7 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.plan.dao.SupervisePlanMainDao;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanMain;
 import cn.shianxian.supervise.plan.service.SupervisePlanMainService;
+import cn.shianxian.supervise.plan.vo.SupervisePlanVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,19 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
             return Result.data(list);
         }
         return Result.data(null);
+    }
+
+
+    @Override
+    public Result selectSupervisePlanByNode(String nodeTag, Pages pages) {
+        List<List<?>> list = this.supervisePlanMainDao.selectSupervisePlanByNode(nodeTag, pages);
+        return Result.data(list);
+    }
+
+
+    @Override
+    public Result selectSupervisePlanDetailByIds(Integer planTag) {
+        List<SupervisePlanVO> planList = this.supervisePlanMainDao.selectSupervisePlanDetailByIds(planTag);
+        return Result.data(planList);
     }
 }

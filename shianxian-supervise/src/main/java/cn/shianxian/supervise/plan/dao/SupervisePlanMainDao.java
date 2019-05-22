@@ -3,6 +3,7 @@ package cn.shianxian.supervise.plan.dao;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanMain;
+import cn.shianxian.supervise.plan.vo.SupervisePlanVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -52,4 +53,19 @@ public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
     List<List<?>> selectSupervisePlanMainByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
 
 
+    /**
+     * 根据节点id查询计划任务
+     * @param nodeTag
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectSupervisePlanByNode(@Param("nodeTag") String nodeTag, @Param("pages") Pages pages);
+
+
+    /**
+     * 据子类型编码查询所有监管内容，按类型分组展示
+     * @param planTag
+     * @return
+     */
+    List<SupervisePlanVO> selectSupervisePlanDetailByIds(@Param("planTag") Integer planTag);
 }
