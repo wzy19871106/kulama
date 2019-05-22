@@ -3,7 +3,6 @@ package cn.shianxian.supervise.sys.service;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.User;
-import org.springframework.http.ResponseEntity;
 
 public interface UserService {
 
@@ -49,11 +48,4 @@ public interface UserService {
      */
     Result deleteUserById(String id);
 
-
-    /**
-     * app登录
-     * @param id
-     * @return
-     */
-    ResponseEntity<Result> appLogin(String id);
 }

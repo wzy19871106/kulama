@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.record.dao.CompanyInfoForaduitDao">
+
+   <select id="saveCompanyInfoForaduit" resultType="java.lang.String">
+       CALL Proc_T_CompanyInfo_ForAduit_Add
+       (
+       #{companyInfoForaduit.nodeTag},
+       #{companyInfoForaduit.nodeName},
+       #{companyInfoForaduit.nodeNo},
+       #{companyInfoForaduit.companyTel},
+       #{companyInfoForaduit.companyAddress},
+       #{companyInfoForaduit.companyProvice},
+       #{companyInfoForaduit.companyCity},
+       #{companyInfoForaduit.companyArea},
+       #{companyInfoForaduit.companyVillage},
+       #{companyInfoForaduit.companyGis},
+       #{companyInfoForaduit.picTag}
+       )
+   </select>
+
+</mapper>

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 /**
- * 企业负责人表
+ * 企业负责人审核表
  */
 @Table(name = "t_FunctionaryForaduit")
 @Data

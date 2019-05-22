@@ -6,14 +6,12 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.MD5Utils;
 import cn.shianxian.supervise.exception.CommonException;
 import cn.shianxian.supervise.record.dao.FunctionaryDao;
-import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.sys.dao.UserDao;
 import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,17 +104,4 @@ public class UserServiceImpl implements UserService {
         return Result.successMsg();
     }
 
-
-    @Override
-    public ResponseEntity<Result> appLogin(String id) {
-        Functionary functionary = new Functionary();
-        functionary.setWeChatId(id);
-        List<Functionary> functionaryList = this.functionaryDao.select(functionary);
-        if (1 == functionaryList.size()) {
-            Functionary loginUser = functionaryList.get(0);
-            log.info("用户：{}登录", loginUser);
-            return ResponseEntity.ok(Result.data(loginUser));
-        }
-        throw new CommonException(Constants.FORBIDDEN, "微信没有绑定！");
-    }
 }

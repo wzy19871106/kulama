@@ -7,10 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
 /**
- * 企业备案表
+ * 企业备案审核表
  */
 @Table(name = "t_CompanyinfoForaduit")
 @Data
@@ -22,12 +23,14 @@ public class CompanyInfoForaduit {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "nodeTag")
+    @NotEmpty(message = "企业标识不允许为空！")
     private String nodeTag;
 
     /**
      * 企业名称
      */
     @Column(name = "nodeName")
+    @NotEmpty(message = "企业名称不允许为空！")
     private String nodeName;
 
     /**

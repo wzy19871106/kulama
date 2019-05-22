@@ -1,7 +1,7 @@
 package cn.shianxian.supervise.app.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.sys.service.UserService;
+import cn.shianxian.supervise.record.service.FunctionaryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -21,7 +21,7 @@ public class AppLoginController {
 
 
     @Autowired
-    private UserService userService;
+    private FunctionaryService functionaryService;
 
 
     /**
@@ -34,7 +34,7 @@ public class AppLoginController {
             @ApiImplicitParam(paramType = "query", name = "id", value = "微信appId"),
     })
     public ResponseEntity<Result> appLogin(@RequestParam() String id) {
-        return this.userService.appLogin(id);
+        return this.functionaryService.appLogin(id);
     }
 
 }
