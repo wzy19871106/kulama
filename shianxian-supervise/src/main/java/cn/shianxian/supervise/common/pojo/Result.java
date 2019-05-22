@@ -85,7 +85,7 @@ public class Result<T> implements Serializable {
      * @return
      */
     public static Result<String> msg(String msg) {
-        return new Result(Constants.ZERO, msg);
+        return new Result(Constants.ONE, msg);
     }
 
 
