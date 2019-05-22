@@ -1,9 +1,9 @@
 package cn.shianxian.supervise.plan.dao;
 
+import cn.shianxian.supervise.info.vo.SuperviseInfoVO;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanMain;
-import cn.shianxian.supervise.plan.vo.SupervisePlanVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -67,5 +67,5 @@ public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
      * @param planTag
      * @return
      */
-    List<SupervisePlanVO> selectSupervisePlanDetailByIds(@Param("planTag") Integer planTag);
+    List<SuperviseInfoVO> selectSupervisePlanDetailByIds(@Param("planTag") Integer planTag);
 }

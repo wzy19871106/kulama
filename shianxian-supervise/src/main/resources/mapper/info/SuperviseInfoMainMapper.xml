@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.info.dao.SuperviseInfoMainDao">
+
+    <resultMap id="superviseInfoMain" type="cn.shianxian.supervise.info.pojo.SuperviseInfoMain"></resultMap>
+
+    <select id="selectSuperviseInfoByNodePlan" resultMap="superviseInfoMain,pageCount,totalCount">
+        CALL Proc_T_Supervise_Info_Query_ByNode_Plan
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <resultMap id="info" type="cn.shianxian.supervise.info.vo.SuperviseInfoVO"></resultMap>
+
+    <select id="selectSuperviseInfoByIdPlan" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByMainID_Plan
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoByNode" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByNode
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+</mapper>

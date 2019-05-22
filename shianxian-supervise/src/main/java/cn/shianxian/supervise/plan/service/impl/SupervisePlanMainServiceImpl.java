@@ -1,12 +1,12 @@
 package cn.shianxian.supervise.plan.service.impl;
 
+import cn.shianxian.supervise.info.vo.SuperviseInfoVO;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.plan.dao.SupervisePlanMainDao;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanMain;
 import cn.shianxian.supervise.plan.service.SupervisePlanMainService;
-import cn.shianxian.supervise.plan.vo.SupervisePlanVO;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +68,7 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
 
     @Override
     public Result selectSupervisePlanDetailByIds(Integer planTag) {
-        List<SupervisePlanVO> planList = this.supervisePlanMainDao.selectSupervisePlanDetailByIds(planTag);
+        List<SuperviseInfoVO> planList = this.supervisePlanMainDao.selectSupervisePlanDetailByIds(planTag);
         return Result.data(planList);
     }
 }

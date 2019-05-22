@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.plan.service.SupervisePlanMainService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("app/spervisePlan")
-@Api(description = "计划任务控制器")
+@Api(description = "app计划任务控制器")
 public class AppSupervisePlanController {
 
 
@@ -31,7 +32,11 @@ public class AppSupervisePlanController {
      */
     @PostMapping("selectSupervisePlanByNode")
     @ApiOperation(value = "根据节点id查询计划任务", notes = "根据节点id查询计划任务")
-    @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点id")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点id"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
     public ResponseEntity<Result> selectSupervisePlanByNode(String nodeTag, Pages pages) {
         Result result = this.supervisePlanMainService.selectSupervisePlanByNode(nodeTag, pages);
         return ResponseEntity.ok(result);

@@ -2,8 +2,10 @@ package cn.shianxian.supervise.record.dao;
 
 import cn.shianxian.supervise.record.pojo.CompanyInfoForaduit;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
 
+@Repository
 public interface CompanyInfoForaduitDao extends Mapper<CompanyInfoForaduit> {
 
 

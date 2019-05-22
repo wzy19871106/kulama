@@ -1,9 +1,12 @@
-package cn.shianxian.supervise.plan.vo;
+package cn.shianxian.supervise.info.vo;
 
 import lombok.Data;
 
+/**
+ * 监管结果VO
+ */
 @Data
-public class SupervisePlanVO {
+public class SuperviseInfoVO {
 
 
     /**
@@ -46,4 +49,14 @@ public class SupervisePlanVO {
      * 监管内容名称
      */
     private String superviseName;
+
+    /**
+     * 分数
+     */
+    private String score;
+
+    /**
+     * 整改状态  0 无需整改 1,2,3,4.....需要整改的数量
+     */
+    private String status;
 }
