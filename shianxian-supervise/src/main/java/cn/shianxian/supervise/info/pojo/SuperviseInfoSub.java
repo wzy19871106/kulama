@@ -9,6 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
+
+/**
+ * 监管业务从表
+ */
 @Data
 @Table(name = "t_SuperviseInfoSub")
 public class SuperviseInfoSub {

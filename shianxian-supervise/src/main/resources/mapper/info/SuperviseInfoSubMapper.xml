@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.info.dao.SuperviseInfoSubDao">
+
+    <resultMap id="info" type="cn.shianxian.supervise.info.vo.SuperviseInfoVO"></resultMap>
+
+    <select id="selectSuperviseRectifyByNode" resultMap="info,pageCount,totalCount">
+        CALL Proc_T_Superviser_Rectify_ByNode
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseRectifyById" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Superviser_Rectify_ByMainIDS
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoSubById" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
+        CALL proc_T_Supervise_Info_Sub_Query_ByIDS(#{id})
+    </select>
+
+    <select id="updateSuperviseInfoSubById" resultType="java.lang.String">
+        CALL Proc_T_Supervise_Info_Sub_Rectify_ByIDS
+        (
+        #{superviseInfoSub.subId},
+        #{superviseInfoSub.requst},
+        #{superviseInfoSub.picTag},
+        #{superviseInfoSub.lastUpdateUser}
+        )
+    </select>
+</mapper>
