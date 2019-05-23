@@ -90,6 +90,16 @@ public class Result<T> implements Serializable {
 
 
     /**
+     * 返回自定义信息
+     * @param msg
+     * @return
+     */
+    public static Result<String> msg(int code, String msg) {
+        return new Result(code, msg);
+    }
+
+
+    /**
      * 返回自定义数据
      * @param data
      * @return

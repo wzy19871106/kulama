@@ -79,21 +79,8 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "aduitType", value = "1新增，2删除，3变更，4审核失败，5注销，0已完成"),
             @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回原因"),
     })
-    public ResponseEntity<Result> updateCompanyInfoForaduit(CompanyInfoForaduit companyInfoForaduit) {
-        return ResponseEntity.ok(Result.successMsg());
-    }
-
-
-    /**
-     * 删除
-     * @param id
-     * @return
-     */
-    @DeleteMapping("companyInfo")
-    @ApiOperation(value = "删除企业", notes = "删除企业")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
-    public ResponseEntity<Result> delete(@RequestParam() String id) {
-        return ResponseEntity.ok(Result.successMsg());
+    public ResponseEntity<Result> updateCompanyInfoForaduit(@Valid CompanyInfoForaduit companyInfoForaduit) {
+        return this.companyInfoService.updateCompanyInfoForaduit(companyInfoForaduit);
     }
 
 
@@ -108,5 +95,36 @@ public class CompanyInfoController {
     public ResponseEntity<Result> deleteCompanyInfoForaduit(@RequestParam() String id) {
         return ResponseEntity.ok(Result.successMsg());
     }
+
+
+    /**
+     * 审核企业
+     * @param index
+     * @return
+     */
+    @PutMapping("checkCompanyInfoForaduit")
+    @ApiOperation(value = "审核企业", notes = "审核企业")
+    @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号")
+    public ResponseEntity<Result> checkCompanyInfoForaduit(String index) {
+        return this.companyInfoService.checkCompanyInfoForaduit(index);
+    }
+
+
+    /**
+     * 退回企业提交审核信息
+     * @param companyInfoForaduit
+     * @return
+     */
+    @DeleteMapping("backCompanyInfoForaduit")
+    @ApiOperation(value = "退回企业提交审核信息", notes = "退回企业提交审核信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号"),
+            @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回原因"),
+    })
+    public ResponseEntity<Result> backCompanyInfoForaduit(CompanyInfoForaduit companyInfoForaduit) {
+        return this.companyInfoService.backCompanyInfoForaduit(companyInfoForaduit);
+    }
+
+
 
 }

@@ -15,4 +15,28 @@ public interface CompanyInfoService {
      * @return
      */
     ResponseEntity<Result> saveCompanyInfoForaduit(CompanyInfoForaduit companyInfoForaduit);
+
+
+    /**
+     * 修改企业审核表
+     * @param companyInfoForaduit
+     * @return
+     */
+    ResponseEntity<Result> updateCompanyInfoForaduit(CompanyInfoForaduit companyInfoForaduit);
+
+
+    /**
+     * 审核企业
+     * @param index
+     * @return
+     */
+    ResponseEntity<Result> checkCompanyInfoForaduit(String index);
+
+
+    /**
+     * 退回企业提交审核信息
+     * @param companyInfoForaduit
+     * @return
+     */
+    ResponseEntity<Result> backCompanyInfoForaduit(CompanyInfoForaduit companyInfoForaduit);
 }

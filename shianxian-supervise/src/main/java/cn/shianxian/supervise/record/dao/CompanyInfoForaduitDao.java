@@ -15,4 +15,26 @@ public interface CompanyInfoForaduitDao extends Mapper<CompanyInfoForaduit> {
      * @return
      */
     String saveCompanyInfoForaduit(@Param("companyInfoForaduit") CompanyInfoForaduit companyInfoForaduit);
+
+
+    /**
+     * 修改企业审核表
+     * @param companyInfoForaduit
+     * @return
+     */
+    String updateCompanyInfoForaduit(@Param("companyInfoForaduit") CompanyInfoForaduit companyInfoForaduit);
+
+
+    /**
+     * 审核企业
+     * @param index
+     */
+    String checkCompanyInfoForaduit(@Param("index") String index);
+
+
+    /**
+     * 退回企业提交审核信息
+     * @param companyInfoForaduit
+     */
+    String backCompanyInfoForaduit(@Param("companyInfoForaduit") CompanyInfoForaduit companyInfoForaduit);
 }

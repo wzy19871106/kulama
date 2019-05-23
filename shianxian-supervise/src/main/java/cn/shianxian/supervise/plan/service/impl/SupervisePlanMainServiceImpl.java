@@ -62,7 +62,7 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
     @Override
     public Result selectSupervisePlanByNode(String nodeTag, Pages pages) {
         List<List<?>> list = this.supervisePlanMainDao.selectSupervisePlanByNode(nodeTag, pages);
-        return Result.data(list);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 
 

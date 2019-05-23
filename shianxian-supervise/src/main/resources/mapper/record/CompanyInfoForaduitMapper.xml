@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.shianxian.supervise.record.dao.CompanyInfoForaduitDao">
 
-   <select id="saveCompanyInfoForaduit" resultType="java.lang.String">
+    <select id="saveCompanyInfoForaduit" resultType="java.lang.String">
        CALL Proc_T_CompanyInfo_ForAduit_Add
        (
        #{companyInfoForaduit.nodeTag},
@@ -17,6 +17,34 @@
        #{companyInfoForaduit.companyGis},
        #{companyInfoForaduit.picTag}
        )
-   </select>
+    </select>
 
+    <select id="updateCompanyInfoForaduit" resultType="java.lang.String">
+       CALL Proc_T_CompanyInfo_ForAduit_Edit_ByNodeTag
+       (
+       #{companyInfoForaduit.nodeTag},
+       #{companyInfoForaduit.nodeName},
+       #{companyInfoForaduit.nodeNo},
+       #{companyInfoForaduit.companyTel},
+       #{companyInfoForaduit.companyAddress},
+       #{companyInfoForaduit.companyProvice},
+       #{companyInfoForaduit.companyCity},
+       #{companyInfoForaduit.companyArea},
+       #{companyInfoForaduit.companyVillage},
+       #{companyInfoForaduit.companyGis},
+       #{companyInfoForaduit.picTag}
+       )
+    </select>
+
+    <select id="checkCompanyInfoForaduit" resultType="java.lang.String">
+      CALL Proc_T_CompanyInfo_ForAduit_Check_ByIndex(#{index})
+    </select>
+
+    <select id="backCompanyInfoForaduit" resultType="java.lang.String">
+      CALL Proc_T_CompanyInfo_ForAduit_Fail_ByIndex
+      (
+      #{companyInfoForaduit.index},
+      #{companyInfoForaduit.failReason}
+      )
+    </select>
 </mapper>
