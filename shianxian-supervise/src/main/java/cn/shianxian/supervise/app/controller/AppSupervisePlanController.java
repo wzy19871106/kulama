@@ -42,6 +42,7 @@ public class AppSupervisePlanController {
         return ResponseEntity.ok(result);
     }
 
+
     /**
      * 据子类型编码查询所有监管内容，按类型分组展示
      * @return
