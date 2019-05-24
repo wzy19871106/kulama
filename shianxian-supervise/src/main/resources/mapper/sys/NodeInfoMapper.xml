@@ -70,4 +70,8 @@
         )
     </select>
 
+    <select id="checkKey" resultType="cn.shianxian.supervise.sys.dto.NodeFunctionaryDTO">
+        CALL Proc_T_NodeInfoFunctionary_Query_ByKey(#{key})
+    </select>
+
 </mapper>

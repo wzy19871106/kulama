@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.sys.dao;
 
 import cn.shianxian.supervise.common.pojo.Pages;
+import cn.shianxian.supervise.sys.dto.NodeFunctionaryDTO;
 import cn.shianxian.supervise.sys.pojo.NodeInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -76,4 +77,10 @@ public interface NodeInfoDao extends Mapper<NodeInfo> {
     String updateAuthorityById(@Param("nodeInfo") NodeInfo nodeInfo);
 
 
+    /**
+     * 校验key
+     * @param key
+     * @return
+     */
+    NodeFunctionaryDTO checkKey(@Param("key") String key);
 }

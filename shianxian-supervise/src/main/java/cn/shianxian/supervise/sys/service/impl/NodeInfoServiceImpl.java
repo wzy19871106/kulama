@@ -3,6 +3,7 @@ package cn.shianxian.supervise.sys.service.impl;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.NodeInfoDao;
+import cn.shianxian.supervise.sys.dto.NodeFunctionaryDTO;
 import cn.shianxian.supervise.sys.pojo.NodeInfo;
 import cn.shianxian.supervise.sys.service.NodeInfoService;
 import lombok.extern.slf4j.Slf4j;
@@ -84,6 +85,17 @@ public class NodeInfoServiceImpl implements NodeInfoService {
     public Result updateAuthorityById(NodeInfo nodeInfo) {
         this.nodeInfoDao.updateAuthorityById(nodeInfo);
         return Result.successMsg();
+    }
+
+
+    @Override
+    public ResponseEntity<Result> checkKey(String key) {
+        NodeFunctionaryDTO nodeInfo = new NodeFunctionaryDTO();
+        nodeInfo.setFlag("3");
+        if (StringUtils.isNotBlank(key)) {
+            nodeInfo = this.nodeInfoDao.checkKey(key);
+        }
+        return ResponseEntity.ok(Result.data(nodeInfo));
     }
 
 }

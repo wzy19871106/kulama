@@ -56,4 +56,11 @@ public interface NodeInfoService {
      */
     Result updateAuthorityById(NodeInfo nodeInfo);
 
+
+    /**
+     * 校验key
+     * @param key
+     * @return
+     */
+    ResponseEntity<Result> checkKey(String key);
 }
