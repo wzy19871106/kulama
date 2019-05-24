@@ -159,4 +159,18 @@ public class AppSuperviseInfoController {
         Result result = this.superviseInfoSubService.updateSuperviseInfoSubById(superviseInfoSub);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 根据所选监管业务（主类型）编码查询监管明细
+     * @return
+     */
+    @PostMapping("selectSuperviseInfoDetailById")
+    @ApiOperation(value = "根据所选监管业务（主类型）编码查询监管明细", notes = "根据所选监管业务（主类型）编码查询监管明细")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id")
+    public ResponseEntity<Result> selectSuperviseInfoDetailById(String id, Pages pages) {
+        Result result = this.superviseInfoSubService.selectSuperviseInfoDetailById(id, pages);
+        return ResponseEntity.ok(result);
+    }
+
 }

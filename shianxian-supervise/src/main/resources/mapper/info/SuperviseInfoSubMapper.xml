@@ -35,4 +35,14 @@
         #{superviseInfoSub.lastUpdateUser}
         )
     </select>
+
+    <select id="selectSuperviseInfoDetailById" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_Detail
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
 </mapper>

@@ -39,4 +39,13 @@ public interface SuperviseInfoSubService {
      * @return
      */
     Result updateSuperviseInfoSubById(SuperviseInfoSub superviseInfoSub);
+
+
+    /**
+     * 根据所选监管业务（主类型）编码查询监管明细
+     * @param id
+     * @param pages
+     * @return
+     */
+    Result selectSuperviseInfoDetailById(String id, Pages pages);
 }

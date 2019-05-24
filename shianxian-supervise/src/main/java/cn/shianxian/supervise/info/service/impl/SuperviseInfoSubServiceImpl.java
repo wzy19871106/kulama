@@ -43,7 +43,14 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Transactional
     @Override
     public Result updateSuperviseInfoSubById(SuperviseInfoSub superviseInfoSub) {
-        String res = this.superviseInfoSubDao.updateSuperviseInfoSubById(superviseInfoSub);
+        this.superviseInfoSubDao.updateSuperviseInfoSubById(superviseInfoSub);
         return Result.successMsg();
+    }
+
+
+    @Override
+    public Result selectSuperviseInfoDetailById(String id, Pages pages) {
+        List<List<?>> list = this.superviseInfoSubDao.selectSuperviseInfoDetailById(id, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 }

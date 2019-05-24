@@ -58,7 +58,7 @@ public class SuperviseInfoVO {
     /**
      * 监管结果id
      */
-    private String ResultTag;
+    private String resultTag;
 
     /**
      * 监管结果
@@ -90,4 +90,33 @@ public class SuperviseInfoVO {
      */
     private String allStatus;
 
+    /**
+     * 监管业务得分
+     */
+    private String subSuperviseScore;
+
+    /**
+     * 监管业务总分
+     */
+    private String subSuperviseScoreValue;
+
+    /**
+     * 监管结果得分
+     */
+    private String parentSuperviseScore;
+
+    /**
+     * 监管结果总分
+     */
+    private String parentSuperviseScoreValue;
+
+    /**
+     * 监管类型得分
+     */
+    private String superviseTypeScore;
+
+    /**
+     * 监管类型总分
+     */
+    private String superviseTypeScoreValue;
 }
