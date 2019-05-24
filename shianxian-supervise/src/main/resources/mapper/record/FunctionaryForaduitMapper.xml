@@ -52,4 +52,16 @@
       #{pages.pageNum}
       )
     </select>
+
+    <select id="selectFunctionaryForaduitById" resultType="cn.shianxian.supervise.record.pojo.FunctionaryForaduit">
+      CALL Proc_T_Functionary_ForAduit_Query_ByNodeTag(#{nodeTag})
+    </select>
+
+    <select id="selectFunctionaryForaduitByIndex" resultType="cn.shianxian.supervise.record.pojo.FunctionaryForaduit">
+      CALL Proc_T_Functionary_ForAduit_Query_ByIndex(#{index})
+    </select>
+
+    <select id="deleteFunctionaryForaduit" resultType="java.lang.String">
+      CALL Proc_T_Functionary_Remove_ByFunctionaryTag(#{id})
+    </select>
 </mapper>

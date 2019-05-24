@@ -9,6 +9,7 @@ import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.record.pojo.FunctionaryForaduit;
 import cn.shianxian.supervise.record.service.FunctionaryService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -84,5 +85,57 @@ public class FunctionaryServiceImpl implements FunctionaryService {
     public ResponseEntity<Result> selectFunctionaryForaduitByLike(QueryPojo queryPojo, Pages pages) {
         List<List<?>> list = this.functionaryForaduitDao.selectFunctionaryForaduitByLike(queryPojo, pages);
         return ResponseEntity.ok(Result.data(list));
+    }
+
+
+    @Override
+    public ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
+        if (StringUtils.isNotBlank(functionaryForaduit.getNodeTag())) {
+            functionaryForaduit = this.functionaryForaduitDao.selectFunctionaryForaduitById(functionaryForaduit.getNodeTag());
+        } else if (null != functionaryForaduit.getIndex()) {
+            functionaryForaduit = this.functionaryForaduitDao.selectFunctionaryForaduitByIndex(functionaryForaduit.getIndex());
+        }
+        return ResponseEntity.ok(Result.data(functionaryForaduit));
+    }
+
+
+    @Override
+    public ResponseEntity<Result> deleteFunctionaryForaduit(String id) {
+        String flag = this.functionaryForaduitDao.deleteFunctionaryForaduit(id);
+        if ("R003".equals(flag)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("拒绝删除申请！"));
+        }
+        return ResponseEntity.ok(Result.successMsg());
+    }
+
+
+    @Override
+    public ResponseEntity<Result> selectFunctionaryByLike(QueryPojo queryPojo, Pages pages) {
+        List<List<?>> list = this.functionaryDao.selectFunctionaryByLike(queryPojo, pages);
+        return ResponseEntity.ok(Result.data(list));
+    }
+
+
+    @Override
+    public ResponseEntity<Result> selectFunctionary(Functionary functionary) {
+        if (StringUtils.isNotBlank(functionary.getNodeTag())) {
+            functionary = this.functionaryDao.selectFunctionaryByNodeTag(functionary.getNodeTag());
+        } else if (null != functionary.getFunctionaryTag()) {
+            functionary = this.functionaryDao.selectFunctionaryByFunctionaryTag(functionary.getFunctionaryTag());
+        } else if (null != functionary.getWeChatId()) {
+            functionary = this.functionaryDao.selectFunctionaryByWeChatId(functionary.getWeChatId());
+        }
+        return ResponseEntity.ok(Result.data(functionary));
+    }
+
+
+    @Transactional
+    @Override
+    public ResponseEntity<Result> deleteFunctionary(String index) {
+        String flag = this.functionaryDao.deleteFunctionary(index);
+        if ("R003".equals(flag)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+        }
+        return ResponseEntity.ok(Result.successMsg());
     }
 }

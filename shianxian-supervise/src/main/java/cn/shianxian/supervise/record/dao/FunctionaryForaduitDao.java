@@ -43,10 +43,34 @@ public interface FunctionaryForaduitDao extends Mapper<FunctionaryForaduit> {
 
 
     /**
-     * 根据各种查询条件查询负责人
+     * 根据各种查询条件查询负责人审核表
      * @param queryPojo
      * @param pages
      * @return
      */
     List<List<?>> selectFunctionaryForaduitByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
+
+
+    /**
+     * 根据id查询负责人审核表
+     * @param nodeTag
+     * @return
+     */
+    FunctionaryForaduit selectFunctionaryForaduitById(@Param("nodeTag") String nodeTag);
+
+
+    /**
+     * 根据企业流水号查询负责人审核表
+     * @param index
+     * @return
+     */
+    FunctionaryForaduit selectFunctionaryForaduitByIndex(@Param("index") Long index);
+
+
+    /**
+     * 根据参数对负责人审核表进行删除申请
+     * @param id
+     */
+    String deleteFunctionaryForaduit(@Param("id") String id);
+
 }

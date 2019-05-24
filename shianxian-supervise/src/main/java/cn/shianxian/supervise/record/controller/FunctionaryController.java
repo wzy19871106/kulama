@@ -3,6 +3,7 @@ package cn.shianxian.supervise.record.controller;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.record.pojo.FunctionaryForaduit;
 import cn.shianxian.supervise.record.service.FunctionaryService;
 import io.swagger.annotations.Api;
@@ -11,10 +12,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -119,12 +117,12 @@ public class FunctionaryController {
 
 
     /**
-     * 根据各种查询条件查询负责人
+     * 根据各种查询条件查询负责人审核表
      * @param queryPojo
      * @return
      */
-    @PutMapping("selectFunctionaryForaduitByLike")
-    @ApiOperation(value = "根据各种查询条件查询负责人", notes = "根据各种查询条件查询负责人")
+    @GetMapping("selectFunctionaryForaduitByLike")
+    @ApiOperation(value = "根据各种查询条件查询负责人审核表", notes = "根据各种查询条件查询负责人审核表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
@@ -133,5 +131,82 @@ public class FunctionaryController {
     })
     public ResponseEntity<Result> selectFunctionaryForaduitByLike(QueryPojo queryPojo, Pages pages) {
         return this.functionaryService.selectFunctionaryForaduitByLike(queryPojo, pages);
+    }
+
+
+    /**
+     * 根据id或企业流水号查询负责人审核表
+     * @param functionaryForaduit
+     * @return
+     */
+    @GetMapping("selectFunctionaryForaduit")
+    @ApiOperation(value = "根据id或企业流水号查询负责人审核表", notes = "根据id或企业流水号查询负责人审核表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号"),
+    })
+    public ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
+        return this.functionaryService.selectFunctionaryForaduit(functionaryForaduit);
+    }
+
+
+    /**
+     * 根据参数对负责人审核表进行删除申请
+     * @param id
+     * @return
+     */
+    @DeleteMapping("functionaryForaduit")
+    @ApiOperation(value = "根据参数对负责人审核表进行删除申请", notes = "根据参数对负责人审核表进行删除申请")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "负责人标识")
+    public ResponseEntity<Result> deleteFunctionaryForaduit(String id) {
+        return this.functionaryService.deleteFunctionaryForaduit(id);
+    }
+
+
+    /**
+     * 根据各种查询条件查询负责人
+     * @param queryPojo
+     * @return
+     */
+    @GetMapping("selectFunctionaryByLike")
+    @ApiOperation(value = "根据各种查询条件查询负责人", notes = "根据各种查询条件查询负责人")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectFunctionaryByLike(QueryPojo queryPojo, Pages pages) {
+        return this.functionaryService.selectFunctionaryByLike(queryPojo, pages);
+    }
+
+
+    /**
+     * 根据id、负责人标识、微信id查询负责人
+     * @param functionary
+     * @return
+     */
+    @GetMapping("selectFunctionary")
+    @ApiOperation(value = "根据id、负责人标识、微信id查询负责人", notes = "根据id、负责人标识、微信id查询负责人")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
+            @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
+    })
+    public ResponseEntity<Result> selectFunctionary(Functionary functionary) {
+        return this.functionaryService.selectFunctionary(functionary);
+    }
+
+
+    /**
+     * 根据节点流水号删除负责人申请
+     * @param index
+     * @return
+     */
+    @DeleteMapping("functionary")
+    @ApiOperation(value = "根据节点流水号删除负责人申请", notes = "根据节点流水号删除负责人申请")
+    @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号")
+    public ResponseEntity<Result> deleteFunctionary(String index) {
+        return this.functionaryService.deleteFunctionary(index);
     }
 }
