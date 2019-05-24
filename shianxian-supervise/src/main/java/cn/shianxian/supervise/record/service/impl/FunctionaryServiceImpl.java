@@ -39,7 +39,7 @@ public class FunctionaryServiceImpl implements FunctionaryService {
             functionary = functionaryList.get(0);
             log.info("用户：{}登录", functionary);
         } else {
-            functionary.setKeyUsed("0");
+            functionary.setKeyUsed(0);
         }
         return ResponseEntity.ok(Result.data(functionary));
     }

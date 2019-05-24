@@ -112,7 +112,7 @@ public class NodeInfo {
 
 
     @Column(name = "keyUsed")
-    private String keyUsed;
+    private Integer keyUsed;
 
     /**
      * 创建时间

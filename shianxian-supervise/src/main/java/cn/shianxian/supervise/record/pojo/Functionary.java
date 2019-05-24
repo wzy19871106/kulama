@@ -83,7 +83,7 @@ public class Functionary {
      * 是否已经激活
      */
     @Column(name = "keyUsed")
-    private String keyUsed;
+    private Integer keyUsed;
 
     /**
      * 所属企业名称
