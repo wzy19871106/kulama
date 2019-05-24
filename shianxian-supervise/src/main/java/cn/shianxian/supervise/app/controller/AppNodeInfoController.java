@@ -33,9 +33,10 @@ public class AppNodeInfoController {
     @ApiOperation(value = "校验key", notes = "校验key")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "key", value = "key"),
+            @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信id"),
     })
-    public ResponseEntity<Result> checkKey(String key) {
-        return this.nodeInfoService.checkKey(key);
+    public ResponseEntity<Result> checkKey(String key, String weChatId) {
+        return this.nodeInfoService.checkKey(key, weChatId);
     }
 
 }

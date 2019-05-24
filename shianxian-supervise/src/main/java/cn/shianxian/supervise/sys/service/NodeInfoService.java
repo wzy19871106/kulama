@@ -62,5 +62,5 @@ public interface NodeInfoService {
      * @param key
      * @return
      */
-    ResponseEntity<Result> checkKey(String key);
+    ResponseEntity<Result> checkKey(String key, String weChatId);
 }

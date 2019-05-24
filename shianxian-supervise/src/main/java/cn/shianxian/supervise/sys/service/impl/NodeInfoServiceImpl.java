@@ -89,11 +89,11 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
 
     @Override
-    public ResponseEntity<Result> checkKey(String key) {
+    public ResponseEntity<Result> checkKey(String key, String weChatId) {
         NodeFunctionaryDTO nodeInfo = new NodeFunctionaryDTO();
         nodeInfo.setFlag("3");
         if (StringUtils.isNotBlank(key)) {
-            nodeInfo = this.nodeInfoDao.checkKey(key);
+            nodeInfo = this.nodeInfoDao.checkKey(key, weChatId);
         }
         return ResponseEntity.ok(Result.data(nodeInfo));
     }
