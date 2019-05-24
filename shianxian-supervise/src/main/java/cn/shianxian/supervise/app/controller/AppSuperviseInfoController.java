@@ -37,7 +37,7 @@ public class AppSuperviseInfoController {
      * @return
      */
     @PostMapping("selectSuperviseInfoByNodePlan")
-    @ApiOperation(value = "根据节点id查询监管业务", notes = "根据节点id查询监管业务")
+    @ApiOperation(value = "根据节点id查询监管业务（初始化当前登录企业本年已完成计划任务监管信息，按照日期汇总。）", notes = "根据节点id查询监管业务")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点id"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
@@ -54,7 +54,7 @@ public class AppSuperviseInfoController {
      * @return
      */
     @PostMapping("selectSuperviseInfoByIdPlan")
-    @ApiOperation(value = "根据id查询已完成的计划任务的监管业务", notes = "根据id查询已完成的计划任务的监管业务")
+    @ApiOperation(value = "根据id查询已完成的计划任务的监管业务（初始化当前登录企业本，所选计划任务监管信息，按照日期及类型汇总）", notes = "根据id查询已完成的计划任务的监管业务")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
@@ -71,7 +71,7 @@ public class AppSuperviseInfoController {
      * @return
      */
     @PostMapping("selectSuperviseInfoByNode")
-    @ApiOperation(value = "根据节点id查询监管业务", notes = "根据节点id查询监管业务")
+    @ApiOperation(value = "根据节点id查询监管业务（初始化当前登录企业本年已完成日常抽查监管信息）", notes = "根据节点id查询监管业务")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点id"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
@@ -88,7 +88,7 @@ public class AppSuperviseInfoController {
      * @return
      */
     @PostMapping("selectSuperviseRectifyByNode")
-    @ApiOperation(value = "根据节点id查询所有需整改监管业务", notes = "根据节点id查询所有需整改监管业务")
+    @ApiOperation(value = "根据节点id查询所有需整改监管业务（根据登录用户企业编码初始化绑定该企业所有需整改监管列表）", notes = "根据节点id查询所有需整改监管业务")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点id"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
@@ -105,7 +105,7 @@ public class AppSuperviseInfoController {
      * @return
      */
     @PostMapping("selectSuperviseRectifyById")
-    @ApiOperation(value = "根据业务主类型编码查询该项下所有需整改项详细", notes = "根据业务主类型编码查询该项下所有需整改项详细")
+    @ApiOperation(value = "根据业务主类型编码查询该项下所有需整改项详细（根据监管编码初始化当前待整改及整改提交的监管项）", notes = "根据业务主类型编码查询该项下所有需整改项详细")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),

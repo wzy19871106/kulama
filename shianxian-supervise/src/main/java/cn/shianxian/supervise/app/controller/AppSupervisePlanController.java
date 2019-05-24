@@ -31,7 +31,7 @@ public class AppSupervisePlanController {
      * @return
      */
     @PostMapping("selectSupervisePlanByNode")
-    @ApiOperation(value = "根据节点id查询计划任务", notes = "根据节点id查询计划任务")
+    @ApiOperation(value = "根据节点id查询计划任务（根据企业编码初始化当前年度的计划任务列表）", notes = "根据节点id查询计划任务")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点id"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
