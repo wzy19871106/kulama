@@ -15,6 +15,11 @@ public class SuperviseInfoVO {
     private String mainIds;
 
     /**
+     * 监管业务主表主键
+     */
+    private String mainId;
+
+    /**
      * 监管业务(从类型)主键
      */
     private String subId;
