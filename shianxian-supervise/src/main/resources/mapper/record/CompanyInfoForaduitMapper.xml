@@ -75,26 +75,4 @@
       CALL Proc_T_CompanyInfo_ForAduit_Query_ByIndex(#{index})
     </select>
 
-    <resultMap id="companyInfo" type="cn.shianxian.supervise.record.pojo.CompanyInfo"></resultMap>
-
-    <select id="selectCompanyInfoByLike" resultMap="companyInfo,pageCount,totalCount">
-      CALL Proc_T_CompanyInfo_Query_ByCondition
-      (
-      #{companyInfo.companyProvice},
-      #{companyInfo.companyCity},
-      #{companyInfo.companyArea},
-      #{companyInfo.companyVillage},
-      #{companyInfo.nodeName},
-      #{pages.pageSize},
-      #{pages.pageNum}
-      )
-    </select>
-
-    <select id="selectCompanyInfoById" resultType="cn.shianxian.supervise.record.pojo.CompanyInfo">
-      CALL Proc_T_CompanyInfo_Query_ByNodeTag(#{nodeTag})
-    </select>
-
-    <select id="deleteCompanyInfo" resultType="java.lang.String">
-      CALL Proc_T_CompanyInfo_Remove_ByIndex(#{index})
-    </select>
 </mapper>

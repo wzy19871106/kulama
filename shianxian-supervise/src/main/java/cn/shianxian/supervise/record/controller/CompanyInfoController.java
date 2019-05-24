@@ -141,6 +141,8 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "companyCity", value = "企业所属市"),
             @ApiImplicitParam(paramType = "query", name = "companyArea", value = "企业所属区"),
             @ApiImplicitParam(paramType = "query", name = "companyVillage", value = "企业所属乡镇"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectCompanyInfoForaduitByLike(CompanyInfoForaduit companyInfoForaduit, Pages pages) {
         return this.companyInfoService.selectCompanyInfoForaduitByLike(companyInfoForaduit, pages);
@@ -176,6 +178,8 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "companyCity", value = "企业所属市"),
             @ApiImplicitParam(paramType = "query", name = "companyArea", value = "企业所属区"),
             @ApiImplicitParam(paramType = "query", name = "companyVillage", value = "企业所属乡镇"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectCompanyInfoByLike(CompanyInfo companyInfo, Pages pages) {
         return this.companyInfoService.selectCompanyInfoByLike(companyInfo, pages);

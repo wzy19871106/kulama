@@ -3,6 +3,7 @@ package cn.shianxian.supervise.record.service.impl;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.record.dao.CompanyInfoDao;
 import cn.shianxian.supervise.record.dao.CompanyInfoForaduitDao;
 import cn.shianxian.supervise.record.pojo.CompanyInfo;
 import cn.shianxian.supervise.record.pojo.CompanyInfoForaduit;
@@ -22,6 +23,9 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
     @Autowired
     private CompanyInfoForaduitDao companyInfoForaduitDao;
+
+    @Autowired
+    private CompanyInfoDao companyInfoDao;
 
 
     @Transactional
@@ -87,13 +91,13 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
     @Override
     public ResponseEntity<Result> selectCompanyInfoByLike(CompanyInfo companyInfo, Pages pages) {
-        List<List<?>> list = this.companyInfoForaduitDao.selectCompanyInfoByLike(companyInfo, pages);
+        List<List<?>> list = this.companyInfoDao.selectCompanyInfoByLike(companyInfo, pages);
         return ResponseEntity.ok(Result.data(list));
     }
 
     @Override
     public ResponseEntity<Result> selectCompanyInfoById(String nodeTag) {
-        CompanyInfo companyInfo = this.companyInfoForaduitDao.selectCompanyInfoById(nodeTag);
+        CompanyInfo companyInfo = this.companyInfoDao.selectCompanyInfoById(nodeTag);
         return ResponseEntity.ok(Result.data(companyInfo));
     }
 
@@ -101,7 +105,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Transactional
     @Override
     public ResponseEntity<Result> deleteCompanyInfo(String index) {
-        String flag = this.companyInfoForaduitDao.deleteCompanyInfo(index);
+        String flag = this.companyInfoDao.deleteCompanyInfo(index);
         if (!"R001".equals(flag)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
         }
