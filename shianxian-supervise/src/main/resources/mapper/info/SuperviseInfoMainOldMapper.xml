@@ -21,4 +21,19 @@
         )
     </select>
 
+    <resultMap id="superviseInfoMainOldVO" type="cn.shianxian.supervise.info.vo.SuperviseInfoMainOldVO"></resultMap>
+
+    <select id="selectSuperviseInfoMainOldByLike" resultMap="superviseInfoMainOldVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Old_Query_ByCondition
+        (
+        #{queryPojo.id},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.authority},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
 </mapper>

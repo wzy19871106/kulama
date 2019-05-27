@@ -1,5 +1,7 @@
 package cn.shianxian.supervise.info.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
+import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMainOld;
 import cn.shianxian.supervise.info.service.SuperviseInfoMainOldService;
@@ -9,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,6 +60,27 @@ public class SuperviseInfoMainOldController {
     })
     public ResponseEntity<Result> saveSuperviseInfoMainOld(@Valid SuperviseInfoMainOld superviseInfoMainOld) {
         Result result = this.superviseInfoMainOldService.saveSuperviseInfoMainOld(superviseInfoMainOld);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据登录用户的数据访问权限查询线下监管日志列表
+     * @return
+     */
+    @GetMapping("superviseInfoMainOld")
+    @ApiOperation(value = "根据登录用户的数据访问权限查询线下监管日志列表", notes = "根据登录用户的数据访问权限查询线下监管日志列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管类型id"),
+            @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "权限"),
+            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSuperviseInfoMainOldByLike(QueryPojo queryPojo, Pages pages) {
+        Result result = this.superviseInfoMainOldService.selectSuperviseInfoMainOldByLike(queryPojo, pages);
         return ResponseEntity.ok(result);
     }
 

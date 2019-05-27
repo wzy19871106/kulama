@@ -29,6 +29,11 @@ public class QueryPojo {
     private String name;
 
     /**
+     * 权限
+     */
+    private String authority;
+
+    /**
      * 是否有效，1：有效0：无效。
      */
     private String enable;
