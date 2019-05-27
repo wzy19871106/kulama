@@ -138,4 +138,12 @@ public class FunctionaryServiceImpl implements FunctionaryService {
         }
         return ResponseEntity.ok(Result.successMsg());
     }
+
+
+
+    @Override
+    public ResponseEntity<Result> saveFunctionary(Functionary functionary) {
+        this.functionaryDao.saveFunctionary(functionary);
+        return ResponseEntity.ok(Result.successMsg());
+    }
 }

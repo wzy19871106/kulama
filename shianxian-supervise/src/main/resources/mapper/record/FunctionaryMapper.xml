@@ -29,5 +29,19 @@
     <select id="deleteFunctionary" resultType="java.lang.String">
       CALL Proc_T_Functionary_Remove_ByIndex(#{index})
     </select>
+     Functionary_Postition VARCHAR(200), We_Chat_ID VARCHAR(200), _key VARCHAR(20))
+    <select id="saveFunctionary" resultType="java.lang.String">
+      CALL Proc_T_Functionary_Add
+      (
+      #{functionary.nodeTag},
+      #{functionary.functionaryName},
+      #{functionary.functionaryNo},
+      #{functionary.picTag},
+      #{functionary.nodeName},
+      #{functionary.functionaryPostition},
+      #{functionary.weChatId},
+      #{functionary.key}
+      )
+    </select>
 
 </mapper>

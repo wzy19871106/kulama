@@ -97,4 +97,12 @@ public interface FunctionaryService {
      * @return
      */
     ResponseEntity<Result> deleteFunctionary(String index);
+
+
+    /**
+     * 保存企业负责人
+     * @param functionary
+     * @return
+     */
+    ResponseEntity<Result> saveFunctionary(Functionary functionary);
 }

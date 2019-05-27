@@ -55,4 +55,12 @@ public interface FunctionaryDao extends Mapper<Functionary> {
      * @return
      */
     String deleteFunctionary(@Param("index") String index);
+
+
+    /**
+     * 保存企业负责人
+     * @param functionary
+     * @return
+     */
+    String saveFunctionary(@Param("functionary") Functionary functionary);
 }

@@ -209,4 +209,32 @@ public class FunctionaryController {
     public ResponseEntity<Result> deleteFunctionary(String index) {
         return this.functionaryService.deleteFunctionary(index);
     }
+
+
+    /**
+     * 保存企业负责人
+     * @param functionary
+     * @return
+     */
+    @PostMapping("functionary")
+    @ApiOperation(value = "保存企业负责人", notes = "保存企业负责人")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryName", value = "负责人名称"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryNo", value = "负责人身份证号"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryType", value = "负责人类型，1管理，2普通"),
+            @ApiImplicitParam(paramType = "query", name = "picTag", value = "负责人图片地址标识"),
+            @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号"),
+            @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建时间"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryDisable", value = "负责人是否启用"),
+            @ApiImplicitParam(paramType = "query", name = "key", value = "激活KEY"),
+            @ApiImplicitParam(paramType = "query", name = "keyUsed", value = "是否已经激活"),
+            @ApiImplicitParam(paramType = "query", name = "nodeName", value = "所属企业名称"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryPostition", value = "负责人职位，无固定"),
+            @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
+    })
+    public ResponseEntity<Result> saveFunctionary(@Valid Functionary functionary) {
+        return this.functionaryService.saveFunctionary(functionary);
+    }
 }
