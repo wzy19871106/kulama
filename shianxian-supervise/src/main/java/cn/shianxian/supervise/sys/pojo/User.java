@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.sys.pojo;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -57,6 +58,7 @@ public class User {
      */
     @NotEmpty(message = "密码不能为空！")
     @Column(name = "userLoginPass")
+    @JsonIgnore
     private String userLoginPass;
 
     /**

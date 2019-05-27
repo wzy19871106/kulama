@@ -26,9 +26,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private FunctionaryDao functionaryDao;
-
 
     @Override
     public Result selectUserByPage(User user, Pages pages) {
