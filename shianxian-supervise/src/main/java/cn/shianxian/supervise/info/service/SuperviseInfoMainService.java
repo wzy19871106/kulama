@@ -2,6 +2,7 @@ package cn.shianxian.supervise.info.service;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
 
 public interface SuperviseInfoMainService {
 
@@ -31,4 +32,12 @@ public interface SuperviseInfoMainService {
      * @return
      */
     Result selectSuperviseInfoByNode(String nodeTag, Pages pages);
+
+
+    /**
+     * 保存监管业务（主表）
+     * @param superviseInfoMain
+     * @return
+     */
+    Result saveSuperviseInfoMain(SuperviseInfoMain superviseInfoMain);
 }

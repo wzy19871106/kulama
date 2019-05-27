@@ -36,5 +36,13 @@ public interface SuperviseInfoMainDao extends Mapper<SuperviseInfoMain> {
      * @param pages
      * @return
      */
-    List<List<?>> selectSuperviseInfoByNode(String nodeTag, Pages pages);
+    List<List<?>> selectSuperviseInfoByNode(@Param("nodeTag") String nodeTag, @Param("pages") Pages pages);
+
+
+    /**
+     * 保存监管业务（主表）
+     * @param superviseInfoMain
+     * @return
+     */
+    String saveSuperviseInfoMain(@Param("superviseInfoMain") SuperviseInfoMain superviseInfoMain);
 }

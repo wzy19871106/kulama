@@ -48,4 +48,12 @@ public interface SuperviseInfoSubService {
      * @return
      */
     Result selectSuperviseInfoDetailById(String id, Pages pages);
+
+
+    /**
+     * 根据监管编码返回待整改的监管内容的整改意见
+     * @param id
+     * @return
+     */
+    Result selectSuperviseInfoAdviceById(String id);
 }

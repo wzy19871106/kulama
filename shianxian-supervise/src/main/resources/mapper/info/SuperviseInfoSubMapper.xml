@@ -45,4 +45,7 @@
         )
     </select>
 
+    <select id="selectSuperviseInfoAdviceById" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
+        CALL proc_T_Supervise_Info_Advice_Query_ByCondition(#{id})
+    </select>
 </mapper>

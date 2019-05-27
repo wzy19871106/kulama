@@ -31,4 +31,17 @@
         )
     </select>
 
+    <select id="saveSuperviseInfoMain" resultType="java.lang.String">
+        CALL proc_T_Supervise_Info_Main_Add
+        (
+        #{superviseInfoMain.mainId},
+        #{superviseInfoMain.planTag},
+        #{superviseInfoMain.nodeType},
+        #{superviseInfoMain.nodeTag},
+        #{superviseInfoMain.nodeName},
+        #{superviseInfoMain.createTime},
+        #{superviseInfoMain.remark},
+        #{superviseInfoMain.picTag}
+        )
+    </select>
 </mapper>

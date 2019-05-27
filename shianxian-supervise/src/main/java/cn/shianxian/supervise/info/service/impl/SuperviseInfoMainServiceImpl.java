@@ -3,9 +3,11 @@ package cn.shianxian.supervise.info.service.impl;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.dao.SuperviseInfoMainDao;
+import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
 import cn.shianxian.supervise.info.service.SuperviseInfoMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,5 +37,13 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
     public Result selectSuperviseInfoByNode(String nodeTag, Pages pages) {
         List<List<?>> list = this.superviseInfoMainDao.selectSuperviseInfoByNode(nodeTag, pages);
         return Result.data((Long) list.get(2).get(0), list.get(0));
+    }
+
+
+    @Transactional
+    @Override
+    public Result saveSuperviseInfoMain(SuperviseInfoMain superviseInfoMain) {
+        this.superviseInfoMainDao.saveSuperviseInfoMain(superviseInfoMain);
+        return Result.successMsg();
     }
 }

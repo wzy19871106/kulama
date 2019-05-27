@@ -52,5 +52,13 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
      * @param pages
      * @return
      */
-    List<List<?>> selectSuperviseInfoDetailById(String id, Pages pages);
+    List<List<?>> selectSuperviseInfoDetailById(@Param("id") String id, @Param("pages") Pages pages);
+
+
+    /**
+     * 根据监管编码返回待整改的监管内容的整改意见
+     * @param id
+     * @return
+     */
+    List<List<?>> selectSuperviseInfoAdviceById(@Param("id") String id);
 }
