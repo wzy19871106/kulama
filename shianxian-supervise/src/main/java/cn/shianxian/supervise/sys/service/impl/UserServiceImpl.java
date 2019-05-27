@@ -92,7 +92,7 @@ public class UserServiceImpl implements UserService {
             u.setUserErrCount(u.getUserErrCount() + 1);
             this.userDao.updateByPrimaryKeySelective(u);
         }
-        throw new CommonException(Constants.FORBIDDEN, "用户名密码不正确");
+        throw new CommonException(Constants.UNAUTHORIZED, "用户名密码不正确");
     }
 
 
