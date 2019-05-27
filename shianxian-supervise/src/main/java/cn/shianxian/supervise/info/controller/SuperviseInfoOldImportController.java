@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 线下监管文件导入控制器
  */
 @RestController
-@RequestMapping("superviseInfoMainType")
+@RequestMapping("superviseInfoOldImport")
 @Api(description = "线下监管文件导入控制器")
 public class SuperviseInfoOldImportController {
 

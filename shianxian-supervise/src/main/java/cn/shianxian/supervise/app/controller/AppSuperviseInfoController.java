@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -170,6 +171,19 @@ public class AppSuperviseInfoController {
     @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id")
     public ResponseEntity<Result> selectSuperviseInfoDetailById(String id, Pages pages) {
         Result result = this.superviseInfoSubService.selectSuperviseInfoDetailById(id, pages);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据监管编码返回待整改的监管内容的整改意见
+     * @return
+     */
+    @GetMapping("selectSuperviseInfoAdviceById")
+    @ApiOperation(value = "根据监管编码返回待整改的监管内容的整改意见", notes = "根据监管编码返回待整改的监管内容的整改意见")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "监管编码")
+    public ResponseEntity<Result> selectSuperviseInfoAdviceById(String id) {
+        Result result = this.superviseInfoSubService.selectSuperviseInfoAdviceById(id);
         return ResponseEntity.ok(result);
     }
 

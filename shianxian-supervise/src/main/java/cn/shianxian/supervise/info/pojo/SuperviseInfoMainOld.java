@@ -40,7 +40,7 @@ public class SuperviseInfoMainOld {
      * 计划任务子任务编号（非计划任务监管可为空）
      */
     @Column(name = "planIDs")
-    private Long planIDs;
+    private Long planIds;
 
     /**
      * 企业类型
