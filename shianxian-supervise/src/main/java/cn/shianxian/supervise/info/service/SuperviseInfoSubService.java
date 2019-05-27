@@ -56,4 +56,13 @@ public interface SuperviseInfoSubService {
      * @return
      */
     Result selectSuperviseInfoAdviceById(String id);
+
+
+    /**
+     * 根据所选监管业务（主类型）编码查询监管明细（树）
+     * @param id
+     * @param pages
+     * @return
+     */
+    Result selectSuperviseInfoDetailTree(String id, Pages pages);
 }

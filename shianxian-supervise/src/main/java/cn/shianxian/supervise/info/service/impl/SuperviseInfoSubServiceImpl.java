@@ -60,4 +60,10 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         List<List<?>> list = this.superviseInfoSubDao.selectSuperviseInfoAdviceById(id);
         return Result.data(list);
     }
+
+
+    @Override
+    public Result selectSuperviseInfoDetailTree(String id, Pages pages) {
+        return null;
+    }
 }

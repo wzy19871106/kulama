@@ -11,7 +11,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -168,7 +167,11 @@ public class AppSuperviseInfoController {
      */
     @PostMapping("selectSuperviseInfoDetailById")
     @ApiOperation(value = "根据所选监管业务（主类型）编码查询监管明细", notes = "根据所选监管业务（主类型）编码查询监管明细")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
     public ResponseEntity<Result> selectSuperviseInfoDetailById(String id, Pages pages) {
         Result result = this.superviseInfoSubService.selectSuperviseInfoDetailById(id, pages);
         return ResponseEntity.ok(result);
@@ -179,12 +182,30 @@ public class AppSuperviseInfoController {
      * 根据监管编码返回待整改的监管内容的整改意见
      * @return
      */
-    @GetMapping("selectSuperviseInfoAdviceById")
+    @PostMapping("selectSuperviseInfoAdviceById")
     @ApiOperation(value = "根据监管编码返回待整改的监管内容的整改意见", notes = "根据监管编码返回待整改的监管内容的整改意见")
     @ApiImplicitParam(paramType = "query", name = "id", value = "监管编码")
     public ResponseEntity<Result> selectSuperviseInfoAdviceById(String id) {
         Result result = this.superviseInfoSubService.selectSuperviseInfoAdviceById(id);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 根据所选监管业务（主类型）编码查询监管明细（树）
+     * @return
+     */
+    @PostMapping("selectSuperviseInfoDetailTree")
+    @ApiOperation(value = "根据所选监管业务（主类型）编码查询监管明细（树）", notes = "根据所选监管业务（主类型）编码查询监管明细（树）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSuperviseInfoDetailTree(String id, Pages pages) {
+        Result result = this.superviseInfoSubService.selectSuperviseInfoDetailTree(id, pages);
+        return ResponseEntity.ok(result);
+    }
+
 
 }
