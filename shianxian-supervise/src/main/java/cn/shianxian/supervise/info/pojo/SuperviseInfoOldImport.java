@@ -38,7 +38,7 @@ public class SuperviseInfoOldImport {
     private LocalDateTime importTime;
 
     /**
-     *
+     * 导入结果 0为导入失败，1为导入成功
      */
     @Column(name = "importResult")
     private String importResult;
