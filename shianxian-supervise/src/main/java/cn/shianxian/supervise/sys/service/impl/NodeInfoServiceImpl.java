@@ -2,6 +2,8 @@ package cn.shianxian.supervise.sys.service.impl;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.record.dao.FunctionaryDao;
+import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.sys.dao.NodeInfoDao;
 import cn.shianxian.supervise.sys.dto.NodeFunctionaryDTO;
 import cn.shianxian.supervise.sys.pojo.NodeInfo;
@@ -23,6 +25,10 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
     @Autowired
     private NodeInfoDao nodeInfoDao;
+
+
+    @Autowired
+    private FunctionaryDao functionaryDao;
 
 
     @Transactional
@@ -91,9 +97,15 @@ public class NodeInfoServiceImpl implements NodeInfoService {
     @Override
     public ResponseEntity<Result> checkKey(String key, String weChatId) {
         NodeFunctionaryDTO nodeInfo = new NodeFunctionaryDTO();
+        Functionary f = new Functionary();
+        nodeInfo.setFunctionary(f);
         nodeInfo.setFlag("3");
         if (StringUtils.isNotBlank(key)) {
             nodeInfo = this.nodeInfoDao.checkKey(key, weChatId);
+            Functionary functionary = this.functionaryDao.selectFunctionaryByWeChatId(weChatId);
+            if (null != functionary) {
+                nodeInfo.setFunctionary(functionary);
+            }
         }
         return ResponseEntity.ok(Result.data(nodeInfo));
     }
