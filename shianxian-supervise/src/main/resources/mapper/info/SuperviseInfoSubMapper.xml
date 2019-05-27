@@ -4,6 +4,8 @@
 
     <resultMap id="info" type="cn.shianxian.supervise.info.vo.SuperviseInfoVO"></resultMap>
 
+    <resultMap id="superviseVO" type="cn.shianxian.supervise.info.vo.SuperviseVO"></resultMap>
+
     <select id="selectSuperviseRectifyByNode" resultMap="info,pageCount,totalCount">
         CALL Proc_T_Superviser_Rectify_ByNode
         (
@@ -47,5 +49,28 @@
 
     <select id="selectSuperviseInfoAdviceById" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
         CALL proc_T_Supervise_Info_Advice_Query_ByCondition(#{id})
+    </select>
+
+    <select id="selectSuperviseInfoSubParentId" resultMap="superviseVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Sub_Query_Parent_Supervise_By_MainIDS
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoSubId" resultMap="superviseVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Sub_Query_SubSupervise_By_Tag_MainIDS
+        (
+        #{superviseTag},
+        #{id},
+        1000,
+        1
+        )
+    </select>
+
+    <select id="selectSuperviseInfoSubScoreId" resultType="cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO">
+        CALL proc_T_Supervise_Info_Sub_Query_Score_ByMainIDS(#{id})
     </select>
 </mapper>

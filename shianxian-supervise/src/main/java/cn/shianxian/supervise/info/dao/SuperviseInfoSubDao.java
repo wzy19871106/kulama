@@ -2,6 +2,7 @@ package cn.shianxian.supervise.info.dao;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
+import cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -61,4 +62,29 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
      * @return
      */
     List<List<?>> selectSuperviseInfoAdviceById(@Param("id") String id);
+
+
+    /**
+     * 根据监管业务（主类型）表的ID查询该ID的上级监管内容相关信息
+     * @param id
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectSuperviseInfoSubParentId(@Param("id") String id, @Param("pages") Pages pages);
+
+
+    /**
+     * 根据监管业务（主类型）表的ID查询及该ID的上级监管内容ID查询下级监管内容的相关信息
+     * @param id
+     */
+    List<List<?>> selectSuperviseInfoSubId(@Param("superviseTag") String superviseTag, @Param("id") String id);
+
+
+    /**
+     * 根据监管业务（主类型）表的ID查询该ID的得分以及总分值
+     * @param id
+     * @return
+     */
+    SuperviseInfoScoreVO selectSuperviseInfoSubScoreId(@Param("id") String id);
+
 }

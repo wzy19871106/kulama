@@ -5,6 +5,9 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.dao.SuperviseInfoSubDao;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.service.SuperviseInfoSubService;
+import cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO;
+import cn.shianxian.supervise.info.vo.SuperviseInfoTreeVO;
+import cn.shianxian.supervise.info.vo.SuperviseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,6 +67,22 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
 
     @Override
     public Result selectSuperviseInfoDetailTree(String id, Pages pages) {
-        return null;
+        SuperviseInfoTreeVO tree = new SuperviseInfoTreeVO();
+        // 获取监管内容
+        List<List<?>> superviseVOS = this.superviseInfoSubDao.selectSuperviseInfoSubParentId(id, pages);
+        if (null != superviseVOS) {
+            List<SuperviseVO> superviseVOList = (List<SuperviseVO>) superviseVOS.get(0);
+            for (SuperviseVO superviseVO : superviseVOList) {
+                List<List<?>> infoList = this.superviseInfoSubDao.selectSuperviseInfoSubId(superviseVO.getSuperviseTag(), id);
+                if (null != infoList) {
+                    superviseVO.setInfoTreeList((List<SuperviseVO>) infoList.get(0));
+                }
+            }
+            tree.setSupervise(superviseVOList);
+        }
+        // 获取分数
+        SuperviseInfoScoreVO score = this.superviseInfoSubDao.selectSuperviseInfoSubScoreId(id);
+        tree.setScore(score);
+        return Result.data(tree);
     }
 }
