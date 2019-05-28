@@ -3,8 +3,8 @@ package cn.shianxian.supervise.sys.service.impl;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.common.utils.AuthorityUtils;
 import cn.shianxian.supervise.sys.dao.RoleDao;
-import cn.shianxian.supervise.sys.dto.AuthorityDTO;
 import cn.shianxian.supervise.sys.pojo.Role;
 import cn.shianxian.supervise.sys.service.RoleService;
 import com.alibaba.fastjson.JSON;
@@ -16,8 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,32 +28,11 @@ public class RoleServiceImpl implements RoleService {
     private RoleDao roleDao;
 
 
-    public Map<String, List<String>> getAuthority(String roleAuthority) {
-        // 前端传过来的数据拼json
-        Map<String, List<String>> map = new HashMap<>();
-        if (StringUtils.isNotBlank(roleAuthority)) {
-            List<AuthorityDTO> authorityList = JSON.parseArray(roleAuthority, AuthorityDTO.class);
-            for (AuthorityDTO a : authorityList) {
-                if (map.containsKey(a.getParentId())) {
-                    List<String> list = map.get(a.getParentId());
-                    list.add(a.getId().substring(a.getParentId().length()));
-                    map.put(a.getParentId(), list);
-                } else {
-                    List<String> list = new ArrayList<>();
-                    list.add(a.getId().substring(a.getParentId().length()));
-                    map.put(a.getParentId(), list);
-                }
-            }
-        }
-        return map;
-    }
-
-
     @Transactional
     @Override
     public Result saveOrUpdateRole(Role role) {
         // 前端传过来的数据拼json
-        Map<String, List<String>> map = getAuthority(role.getModuleAuthority());
+        Map<String, List<String>> map = AuthorityUtils.getModuleAuthority(role.getModuleAuthority());
         role.setModuleAuthority(JSON.toJSONString(map));
         if (StringUtils.isBlank(role.getRoleTag())) {
             this.roleDao.insertRole(role);

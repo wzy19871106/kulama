@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.sys.service.impl;
 
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.common.utils.AuthorityUtils;
 import cn.shianxian.supervise.sys.dao.RoleAuthorityDao;
 import cn.shianxian.supervise.sys.pojo.RoleAuthority;
 import cn.shianxian.supervise.sys.service.RoleAuthorityService;
@@ -26,8 +27,7 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     @Transactional
     @Override
     public Result saveRoleAuthority(RoleAuthority roleAuthority) {
-        RoleServiceImpl roleService = new RoleServiceImpl();
-        Map<String, List<String>> map = roleService.getAuthority(roleAuthority.getModuleAuthority());
+        Map<String, List<String>> map = AuthorityUtils.getModuleAuthority(roleAuthority.getModuleAuthority());
         roleAuthority.setModuleAuthority(JSON.toJSONString(map));
         if (null != roleAuthority.getIds()) {
             String[] ids = roleAuthority.getIds();
@@ -43,8 +43,7 @@ public class RoleAuthorityServiceImpl implements RoleAuthorityService {
     @Transactional
     @Override
     public Result updateRoleAuthority(RoleAuthority roleAuthority) {
-        RoleServiceImpl roleService = new RoleServiceImpl();
-        Map<String, List<String>> map = roleService.getAuthority(roleAuthority.getModuleAuthority());
+        Map<String, List<String>> map = AuthorityUtils.getModuleAuthority(roleAuthority.getModuleAuthority());
         roleAuthority.setModuleAuthority(JSON.toJSONString(map));
         this.roleAuthorityDao.updateRoleAuthority(roleAuthority);
         return Result.successMsg();

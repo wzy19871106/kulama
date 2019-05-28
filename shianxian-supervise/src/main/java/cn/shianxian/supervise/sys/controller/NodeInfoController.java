@@ -2,6 +2,7 @@ package cn.shianxian.supervise.sys.controller;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.sys.dto.DataAuthorityDTO;
 import cn.shianxian.supervise.sys.pojo.NodeInfo;
 import cn.shianxian.supervise.sys.service.NodeInfoService;
 import io.swagger.annotations.Api;
@@ -137,5 +138,20 @@ public class NodeInfoController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 批量赋予节点权限
+     * @return
+     */
+    @PutMapping("batchUpdateNodeInfoAuthority")
+    @ApiOperation(value = "批量赋予节点权限", notes = "批量赋予节点权限")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "ids", value = "id数组"),
+            @ApiImplicitParam(paramType = "query", name = "权限", value = "所拥有的数据权限"),
+    })
+    public ResponseEntity<Result> batchUpdateNodeInfoAuthority(@Valid DataAuthorityDTO dataAuthority) {
+        Result result = this.nodeInfoService.batchUpdateNodeInfoAuthority(dataAuthority);
+        return ResponseEntity.ok(result);
+    }
 
 }

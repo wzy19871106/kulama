@@ -2,6 +2,7 @@ package cn.shianxian.supervise.sys.service;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.sys.dto.DataAuthorityDTO;
 import cn.shianxian.supervise.sys.pojo.NodeInfo;
 import org.springframework.http.ResponseEntity;
 
@@ -63,4 +64,12 @@ public interface NodeInfoService {
      * @return
      */
     ResponseEntity<Result> checkKey(String key, String weChatId);
+
+
+    /**
+     * 批量赋予节点权限
+     * @param dataAuthority
+     * @return
+     */
+    Result batchUpdateNodeInfoAuthority(DataAuthorityDTO dataAuthority);
 }

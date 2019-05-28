@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.record.dao.FunctionaryDao;
 import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.sys.dao.NodeInfoDao;
+import cn.shianxian.supervise.sys.dto.DataAuthorityDTO;
 import cn.shianxian.supervise.sys.dto.NodeFunctionaryDTO;
 import cn.shianxian.supervise.sys.pojo.NodeInfo;
 import cn.shianxian.supervise.sys.service.NodeInfoService;
@@ -94,6 +95,7 @@ public class NodeInfoServiceImpl implements NodeInfoService {
     }
 
 
+    @Transactional
     @Override
     public ResponseEntity<Result> checkKey(String key, String weChatId) {
         NodeFunctionaryDTO nodeInfo = new NodeFunctionaryDTO();
@@ -108,6 +110,13 @@ public class NodeInfoServiceImpl implements NodeInfoService {
             }
         }
         return ResponseEntity.ok(Result.data(nodeInfo));
+    }
+
+
+    @Transactional
+    @Override
+    public Result batchUpdateNodeInfoAuthority(DataAuthorityDTO dataAuthority) {
+        return null;
     }
 
 }
