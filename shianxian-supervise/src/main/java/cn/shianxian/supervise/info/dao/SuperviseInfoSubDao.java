@@ -2,6 +2,7 @@ package cn.shianxian.supervise.info.dao;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
+import cn.shianxian.supervise.info.vo.RectifySumVO;
 import cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -87,4 +88,29 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
      */
     SuperviseInfoScoreVO selectSuperviseInfoSubScoreId(@Param("id") String id);
 
+
+    /**
+     * 获取整改意见内容
+     * @param id
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectRectify(@Param("id") String id, @Param("pages") Pages pages);
+
+
+    /**
+     * 获取整改意见详情
+     * @param superviseTag
+     * @param id
+     * @return
+     */
+    List<List<?>> selectRectifyDetail(@Param("superviseTag") String superviseTag, @Param("id") String id);
+
+
+    /**
+     * 获取整改意见汇总
+     * @param id
+     * @return
+     */
+    RectifySumVO selectRectifySum(@Param("id") String id);
 }

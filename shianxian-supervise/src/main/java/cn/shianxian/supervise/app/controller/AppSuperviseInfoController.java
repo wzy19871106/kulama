@@ -208,4 +208,21 @@ public class AppSuperviseInfoController {
     }
 
 
+    /**
+     * 根据业务主类型编码查询该项下所有需整改项详细（树）
+     * @return
+     */
+    @PostMapping("selectSuperviseRectifyTree")
+    @ApiOperation(value = "根据业务主类型编码查询该项下所有需整改项详细（树）", notes = "根据业务主类型编码查询该项下所有需整改项详细（树）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSuperviseRectifyTree(String id, Pages pages) {
+        Result result = this.superviseInfoSubService.selectSuperviseRectifyTree(id, pages);
+        return ResponseEntity.ok(result);
+    }
+
+
 }

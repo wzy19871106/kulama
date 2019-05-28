@@ -5,9 +5,7 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.dao.SuperviseInfoSubDao;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.service.SuperviseInfoSubService;
-import cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO;
-import cn.shianxian.supervise.info.vo.SuperviseInfoTreeVO;
-import cn.shianxian.supervise.info.vo.SuperviseVO;
+import cn.shianxian.supervise.info.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -83,6 +81,28 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         // 获取分数
         SuperviseInfoScoreVO score = this.superviseInfoSubDao.selectSuperviseInfoSubScoreId(id);
         tree.setScore(score);
+        return Result.data(tree);
+    }
+
+
+    @Override
+    public Result selectSuperviseRectifyTree(String id, Pages pages) {
+        RectifyTreeVO tree = new RectifyTreeVO();
+        // 获取整改建议内容
+        List<List<?>> rectifys = this.superviseInfoSubDao.selectRectify(id, pages);
+        if (null != rectifys) {
+            List<RectifyVO> rectifyVOList = (List<RectifyVO>) rectifys.get(0);
+            for (RectifyVO rectifyVO : rectifyVOList) {
+                List<List<?>> rectifyDetail = this.superviseInfoSubDao.selectRectifyDetail(rectifyVO.getSuperviseTag(), id);
+                if (null != rectifyDetail) {
+                    rectifyVO.setDetailList((List<RectifyDetailVO>) rectifyDetail.get(0));
+                }
+            }
+            tree.setRectifys(rectifyVOList);
+        }
+        // 获取汇总
+        RectifySumVO rectifySum = this.superviseInfoSubDao.selectRectifySum(id);
+        tree.setRectifySum(rectifySum);
         return Result.data(tree);
     }
 }

@@ -6,6 +6,10 @@
 
     <resultMap id="superviseVO" type="cn.shianxian.supervise.info.vo.SuperviseVO"></resultMap>
 
+    <resultMap id="rectifyVO" type="cn.shianxian.supervise.info.vo.RectifyVO"></resultMap>
+
+    <resultMap id="rectifyDetailVO" type="cn.shianxian.supervise.info.vo.RectifyDetailVO"></resultMap>
+
     <select id="selectSuperviseRectifyByNode" resultMap="info,pageCount,totalCount">
         CALL Proc_T_Superviser_Rectify_ByNode
         (
@@ -73,4 +77,28 @@
     <select id="selectSuperviseInfoSubScoreId" resultType="cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO">
         CALL proc_T_Supervise_Info_Sub_Query_Score_ByMainIDS(#{id})
     </select>
+
+    <select id="selectRectify" resultMap="rectifyVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Rectify_Parent_Info_ByMainIDS
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectRectifyDetail" resultMap="rectifyDetailVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Rectify_Sub_Info_ByMainIDS
+        (
+        #{superviseTag},
+        #{id},
+        1000,
+        1
+        )
+    </select>
+
+    <select id="selectRectifySum" resultType="cn.shianxian.supervise.info.vo.RectifySumVO">
+        CALL proc_T_Supervise_Rectify_Info_ByMainIDS(#{id})
+    </select>
+
 </mapper>

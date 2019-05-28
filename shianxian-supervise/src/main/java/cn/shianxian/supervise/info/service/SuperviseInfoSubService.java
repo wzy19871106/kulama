@@ -65,4 +65,13 @@ public interface SuperviseInfoSubService {
      * @return
      */
     Result selectSuperviseInfoDetailTree(String id, Pages pages);
+
+
+    /**
+     * 根据业务主类型编码查询该项下所有需整改项详细（树）
+     * @param id
+     * @param pages
+     * @return
+     */
+    Result selectSuperviseRectifyTree(String id, Pages pages);
 }
