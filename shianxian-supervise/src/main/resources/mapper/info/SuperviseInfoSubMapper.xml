@@ -8,8 +8,6 @@
 
     <resultMap id="rectifyVO" type="cn.shianxian.supervise.info.vo.RectifyVO"></resultMap>
 
-    <resultMap id="rectifyDetailVO" type="cn.shianxian.supervise.info.vo.RectifyDetailVO"></resultMap>
-
     <select id="selectSuperviseRectifyByNode" resultMap="info,pageCount,totalCount">
         CALL Proc_T_Superviser_Rectify_ByNode
         (
@@ -87,7 +85,7 @@
         )
     </select>
 
-    <select id="selectRectifyDetail" resultMap="rectifyDetailVO,pageCount,totalCount">
+    <select id="selectRectifyDetail" resultMap="rectifyVO,pageCount,totalCount">
         CALL proc_T_Supervise_Rectify_Sub_Info_ByMainIDS
         (
         #{superviseTag},

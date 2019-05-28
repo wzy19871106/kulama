@@ -72,7 +72,7 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         if (null != superviseVOS) {
             List<SuperviseVO> superviseVOList = (List<SuperviseVO>) superviseVOS.get(0);
             for (SuperviseVO superviseVO : superviseVOList) {
-                if (StringUtils.isNoneBlank(superviseVO.getResultTag(), superviseVO.getResultValue())) {
+                if (StringUtils.isAnyBlank(superviseVO.getResultTag(), superviseVO.getResultValue())) {
                     List<List<?>> infoList = this.superviseInfoSubDao.selectSuperviseInfoSubId(superviseVO.getSuperviseTag(), id);
                     if (null != infoList) {
                         superviseVO.setInfoTreeList((List<SuperviseVO>) infoList.get(0));
@@ -96,9 +96,11 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         if (null != rectifys) {
             List<RectifyVO> rectifyVOList = (List<RectifyVO>) rectifys.get(0);
             for (RectifyVO rectifyVO : rectifyVOList) {
-                List<List<?>> rectifyDetail = this.superviseInfoSubDao.selectRectifyDetail(rectifyVO.getSuperviseTag(), id);
-                if (null != rectifyDetail) {
-                    rectifyVO.setDetailList((List<RectifyDetailVO>) rectifyDetail.get(0));
+                if (StringUtils.isAnyBlank(rectifyVO.getResultTag(), rectifyVO.getResultValue(), rectifyVO.getStatus(), rectifyVO.getSubId())) {
+                    List<List<?>> rectifyDetail = this.superviseInfoSubDao.selectRectifyDetail(rectifyVO.getSuperviseTag(), id);
+                    if (null != rectifyDetail) {
+                        rectifyVO.setRectifyList((List<RectifyVO>) rectifyDetail.get(0));
+                    }
                 }
             }
             tree.setRectifys(rectifyVOList);
