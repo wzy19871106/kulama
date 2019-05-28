@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("superviseResult")
 @Api(description = "监管结果控制器")
+@Slf4j
 public class SuperviseResultController {
 
 
@@ -45,6 +47,7 @@ public class SuperviseResultController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
     public ResponseEntity<Result> saveSuperviseResult(@Valid SuperviseResult superviseResult) {
+        log.info("保存监管结果：{}", superviseResult);
         return this.superviseResultService.saveSuperviseResult(superviseResult);
     }
 
@@ -67,6 +70,7 @@ public class SuperviseResultController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
     public ResponseEntity<Result> updateSuperviseResult(@Valid SuperviseResult superviseResult) {
+        log.info("修改监管结果：{}", superviseResult);
         Result result = this.superviseResultService.updateSuperviseResult(superviseResult);
         return ResponseEntity.ok(result);
     }
@@ -80,6 +84,7 @@ public class SuperviseResultController {
     @ApiOperation(value = "删除监管结果接口", notes = "删除监管结果接口")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSuperviseResultById(String ids) {
+        log.info("删除监管结果：{}", ids);
         return this.superviseResultService.deleteSuperviseResultById(ids);
     }
 
@@ -112,6 +117,7 @@ public class SuperviseResultController {
             @ApiImplicitParam(paramType = "query", name = "type", value = "排序结果[1:升序，2:降序]"),
     })
     public ResponseEntity<Result> updateSuperviseResultBySort(String id, int type) {
+        log.info("修改监管结果排序：{}，排序内容[1:升序，2:降序]：{}", id, type);
         Result result = this.superviseResultService.updateSuperviseResultBySort(id, type);
         return ResponseEntity.ok(result);
     }

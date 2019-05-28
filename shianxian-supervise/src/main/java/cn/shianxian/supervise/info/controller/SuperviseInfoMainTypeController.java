@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("superviseInfoMainType")
 @Api(description = "监管业务主类型控制器")
+@Slf4j
 public class SuperviseInfoMainTypeController {
 
 
@@ -54,6 +56,7 @@ public class SuperviseInfoMainTypeController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除"),
     })
     public ResponseEntity<Result> saveSuperviseInfoMainType(@Valid SuperviseInfoMainType superviseInfoMainType) {
+        log.info("保存监管业务主类型：{}", superviseInfoMainType);
         Result result = this.superviseInfoMainTypeService.saveSuperviseInfoMainType(superviseInfoMainType);
         return ResponseEntity.ok(result);
     }
@@ -67,6 +70,7 @@ public class SuperviseInfoMainTypeController {
     @ApiOperation(value = "根据主业务编码更新整改状态", notes = "根据主业务编码更新整改状态")
     @ApiImplicitParam(paramType = "query", name = "mainIds", value = "监管业务(主类型)主键")
     public ResponseEntity<Result> updateSuperviseInfoMainType(String mainIds) {
+        log.info("根据主业务编码更新整改状态：{}", mainIds);
         Result result = this.superviseInfoMainTypeService.updateSuperviseInfoMainType(mainIds);
         return ResponseEntity.ok(result);
     }

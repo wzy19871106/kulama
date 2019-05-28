@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("supervise")
 @Api(description = "监管内容控制器")
+@Slf4j
 public class SuperviseController {
 
 
@@ -48,6 +50,7 @@ public class SuperviseController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "栏目禁用，不可添加新信息，历史数据不可查(逻辑删除)", dataType = "Boolean"),
     })
     public ResponseEntity<Result> saveOrUpdateSupervise(@Valid Supervise supervise) {
+        log.info("保存、修改监管内容：{}", supervise);
         Result result = this.superviseService.saveOrUpdateSupervise(supervise);
         return ResponseEntity.ok(result);
     }
@@ -61,6 +64,7 @@ public class SuperviseController {
     @ApiOperation(value = "删除监管内容接口", notes = "删除监管内容接口")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSuperviseById(String ids) {
+        log.info("删除监管内容：{}", ids);
         return this.superviseService.deleteSuperviseById(ids);
     }
 
@@ -92,6 +96,7 @@ public class SuperviseController {
             @ApiImplicitParam(paramType = "query", name = "type", value = "排序内容[1:升序，2:降序]"),
     })
     public ResponseEntity<Result> updateSuperviseBySort(String id, int type) {
+        log.info("修改监管内容排序：{}，排序内容[1:升序，2:降序]：{}", id, type);
         Result result = this.superviseService.updateSuperviseBySort(id, type);
         return ResponseEntity.ok(result);
     }

@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("userGroup")
 @Api(description = "用户组控制器")
+@Slf4j
 public class UserGroupController {
 
 
@@ -45,6 +47,7 @@ public class UserGroupController {
             @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建时间"),
     })
     public ResponseEntity<Result> saveOrUpdateUserGroup(@Valid UserGroup userGroup) {
+        log.info("保存、修改用户组：{}", userGroup);
         Result result = this.userGroupService.saveOrUpdateUserGroup(userGroup);
         return ResponseEntity.ok(result);
     }
@@ -58,9 +61,9 @@ public class UserGroupController {
     @ApiOperation(value = "删除用户组", notes = "删除用户组")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids")
     public ResponseEntity<Result> deleteUserGroupById(String ids) {
+        log.info("删除用户组：{}", ids);
         return this.userGroupService.deleteUserGroupById(ids);
     }
-
 
 
     /**

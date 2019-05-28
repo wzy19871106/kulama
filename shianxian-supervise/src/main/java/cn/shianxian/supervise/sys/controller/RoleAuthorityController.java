@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("roleAuthority")
 @Api(description = "角色权限权限控制器")
+@Slf4j
 public class RoleAuthorityController {
 
 
@@ -36,6 +38,7 @@ public class RoleAuthorityController {
             @ApiImplicitParam(paramType = "query", name = "moduleAuthority", value = "模块权限(JSON格式)"),
     })
     public ResponseEntity<Result> saveRoleAuthority(@Valid RoleAuthority roleAuthority) {
+        log.info("保存角色权限：{}", roleAuthority);
         Result result = this.roleAuthorityService.saveRoleAuthority(roleAuthority);
         return ResponseEntity.ok(result);
     }
@@ -52,6 +55,7 @@ public class RoleAuthorityController {
             @ApiImplicitParam(paramType = "query", name = "moduleAuthority", value = "模块权限(JSON格式)"),
     })
     public ResponseEntity<Result> updateRoleAuthority(@Valid RoleAuthority roleAuthority) {
+        log.info("修改角色权限：{}", roleAuthority);
         Result result = this.roleAuthorityService.updateRoleAuthority(roleAuthority);
         return ResponseEntity.ok(result);
     }
@@ -65,6 +69,7 @@ public class RoleAuthorityController {
     @ApiOperation(value = "删除角色权限接口", notes = "删除角色权限接口")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids")
     public ResponseEntity<Result> deleteRodeleteRoleAuthorityByIdleById(String ids) {
+        log.info("删除角色权限：{}", ids);
         Result result = this.roleAuthorityService.deleteRoleAuthorityById(ids);
         return ResponseEntity.ok(result);
     }

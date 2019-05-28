@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("companyInfo")
 @Api(description = "企业控制器")
+@Slf4j
 public class CompanyInfoController {
 
 
@@ -53,6 +55,7 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回原因"),
     })
     public ResponseEntity<Result> saveCompanyInfoForaduit(@Valid CompanyInfoForaduit companyInfoForaduit) {
+        log.info("保存企业审核表：{}", companyInfoForaduit);
         return this.companyInfoService.saveCompanyInfoForaduit(companyInfoForaduit);
     }
 
@@ -82,6 +85,7 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回原因"),
     })
     public ResponseEntity<Result> updateCompanyInfoForaduit(@Valid CompanyInfoForaduit companyInfoForaduit) {
+        log.info("修改企业审核表：{}", companyInfoForaduit);
         return this.companyInfoService.updateCompanyInfoForaduit(companyInfoForaduit);
     }
 
@@ -95,6 +99,7 @@ public class CompanyInfoController {
     @ApiOperation(value = "审核企业", notes = "审核企业")
     @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号")
     public ResponseEntity<Result> checkCompanyInfoForaduit(String index) {
+        log.info("审核企业：{}", index);
         return this.companyInfoService.checkCompanyInfoForaduit(index);
     }
 
@@ -111,6 +116,7 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回原因"),
     })
     public ResponseEntity<Result> backCompanyInfoForaduit(CompanyInfoForaduit companyInfoForaduit) {
+        log.info("退回企业提交审核信息：{}", companyInfoForaduit);
         return this.companyInfoService.backCompanyInfoForaduit(companyInfoForaduit);
     }
 
@@ -124,6 +130,7 @@ public class CompanyInfoController {
     @ApiOperation(value = "对企业表进行删除申请", notes = "对企业表进行删除申请")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> deleteCompanyInfoForaduit(@RequestParam() String id) {
+        log.info("对企业审核表进行删除申请：{}", id);
         return this.companyInfoService.deleteCompanyInfoForaduit(id);
     }
 
@@ -207,6 +214,7 @@ public class CompanyInfoController {
     @ApiOperation(value = "删除企业表", notes = "删除企业表")
     @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号")
     public ResponseEntity<Result> deleteCompanyInfo(@RequestParam() String index) {
+        log.info("删除企业表：{}", index);
         return this.companyInfoService.deleteCompanyInfo(index);
     }
 

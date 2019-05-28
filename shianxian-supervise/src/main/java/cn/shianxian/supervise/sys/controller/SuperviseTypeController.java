@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("superviseType")
 @Api(description = "监管类型控制器")
+@Slf4j
 public class SuperviseTypeController {
 
 
@@ -44,6 +46,7 @@ public class SuperviseTypeController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "栏目禁用，不可添加新信息，历史数据不可查", dataType = "Boolean"),
     })
     public ResponseEntity<Result> saveOrUpdateSuperviseType(@Valid SuperviseType superviseType) {
+        log.info("保存、修改监管类型：{}", superviseType);
         Result result = this.superviseTypeService.saveOrUpdateSuperviseType(superviseType);
         return ResponseEntity.ok(result);
     }
@@ -57,6 +60,7 @@ public class SuperviseTypeController {
     @ApiOperation(value = "删除监管类型接口", notes = "删除监管类型接口")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSuperviseTypeById(String ids) {
+        log.info("删除监管类型：{}", ids);
         return this.superviseTypeService.deleteSuperviseTypeById(ids);
     }
 
@@ -88,6 +92,7 @@ public class SuperviseTypeController {
             @ApiImplicitParam(paramType = "query", name = "type", value = "排序类型[1:升序，2:降序]"),
     })
     public ResponseEntity<Result> updateSuperviseTypeBySort(String id, int type) {
+        log.info("修改监管类型排序：{}，排序内容[1:升序，2:降序]：{}", id, type);
         Result result = this.superviseTypeService.updateSuperviseTypeBySort(id, type);
         return ResponseEntity.ok(result);
     }
@@ -134,6 +139,7 @@ public class SuperviseTypeController {
             @ApiImplicitParam(paramType = "query", name = "type", value = "类型[1:新增权限，2:修改权限]"),
     })
     public ResponseEntity<Result> superviseTypeAuthority(SuperviseType superviseType, int type) {
+        log.info("保存、修改监管类型权限：{}，类型[1:新增权限，2:修改权限]：{}", superviseType, type);
         Result result = this.superviseTypeService.superviseTypeAuthority(superviseType, type);
         return ResponseEntity.ok(result);
     }

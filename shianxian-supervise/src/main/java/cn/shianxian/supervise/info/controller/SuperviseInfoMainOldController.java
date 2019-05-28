@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("superviseInfoMainOld")
 @Api(description = "监管业务（主表）控制器")
+@Slf4j
 public class SuperviseInfoMainOldController {
 
 
@@ -59,6 +61,7 @@ public class SuperviseInfoMainOldController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除"),
     })
     public ResponseEntity<Result> saveSuperviseInfoMainOld(@Valid SuperviseInfoMainOld superviseInfoMainOld) {
+        log.info("保存线下监管业务主表：{}", superviseInfoMainOld);
         Result result = this.superviseInfoMainOldService.saveSuperviseInfoMainOld(superviseInfoMainOld);
         return ResponseEntity.ok(result);
     }

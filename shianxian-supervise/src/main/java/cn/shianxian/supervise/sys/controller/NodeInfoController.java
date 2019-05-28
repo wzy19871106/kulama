@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
  */
 @RestController
 @Api(description = "节点控制器")
+@Slf4j
 public class NodeInfoController {
 
 
@@ -53,6 +55,7 @@ public class NodeInfoController {
             @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建时间"),
     })
     public ResponseEntity<Result> saveOrUpdateNodeInfo(@Valid NodeInfo nodeInfo) {
+        log.info("保存、修改节点：{}", nodeInfo);
         Result result = this.nodeInfoService.saveOrUpdateNodeInfo(nodeInfo);
         return ResponseEntity.ok(result);
     }
@@ -66,6 +69,7 @@ public class NodeInfoController {
     @ApiOperation(value = "删除节点", notes = "删除节点")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids")
     public ResponseEntity<Result> deleteNodeInfoById(String ids) {
+        log.info("删除节点：{}", ids);
         return this.nodeInfoService.deleteNodeInfoById(ids);
     }
 
@@ -134,6 +138,7 @@ public class NodeInfoController {
             @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
     })
     public ResponseEntity<Result> updateAuthorityById(NodeInfo nodeInfo) {
+        log.info("修改节点权限：{}", nodeInfo);
         Result result = this.nodeInfoService.updateAuthorityById(nodeInfo);
         return ResponseEntity.ok(result);
     }
@@ -147,9 +152,10 @@ public class NodeInfoController {
     @ApiOperation(value = "批量赋予节点权限", notes = "批量赋予节点权限")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "ids", value = "id数组"),
-            @ApiImplicitParam(paramType = "query", name = "权限", value = "所拥有的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "所拥有的数据权限"),
     })
     public ResponseEntity<Result> batchUpdateNodeInfoAuthority(@Valid DataAuthorityDTO dataAuthority) {
+        log.info("批量赋予节点权限：{}", dataAuthority);
         Result result = this.nodeInfoService.batchUpdateNodeInfoAuthority(dataAuthority);
         return ResponseEntity.ok(result);
     }

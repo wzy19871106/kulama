@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("superviseInfoMainOld")
 @Api(description = "线下监管业务（从表）控制器")
+@Slf4j
 public class SuperviseInfoSubOldController {
 
 
@@ -68,6 +70,7 @@ public class SuperviseInfoSubOldController {
             @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
     })
     public ResponseEntity<Result> saveSuperviseInfoSubOld(@Valid SuperviseInfoSubOld superviseInfoSubOld) {
+        log.info("保存线下监管业务（从表）：{}", superviseInfoSubOld);
         Result result = this.superviseInfoSubOldService.saveSuperviseInfoSubOld(superviseInfoSubOld);
         return ResponseEntity.ok(result);
     }

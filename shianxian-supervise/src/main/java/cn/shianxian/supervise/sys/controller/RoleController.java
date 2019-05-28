@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("role")
 @Api(description = "角色控制器")
+@Slf4j
 public class RoleController {
 
 
@@ -41,6 +43,7 @@ public class RoleController {
             @ApiImplicitParam(paramType = "query", name = "moduleAuthority", value = "模块权限JSON"),
     })
     public ResponseEntity<Result> saveOrUpdateRole(@Valid Role role) {
+        log.info("保存、修改角色：{}", role);
         Result result = this.roleService.saveOrUpdateRole(role);
         return ResponseEntity.ok(result);
     }
@@ -71,6 +74,7 @@ public class RoleController {
     @ApiOperation(value = "删除角色接口", notes = "删除角色接口")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> deleteRoleById(String id) {
+        log.info("删除角色：{}", id);
         return this.roleService.deleteRoleById(id);
     }
 

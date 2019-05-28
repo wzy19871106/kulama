@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("user")
 @Api(description = "用户控制器")
+@Slf4j
 public class UserController {
 
 
@@ -68,6 +70,7 @@ public class UserController {
         if (!password.equals(confirmPassword)) {
             throw new CommonException(Constants.FORBIDDEN, "两次密码不一致！");
         }
+        log.info("修改密码：{}", id);
         Result result = this.userService.updatePassword(id, password);
         return ResponseEntity.ok(result);
     }
@@ -95,6 +98,7 @@ public class UserController {
             @ApiImplicitParam(paramType = "query", name = "roleTag", value = "所属用户角色标识"),
     })
     public ResponseEntity<Result> saveOrUpdateUser(@Valid User user) {
+        log.info("保存、修改用户：{}", user);
         Result result = this.userService.saveOrUpdateUser(user);
         return ResponseEntity.ok(result);
     }
@@ -108,6 +112,7 @@ public class UserController {
     @ApiOperation(value = "删除用户接口", notes = "删除用户接口")
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> deleteUserById(String id) {
+        log.info("删除用户：{}", id);
         Result result = this.userService.deleteUserById(id);
         return ResponseEntity.ok(result);
     }

@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("superviseInfoOldImport")
 @Api(description = "线下监管文件导入控制器")
+@Slf4j
 public class SuperviseInfoOldImportController {
 
 
@@ -42,6 +44,7 @@ public class SuperviseInfoOldImportController {
             @ApiImplicitParam(paramType = "query", name = "importResult", value = "导入结果 0为导入失败，1为导入成功"),
     })
     public ResponseEntity<Result> saveSuperviseInfoOldImport(SuperviseInfoOldImport superviseInfoOldImport) {
+        log.info("保存线下监管文件：{}", superviseInfoOldImport);
         Result result = this.superviseInfoOldImportService.saveSuperviseInfoOldImport(superviseInfoOldImport);
         return ResponseEntity.ok(result);
     }

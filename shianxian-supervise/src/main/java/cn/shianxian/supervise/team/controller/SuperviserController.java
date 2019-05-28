@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("superviser")
 @Api(description = "执法人员控制器")
+@Slf4j
 public class SuperviserController {
 
 
@@ -50,6 +52,7 @@ public class SuperviserController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
     public ResponseEntity<Result> saveSuperviser(@Valid Superviser Superviser) {
+        log.info("保存执法人员：{}", Superviser);
         Result result = this.superviserService.saveSuperviser(Superviser);
         return ResponseEntity.ok(result);
     }
@@ -77,6 +80,7 @@ public class SuperviserController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
     public ResponseEntity<Result> updateSuperviser(@Valid Superviser Superviser) {
+        log.info("修改执法人员：{}", Superviser);
         Result result = this.superviserService.updateSuperviser(Superviser);
         return ResponseEntity.ok(result);
     }
@@ -90,6 +94,7 @@ public class SuperviserController {
     @ApiOperation(value = "删除执法人员接口", notes = "删除执法人员接口")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSuperviserById(String ids) {
+        log.info("删除执法人员：{}", ids);
         Result result = this.superviserService.deleteSuperviserById(ids);
         return ResponseEntity.ok(result);
     }

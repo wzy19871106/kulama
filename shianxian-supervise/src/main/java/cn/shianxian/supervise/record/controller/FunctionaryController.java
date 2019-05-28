@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("functionary")
 @Api(description = "企业负责人控制器")
+@Slf4j
 public class FunctionaryController {
 
 
@@ -54,6 +56,7 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
     })
     public ResponseEntity<Result> saveFunctionaryForaduit(@Valid FunctionaryForaduit functionaryForaduit) {
+        log.info("保存企业负责人审核表：{}", functionaryForaduit);
         return this.functionaryService.saveFunctionaryForaduit(functionaryForaduit);
     }
 
@@ -83,6 +86,7 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
     })
     public ResponseEntity<Result> updateFunctionaryForaduit(@Valid FunctionaryForaduit functionaryForaduit) {
+        log.info("修改企业负责人审核表：{}", functionaryForaduit);
         return this.functionaryService.updateFunctionaryForaduit(functionaryForaduit);
     }
 
@@ -96,6 +100,7 @@ public class FunctionaryController {
     @ApiOperation(value = "审核通过负责人审核信息", notes = "审核通过负责人审核信息")
     @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号")
     public ResponseEntity<Result> checkFunctionaryForaduit(String index) {
+        log.info("审核通过负责人审核信息：{}", index);
         return this.functionaryService.checkFunctionaryForaduit(index);
     }
 
@@ -112,6 +117,7 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回说明"),
     })
     public ResponseEntity<Result> backFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
+        log.info("退回负责人提交审核信息：{}", functionaryForaduit);
         return this.functionaryService.backFunctionaryForaduit(functionaryForaduit);
     }
 
@@ -235,6 +241,7 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
     })
     public ResponseEntity<Result> saveFunctionary(@Valid Functionary functionary) {
+        log.info("保存企业负责人：{}", functionary);
         return this.functionaryService.saveFunctionary(functionary);
     }
 }

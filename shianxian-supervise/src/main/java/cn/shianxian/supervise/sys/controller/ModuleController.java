@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("module")
 @Api(description = "模块控制器")
+@Slf4j
 public class ModuleController {
 
 
@@ -83,6 +85,7 @@ public class ModuleController {
             @ApiImplicitParam(paramType = "query", name = "index", value = "模块流水号"),
     })
     public ResponseEntity<Result> saveOrUpdateModule(@Valid Module module) {
+        log.info("保存、修改模块：{}", module);
         Result result = this.moduleService.saveOrUpdateModule(module);
         return ResponseEntity.ok(result);
     }
@@ -96,6 +99,7 @@ public class ModuleController {
     @ApiOperation(value = "删除模块", notes = "删除模块")
     @ApiImplicitParam(paramType = "query", name = "id", value = "模块标识")
     public ResponseEntity<Result> deleteModuleById(String id) {
+        log.info("删除模块：{}", id);
         Result result = this.moduleService.deleteModuleById(id);
         return ResponseEntity.ok(result);
     }

@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("spervisePlanSub")
 @Api(description = "子计划任务控制器")
+@Slf4j
 public class SupervisePlanSubController {
 
 
@@ -51,6 +53,7 @@ public class SupervisePlanSubController {
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除", dataType = "Boolean"),
     })
     public ResponseEntity<Result> saveOrUpdateSupervisePlanSub(@Valid SupervisePlanSub supervisePlanSub) {
+        log.info("保存、修改子计划任务：{}", supervisePlanSub);
         Result result = this.supervisePlanSubService.saveOrUpdateSupervisePlanSub(supervisePlanSub);
         return ResponseEntity.ok(result);
     }
@@ -64,6 +67,7 @@ public class SupervisePlanSubController {
     @ApiOperation(value = "删除子计划任务接口", notes = "删除子计划任务接口")
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSupervisePlanSubById(String ids) {
+        log.info("删除子计划任务：{}", ids);
         Result result = this.supervisePlanSubService.deleteSupervisePlanSubById(ids);
         return ResponseEntity.ok(result);
     }
