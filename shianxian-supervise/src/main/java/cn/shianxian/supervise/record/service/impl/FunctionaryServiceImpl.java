@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -90,12 +91,13 @@ public class FunctionaryServiceImpl implements FunctionaryService {
 
     @Override
     public ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
+        List<FunctionaryForaduit> list = new ArrayList<>();
         if (StringUtils.isNotBlank(functionaryForaduit.getNodeTag())) {
-            functionaryForaduit = this.functionaryForaduitDao.selectFunctionaryForaduitById(functionaryForaduit.getNodeTag());
+            list = this.functionaryForaduitDao.selectFunctionaryForaduitById(functionaryForaduit.getNodeTag());
         } else if (null != functionaryForaduit.getIndex()) {
-            functionaryForaduit = this.functionaryForaduitDao.selectFunctionaryForaduitByIndex(functionaryForaduit.getIndex());
+            list = this.functionaryForaduitDao.selectFunctionaryForaduitByIndex(functionaryForaduit.getIndex());
         }
-        return ResponseEntity.ok(Result.data(functionaryForaduit));
+        return ResponseEntity.ok(Result.data(list));
     }
 
 

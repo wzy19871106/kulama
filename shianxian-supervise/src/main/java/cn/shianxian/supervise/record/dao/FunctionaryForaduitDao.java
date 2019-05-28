@@ -56,7 +56,7 @@ public interface FunctionaryForaduitDao extends Mapper<FunctionaryForaduit> {
      * @param nodeTag
      * @return
      */
-    FunctionaryForaduit selectFunctionaryForaduitById(@Param("nodeTag") String nodeTag);
+    List<FunctionaryForaduit> selectFunctionaryForaduitById(@Param("nodeTag") String nodeTag);
 
 
     /**
@@ -64,7 +64,7 @@ public interface FunctionaryForaduitDao extends Mapper<FunctionaryForaduit> {
      * @param index
      * @return
      */
-    FunctionaryForaduit selectFunctionaryForaduitByIndex(@Param("index") Long index);
+    List<FunctionaryForaduit> selectFunctionaryForaduitByIndex(@Param("index") Long index);
 
 
     /**
