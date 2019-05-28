@@ -6,6 +6,7 @@ import cn.shianxian.supervise.info.dao.SuperviseInfoSubDao;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.service.SuperviseInfoSubService;
 import cn.shianxian.supervise.info.vo.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,9 +72,11 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         if (null != superviseVOS) {
             List<SuperviseVO> superviseVOList = (List<SuperviseVO>) superviseVOS.get(0);
             for (SuperviseVO superviseVO : superviseVOList) {
-                List<List<?>> infoList = this.superviseInfoSubDao.selectSuperviseInfoSubId(superviseVO.getSuperviseTag(), id);
-                if (null != infoList) {
-                    superviseVO.setInfoTreeList((List<SuperviseVO>) infoList.get(0));
+                if (StringUtils.isNoneBlank(superviseVO.getResultTag(), superviseVO.getResultValue())) {
+                    List<List<?>> infoList = this.superviseInfoSubDao.selectSuperviseInfoSubId(superviseVO.getSuperviseTag(), id);
+                    if (null != infoList) {
+                        superviseVO.setInfoTreeList((List<SuperviseVO>) infoList.get(0));
+                    }
                 }
             }
             tree.setSupervise(superviseVOList);

@@ -22,6 +22,11 @@ public class SuperviseVO {
     private String superviseName;
 
     /**
+     * 监管结果id
+     */
+    private String resultTag;
+
+    /**
      * 监管结果
      */
     private String resultValue;
