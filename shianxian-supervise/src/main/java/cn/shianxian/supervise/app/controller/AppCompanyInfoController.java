@@ -60,7 +60,7 @@ public class AppCompanyInfoController {
      * @param companyInfoForaduit
      * @return
      */
-    @PutMapping("companyInfoForaduit")
+    @PostMapping("companyInfoForaduit")
     @ApiOperation(value = "修改企业审核表", notes = "修改企业审核表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
@@ -89,7 +89,7 @@ public class AppCompanyInfoController {
      * @param nodeTag
      * @return
      */
-    @GetMapping("selectCompanyInfoById")
+    @PostMapping("selectCompanyInfoById")
     @ApiOperation(value = "根据id查询企业表", notes = "根据id查询企业表")
     @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识")
     public ResponseEntity<Result> selectCompanyInfoById(String nodeTag) {
