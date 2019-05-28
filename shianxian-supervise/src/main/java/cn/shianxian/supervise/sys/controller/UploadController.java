@@ -69,13 +69,13 @@ public class UploadController {
         File f = new File(uploadPath);
         if (!f.exists()) {
             f.mkdirs();
-            log.info("创建文件夹：{}" + uploadPath);
+            log.info("创建文件夹：{}", uploadPath);
         }
         fileName = fileName + fileSuffix;
         String filepath = uploadPath + fileName;
         File tmpFile = new File(filepath);
         file.transferTo(tmpFile);
-        log.info("上传文件成功：{}" + fileName);
+        log.info("上传文件成功：{}", fileName);
         return ResponseEntity.ok(Result.data(uploadUrl + fileName));
     }
 

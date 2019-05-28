@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("app/functionary")
 @Api(description = "app企业负责人控制器")
+@Slf4j
 public class AppFunctionaryController {
 
 
@@ -53,6 +55,7 @@ public class AppFunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
     })
     public ResponseEntity<Result> saveFunctionary(@Valid Functionary functionary) {
+        log.info("保存企业负责人：{}", functionary);
         return this.functionaryService.saveFunctionary(functionary);
     }
 
@@ -82,6 +85,7 @@ public class AppFunctionaryController {
     @ApiOperation(value = "根据节点流水号删除负责人申请", notes = "根据节点流水号删除负责人申请")
     @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号")
     public ResponseEntity<Result> deleteFunctionary(String index) {
+        log.info("根据节点流水号删除负责人申请：{}", index);
         return this.functionaryService.deleteFunctionary(index);
     }
 
@@ -128,6 +132,7 @@ public class AppFunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
     })
     public ResponseEntity<Result> updateFunctionaryForaduit(@Valid FunctionaryForaduit functionaryForaduit) {
+        log.info("修改企业负责人审核表：{}", functionaryForaduit);
         return this.functionaryService.updateFunctionaryForaduit(functionaryForaduit);
     }
 

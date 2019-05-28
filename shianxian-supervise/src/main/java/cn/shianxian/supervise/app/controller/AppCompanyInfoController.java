@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("app/companyInfo")
 @Api(description = "app企业控制器")
+@Slf4j
 public class AppCompanyInfoController {
 
 
@@ -51,6 +53,7 @@ public class AppCompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回原因"),
     })
     public ResponseEntity<Result> saveCompanyInfoForaduit(@Valid CompanyInfoForaduit companyInfoForaduit) {
+        log.info("保存企业审核表：{}", companyInfoForaduit);
         return this.companyInfoService.saveCompanyInfoForaduit(companyInfoForaduit);
     }
 
@@ -80,6 +83,7 @@ public class AppCompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回原因"),
     })
     public ResponseEntity<Result> updateCompanyInfoForaduit(@Valid CompanyInfoForaduit companyInfoForaduit) {
+        log.info("修改企业审核表：{}", companyInfoForaduit);
         return this.companyInfoService.updateCompanyInfoForaduit(companyInfoForaduit);
     }
 

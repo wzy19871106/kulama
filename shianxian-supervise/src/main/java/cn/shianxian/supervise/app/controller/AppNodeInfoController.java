@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("app/nodeInfo")
 @Api(description = "节点控制器")
+@Slf4j
 public class AppNodeInfoController {
 
 
@@ -36,6 +38,7 @@ public class AppNodeInfoController {
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信id"),
     })
     public ResponseEntity<Result> checkKey(String key, String weChatId) {
+        log.info("激活key：{}，微信id：{}", key, weChatId);
         return this.nodeInfoService.checkKey(key, weChatId);
     }
 
