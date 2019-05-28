@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * APP企业负责人控制器
+ * app企业负责人控制器
  */
 @RestController
 @RequestMapping("app/functionary")
-@Api(description = "APP企业负责人控制器")
+@Api(description = "app企业负责人控制器")
 public class AppFunctionaryController {
 
 
