@@ -74,4 +74,12 @@ public interface SuperviseInfoSubService {
      * @return
      */
     Result selectSuperviseRectifyTree(String id, Pages pages);
+
+
+    /**
+     * 保存监管业务（从表）
+     * @param superviseInfoSub
+     * @return
+     */
+    Result saveSuperviseInfoSub(SuperviseInfoSub superviseInfoSub);
 }

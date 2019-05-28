@@ -2,10 +2,7 @@ package cn.shianxian.supervise.info.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 线下监管业务从表
@@ -100,4 +97,9 @@ public class SuperviseInfoSubOld {
     @Column(name = "remark")
     private String remark;
 
+    /**
+     * 监管类型名称
+     */
+    @Transient
+    private String superviseTypeName;
 }

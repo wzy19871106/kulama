@@ -1,8 +1,8 @@
 package cn.shianxian.supervise.info.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
-import cn.shianxian.supervise.info.service.SuperviseInfoSubService;
+import cn.shianxian.supervise.info.pojo.SuperviseInfoSubOld;
+import cn.shianxian.supervise.info.service.SuperviseInfoSubOldService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -17,37 +17,40 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 /**
- * 监管业务（从表）控制器
+ * 线下监管业务（从表）控制器
  */
 @RestController
-@RequestMapping("sperviseInfoSub")
-@Api(description = "监管业务（从表）控制器")
-public class SuperviseInfoSubController {
+@RequestMapping("superviseInfoMainOld")
+@Api(description = "线下监管业务（从表）控制器")
+public class SuperviseInfoSubOldController {
 
 
     @Autowired
-    private SuperviseInfoSubService superviseInfoSubService;
+    private SuperviseInfoSubOldService superviseInfoSubOldService;
 
 
     /**
-     * 根据监管编码返回待整改的监管内容的整改意见
+     * 根据所选监管业务编码和监管类型查询监管结果详细信息
      * @return
      */
-    @GetMapping("selectSuperviseInfoAdviceById")
-    @ApiOperation(value = "根据监管编码返回待整改的监管内容的整改意见", notes = "根据监管编码返回待整改的监管内容的整改意见")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "监管编码")
-    public ResponseEntity<Result> selectSuperviseInfoAdviceById(String id) {
-        Result result = this.superviseInfoSubService.selectSuperviseInfoAdviceById(id);
+    @GetMapping("selectSuperviseInfoOldDetail")
+    @ApiOperation(value = "根据所选监管业务编码和监管类型查询监管结果详细信息", notes = "根据所选监管业务编码和监管类型查询监管结果详细信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "mainId", value = "监管业务编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+    })
+    public ResponseEntity<Result> selectSuperviseInfoOldDetail(SuperviseInfoSubOld superviseInfoSubOld) {
+        Result result = this.superviseInfoSubOldService.selectSuperviseInfoOldDetail(superviseInfoSubOld);
         return ResponseEntity.ok(result);
     }
 
 
     /**
-     * 保存监管业务（从表）
+     * 保存线下监管业务从表
      * @return
      */
-    @PostMapping("superviseInfoSub")
-    @ApiOperation(value = "保存监管业务（从表）", notes = "保存监管业务（从表）")
+    @PostMapping("superviseInfoSubOld")
+    @ApiOperation(value = "保存线下监管业务从表", notes = "保存线下监管业务从表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "subId", value = "监管业务主键"),
             @ApiImplicitParam(paramType = "query", name = "mainId", value = "主表外键"),
@@ -61,15 +64,12 @@ public class SuperviseInfoSubController {
             @ApiImplicitParam(paramType = "query", name = "advice", value = "整改意见"),
             @ApiImplicitParam(paramType = "query", name = "requst", value = "整改反馈"),
             @ApiImplicitParam(paramType = "query", name = "picTag", value = "附件路径"),
-            @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建日期"),
-            @ApiImplicitParam(paramType = "query", name = "createUserTag", value = "创建人"),
-            @ApiImplicitParam(paramType = "query", name = "lastUpdateTime", value = "最后更新日期"),
-            @ApiImplicitParam(paramType = "query", name = "lastUpdateUser", value = "最后更新人"),
             @ApiImplicitParam(paramType = "query", name = "status", value = "整改状态  0 无需整改 1，整改完成 2，待整改，3 整改提交，待审核4……"),
             @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
     })
-    public ResponseEntity<Result> saveSuperviseInfoSub(@Valid SuperviseInfoSub superviseInfoSub) {
-        Result result = this.superviseInfoSubService.saveSuperviseInfoSub(superviseInfoSub);
+    public ResponseEntity<Result> saveSuperviseInfoSubOld(@Valid SuperviseInfoSubOld superviseInfoSubOld) {
+        Result result = this.superviseInfoSubOldService.saveSuperviseInfoSubOld(superviseInfoSubOld);
         return ResponseEntity.ok(result);
     }
+
 }

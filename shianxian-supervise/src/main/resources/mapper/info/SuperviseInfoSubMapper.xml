@@ -101,4 +101,24 @@
         CALL proc_T_Supervise_Rectify_Info_ByMainIDS(#{id})
     </select>
 
+    <select id="saveSuperviseInfoSub" resultType="java.lang.String">
+        CALL proc_T_Supervise_Info_Sub_Add
+        (
+        #{superviseInfoSub.mainId},
+        #{superviseInfoSub.nodeTag},
+        #{superviseInfoSub.superviseTypeTag},
+        #{superviseInfoSub.superviseTag},
+        #{superviseInfoSub.superviseName},
+        #{superviseInfoSub.resultTag},
+        #{superviseInfoSub.resultValue},
+        #{superviseInfoSub.score},
+        #{superviseInfoSub.advice},
+        #{superviseInfoSub.requst},
+        #{superviseInfoSub.picTag},
+        #{superviseInfoSub.createUserTag},
+        #{superviseInfoSub.lastUpdateUser},
+        #{superviseInfoSub.remark}
+        )
+    </select>
+
 </mapper>

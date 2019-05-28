@@ -105,4 +105,12 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         tree.setRectifySum(rectifySum);
         return Result.data(tree);
     }
+
+
+    @Transactional
+    @Override
+    public Result saveSuperviseInfoSub(SuperviseInfoSub superviseInfoSub) {
+        this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
+        return Result.successMsg();
+    }
 }

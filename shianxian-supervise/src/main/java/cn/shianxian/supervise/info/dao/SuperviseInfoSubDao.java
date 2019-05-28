@@ -113,4 +113,11 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
      * @return
      */
     RectifySumVO selectRectifySum(@Param("id") String id);
+
+
+    /**
+     * 保存监管业务（从表）
+     * @param superviseInfoSub
+     */
+    String saveSuperviseInfoSub(@Param("superviseInfoSub") SuperviseInfoSub superviseInfoSub);
 }
