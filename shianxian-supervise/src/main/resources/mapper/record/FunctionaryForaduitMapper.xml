@@ -16,7 +16,7 @@
     </select>
 
     <select id="updateFunctionaryForaduit" resultType="java.lang.String">
-      CALL Proc_T_Functionary_ForAduit_Add
+      CALL Proc_T_Functionary_ForAduit_Edit_ByFunctionaryTag
       (
       #{functionaryForaduit.functionaryTag},
       #{functionaryForaduit.nodeTag},

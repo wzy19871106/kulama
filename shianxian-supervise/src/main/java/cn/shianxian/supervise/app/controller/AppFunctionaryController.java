@@ -2,6 +2,7 @@ package cn.shianxian.supervise.app.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.record.pojo.Functionary;
+import cn.shianxian.supervise.record.pojo.FunctionaryForaduit;
 import cn.shianxian.supervise.record.service.FunctionaryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -54,4 +55,80 @@ public class AppFunctionaryController {
     public ResponseEntity<Result> saveFunctionary(@Valid Functionary functionary) {
         return this.functionaryService.saveFunctionary(functionary);
     }
+
+
+    /**
+     * 根据id或企业流水号查询负责人审核表
+     * @param functionaryForaduit
+     * @return
+     */
+    @PostMapping("selectFunctionaryForaduit")
+    @ApiOperation(value = "根据id或企业流水号查询负责人审核表", notes = "根据id或企业流水号查询负责人审核表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号"),
+    })
+    public ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
+        return this.functionaryService.selectFunctionaryForaduit(functionaryForaduit);
+    }
+
+
+    /**
+     * 根据节点流水号删除负责人申请
+     * @param index
+     * @return
+     */
+    @PostMapping("deleteFunctionary")
+    @ApiOperation(value = "根据节点流水号删除负责人申请", notes = "根据节点流水号删除负责人申请")
+    @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号")
+    public ResponseEntity<Result> deleteFunctionary(String index) {
+        return this.functionaryService.deleteFunctionary(index);
+    }
+
+
+    /**
+     * 根据id、负责人标识、微信id查询负责人
+     * @param functionary
+     * @return
+     */
+    @PostMapping("selectFunctionary")
+    @ApiOperation(value = "根据id、负责人标识、微信id查询负责人", notes = "根据id、负责人标识、微信id查询负责人")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
+            @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
+    })
+    public ResponseEntity<Result> selectFunctionary(Functionary functionary) {
+        return this.functionaryService.selectFunctionary(functionary);
+    }
+
+
+    /**
+     * 修改企业负责人审核表
+     * @param functionaryForaduit
+     * @return
+     */
+    @PostMapping("updateFunctionaryForaduit")
+    @ApiOperation(value = "修改企业负责人审核表", notes = "修改企业负责人审核表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryName", value = "负责人名称"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryNo", value = "负责人身份证号"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryType", value = "负责人类型，1管理，2普通"),
+            @ApiImplicitParam(paramType = "query", name = "picTag", value = "负责人图片地址标识"),
+            @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号"),
+            @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建时间"),
+            @ApiImplicitParam(paramType = "query", name = "aduitType", value = "审核状态:1新增，2删除，3变更，4审核失败，5注销，6注销通过，0已完成"),
+            @ApiImplicitParam(paramType = "query", name = "updateTime", value = "注销时间"),
+            @ApiImplicitParam(paramType = "query", name = "failReason", value = "退回说明"),
+            @ApiImplicitParam(paramType = "query", name = "key", value = "激活KEY"),
+            @ApiImplicitParam(paramType = "query", name = "nodeName", value = "所属企业名称"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryPostition", value = "负责人职位，无固定"),
+            @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
+    })
+    public ResponseEntity<Result> updateFunctionaryForaduit(@Valid FunctionaryForaduit functionaryForaduit) {
+        return this.functionaryService.updateFunctionaryForaduit(functionaryForaduit);
+    }
+
 }
