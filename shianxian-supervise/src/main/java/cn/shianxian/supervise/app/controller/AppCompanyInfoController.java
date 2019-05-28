@@ -31,7 +31,7 @@ public class AppCompanyInfoController {
      * @param companyInfoForaduit
      * @return
      */
-    @PostMapping("companyInfoForaduit")
+    @PostMapping("saveCompanyInfoForaduit")
     @ApiOperation(value = "保存企业审核表", notes = "保存企业审核表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
@@ -60,7 +60,7 @@ public class AppCompanyInfoController {
      * @param companyInfoForaduit
      * @return
      */
-    @PostMapping("companyInfoForaduit")
+    @PostMapping("updateCompanyInfoForaduit")
     @ApiOperation(value = "修改企业审核表", notes = "修改企业审核表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
