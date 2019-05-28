@@ -120,14 +120,17 @@ public class FunctionaryServiceImpl implements FunctionaryService {
 
     @Override
     public ResponseEntity<Result> selectFunctionary(Functionary functionary) {
+        List<Functionary> list = new ArrayList<>();
         if (StringUtils.isNotBlank(functionary.getNodeTag())) {
-            functionary = this.functionaryDao.selectFunctionaryByNodeTag(functionary.getNodeTag());
+            list = this.functionaryDao.selectFunctionaryByNodeTag(functionary.getNodeTag());
         } else if (null != functionary.getFunctionaryTag()) {
             functionary = this.functionaryDao.selectFunctionaryByFunctionaryTag(functionary.getFunctionaryTag());
+            list.add(functionary);
         } else if (null != functionary.getWeChatId()) {
             functionary = this.functionaryDao.selectFunctionaryByWeChatId(functionary.getWeChatId());
+            list.add(functionary);
         }
-        return ResponseEntity.ok(Result.data(functionary));
+        return ResponseEntity.ok(Result.data(list));
     }
 
 
