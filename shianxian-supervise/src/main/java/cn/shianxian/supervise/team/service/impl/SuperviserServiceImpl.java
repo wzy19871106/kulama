@@ -9,6 +9,8 @@ import cn.shianxian.supervise.team.service.SuperviserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,12 +44,15 @@ public class SuperviserServiceImpl implements SuperviserService {
 
     @Transactional
     @Override
-    public Result deleteSuperviserById(String ids) {
+    public ResponseEntity<Result> deleteSuperviserById(String ids) {
         String[] idArr = ids.split(",");
         for (String id : idArr) {
-            this.superviserDao.deleteSuperviserById(id);
+            String flag = this.superviserDao.deleteSuperviserById(id);
+            if (!"R001".equals(flag)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+            }
         }
-        return Result.successMsg();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 
