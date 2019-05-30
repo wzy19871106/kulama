@@ -40,7 +40,6 @@ public class NodeInfoController {
             @ApiImplicitParam(paramType = "query", name = "nodeName", value = "节点名称"),
             @ApiImplicitParam(paramType = "query", name = "nodeNo", value = "节点法人身份证号或统一社会信用代码"),
             @ApiImplicitParam(paramType = "query", name = "nodeTel", value = "节点联系电话"),
-            @ApiImplicitParam(paramType = "query", name = "nodeGis", value = "节点GIS经纬度"),
             @ApiImplicitParam(paramType = "query", name = "picTag", value = "节点图片地址标识"),
             @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号"),
@@ -170,6 +169,19 @@ public class NodeInfoController {
     @ApiImplicitParam(paramType = "query", name = "ids", value = "id数组")
     public ResponseEntity<Result> batchDeleteNodeInfoAuthority(String[] ids) {
         Result result = this.nodeInfoService.batchDeleteNodeInfoAuthority(ids);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据节点id查询节点权限
+     * @return
+     */
+    @GetMapping("selectNodeInfoAuthorityById")
+    @ApiOperation(value = "根据节点id查询节点权限", notes = "根据节点id查询节点权限")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
+    public ResponseEntity<Result> selectNodeInfoAuthorityById(String id) {
+        Result result = this.nodeInfoService.selectNodeInfoAuthorityById(id);
         return ResponseEntity.ok(result);
     }
 

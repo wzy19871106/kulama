@@ -45,12 +45,6 @@ public class NodeInfo {
     private String nodeTel;
 
     /**
-     * 节点GIS经纬度
-     */
-    @Column(name = "nodeGis")
-    private String nodeGis;
-
-    /**
      * 节点图片地址标识
      */
     @Column(name = "picTag")

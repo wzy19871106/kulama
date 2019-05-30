@@ -161,4 +161,24 @@ public class NodeInfoServiceImpl implements NodeInfoService {
         return Result.successMsg();
     }
 
+
+    @Override
+    public Result selectNodeInfoAuthorityById(String id) {
+        // 根据节点id查询节点权限
+        NodeInfo nodeInfo = this.nodeInfoDao.selectByPrimaryKey(id);
+        List<String> list = new ArrayList<>();
+        if (null != nodeInfo && StringUtils.isNotBlank(nodeInfo.getUserDataUsedAuthoritySet())) {
+            String[] authority = nodeInfo.getUserDataUsedAuthoritySet().split(",");
+            UserGroup userGroup = new UserGroup();
+            for (String a : authority) {
+                userGroup.setUserDataAuthority(a);
+                List<UserGroup> userGroupList = this.userGroupDao.select(userGroup);
+                if (!userGroupList.isEmpty()) {
+                    list.add(userGroupList.get(0).getUserGroupTag());
+                }
+            }
+        }
+        return Result.data(list);
+    }
+
 }

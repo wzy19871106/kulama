@@ -80,4 +80,12 @@ public interface NodeInfoService {
      * @return
      */
     Result batchDeleteNodeInfoAuthority(String[] ids);
+
+
+    /**
+     * 根据节点id查询节点权限
+     * @param id
+     * @return
+     */
+    Result selectNodeInfoAuthorityById(String id);
 }
