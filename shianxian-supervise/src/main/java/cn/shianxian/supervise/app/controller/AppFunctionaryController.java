@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.app.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.record.pojo.FunctionaryForaduit;
@@ -61,18 +62,19 @@ public class AppFunctionaryController {
 
 
     /**
-     * 根据id或企业流水号查询负责人审核表
-     * @param functionaryForaduit
+     * 根据企业标识查询负责人审核表
+     * @param nodeTag
      * @return
      */
-    @PostMapping("selectFunctionaryForaduit")
-    @ApiOperation(value = "根据id或企业流水号查询负责人审核表", notes = "根据id或企业流水号查询负责人审核表")
+    @PostMapping("selectFunctionaryForaduitByNodeTag")
+    @ApiOperation(value = "根据企业标识查询负责人审核表", notes = "根据企业标识查询负责人审核表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
-            @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
-    public ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
-        return this.functionaryService.selectFunctionaryForaduit(functionaryForaduit);
+    public ResponseEntity<Result> selectFunctionaryForaduitByNodeTag(String nodeTag, Pages pages) {
+        return this.functionaryService.selectFunctionaryForaduitByNodeTag(nodeTag, pages);
     }
 
 
@@ -91,14 +93,13 @@ public class AppFunctionaryController {
 
 
     /**
-     * 根据id、负责人标识、微信id查询负责人
+     * 根据负责人标识、微信id查询负责人
      * @param functionary
      * @return
      */
     @PostMapping("selectFunctionary")
-    @ApiOperation(value = "根据id、负责人标识、微信id查询负责人", notes = "根据id、负责人标识、微信id查询负责人")
+    @ApiOperation(value = "根据负责人标识、微信id查询负责人", notes = "根据负责人标识、微信id查询负责人")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
     })
@@ -134,6 +135,36 @@ public class AppFunctionaryController {
     public ResponseEntity<Result> updateFunctionaryForaduit(@Valid FunctionaryForaduit functionaryForaduit) {
         log.info("修改企业负责人审核表：{}", functionaryForaduit);
         return this.functionaryService.updateFunctionaryForaduit(functionaryForaduit);
+    }
+
+
+    /**
+     * 根据企业流水号查询负责人审核表
+     * @param index
+     * @return
+     */
+    @PostMapping("selectFunctionaryForaduitByIndex")
+    @ApiOperation(value = "根据企业流水号查询负责人审核表", notes = "根据企业流水号查询负责人审核表")
+    @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号")
+    public ResponseEntity<Result> selectFunctionaryForaduitByIndex(Long index) {
+        return this.functionaryService.selectFunctionaryForaduitByIndex(index);
+    }
+
+
+    /**
+     * 根据企业标识查询负责人
+     * @param nodeTag
+     * @return
+     */
+    @PostMapping("selectFunctionaryByNodeTag")
+    @ApiOperation(value = "根据企业标识查询负责人", notes = "根据企业标识查询负责人")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectFunctionaryByNodeTag(String nodeTag, Pages pages) {
+        return this.functionaryService.selectFunctionaryByNodeTag(nodeTag, pages);
     }
 
 }

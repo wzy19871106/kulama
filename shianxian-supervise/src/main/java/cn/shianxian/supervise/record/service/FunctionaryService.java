@@ -59,11 +59,10 @@ public interface FunctionaryService {
 
 
     /**
-     * 根据id或企业流水号查询负责人审核表
-     * @param functionaryForaduit
+     * 根据企业标识查询负责人审核表
      * @return
      */
-    ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit);
+    ResponseEntity<Result> selectFunctionaryForaduitByNodeTag(String nodeTag, Pages pages);
 
 
     /**
@@ -84,7 +83,7 @@ public interface FunctionaryService {
 
 
     /**
-     * 根据id、负责人标识、微信id查询负责人
+     * 根据负责人标识、微信id查询负责人
      * @param functionary
      * @return
      */
@@ -105,4 +104,20 @@ public interface FunctionaryService {
      * @return
      */
     ResponseEntity<Result> saveFunctionary(Functionary functionary);
+
+
+    /**
+     * 根据企业流水号查询负责人审核表
+     * @param index
+     * @return
+     */
+    ResponseEntity<Result> selectFunctionaryForaduitByIndex(Long index);
+
+
+    /**
+     * 根据企业标识查询负责人
+     * @param nodeTag
+     * @return
+     */
+    ResponseEntity<Result> selectFunctionaryByNodeTag(String nodeTag, Pages pages);
 }

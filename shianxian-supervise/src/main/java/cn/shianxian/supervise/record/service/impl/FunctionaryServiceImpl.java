@@ -9,14 +9,12 @@ import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.record.pojo.FunctionaryForaduit;
 import cn.shianxian.supervise.record.service.FunctionaryService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -90,14 +88,9 @@ public class FunctionaryServiceImpl implements FunctionaryService {
 
 
     @Override
-    public ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
-        List<FunctionaryForaduit> list = new ArrayList<>();
-        if (StringUtils.isNotBlank(functionaryForaduit.getNodeTag())) {
-            list = this.functionaryForaduitDao.selectFunctionaryForaduitById(functionaryForaduit.getNodeTag());
-        } else if (null != functionaryForaduit.getIndex()) {
-            list = this.functionaryForaduitDao.selectFunctionaryForaduitByIndex(functionaryForaduit.getIndex());
-        }
-        return ResponseEntity.ok(Result.data(list));
+    public ResponseEntity<Result> selectFunctionaryForaduitByNodeTag(String nodeTag, Pages pages) {
+        List<List<?>> list = this.functionaryForaduitDao.selectFunctionaryForaduitByNodeTag(nodeTag, pages);
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
     }
 
 
@@ -120,17 +113,12 @@ public class FunctionaryServiceImpl implements FunctionaryService {
 
     @Override
     public ResponseEntity<Result> selectFunctionary(Functionary functionary) {
-        List<Functionary> list = new ArrayList<>();
-        if (StringUtils.isNotBlank(functionary.getNodeTag())) {
-            list = this.functionaryDao.selectFunctionaryByNodeTag(functionary.getNodeTag());
-        } else if (null != functionary.getFunctionaryTag()) {
+        if (null != functionary.getFunctionaryTag()) {
             functionary = this.functionaryDao.selectFunctionaryByFunctionaryTag(functionary.getFunctionaryTag());
-            list.add(functionary);
         } else if (null != functionary.getWeChatId()) {
             functionary = this.functionaryDao.selectFunctionaryByWeChatId(functionary.getWeChatId());
-            list.add(functionary);
         }
-        return ResponseEntity.ok(Result.data(list));
+        return ResponseEntity.ok(Result.data(functionary));
     }
 
 
@@ -145,10 +133,22 @@ public class FunctionaryServiceImpl implements FunctionaryService {
     }
 
 
-
     @Override
     public ResponseEntity<Result> saveFunctionary(Functionary functionary) {
         this.functionaryDao.saveFunctionary(functionary);
         return ResponseEntity.ok(Result.successMsg());
     }
+
+
+    @Override
+    public ResponseEntity<Result> selectFunctionaryForaduitByIndex(Long index) {
+        List<FunctionaryForaduit> list = this.functionaryForaduitDao.selectFunctionaryForaduitByIndex(index);
+        return ResponseEntity.ok(Result.data(list));
+    }
+
+
+    @Override
+    public ResponseEntity<Result> selectFunctionaryByNodeTag(String nodeTag, Pages pages) {
+        List<List<?>> list = this.functionaryDao.selectFunctionaryByNodeTag(nodeTag, pages);
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));    }
 }

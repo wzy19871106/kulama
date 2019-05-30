@@ -141,18 +141,19 @@ public class FunctionaryController {
 
 
     /**
-     * 根据id或企业流水号查询负责人审核表
-     * @param functionaryForaduit
+     * 根据企业标识查询负责人审核表
+     * @param nodeTag
      * @return
      */
-    @GetMapping("selectFunctionaryForaduit")
-    @ApiOperation(value = "根据id或企业流水号查询负责人审核表", notes = "根据id或企业流水号查询负责人审核表")
+    @GetMapping("selectFunctionaryForaduitByNodeTag")
+    @ApiOperation(value = "根据企业标识查询负责人审核表", notes = "根据企业标识查询负责人审核表")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
-            @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
-    public ResponseEntity<Result> selectFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
-        return this.functionaryService.selectFunctionaryForaduit(functionaryForaduit);
+    public ResponseEntity<Result> selectFunctionaryForaduitByNodeTag(String nodeTag, Pages pages) {
+        return this.functionaryService.selectFunctionaryForaduitByNodeTag(nodeTag, pages);
     }
 
 
@@ -188,14 +189,13 @@ public class FunctionaryController {
 
 
     /**
-     * 根据id、负责人标识、微信id查询负责人
+     * 根据负责人标识、微信id查询负责人
      * @param functionary
      * @return
      */
     @GetMapping("selectFunctionary")
-    @ApiOperation(value = "根据id、负责人标识、微信id查询负责人", notes = "根据id、负责人标识、微信id查询负责人")
+    @ApiOperation(value = "根据负责人标识、微信id查询负责人", notes = "根据负责人标识、微信id查询负责人")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
     })
@@ -244,4 +244,35 @@ public class FunctionaryController {
         log.info("保存企业负责人：{}", functionary);
         return this.functionaryService.saveFunctionary(functionary);
     }
+
+
+    /**
+     * 根据企业流水号查询负责人审核表
+     * @param index
+     * @return
+     */
+    @GetMapping("selectFunctionaryForaduitByIndex")
+    @ApiOperation(value = "根据企业流水号查询负责人审核表", notes = "根据企业流水号查询负责人审核表")
+    @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号")
+    public ResponseEntity<Result> selectFunctionaryForaduitByIndex(Long index) {
+        return this.functionaryService.selectFunctionaryForaduitByIndex(index);
+    }
+
+
+    /**
+     * 根据企业标识查询负责人
+     * @param nodeTag
+     * @return
+     */
+    @GetMapping("selectFunctionaryByNodeTag")
+    @ApiOperation(value = "根据企业标识查询负责人", notes = "根据企业标识查询负责人")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectFunctionaryByNodeTag(String nodeTag, Pages pages) {
+        return this.functionaryService.selectFunctionaryByNodeTag(nodeTag, pages);
+    }
+
 }

@@ -14,8 +14,13 @@
       )
     </select>
 
-    <select id="selectFunctionaryByNodeTag" resultMap="functionary">
-      CALL Proc_T_Functionary_Query_ByNodeTag(#{nodeTag})
+    <select id="selectFunctionaryByNodeTag" resultMap="functionary,pageCount,totalCount">
+      CALL Proc_T_Functionary_Query_ByNodeTag
+      (
+      #{nodeTag},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
     </select>
 
     <select id="selectFunctionaryByFunctionaryTag" resultMap="functionary">

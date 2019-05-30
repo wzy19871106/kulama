@@ -28,7 +28,7 @@ public interface FunctionaryDao extends Mapper<Functionary> {
      * @param nodeTag
      * @return
      */
-    List<Functionary> selectFunctionaryByNodeTag(@Param("nodeTag") String nodeTag);
+    List<List<?>> selectFunctionaryByNodeTag(@Param("nodeTag") String nodeTag, @Param("pages") Pages pages);
 
 
     /**

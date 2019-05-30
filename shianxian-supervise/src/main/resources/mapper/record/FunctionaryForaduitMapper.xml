@@ -53,8 +53,13 @@
       )
     </select>
 
-    <select id="selectFunctionaryForaduitById" resultType="cn.shianxian.supervise.record.pojo.FunctionaryForaduit">
-      CALL Proc_T_Functionary_ForAduit_Query_ByNodeTag(#{nodeTag})
+    <select id="selectFunctionaryForaduitByNodeTag" resultMap="functionaryForaduit,pageCount,totalCount">
+      CALL Proc_T_Functionary_ForAduit_Query_ByNodeTag
+      (
+      #{nodeTag},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
     </select>
 
     <select id="selectFunctionaryForaduitByIndex" resultType="cn.shianxian.supervise.record.pojo.FunctionaryForaduit">

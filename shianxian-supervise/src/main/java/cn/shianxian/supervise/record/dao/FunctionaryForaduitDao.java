@@ -56,7 +56,7 @@ public interface FunctionaryForaduitDao extends Mapper<FunctionaryForaduit> {
      * @param nodeTag
      * @return
      */
-    List<FunctionaryForaduit> selectFunctionaryForaduitById(@Param("nodeTag") String nodeTag);
+    List<List<?>> selectFunctionaryForaduitByNodeTag(@Param("nodeTag") String nodeTag, @Param("pages") Pages pages);
 
 
     /**
