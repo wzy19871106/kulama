@@ -6,7 +6,9 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.MD5Utils;
 import cn.shianxian.supervise.exception.CommonException;
 import cn.shianxian.supervise.sys.dao.UserDao;
+import cn.shianxian.supervise.sys.dao.UserGroupDao;
 import cn.shianxian.supervise.sys.pojo.User;
+import cn.shianxian.supervise.sys.pojo.UserGroup;
 import cn.shianxian.supervise.sys.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+
+    @Autowired
+    private UserGroupDao userGroupDao;
 
 
     @Override
@@ -81,6 +87,10 @@ public class UserServiceImpl implements UserService {
             loginUser.setUserLastTime(LocalDateTime.now());
             this.userDao.updateByPrimaryKeySelective(user);
             log.info("用户：{}登录", loginUser);
+            UserGroup userGroup = this.userGroupDao.selectByPrimaryKey(loginUser.getUserGroupTag());
+            if (userGroup != null) {
+                loginUser.setUserGroupTag(userGroup.getUserDataAuthority());
+            }
             return Result.data(loginUser);
         }
         user.setUserLoginPass(null);
