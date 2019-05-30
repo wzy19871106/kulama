@@ -79,4 +79,12 @@ public interface SuperviseTypeService {
      * @return
      */
     Result selectSuperviseTypeAuthorityById(String id);
+
+
+    /**
+     * 修改监管类型权限
+     * @param superviseType
+     * @return
+     */
+    Result updateSuperviseTypeAuthority(SuperviseType superviseType);
 }

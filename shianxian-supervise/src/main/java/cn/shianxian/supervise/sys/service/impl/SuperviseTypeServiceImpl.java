@@ -155,4 +155,30 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
         return Result.data(list);
     }
 
+
+    @Transactional
+    @Override
+    public Result updateSuperviseTypeAuthority(SuperviseType superviseType) {
+        // 根据前端传来的权限id，查出权限数据拼接
+        String authority = superviseType.getUserGroupDataAuthority();
+        if (StringUtils.isNotBlank(authority)) {
+            List<AuthorityDTO> authorityDTOS = JSON.parseArray(authority, AuthorityDTO.class);
+            UserGroup userGroup = new UserGroup();
+            StringBuilder sb = new StringBuilder();
+            for (AuthorityDTO authorityDTO : authorityDTOS) {
+                if (authorityDTO.getChildren().isEmpty()) {
+                    userGroup.setUserGroupTag(authorityDTO.getId());
+                    List<UserGroup> groups = this.userGroupDao.select(userGroup);
+                    if (!groups.isEmpty()) {
+                        sb.append(groups.get(0).getUserDataAuthority()).append(",");
+                    }
+                }
+            }
+            String authoritys = sb.substring(0, sb.length() - 1);
+            superviseType.setUserGroupDataAuthority(authoritys);
+            this.superviseTypeDao.updateSuperviseTypeAuthority(superviseType);
+        }
+        return Result.successMsg();
+    }
+
 }

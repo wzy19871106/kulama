@@ -169,4 +169,20 @@ public class SuperviseTypeController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 修改监管类型权限
+     * @return
+     */
+    @PutMapping("updateSuperviseTypeAuthority")
+    @ApiOperation(value = "修改监管类型权限", notes = "修改监管类型权限")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
+    })
+    public ResponseEntity<Result> updateSuperviseTypeAuthority(SuperviseType superviseType) {
+        Result result = this.superviseTypeService.updateSuperviseTypeAuthority(superviseType);
+        return ResponseEntity.ok(result);
+    }
+
 }
