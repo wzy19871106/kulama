@@ -116,4 +116,17 @@ public class UserController {
         Result result = this.userService.deleteUserById(id);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 查询没有绑定过的用户
+     * @return
+     */
+    @GetMapping("selectUserByNoBind")
+    @ApiOperation(value = "查询没有绑定过的用户", notes = "查询没有绑定过的用户")
+    @ApiImplicitParam(paramType = "query", name = "userNo", value = "用户身份证")
+    public ResponseEntity<Result> selectUserByNoBind(String userNo) {
+        Result result = this.userService.selectUserByNoBind(userNo);
+        return ResponseEntity.ok(result);
+    }
 }

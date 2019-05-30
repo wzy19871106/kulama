@@ -102,4 +102,11 @@ public class UserServiceImpl implements UserService {
         return Result.successMsg();
     }
 
+
+    @Override
+    public Result selectUserByNoBind(String userNo) {
+        User user = this.userDao.selectUserByNoBind(userNo);
+        return Result.data(user);
+    }
+
 }

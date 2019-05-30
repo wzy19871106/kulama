@@ -51,4 +51,11 @@ public interface UserDao extends Mapper<User> {
      */
     List<List<?>> selectUserByLike(@Param("user") User user, @Param("pages") Pages pages);
 
+
+    /**
+     * 查询没有绑定过的用户
+     * @param userNo
+     * @return
+     */
+    User selectUserByNoBind(@Param("userNo") String userNo);
 }

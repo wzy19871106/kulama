@@ -48,4 +48,11 @@ public interface UserService {
      */
     Result deleteUserById(String id);
 
+
+    /**
+     * 查询没有绑定过的用户
+     * @param userNo
+     * @return
+     */
+    Result selectUserByNoBind(String userNo);
 }

@@ -47,4 +47,9 @@
         #{pages.pageNum}
         )
     </select>
+
+    <select id="selectUserByNoBind" resultType="cn.shianxian.supervise.sys.pojo.User">
+        CALL proc_T_User_Query_BindList(#{userNo})
+    </select>
+
 </mapper>
