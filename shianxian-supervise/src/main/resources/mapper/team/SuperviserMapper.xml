@@ -15,7 +15,7 @@
         #{superviser.userNo},
         #{superviser.remark},
         #{superviser.ifUse},
-        #{superviser.createTime},
+        #{superviser.picTag},
         #{superviser.createUserTag},
         #{superviser.lastUpdateTime},
         #{superviser.lastUpdateUser}
