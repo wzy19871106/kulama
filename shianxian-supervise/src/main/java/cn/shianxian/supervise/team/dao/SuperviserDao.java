@@ -53,4 +53,17 @@ public interface SuperviserDao extends Mapper<Superviser> {
     List<List<?>> selectSuperviserByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
 
 
+    /**
+     * 给执法人绑定用户
+     * @param superviser
+     */
+    String bindSuperviser(@Param("superviser") Superviser superviser);
+
+
+    /**
+     * 解除执法人员与登录账号的绑定关系
+     * @param superviser
+     * @return
+     */
+    String unBindSuperviser(@Param("superviser") Superviser superviser);
 }

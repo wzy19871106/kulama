@@ -39,4 +39,12 @@ public interface SuperviserService {
      * @return
      */
     Result selectSuperviser(QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 绑定执法人员
+     * @param superviser
+     * @return
+     */
+    Result bindSuperviser(Superviser superviser);
 }

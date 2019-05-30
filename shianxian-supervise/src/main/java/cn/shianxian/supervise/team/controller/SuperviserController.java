@@ -117,4 +117,20 @@ public class SuperviserController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 绑定执法人员
+     * @return
+     */
+    @PutMapping("bindSuperviser")
+    @ApiOperation(value = "绑定执法人员", notes = "绑定执法人员")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "superviserTag", value = "执法人员编码"),
+            @ApiImplicitParam(paramType = "query", name = "userTag", value = "绑定账号"),
+            @ApiImplicitParam(paramType = "query", name = "type", value = "类型1：绑定  2解绑"),
+    })
+    public ResponseEntity<Result> bindSuperviser(Superviser superviser) {
+        Result result = this.superviserService.bindSuperviser(superviser);
+        return ResponseEntity.ok(result);
+    }
 }

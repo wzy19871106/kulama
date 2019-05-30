@@ -68,4 +68,16 @@ public class SuperviserServiceImpl implements SuperviserService {
         return Result.data(superviserList);
     }
 
+
+    @Transactional
+    @Override
+    public Result bindSuperviser(Superviser superviser) {
+        if (1 == superviser.getType()) {
+            this.superviserDao.bindSuperviser(superviser);
+        } else if (2 == superviser.getType()) {
+            this.superviserDao.unBindSuperviser(superviser);
+        }
+        return Result.successMsg();
+    }
+
 }

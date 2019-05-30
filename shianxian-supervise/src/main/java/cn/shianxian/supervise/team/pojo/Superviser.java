@@ -75,4 +75,10 @@ public class Superviser extends BasePojo {
      */
     @Transient
     private String teamName;
+
+    /**
+     * 类型1：绑定  2解绑
+     */
+    @Transient
+    private int type;
 }

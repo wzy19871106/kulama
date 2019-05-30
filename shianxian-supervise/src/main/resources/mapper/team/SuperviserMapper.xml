@@ -51,4 +51,16 @@
         #{pages.pageNum}
         )
     </select>
+
+    <select id="bindSuperviser" resultType="java.lang.String">
+        CALL proc_T_Superviser_BindUser
+        (
+        #{superviser.superviserTag},
+        #{superviser.userTag}
+        )
+    </select>
+
+    <select id="unBindSuperviser" resultType="java.lang.String">
+        CALL proc_T_Superviser_UnBind_ByTag(#{superviser.superviserTag})
+    </select>
 </mapper>
