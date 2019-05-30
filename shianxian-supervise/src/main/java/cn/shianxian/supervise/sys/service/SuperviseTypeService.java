@@ -1,6 +1,5 @@
 package cn.shianxian.supervise.sys.service;
 
-import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,7 @@ public interface SuperviseTypeService {
      * @param superviseType
      * @return
      */
-    Result selectSuperviseType(SuperviseType superviseType, Pages pages);
+    Result selectSuperviseType(SuperviseType superviseType);
 
 
     /**

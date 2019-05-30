@@ -27,8 +27,8 @@ public class ModuleServiceImpl implements ModuleService {
             List<Module> modules = this.moduleDao.selectModuleById(queryPojo.getId());
             return Result.data(modules);
         } else if (null != queryPojo.getParentId() && null != queryPojo.getName()) {
-            List<List<?>> lists = this.moduleDao.selectModuleByLike(queryPojo, pages);
-            return Result.data(lists);
+            List<List<?>> list = this.moduleDao.selectModuleByLike(queryPojo, pages);
+            return Result.data((Long) list.get(2).get(0), list.get(0));
         }
         return Result.data(null);
     }

@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -60,14 +61,15 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
     @Override
     public Result selectNodeInfo(NodeInfo nodeInfo, Pages pages) {
-        Object nodeInfos = null;
+        List<NodeInfo> nodeInfos = new ArrayList<>();
         if (StringUtils.isNotBlank(nodeInfo.getNodeTag())) {
             nodeInfos = this.nodeInfoDao.selectNodeInfoById(nodeInfo.getNodeTag());
         } else if (null != nodeInfo.getNodeTag() &&
                 null != nodeInfo.getNodeName() &&
                 null != nodeInfo.getIndustryTag() &&
                 null != nodeInfo.getUserDataUsedAuthoritySet()) {
-            nodeInfos = this.nodeInfoDao.selectNodeInfoByLike(nodeInfo, pages);
+            List<List<?>> list = this.nodeInfoDao.selectNodeInfoByLike(nodeInfo, pages);
+            return Result.data((Long) list.get(2).get(0), list.get(0));
         }
         return Result.data(nodeInfos);
     }
@@ -82,8 +84,8 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
     @Override
     public Result selectNodeInfoTreeByLike(NodeInfo nodeInfo, Pages pages) {
-        List<List<?>> nodeInfos = this.nodeInfoDao.selectNodeInfoTreeByLike(nodeInfo, pages);
-        return Result.data(nodeInfos);
+        List<List<?>> list = this.nodeInfoDao.selectNodeInfoTreeByLike(nodeInfo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 
 

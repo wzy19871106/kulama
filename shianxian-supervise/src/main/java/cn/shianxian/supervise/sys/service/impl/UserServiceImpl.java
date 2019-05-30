@@ -5,7 +5,6 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.MD5Utils;
 import cn.shianxian.supervise.exception.CommonException;
-import cn.shianxian.supervise.record.dao.FunctionaryDao;
 import cn.shianxian.supervise.sys.dao.UserDao;
 import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.service.UserService;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,11 +29,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result selectUserByPage(User user, Pages pages) {
-        Object users = null;
+        List<User> users = new ArrayList<>();
         if (StringUtils.isNotBlank(user.getUserTag())) {
             users = this.userDao.selectUserById(user.getUserTag());
         } else if (null != user.getUserName() && null != user.getRoleTag() && null != user.getUserGroupTag()) {
-            users = this.userDao.selectUserByLike(user, pages);
+            List<List<?>> list = this.userDao.selectUserByLike(user, pages);
+            return Result.data((Long) list.get(2).get(0), list.get(0));
         }
         return Result.data(users);
     }

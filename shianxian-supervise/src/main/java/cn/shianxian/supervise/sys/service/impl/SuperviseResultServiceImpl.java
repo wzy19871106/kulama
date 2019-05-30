@@ -1,6 +1,5 @@
 package cn.shianxian.supervise.sys.service.impl;
 
-import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.SuperviseResultDao;
 import cn.shianxian.supervise.sys.dto.SuperviseResultDTO;
@@ -60,7 +59,7 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
 
 
     @Override
-    public Result selectSuperviseResult(SuperviseResult superviseResult, Pages pages) {
+    public Result selectSuperviseResult(SuperviseResult superviseResult) {
         if (StringUtils.isNotBlank(superviseResult.getResultTag())) {
             List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultById(superviseResult.getResultTag());
             return Result.data(results);

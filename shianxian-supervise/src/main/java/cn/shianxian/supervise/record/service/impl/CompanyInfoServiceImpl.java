@@ -74,7 +74,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Override
     public ResponseEntity<Result> selectCompanyInfoForaduitByLike(CompanyInfoForaduit companyInfoForaduit, Pages pages) {
         List<List<?>> list = this.companyInfoForaduitDao.selectCompanyInfoForaduitByLike(companyInfoForaduit, pages);
-        return ResponseEntity.ok(Result.data(list));
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
     }
 
 
@@ -92,7 +92,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Override
     public ResponseEntity<Result> selectCompanyInfoByLike(CompanyInfo companyInfo, Pages pages) {
         List<List<?>> list = this.companyInfoDao.selectCompanyInfoByLike(companyInfo, pages);
-        return ResponseEntity.ok(Result.data(list));
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
     }
 
     @Override

@@ -31,6 +31,6 @@ public class SuperviseInfoOldImportServiceImpl implements SuperviseInfoOldImport
     @Override
     public Result selectSuperviseInfoOldImport(QueryPojo queryPojo, Pages pages) {
         List<List<?>> list = this.superviseInfoOldImportDao.selectSuperviseInfoOldImport(queryPojo, pages);
-        return Result.data(list);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 }

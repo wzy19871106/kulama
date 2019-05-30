@@ -83,7 +83,7 @@ public class FunctionaryServiceImpl implements FunctionaryService {
     @Override
     public ResponseEntity<Result> selectFunctionaryForaduitByLike(QueryPojo queryPojo, Pages pages) {
         List<List<?>> list = this.functionaryForaduitDao.selectFunctionaryForaduitByLike(queryPojo, pages);
-        return ResponseEntity.ok(Result.data(list));
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
     }
 
 
@@ -107,7 +107,7 @@ public class FunctionaryServiceImpl implements FunctionaryService {
     @Override
     public ResponseEntity<Result> selectFunctionaryByLike(QueryPojo queryPojo, Pages pages) {
         List<List<?>> list = this.functionaryDao.selectFunctionaryByLike(queryPojo, pages);
-        return ResponseEntity.ok(Result.data(list));
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
     }
 
 
@@ -150,5 +150,6 @@ public class FunctionaryServiceImpl implements FunctionaryService {
     @Override
     public ResponseEntity<Result> selectFunctionaryByNodeTag(String nodeTag, Pages pages) {
         List<List<?>> list = this.functionaryDao.selectFunctionaryByNodeTag(nodeTag, pages);
-        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));    }
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
+    }
 }

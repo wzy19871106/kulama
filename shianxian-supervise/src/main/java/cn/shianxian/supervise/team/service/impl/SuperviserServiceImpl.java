@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 public class SuperviserServiceImpl implements SuperviserService {
@@ -50,11 +53,12 @@ public class SuperviserServiceImpl implements SuperviserService {
 
     @Override
     public Result selectSuperviser(QueryPojo queryPojo, Pages pages) {
-        Object superviserList = null;
+        List<Superviser> superviserList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             superviserList = this.superviserDao.selectSuperviserById(queryPojo.getId());
         } else if (null != queryPojo.getParentId() && null != queryPojo.getName()) {
-            superviserList = this.superviserDao.selectSuperviserByLike(queryPojo, pages);
+            List<List<?>> list = this.superviserDao.selectSuperviserByLike(queryPojo, pages);
+            return Result.data((Long) list.get(2).get(0), list.get(0));
         }
         return Result.data(superviserList);
     }

@@ -1,6 +1,5 @@
 package cn.shianxian.supervise.sys.service.impl;
 
-import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.dao.SuperviseTypeDao;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
@@ -51,7 +50,7 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
 
 
     @Override
-    public Result selectSuperviseType(SuperviseType superviseType, Pages pages) {
+    public Result selectSuperviseType(SuperviseType superviseType) {
         List<SuperviseType> superviseTypes = this.superviseTypeDao.selectSuperviseType(superviseType.getSuperviseTypeTag(), superviseType.getUserGroupDataAuthority());
         return Result.data(superviseTypes);
     }

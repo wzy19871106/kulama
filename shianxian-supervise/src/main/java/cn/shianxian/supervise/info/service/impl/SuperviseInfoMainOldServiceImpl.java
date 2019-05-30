@@ -31,6 +31,6 @@ public class SuperviseInfoMainOldServiceImpl implements SuperviseInfoMainOldServ
     @Override
     public Result selectSuperviseInfoMainOldByLike(QueryPojo queryPojo, Pages pages) {
         List<List<?>> list = this.superviseInfoMainOldDao.selectSuperviseInfoMainOldByLike(queryPojo, pages);
-        return Result.data(list);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 }

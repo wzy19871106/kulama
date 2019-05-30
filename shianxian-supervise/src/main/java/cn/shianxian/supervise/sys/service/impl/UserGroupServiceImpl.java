@@ -14,6 +14,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @Slf4j
 public class UserGroupServiceImpl implements UserGroupService {
@@ -51,11 +54,12 @@ public class UserGroupServiceImpl implements UserGroupService {
 
     @Override
     public Result selectUserGroup(QueryPojo queryPojo, Pages pages) {
-        Object userGroupList = null;
+        List<UserGroup> userGroupList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
             userGroupList = this.userGroupDao.selectUserGroupById(queryPojo.getId());
         } else if (null != queryPojo.getParentId() && null != queryPojo.getName()) {
-            userGroupList = this.userGroupDao.selectUserGroupByLike(queryPojo, pages);
+            List<List<?>> list = this.userGroupDao.selectUserGroupByLike(queryPojo, pages);
+            return Result.data((Long) list.get(2).get(0), list.get(0));
         }
         return Result.data(userGroupList);
     }

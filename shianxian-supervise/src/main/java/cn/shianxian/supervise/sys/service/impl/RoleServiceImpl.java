@@ -47,8 +47,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Result selectRoleByPage(QueryPojo queryPojo, Pages pages) {
-        List<List<?>> roles = this.roleDao.selectRoleByLike(queryPojo, pages);
-        return Result.data(roles);
+        List<List<?>> list = this.roleDao.selectRoleByLike(queryPojo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 
 
