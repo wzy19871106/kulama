@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.sys.service;
 
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.sys.dto.DataAuthorityDTO;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import org.springframework.http.ResponseEntity;
 
@@ -57,10 +58,25 @@ public interface SuperviseTypeService {
 
 
     /**
-     * 保存、修改监管类型权限
-     * @param superviseType
-     * @param type
+     * 批量赋予监管类型权限
+     * @param dataAuthorityDTO
      * @return
      */
-    Result superviseTypeAuthority(SuperviseType superviseType, int type);
+    Result batchUpdateSuperviseTypeAuthority(DataAuthorityDTO dataAuthorityDTO);
+
+
+    /**
+     * 批量清空监管类型权限
+     * @param ids
+     * @return
+     */
+    Result batchDeleteSuperviseTypeAuthority(String[] ids);
+
+
+    /**
+     * 根据监管类型id查询监管类型权限
+     * @param id
+     * @return
+     */
+    Result selectSuperviseTypeAuthorityById(String id);
 }

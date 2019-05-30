@@ -1,7 +1,7 @@
 package cn.shianxian.supervise.sys.controller;
 
-import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.sys.dto.DataAuthorityDTO;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import cn.shianxian.supervise.sys.service.SuperviseTypeService;
 import io.swagger.annotations.Api;
@@ -128,19 +128,45 @@ public class SuperviseTypeController {
 
 
     /**
-     * 保存、修改监管类型权限
+     * 批量赋予监管类型权限
      * @return
      */
-    @PutMapping("superviseTypeAuthority")
-    @ApiOperation(value = "保存、修改监管类型权限", notes = "保存、修改监管类型权限")
+    @PutMapping("batchUpdateSuperviseTypeAuthority")
+    @ApiOperation(value = "批量赋予监管类型权限", notes = "批量赋予监管类型权限")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
-            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
-            @ApiImplicitParam(paramType = "query", name = "type", value = "类型[1:新增权限，2:修改权限]"),
+            @ApiImplicitParam(paramType = "query", name = "ids", value = "id数组"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "所拥有的数据权限"),
     })
-    public ResponseEntity<Result> superviseTypeAuthority(SuperviseType superviseType, int type) {
-        log.info("保存、修改监管类型权限：{}，类型[1:新增权限，2:修改权限]：{}", superviseType, type);
-        Result result = this.superviseTypeService.superviseTypeAuthority(superviseType, type);
+    public ResponseEntity<Result> batchUpdateSuperviseTypeAuthority(DataAuthorityDTO dataAuthority) {
+        log.info("批量赋予监管类型权限：{}", dataAuthority);
+        Result result = this.superviseTypeService.batchUpdateSuperviseTypeAuthority(dataAuthority);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 批量清空监管类型权限
+     * @return
+     */
+    @PutMapping("batchDeleteSuperviseTypeAuthority")
+    @ApiOperation(value = "批量清空监管类型权限", notes = "批量清空监管类型权限")
+    @ApiImplicitParam(paramType = "query", name = "ids", value = "id数组")
+    public ResponseEntity<Result> batchDeleteSuperviseTypeAuthority(String[] ids) {
+        Result result = this.superviseTypeService.batchDeleteSuperviseTypeAuthority(ids);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据监管类型id查询监管类型权限
+     * @return
+     */
+    @GetMapping("selectSuperviseTypeAuthorityById")
+    @ApiOperation(value = "根据监管类型id查询监管类型权限", notes = "根据监管类型id查询监管类型权限")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
+    public ResponseEntity<Result> selectSuperviseTypeAuthorityById(String id) {
+        Result result = this.superviseTypeService.selectSuperviseTypeAuthorityById(id);
+        return ResponseEntity.ok(result);
+    }
+
 }

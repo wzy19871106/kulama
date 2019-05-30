@@ -150,6 +150,7 @@ public class NodeInfoServiceImpl implements NodeInfoService {
     }
 
 
+    @Transactional
     @Override
     public Result batchDeleteNodeInfoAuthority(String[] ids) {
         NodeInfo nodeInfo = new NodeInfo();
