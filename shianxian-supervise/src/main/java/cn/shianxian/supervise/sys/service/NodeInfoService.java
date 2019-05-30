@@ -72,4 +72,12 @@ public interface NodeInfoService {
      * @return
      */
     Result batchUpdateNodeInfoAuthority(DataAuthorityDTO dataAuthority);
+
+
+    /**
+     * batchDeleteNodeInfoAuthority
+     * @param ids
+     * @return
+     */
+    Result batchDeleteNodeInfoAuthority(String[] ids);
 }

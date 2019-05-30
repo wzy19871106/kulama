@@ -5,10 +5,14 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.record.dao.FunctionaryDao;
 import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.sys.dao.NodeInfoDao;
+import cn.shianxian.supervise.sys.dao.UserGroupDao;
+import cn.shianxian.supervise.sys.dto.AuthorityDTO;
 import cn.shianxian.supervise.sys.dto.DataAuthorityDTO;
 import cn.shianxian.supervise.sys.dto.NodeFunctionaryDTO;
 import cn.shianxian.supervise.sys.pojo.NodeInfo;
+import cn.shianxian.supervise.sys.pojo.UserGroup;
 import cn.shianxian.supervise.sys.service.NodeInfoService;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +35,10 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
     @Autowired
     private FunctionaryDao functionaryDao;
+
+
+    @Autowired
+    private UserGroupDao userGroupDao;
 
 
     @Transactional
@@ -118,7 +126,39 @@ public class NodeInfoServiceImpl implements NodeInfoService {
     @Transactional
     @Override
     public Result batchUpdateNodeInfoAuthority(DataAuthorityDTO dataAuthority) {
-        return null;
+        // 根据前端传来的权限id，查出权限数据拼接
+        String authority = dataAuthority.getAuthority();
+        List<AuthorityDTO> authorityDTOS = JSON.parseArray(authority, AuthorityDTO.class);
+        UserGroup userGroup = new UserGroup();
+        StringBuilder sb = new StringBuilder();
+        for (AuthorityDTO authorityDTO : authorityDTOS) {
+            if (authorityDTO.getChildren().isEmpty()) {
+                userGroup.setUserGroupTag(authorityDTO.getId());
+                List<UserGroup> groups = this.userGroupDao.select(userGroup);
+                if (!groups.isEmpty()) {
+                    sb.append(groups.get(0).getUserDataAuthority()).append(",");
+                }
+            }
+        }
+        String authoritys = sb.substring(0, sb.length() - 1);
+        // 批量赋予节点权限
+        String[] ids = dataAuthority.getIds();
+        for (String id : ids) {
+            this.nodeInfoDao.updateNodeInfoAuthority(id, authoritys);
+        }
+        return Result.successMsg();
+    }
+
+
+    @Override
+    public Result batchDeleteNodeInfoAuthority(String[] ids) {
+        NodeInfo nodeInfo = new NodeInfo();
+        nodeInfo.setUserDataUsedAuthoritySet("");
+        for (String id : ids) {
+            nodeInfo.setNodeTag(id);
+            this.nodeInfoDao.updateAuthorityById(nodeInfo);
+        }
+        return Result.successMsg();
     }
 
 }

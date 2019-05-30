@@ -160,4 +160,18 @@ public class NodeInfoController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 批量清空节点权限
+     * @return
+     */
+    @PutMapping("batchDeleteNodeInfoAuthority")
+    @ApiOperation(value = "批量清空节点权限", notes = "批量清空节点权限")
+    @ApiImplicitParam(paramType = "query", name = "ids", value = "id数组")
+    public ResponseEntity<Result> batchDeleteNodeInfoAuthority(String[] ids) {
+        Result result = this.nodeInfoService.batchDeleteNodeInfoAuthority(ids);
+        return ResponseEntity.ok(result);
+    }
+
+
 }

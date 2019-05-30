@@ -63,7 +63,7 @@
     </select>
 
     <select id="updateAuthorityById" resultType="java.lang.String">
-        CALL proc_T_NodeInfo_UserGroupDataAuthority_Add
+        CALL proc_T_NodeInfo_UserGroupDataAuthority_Edit_ByNodeTag
         (
         #{nodeInfo.nodeTag},
         #{nodeInfo.userDataUsedAuthoritySet}
@@ -74,4 +74,7 @@
         CALL Proc_T_NodeInfoFunctionary_Query_ByKey(#{key}, #{weChatId})
     </select>
 
+    <select id="updateNodeInfoAuthority" resultType="java.lang.String">
+        CALL proc_T_NodeInfo_UserGroupDataAuthority_Add(#{id}, #{authoritys})
+    </select>
 </mapper>

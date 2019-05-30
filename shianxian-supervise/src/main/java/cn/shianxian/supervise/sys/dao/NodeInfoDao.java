@@ -83,4 +83,12 @@ public interface NodeInfoDao extends Mapper<NodeInfo> {
      * @return
      */
     NodeFunctionaryDTO checkKey(@Param("key") String key, @Param("weChatId") String weChatId);
+
+
+    /**
+     * 增量添加节点权限
+     * @param id
+     * @param authoritys
+     */
+    String updateNodeInfoAuthority(@Param("id") String id, @Param("authoritys") String authoritys);
 }
