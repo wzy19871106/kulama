@@ -13,6 +13,8 @@ import cn.shianxian.supervise.sys.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -106,10 +108,13 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Result deleteUserById(String id) {
-        this.userDao.deleteUserById(id);
+    public ResponseEntity<Result> deleteUserById(String id) {
         log.info("删除用户：{}", id);
-        return Result.successMsg();
+        String flag = this.userDao.deleteUserById(id);
+        if (!"R001".equals(flag)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+        }
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

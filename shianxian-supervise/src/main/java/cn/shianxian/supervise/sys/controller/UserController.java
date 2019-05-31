@@ -113,8 +113,7 @@ public class UserController {
     @ApiImplicitParam(paramType = "query", name = "id", value = "id")
     public ResponseEntity<Result> deleteUserById(String id) {
         log.info("删除用户：{}", id);
-        Result result = this.userService.deleteUserById(id);
-        return ResponseEntity.ok(result);
+        return this.userService.deleteUserById(id);
     }
 
 
