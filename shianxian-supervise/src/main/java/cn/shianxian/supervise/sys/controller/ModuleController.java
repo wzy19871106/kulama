@@ -141,4 +141,16 @@ public class ModuleController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 查询模块权限（禁用）（树形）
+     * @return
+     */
+    @GetMapping("selectModuleAuthorityDisabledTree")
+    @ApiOperation(value = "查询模块权限（禁用）（树形）", notes = "查询模块权限（禁用）（树形）")
+    public ResponseEntity<Result> selectModuleAuthorityDisabledTree() {
+        Result result = this.moduleService.selectModuleAuthorityDisabledTree();
+        return ResponseEntity.ok(result);
+    }
+
 }

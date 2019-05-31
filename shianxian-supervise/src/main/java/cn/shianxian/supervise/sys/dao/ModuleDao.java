@@ -80,4 +80,11 @@ public interface ModuleDao extends Mapper<Module> {
      * @return
      */
     String selectModuleAuthorityTree();
+
+
+    /**
+     * 查询模块权限（禁用）（树形）
+     * @return
+     */
+    String selectModuleAuthorityDisabledTree();
 }

@@ -82,4 +82,12 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
 
+    @Override
+
+    public Result selectModuleAuthorityDisabledTree() {
+        String moduleJson = this.moduleDao.selectModuleAuthorityDisabledTree();
+        return Result.data(moduleJson);
+    }
+
+
 }
