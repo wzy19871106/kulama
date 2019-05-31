@@ -3,10 +3,7 @@ package cn.shianxian.supervise.plan.pojo;
 import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
@@ -79,4 +76,9 @@ public class SupervisePlanSub extends BasePojo {
     @Column(name = "`ifDelete`")
     private Boolean ifDelete;
 
+    /**
+     * 主任务名称
+     */
+    @Transient
+    private String planName;
 }
