@@ -4,10 +4,7 @@ package cn.shianxian.supervise.sys.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
@@ -112,5 +109,6 @@ public class User {
     /**
      * 所属数据权限模板标识
      */
+    @Transient
     private String userGroupName;
 }
