@@ -109,4 +109,8 @@ public class User {
     @Column(name = "createTime")
     private LocalDateTime createTime;
 
+    /**
+     * 所属数据权限模板标识
+     */
+    private String userGroupName;
 }
