@@ -52,7 +52,6 @@ public class User {
     /**
      * 用户登录密码
      */
-    @NotEmpty(message = "密码不能为空！")
     @Column(name = "userLoginPass")
     private String userLoginPass;
 
