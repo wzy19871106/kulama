@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +31,7 @@ public class AppAreaController {
      * 查询区域
      * @return
      */
-    @GetMapping("selectAreaById")
+    @PostMapping("selectAreaById")
     @ApiOperation(value = "查询区域", notes = "查询区域")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
