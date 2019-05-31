@@ -68,8 +68,7 @@ public class SupervisePlanSubController {
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSupervisePlanSubById(String ids) {
         log.info("删除子计划任务：{}", ids);
-        Result result = this.supervisePlanSubService.deleteSupervisePlanSubById(ids);
-        return ResponseEntity.ok(result);
+        return this.supervisePlanSubService.deleteSupervisePlanSubById(ids);
     }
 
 

@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanMain;
+import org.springframework.http.ResponseEntity;
 
 public interface SupervisePlanMainService {
 
@@ -21,7 +22,7 @@ public interface SupervisePlanMainService {
      * @param ids
      * @return
      */
-    Result deleteSupervisePlanMainById(String ids);
+    ResponseEntity<Result> deleteSupervisePlanMainById(String ids);
 
 
     /**
