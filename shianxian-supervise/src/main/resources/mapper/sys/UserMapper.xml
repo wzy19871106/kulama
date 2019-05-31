@@ -23,7 +23,8 @@
         #{user.userName},
         #{user.userNo},
         #{user.userTel},
-        #{user.userLoginPass}
+        #{user.userLoginPass},
+        #{user.picTag}
         )
     </select>
 
