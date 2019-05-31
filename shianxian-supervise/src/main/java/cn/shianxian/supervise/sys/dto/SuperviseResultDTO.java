@@ -47,6 +47,11 @@ public class SuperviseResultDTO {
     private String resultValue;
 
     /**
+     * 排序
+     */
+    private String order;
+
+    /**
      * 分数
      */
     private String score;
@@ -60,5 +65,16 @@ public class SuperviseResultDTO {
      * 整改意见,该结果单项的整改意见
      */
     private String advice;
+
+    /**
+     * 是否启用
+     */
+    private Boolean ifUse;
+
+    /**
+     * 是否删除
+     */
+    private Boolean ifDelete;
+
 
 }
