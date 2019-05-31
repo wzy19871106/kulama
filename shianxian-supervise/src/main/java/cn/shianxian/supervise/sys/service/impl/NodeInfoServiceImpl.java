@@ -22,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -106,18 +108,22 @@ public class NodeInfoServiceImpl implements NodeInfoService {
             List<AuthorityDTO> authorityDTOS = JSON.parseArray(authority, AuthorityDTO.class);
             UserGroup userGroup = new UserGroup();
             StringBuilder sb = new StringBuilder();
+            Set<String> set = new HashSet<>();
             for (AuthorityDTO authorityDTO : authorityDTOS) {
-                if (authorityDTO.getChildren().isEmpty()) {
-                    userGroup.setUserGroupTag(authorityDTO.getId());
-                    List<UserGroup> groups = this.userGroupDao.select(userGroup);
-                    if (!groups.isEmpty()) {
-                        sb.append(groups.get(0).getUserDataAuthority()).append(",");
-                    }
+                userGroup.setUserGroupTag(authorityDTO.getId());
+                List<UserGroup> groups = this.userGroupDao.select(userGroup);
+                if (!groups.isEmpty()) {
+                    set.add(groups.get(0).getUserDataAuthority());
                 }
             }
-            String authoritys = sb.substring(0, sb.length() - 1);
-            nodeInfo.setUserDataUsedAuthoritySet(authoritys);
-            this.nodeInfoDao.updateAuthorityById(nodeInfo);
+            for (String s : set) {
+                sb.append(s).append(",");
+            }
+            if (sb.length() > 0) {
+                String authoritys = sb.substring(0, sb.length() - 1);
+                nodeInfo.setUserDataUsedAuthoritySet(authoritys);
+                this.nodeInfoDao.updateAuthorityById(nodeInfo);
+            }
         }
         return Result.successMsg();
     }
@@ -149,20 +155,24 @@ public class NodeInfoServiceImpl implements NodeInfoService {
         List<AuthorityDTO> authorityDTOS = JSON.parseArray(authority, AuthorityDTO.class);
         UserGroup userGroup = new UserGroup();
         StringBuilder sb = new StringBuilder();
+        Set<String> set = new HashSet<>();
         for (AuthorityDTO authorityDTO : authorityDTOS) {
-            if (authorityDTO.getChildren().isEmpty()) {
-                userGroup.setUserGroupTag(authorityDTO.getId());
-                List<UserGroup> groups = this.userGroupDao.select(userGroup);
-                if (!groups.isEmpty()) {
-                    sb.append(groups.get(0).getUserDataAuthority()).append(",");
-                }
+            userGroup.setUserGroupTag(authorityDTO.getId());
+            List<UserGroup> groups = this.userGroupDao.select(userGroup);
+            if (!groups.isEmpty()) {
+                set.add(groups.get(0).getUserDataAuthority());
             }
         }
-        String authoritys = sb.substring(0, sb.length() - 1);
-        // 批量赋予节点权限
-        String[] ids = dataAuthority.getIds();
-        for (String id : ids) {
-            this.nodeInfoDao.updateNodeInfoAuthority(id, authoritys);
+        for (String s : set) {
+            sb.append(s).append(",");
+        }
+        if (sb.length() > 0) {
+            String authoritys = sb.substring(0, sb.length() - 1);
+            // 批量赋予节点权限
+            String[] ids = dataAuthority.getIds();
+            for (String id : ids) {
+                this.nodeInfoDao.updateNodeInfoAuthority(id, authoritys);
+            }
         }
         return Result.successMsg();
     }

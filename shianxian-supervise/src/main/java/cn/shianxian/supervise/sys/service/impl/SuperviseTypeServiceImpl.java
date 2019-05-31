@@ -18,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Slf4j
@@ -101,23 +103,27 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
         List<AuthorityDTO> authorityDTOS = JSON.parseArray(authority, AuthorityDTO.class);
         UserGroup userGroup = new UserGroup();
         StringBuilder sb = new StringBuilder();
+        Set<String> set = new HashSet<>();
         for (AuthorityDTO authorityDTO : authorityDTOS) {
-            if (authorityDTO.getChildren().isEmpty()) {
-                userGroup.setUserGroupTag(authorityDTO.getId());
-                List<UserGroup> groups = this.userGroupDao.select(userGroup);
-                if (!groups.isEmpty()) {
-                    sb.append(groups.get(0).getUserDataAuthority()).append(",");
-                }
+            userGroup.setUserGroupTag(authorityDTO.getId());
+            List<UserGroup> groups = this.userGroupDao.select(userGroup);
+            if (!groups.isEmpty()) {
+                set.add(groups.get(0).getUserDataAuthority());
             }
         }
-        String authoritys = sb.substring(0, sb.length() - 1);
-        // 批量赋予节点权限
-        String[] ids = dataAuthorityDTO.getIds();
-        SuperviseType superviseType = new SuperviseType();
-        superviseType.setUserGroupDataAuthority(authoritys);
-        for (String id : ids) {
-            superviseType.setSuperviseTypeTag(id);
-            this.superviseTypeDao.saveSuperviseTypeAuthority(superviseType);
+        for (String s : set) {
+            sb.append(s).append(",");
+        }
+        if (sb.length() > 0) {
+            String authoritys = sb.substring(0, sb.length() - 1);
+            // 批量赋予节点权限
+            String[] ids = dataAuthorityDTO.getIds();
+            SuperviseType superviseType = new SuperviseType();
+            superviseType.setUserGroupDataAuthority(authoritys);
+            for (String id : ids) {
+                superviseType.setSuperviseTypeTag(id);
+                this.superviseTypeDao.saveSuperviseTypeAuthority(superviseType);
+            }
         }
         return Result.successMsg();
     }
@@ -165,20 +171,25 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
             List<AuthorityDTO> authorityDTOS = JSON.parseArray(authority, AuthorityDTO.class);
             UserGroup userGroup = new UserGroup();
             StringBuilder sb = new StringBuilder();
+            Set<String> set = new HashSet<>();
             for (AuthorityDTO authorityDTO : authorityDTOS) {
-                if (authorityDTO.getChildren().isEmpty()) {
-                    userGroup.setUserGroupTag(authorityDTO.getId());
-                    List<UserGroup> groups = this.userGroupDao.select(userGroup);
-                    if (!groups.isEmpty()) {
-                        sb.append(groups.get(0).getUserDataAuthority()).append(",");
-                    }
+                userGroup.setUserGroupTag(authorityDTO.getId());
+                List<UserGroup> groups = this.userGroupDao.select(userGroup);
+                if (!groups.isEmpty()) {
+                    set.add(groups.get(0).getUserDataAuthority());
                 }
             }
-            String authoritys = sb.substring(0, sb.length() - 1);
-            superviseType.setUserGroupDataAuthority(authoritys);
-            this.superviseTypeDao.updateSuperviseTypeAuthority(superviseType);
+            for (String s : set) {
+                sb.append(s).append(",");
+            }
+            if (sb.length() > 0) {
+                String authoritys = sb.substring(0, sb.length() - 1);
+                superviseType.setUserGroupDataAuthority(authoritys);
+                this.superviseTypeDao.updateSuperviseTypeAuthority(superviseType);
+            }
         }
         return Result.successMsg();
     }
+
 
 }
