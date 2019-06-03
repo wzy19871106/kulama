@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.information.dao.InformationDao">
+
+    <select id="saveInformation" resultType="java.lang.String">
+       CALL Proc_T_Information_Add
+       (
+       #{information.title},
+       #{information.content},
+       #{information.columnTag},
+       #{information.userId},
+       #{information.picTag},
+       #{information.ifTop},
+       #{information.ifDisable}
+       )
+    </select>
+
+    <select id="updateInformation" resultType="java.lang.String">
+       CALL proc_T_Information_Edit_ByIndex
+       (
+       #{information.index},
+       #{information.title},
+       #{information.content},
+       #{information.columnTag},
+       #{information.userId},
+       #{information.picTag},
+       #{information.updateTime}
+       )
+    </select>
+
+    <select id="deleteInformation" resultType="java.lang.String">
+       CALL proc_T_Information_Remove_ByIndex(#{index})
+    </select>
+
+    <resultMap id="information" type="cn.shianxian.supervise.information.pojo.Information"></resultMap>
+
+    <select id="selectInformation" resultMap="information,pageCount,totalCount">
+        CALL proc_T_Information_Query_ByCondition
+        (
+        #{queryPojo.id},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectInformationById" resultMap="information">
+        CALL proc_T_Information_Query_ByIndex(#{index})
+    </select>
+
+    <select id="updateInformationTop" resultType="java.lang.String">
+       CALL proc_T_Information_Top_ByIndex(#{index})
+    </select>
+
+    <select id="updateInformationUnTop" resultType="java.lang.String">
+       CALL proc_T_Information_UnTop_ByIndex(#{index})
+    </select>
+</mapper>
