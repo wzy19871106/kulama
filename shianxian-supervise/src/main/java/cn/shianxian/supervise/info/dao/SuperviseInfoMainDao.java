@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.info.dao;
 
 import cn.shianxian.supervise.common.pojo.Pages;
+import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -45,4 +46,15 @@ public interface SuperviseInfoMainDao extends Mapper<SuperviseInfoMain> {
      * @return
      */
     String saveSuperviseInfoMain(@Param("superviseInfoMain") SuperviseInfoMain superviseInfoMain);
+
+
+    /**
+     * 根据登录用户的数据访问权限查询计划任务监管日志列表
+     * @param planTag
+     * @param superviseTypeTag
+     * @param queryPojo
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectSuperviseInfoByPlan(@Param("planTag") String planTag, @Param("superviseTypeTag")String superviseTypeTag, @Param("queryPojo")QueryPojo queryPojo, @Param("pages")Pages pages);
 }

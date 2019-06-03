@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.info.service.impl;
 
 import cn.shianxian.supervise.common.pojo.Pages;
+import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.dao.SuperviseInfoMainDao;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
@@ -45,5 +46,12 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
     public Result saveSuperviseInfoMain(SuperviseInfoMain superviseInfoMain) {
         this.superviseInfoMainDao.saveSuperviseInfoMain(superviseInfoMain);
         return Result.successMsg();
+    }
+
+
+    @Override
+    public Result selectSuperviseInfoByPlan(String planTag, String superviseTypeTag, QueryPojo queryPojo, Pages pages) {
+        List<List<?>> list = this.superviseInfoMainDao.selectSuperviseInfoByPlan(planTag, superviseTypeTag, queryPojo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 }

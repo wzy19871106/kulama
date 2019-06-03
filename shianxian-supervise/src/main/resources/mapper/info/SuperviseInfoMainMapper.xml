@@ -44,4 +44,19 @@
         #{superviseInfoMain.picTag}
         )
     </select>
+
+    <select id="selectSuperviseInfoByPlan" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByCondition_Plan
+        (
+        #{planTag},
+        #{superviseTypeTag},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{queryPojo.authority},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
 </mapper>

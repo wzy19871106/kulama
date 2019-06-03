@@ -2,6 +2,8 @@ package cn.shianxian.supervise.info.vo;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 /**
  * 监管结果VO
  */
@@ -27,13 +29,12 @@ public class SuperviseInfoVO {
     /**
      * 监管日期
      */
-    private String createTime;
+    private LocalDateTime createTime;
 
     /**
      * 计划任务编号（非计划任务监管可为空)
      */
     private String planTag;
-
 
     /**
      * 计划任务名称
@@ -74,6 +75,21 @@ public class SuperviseInfoVO {
      * 监管父内容名称
      */
     private String parentSuperviseName;
+
+    /**
+     * 节点名称
+     */
+    private String nodeName;
+
+    /**
+     * 负责人名称
+     */
+    private String functionaryName;
+
+    /**
+     * 监管队伍名称
+     */
+    private String superviseTeamName;
 
     /**
      * 分数
