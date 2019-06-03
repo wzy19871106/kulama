@@ -61,4 +61,11 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
         List<List<?>> list = this.superviseInfoMainDao.selectSuperviseInfoByLike(queryPojo, pages);
         return Result.data((Long) list.get(2).get(0), list.get(0));
     }
+
+
+    @Override
+    public Result selectSuperviseInfoByRectify(QueryPojo queryPojo, Pages pages) {
+        List<List<?>> list = this.superviseInfoMainDao.selectSuperviseInfoByRectify(queryPojo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
+    }
 }

@@ -61,4 +61,13 @@ public interface SuperviseInfoMainService {
      * @return
      */
     Result selectSuperviseInfoByLike(QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 根据登录用户的数据访问权限及条件查询需要整改的监管列表，已企业，监管类型分组显示
+     * @param queryPojo
+     * @param pages
+     * @return
+     */
+    Result selectSuperviseInfoByRectify(QueryPojo queryPojo, Pages pages);
 }

@@ -99,4 +99,26 @@ public class SuperviseInfoMainController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 根据登录用户的数据访问权限及条件查询需要整改的监管列表，已企业，监管类型分组显示
+     * @return
+     */
+    @GetMapping("selectSuperviseInfoByRectify")
+    @ApiOperation(value = "根据登录用户的数据访问权限及条件查询需要整改的监管列表，已企业，监管类型分组显示", notes = "根据登录用户的数据访问权限及条件查询需要整改的监管列表，已企业，监管类型分组显示")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管类型id"),
+            @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "权限"),
+            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSuperviseInfoByRectify(QueryPojo queryPojo, Pages pages) {
+        Result result = this.superviseInfoMainService.selectSuperviseInfoByRectify(queryPojo, pages);
+        return ResponseEntity.ok(result);
+    }
+
+
 }

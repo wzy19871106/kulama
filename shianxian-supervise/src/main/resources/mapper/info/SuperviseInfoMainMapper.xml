@@ -72,4 +72,17 @@
         )
     </select>
 
+    <select id="selectSuperviseInfoByRectify" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByRectify
+        (
+        #{queryPojo.id},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{queryPojo.authority},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
 </mapper>
