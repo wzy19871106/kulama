@@ -59,4 +59,17 @@
         )
     </select>
 
+    <select id="selectSuperviseInfoByLike" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByCondition
+        (
+        #{queryPojo.id},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{queryPojo.authority},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
 </mapper>

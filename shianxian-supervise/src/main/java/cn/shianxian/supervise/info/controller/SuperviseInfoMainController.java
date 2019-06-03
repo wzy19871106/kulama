@@ -78,4 +78,25 @@ public class SuperviseInfoMainController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 根据登录用户的数据访问权限查询计划任务监管日志列表（日常抽查）
+     * @return
+     */
+    @GetMapping("selectSuperviseInfoByLike")
+    @ApiOperation(value = "根据登录用户的数据访问权限查询计划任务监管日志列表（日常抽查）", notes = "根据登录用户的数据访问权限查询计划任务监管日志列表（日常抽查）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管类型id"),
+            @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "权限"),
+            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSuperviseInfoByLike(QueryPojo queryPojo, Pages pages) {
+        Result result = this.superviseInfoMainService.selectSuperviseInfoByLike(queryPojo, pages);
+        return ResponseEntity.ok(result);
+    }
+
 }

@@ -52,4 +52,13 @@ public interface SuperviseInfoMainService {
      * @return
      */
     Result selectSuperviseInfoByPlan(String planTag, String superviseTypeTag, QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 根据登录用户的数据访问权限查询计划任务监管日志列表（日常抽查）
+     * @param queryPojo
+     * @param pages
+     * @return
+     */
+    Result selectSuperviseInfoByLike(QueryPojo queryPojo, Pages pages);
 }

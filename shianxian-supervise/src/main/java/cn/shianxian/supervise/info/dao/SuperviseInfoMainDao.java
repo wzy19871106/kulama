@@ -57,4 +57,13 @@ public interface SuperviseInfoMainDao extends Mapper<SuperviseInfoMain> {
      * @return
      */
     List<List<?>> selectSuperviseInfoByPlan(@Param("planTag") String planTag, @Param("superviseTypeTag")String superviseTypeTag, @Param("queryPojo")QueryPojo queryPojo, @Param("pages")Pages pages);
+
+
+    /**
+     * 根据登录用户的数据访问权限查询计划任务监管日志列表（日常抽查）
+     * @param queryPojo
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectSuperviseInfoByLike(@Param("queryPojo")QueryPojo queryPojo, @Param("pages")Pages pages);
 }
