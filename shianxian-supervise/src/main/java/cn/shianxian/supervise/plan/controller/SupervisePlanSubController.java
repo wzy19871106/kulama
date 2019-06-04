@@ -100,7 +100,7 @@ public class SupervisePlanSubController {
     @GetMapping("selectSupervisePlanSubList")
     @ApiOperation(value = "根据主任务编码，关键字查询主任务下所有未完成的子任务，显示计划任务名称，企业名称，计划检查时间，检查类型", notes = "根据主任务编码，关键字查询主任务下所有未完成的子任务，显示计划任务名称，企业名称，计划检查时间，检查类型")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "id", value = "用户id"),
+            @ApiImplicitParam(paramType = "query", name = "id", value = "计划任务id"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
