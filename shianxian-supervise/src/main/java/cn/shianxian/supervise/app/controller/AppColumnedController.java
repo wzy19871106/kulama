@@ -10,7 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,7 +32,7 @@ public class AppColumnedController {
      * 查询栏目信息
      * @return
      */
-    @GetMapping("columned")
+    @PostMapping("columned")
     @ApiOperation(value = "查询栏目信息", notes = "查询栏目信息")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
@@ -48,7 +48,7 @@ public class AppColumnedController {
      * 根据id查询栏目信息
      * @return
      */
-    @GetMapping("selectColumnedById")
+    @PostMapping("selectColumnedById")
     @ApiOperation(value = "根据id查询栏目信息", notes = "根据id查询栏目信息")
     @ApiImplicitParam(paramType = "query", name = "columnTag", value = "栏目标识")
     public ResponseEntity<Result> selectColumnedById(Long columnTag) {
