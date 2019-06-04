@@ -71,7 +71,7 @@ public class Information {
      * 栏目标识
      */
     @Column(name = "`columnTag`")
-    private String columnTag;
+    private Long columnTag;
 
     /**
      * 对象用户标识(暂不用)
