@@ -122,4 +122,19 @@ public class SuperviseResultController {
     }
 
 
+    /**
+     * 查询监管结果（树）
+     * @return
+     */
+    @GetMapping("selectSuperviseResultTree")
+    @ApiOperation(value = "查询监管结果（树）", notes = "查询监管结果（树）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "typeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
+    })
+    public ResponseEntity<Result> selectSuperviseResultTree(String typeTag, String authority) {
+        Result result = this.superviseResultService.selectSuperviseResultTree(typeTag, authority);
+        return ResponseEntity.ok(result);
+    }
+
 }

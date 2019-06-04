@@ -48,4 +48,11 @@ public interface SuperviseResultService {
     Result updateSuperviseResultBySort(String id, int type);
 
 
+    /**
+     * 查询监管结果（树）
+     * @param typeTag
+     * @param authority
+     * @return
+     */
+    Result selectSuperviseResultTree(String typeTag, String authority);
 }

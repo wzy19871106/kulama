@@ -3,6 +3,7 @@ package cn.shianxian.supervise.sys.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 监管内容
@@ -104,4 +105,10 @@ public class Supervise {
     @Transient
     private String superviseTypeName;
 
+
+    /**
+     * 监管结果集合
+     */
+    @Transient
+    private List<SuperviseResult> superviseResultList;
 }

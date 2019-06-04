@@ -1,9 +1,13 @@
 package cn.shianxian.supervise.sys.service.impl;
 
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.sys.dao.SuperviseDao;
 import cn.shianxian.supervise.sys.dao.SuperviseResultDao;
+import cn.shianxian.supervise.sys.dao.SuperviseTypeDao;
 import cn.shianxian.supervise.sys.dto.SuperviseResultDTO;
+import cn.shianxian.supervise.sys.pojo.Supervise;
 import cn.shianxian.supervise.sys.pojo.SuperviseResult;
+import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import cn.shianxian.supervise.sys.service.SuperviseResultService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +26,14 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
 
     @Autowired
     private SuperviseResultDao superviseResultDao;
+
+
+    @Autowired
+    private SuperviseTypeDao superviseTypeDao;
+
+
+    @Autowired
+    private SuperviseDao superviseDao;
 
 
     @Transactional
@@ -84,6 +96,21 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
             this.superviseResultDao.updateSuperviseResultByDownSort(id);
         }
         return Result.successMsg();
+    }
+
+
+    @Override
+    public Result selectSuperviseResultTree(String typeTag, String authority) {
+        List<SuperviseType> typeList = this.superviseTypeDao.selectSuperviseType(typeTag, authority);
+        for (SuperviseType superviseType : typeList) {
+            List<Supervise> superviseList = this.superviseDao.selectSuperviseByType(superviseType.getSuperviseTypeTag());
+            superviseType.setSuperviseList(superviseList);
+            for (Supervise supervise : superviseList) {
+                List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(supervise.getSuperviseTag());
+                supervise.setSuperviseResultList(results);
+            }
+        }
+        return Result.data(typeList);
     }
 
 }

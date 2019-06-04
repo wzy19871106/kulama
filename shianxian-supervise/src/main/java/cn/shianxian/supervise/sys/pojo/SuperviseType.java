@@ -4,6 +4,7 @@ package cn.shianxian.supervise.sys.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * 监管结果
@@ -69,4 +70,10 @@ public class SuperviseType {
     @Transient
     private String parentName;
 
+
+    /**
+     * 监管内容集合
+     */
+    @Transient
+    private List<Supervise> superviseList;
 }
