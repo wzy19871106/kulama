@@ -1,10 +1,10 @@
-package cn.shianxian.supervise.information.controller;
+package cn.shianxian.supervise.government.controller;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.information.pojo.Information;
-import cn.shianxian.supervise.information.service.InformationService;
+import cn.shianxian.supervise.government.pojo.Information;
+import cn.shianxian.supervise.government.service.InformationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -49,9 +49,9 @@ public class InformationController {
             @ApiImplicitParam(paramType = "query", name = "userId", value = "对象用户标识(暂不用)"),
             @ApiImplicitParam(paramType = "query", name = "userGroupId", value = "对象用户组标识(暂不用)"),
     })
-    public ResponseEntity<Result> saveInformation(@Valid Information information) {
+    public ResponseEntity<Result> saveOrUpdateInformation(@Valid Information information) {
         log.info("保存、修改政企互动信息：{}", information);
-        return this.informationService.saveInformation(information);
+        return this.informationService.saveOrUpdateInformation(information);
     }
 
 

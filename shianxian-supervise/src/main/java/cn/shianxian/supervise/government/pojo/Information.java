@@ -1,4 +1,4 @@
-package cn.shianxian.supervise.information.pojo;
+package cn.shianxian.supervise.government.pojo;
 
 
 import lombok.Data;

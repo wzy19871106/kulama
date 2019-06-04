@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="cn.shianxian.supervise.information.dao.InformationDao">
+<mapper namespace="cn.shianxian.supervise.government.dao.InformationDao">
 
     <select id="saveInformation" resultType="java.lang.String">
        CALL Proc_T_Information_Add
@@ -32,7 +32,7 @@
        CALL proc_T_Information_Remove_ByIndex(#{index})
     </select>
 
-    <resultMap id="information" type="cn.shianxian.supervise.information.pojo.Information"></resultMap>
+    <resultMap id="information" type="cn.shianxian.supervise.government.pojo.Information"></resultMap>
 
     <select id="selectInformation" resultMap="information,pageCount,totalCount">
         CALL proc_T_Information_Query_ByCondition

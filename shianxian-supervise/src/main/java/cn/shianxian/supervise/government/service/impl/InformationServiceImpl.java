@@ -1,11 +1,11 @@
-package cn.shianxian.supervise.information.service.impl;
+package cn.shianxian.supervise.government.service.impl;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.information.dao.InformationDao;
-import cn.shianxian.supervise.information.pojo.Information;
-import cn.shianxian.supervise.information.service.InformationService;
+import cn.shianxian.supervise.government.dao.InformationDao;
+import cn.shianxian.supervise.government.pojo.Information;
+import cn.shianxian.supervise.government.service.InformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class InformationServiceImpl implements InformationService {
 
     @Transactional
     @Override
-    public ResponseEntity<Result> saveInformation(Information information) {
+    public ResponseEntity<Result> saveOrUpdateInformation(Information information) {
         if (null == information.getIndex()) {
             this.informationDao.saveInformation(information);
         } else {

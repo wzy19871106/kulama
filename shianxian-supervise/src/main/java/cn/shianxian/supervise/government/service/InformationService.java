@@ -1,9 +1,9 @@
-package cn.shianxian.supervise.information.service;
+package cn.shianxian.supervise.government.service;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.information.pojo.Information;
+import cn.shianxian.supervise.government.pojo.Information;
 import org.springframework.http.ResponseEntity;
 
 public interface InformationService {
@@ -14,7 +14,7 @@ public interface InformationService {
      * @param information
      * @return
      */
-    ResponseEntity<Result> saveInformation(Information information);
+    ResponseEntity<Result> saveOrUpdateInformation(Information information);
 
 
     /**

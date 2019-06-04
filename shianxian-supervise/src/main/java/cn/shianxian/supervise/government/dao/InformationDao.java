@@ -1,8 +1,8 @@
-package cn.shianxian.supervise.information.dao;
+package cn.shianxian.supervise.government.dao;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
-import cn.shianxian.supervise.information.pojo.Information;
+import cn.shianxian.supervise.government.pojo.Information;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
