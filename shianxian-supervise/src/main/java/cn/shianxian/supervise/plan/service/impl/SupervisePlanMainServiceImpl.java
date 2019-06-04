@@ -76,4 +76,11 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
         List<SuperviseInfoVO> planList = this.supervisePlanMainDao.selectSupervisePlanDetailByIds(planTag);
         return Result.data(planList);
     }
+
+
+    @Override
+    public Result selectSupervisePlanMainList(QueryPojo queryPojo, Pages pages) {
+        List<List<?>> list = this.supervisePlanMainDao.selectSupervisePlanMainList(queryPojo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
+    }
 }

@@ -62,4 +62,11 @@ public class SupervisePlanSubServiceImpl implements SupervisePlanSubService {
         }
         return Result.data(null);
     }
+
+
+    @Override
+    public Result selectSupervisePlanSubList(QueryPojo queryPojo, Pages pages) {
+        List<List<?>> list = this.supervisePlanSubDao.selectSupervisePlanSubList(queryPojo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
+    }
 }

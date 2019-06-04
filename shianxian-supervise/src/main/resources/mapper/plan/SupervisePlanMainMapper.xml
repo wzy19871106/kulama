@@ -68,4 +68,15 @@
     <select id="selectSupervisePlanDetailByIds" resultMap="info">
         CALL proc_T_SuperviserPlanDetail_Query_ByIDS(#{planTag})
     </select>
+
+    <select id="selectSupervisePlanMainList" resultMap="planMain,pageCount,totalCount">
+        CALL Proc_T_Supervise_Query_PlanList
+        (
+        #{queryPojo.id},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
 </mapper>

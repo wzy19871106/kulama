@@ -88,4 +88,22 @@ public class SupervisePlanMainController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 根据登录用户的所属执法队伍及关键字关联查询计划任务主、从表，显示任务名称，任务时间、子任务完成进度等信息
+     * @return
+     */
+    @GetMapping("selectSupervisePlanMainList")
+    @ApiOperation(value = "根据登录用户的所属执法队伍及关键字关联查询计划任务主、从表，显示任务名称，任务时间、子任务完成进度等信息", notes = "根据登录用户的所属执法队伍及关键字关联查询计划任务主、从表，显示任务名称，任务时间、子任务完成进度等信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "用户id"),
+            @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSupervisePlanMainList(QueryPojo queryPojo, Pages pages) {
+        Result result = this.supervisePlanMainService.selectSupervisePlanMainList(queryPojo, pages);
+        return ResponseEntity.ok(result);
+    }
+
 }
