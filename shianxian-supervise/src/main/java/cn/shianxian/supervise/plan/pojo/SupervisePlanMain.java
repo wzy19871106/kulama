@@ -63,6 +63,6 @@ public class SupervisePlanMain extends BasePojo {
      * 完成比例
      */
     @Transient
-    private Boolean completionRate;
+    private String completionRate;
 
 }
