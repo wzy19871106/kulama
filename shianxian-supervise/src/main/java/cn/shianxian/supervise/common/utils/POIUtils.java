@@ -59,20 +59,20 @@ public class POIUtils {
             wb.close();
             stream.close();
         } catch (IOException e) {
-            log.error("销账单导出错误：{}，信息：{}", e, e.getMessage());
+            log.error("导出错误：{}，信息：{}", e, e.getMessage());
         } finally {
             if (wb != null) {
                 try {
                     wb.close();
                 } catch (IOException e) {
-                    log.error("销账单导出错误：{}，信息：{}", e, e.getMessage());
+                    log.error("导出错误：{}，信息：{}", e, e.getMessage());
                 }
             }
             if (stream != null) {
                 try {
                     stream.close();
                 } catch (IOException e) {
-                    log.error("销账单导出错误：{}，信息：{}", e, e.getMessage());
+                    log.error("导出错误：{}，信息：{}", e, e.getMessage());
                 }
             }
         }
