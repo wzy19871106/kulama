@@ -70,10 +70,15 @@ public class SuperviseType {
     @Transient
     private String parentName;
 
-
     /**
      * 监管内容集合
      */
     @Transient
     private List<Supervise> superviseList;
+
+    /**
+     * 监管子内容集合数量
+     */
+    @Transient
+    private int num;
 }
