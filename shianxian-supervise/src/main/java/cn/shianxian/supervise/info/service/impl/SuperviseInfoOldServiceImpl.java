@@ -146,10 +146,7 @@ public class SuperviseInfoOldServiceImpl implements SuperviseInfoOldService {
             criteria.andEqualTo("id", queryPojo.getId());
         }
         if (StringUtils.isNotBlank(queryPojo.getName())) {
-            criteria.orLike("nodeName", "%" + queryPojo.getName() + "%");
-            criteria.orLike("unMatchPointId", "%" + queryPojo.getName() + "%");
-            criteria.orLike("unMatchContent", "%" + queryPojo.getName() + "%");
-            criteria.orLike("requst", "%" + queryPojo.getName() + "%");
+            criteria.andEqualTo("nodeName", queryPojo.getName());
         }
         if (queryPojo.getStartTime() != null && queryPojo.getEndTime() != null) {
             criteria.andBetween("superviseTime", queryPojo.getStartTime(), queryPojo.getEndTime());
