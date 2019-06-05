@@ -159,4 +159,12 @@ public class SuperviseInfoOldServiceImpl implements SuperviseInfoOldService {
     }
 
 
+    @Override
+    public Result selectSuperviseInfoOldGroup(QueryPojo queryPojo, Pages pages) {
+        Page<Object> page = PageHelper.startPage(pages.getPageNum(), pages.getPageSize());
+        List<SuperviseInfoOld> list = this.superviseInfoOldDao.selectSuperviseInfoOldGroup(queryPojo);
+        return Result.data(page.getTotal(), list);
+    }
+
+
 }

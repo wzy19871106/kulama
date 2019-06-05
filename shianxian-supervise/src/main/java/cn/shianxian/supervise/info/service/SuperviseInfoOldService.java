@@ -17,10 +17,19 @@ public interface SuperviseInfoOldService {
 
 
     /**
-     * selectSuperviseInfoOld
+     * 查询导入线下监管信息
      * @param queryPojo
      * @param pages
      * @return
      */
     Result selectSuperviseInfoOld(QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 分组查询导入线下监管信息
+     * @param queryPojo
+     * @param pages
+     * @return
+     */
+    Result selectSuperviseInfoOldGroup(QueryPojo queryPojo, Pages pages);
 }

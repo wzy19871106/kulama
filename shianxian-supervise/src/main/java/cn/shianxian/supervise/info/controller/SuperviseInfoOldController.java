@@ -62,4 +62,23 @@ public class SuperviseInfoOldController {
     }
 
 
+    /**
+     * 分组查询导入线下监管信息
+     * @return
+     */
+    @GetMapping("selectSuperviseInfoOldGroup")
+    @ApiOperation(value = "分组查询导入线下监管信息", notes = "分组查询导入线下监管信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSuperviseInfoOldGroup(QueryPojo queryPojo, Pages pages) {
+        Result result = this.superviseInfoOldService.selectSuperviseInfoOldGroup(queryPojo, pages);
+        return ResponseEntity.ok(result);
+    }
+
+
 }

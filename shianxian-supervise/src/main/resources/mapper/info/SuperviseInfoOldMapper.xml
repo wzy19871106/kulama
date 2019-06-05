@@ -25,4 +25,22 @@
         </foreach>
     </insert>
 
+    <select id="selectSuperviseInfoOldGroup" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoOld">
+         SELECT id,nodeTag,nodeName,nodeAddress,superviseTypeTag,unMatchId,unMatchPointId,wrongNum,unMatchContent,requst,returnVisitDone,ifDelete,superviseTime
+         FROM t_supervise_info_old
+         <where>
+             <if test="queryPojo.startTime != null and queryPojo.endTime != null">
+                 AND superviseTime BETWEEN #{queryPojo.startTime} AND #{queryPojo.endTime}
+             </if>
+             <if test="queryPojo.name != null and queryPojo.name != '' ">
+                 AND nodeName LIKE CONCAT("%", #{queryPojo.name}, "%")
+                 OR unMatchPointId LIKE CONCAT("%", #{queryPojo.name}, "%")
+                 OR unMatchContent LIKE CONCAT("%", #{queryPojo.name}, "%")
+                 OR requst LIKE CONCAT("%", #{queryPojo.name}, "%")
+             </if>
+         </where>
+         GROUP BY nodeName
+         ORDER BY superviseTime DESC
+    </select>
+
 </mapper>
