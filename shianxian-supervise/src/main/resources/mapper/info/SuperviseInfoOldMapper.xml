@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.info.dao.SuperviseInfoOldDao">
+
+    <insert id="batchInsertSelective" parameterType="cn.shianxian.supervise.info.pojo.SuperviseInfoOld">
+        INSERT INTO t_supervise_info_old
+        (
+        nodeName,nodeAddress,superviseTypeTag,unMatchId,unMatchPointId,wrongNum,unMatchContent,requst,returnVisitDone,ifDelete,superviseTime
+        )
+        VALUES
+        <foreach collection="superviseInfoOlds" item="item" separator="," index="index">
+            (
+            #{item.nodeName},
+            #{item.nodeAddress},
+            #{item.superviseTypeTag},
+            #{item.unMatchId},
+            #{item.unMatchPointId},
+            #{item.wrongNum},
+            #{item.unMatchContent},
+            #{item.requst},
+            #{item.returnVisitDone},
+            #{item.ifDelete},
+            #{item.superviseTime}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

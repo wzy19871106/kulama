@@ -30,6 +30,7 @@
         <io.springfox>2.8.0</io.springfox>
         <org.slf4j>1.7.25</org.slf4j>
         <redis.clients>2.9.0</redis.clients>
+        <org.apache.poi>4.0.0</org.apache.poi>
     </properties>
 
     <dependencies>
@@ -132,6 +133,12 @@
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${redis.clients}</version>
+        </dependency>
+        <!-- poi -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${org.apache.poi}</version>
         </dependency>
     </dependencies>
 
