@@ -103,11 +103,15 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
     public Result selectSuperviseResultTree(String typeTag, String authority) {
         List<SuperviseType> typeList = this.superviseTypeDao.selectSuperviseType(typeTag, authority);
         for (SuperviseType superviseType : typeList) {
-            List<Supervise> superviseList = this.superviseDao.selectSuperviseByType(superviseType.getSuperviseTypeTag());
-            superviseType.setSuperviseList(superviseList);
-            for (Supervise supervise : superviseList) {
-                List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(supervise.getSuperviseTag());
-                supervise.setSuperviseResultList(results);
+            List<Supervise> parentSuperviseList = this.superviseDao.selectParentSupervise(superviseType.getSuperviseTypeTag());
+            superviseType.setSuperviseList(parentSuperviseList);
+            for (Supervise supervise : parentSuperviseList) {
+                List<Supervise> subSuperviseList = this.superviseDao.selectSubSupervise(supervise.getSuperviseTag());
+                supervise.setSuperviseList(subSuperviseList);
+                for (Supervise s : subSuperviseList) {
+                    List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(s.getSuperviseTag());
+                    s.setSuperviseResultList(results);
+                }
             }
         }
         return Result.data(typeList);

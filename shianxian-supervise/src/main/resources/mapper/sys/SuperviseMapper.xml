@@ -62,4 +62,11 @@
         CALL proc_T_Supervise_QueryTreeJson_ByType(#{type})
     </select>
 
+    <select id="selectParentSupervise" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Parent_BySuperviseTypeTag(#{id})
+    </select>
+
+    <select id="selectSubSupervise" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Sub_ByParentTag(#{id})
+    </select>
 </mapper>

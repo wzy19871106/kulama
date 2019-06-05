@@ -111,4 +111,10 @@ public class Supervise {
      */
     @Transient
     private List<SuperviseResult> superviseResultList;
+
+    /**
+     * 监管内容子集
+     */
+    @Transient
+    private List<Supervise> superviseList;
 }
