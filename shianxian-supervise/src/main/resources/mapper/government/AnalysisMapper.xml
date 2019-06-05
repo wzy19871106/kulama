@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.government.dao.AnalysisDao">
+
+    <select id="selectCompanyLine" resultType="java.lang.Double">
+        CALL sp_T_Supervise_Analysis_Company_Line
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
+    <select id="selectCompanyRadar" resultType="cn.shianxian.supervise.government.vo.Analysis">
+        CALL sp_T_Supervise_Analysis_Company_Radar
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
+    <select id="selectIndustryLine" resultType="java.lang.Double">
+        CALL sp_T_Supervise_Analysis_Industry_Line
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
+    <select id="selectIndustryRadar" resultType="cn.shianxian.supervise.government.vo.Analysis">
+        CALL sp_T_Supervise_Analysis_Industry_Radar
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
+    <select id="selectAnalysisNodeInfo" resultType="cn.shianxian.supervise.government.vo.NodeAnalysis">
+        CALL sp_T_Supervise_Analysis_NodeInfo
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
+    <select id="selectAnalysisScore" resultType="cn.shianxian.supervise.government.vo.NodeAnalysis">
+        CALL sp_T_Supervise_Analysis_Score_Column
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
+</mapper>
