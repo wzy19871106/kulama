@@ -13,7 +13,8 @@
         #{superviseInfoMainType.superviserTag},
         #{superviseInfoMainType.superviserName},
         #{superviseInfoMainType.functionaryTag},
-        #{superviseInfoMainType.functionaryName}
+        #{superviseInfoMainType.functionaryName},
+        #{superviseInfoMainType.parentMainIds}
         )
     </select>
 
