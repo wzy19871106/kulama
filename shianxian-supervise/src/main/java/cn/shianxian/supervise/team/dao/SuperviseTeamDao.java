@@ -53,4 +53,10 @@ public interface SuperviseTeamDao extends Mapper<SuperviseTeam> {
     List<List<?>> selectSuperviseTeamByLike(@Param("queryPojo") QueryPojo queryPojo, @Param("pages") Pages pages);
 
 
+    /**
+     * 根据用户id查询执法队伍
+     * @param id
+     * @return
+     */
+    SuperviseTeam selectSuperviseTeamByUserId(@Param("id") String id);
 }

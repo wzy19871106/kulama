@@ -63,4 +63,11 @@ public class SuperviseTeamServiceImpl implements SuperviseTeamService {
         }
         return Result.data(superviseTeams);
     }
+
+
+    @Override
+    public Result selectSuperviseTeamByUserId(String id) {
+        SuperviseTeam team = this.superviseTeamDao.selectSuperviseTeamByUserId(id);
+        return Result.data(team);
+    }
 }

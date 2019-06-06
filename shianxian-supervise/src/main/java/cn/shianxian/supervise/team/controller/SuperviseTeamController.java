@@ -111,4 +111,16 @@ public class SuperviseTeamController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 根据用户id查询执法队伍
+     * @return
+     */
+    @GetMapping("selectSuperviseTeamByUserId")
+    @ApiOperation(value = "根据用户id查询执法队伍", notes = "根据用户id查询执法队伍")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "用户id")
+    public ResponseEntity<Result> selectSuperviseTeamByUserId(String id) {
+        Result result = this.superviseTeamService.selectSuperviseTeamByUserId(id);
+        return ResponseEntity.ok(result);
+    }
 }

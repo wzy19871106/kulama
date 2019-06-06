@@ -4,10 +4,7 @@ package cn.shianxian.supervise.team.pojo;
 import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 执法队伍表
@@ -55,4 +52,15 @@ public class SuperviseTeam extends BasePojo {
     @Column(name = "`ifDelete`")
     private Boolean ifDelete;
 
+    /**
+     * 执法人员编码
+     */
+    @Transient
+    private String superviserTag;
+
+    /**
+     * 执法人员名称
+     */
+    @Transient
+    private String superviserName;
 }

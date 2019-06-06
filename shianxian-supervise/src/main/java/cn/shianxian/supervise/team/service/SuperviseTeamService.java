@@ -39,4 +39,11 @@ public interface SuperviseTeamService {
      */
     Result selectSuperviseTeam(QueryPojo queryPojo, Pages pages);
 
+
+    /**
+     * 根据用户id查询执法队伍
+     * @param id
+     * @return
+     */
+    Result selectSuperviseTeamByUserId(String id);
 }

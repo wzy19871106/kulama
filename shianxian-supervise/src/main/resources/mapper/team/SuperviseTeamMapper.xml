@@ -48,4 +48,8 @@
         #{pages.pageNum}
         )
     </select>
+
+    <select id="selectSuperviseTeamByUserId" resultMap="superviseTeam,pageCount,totalCount">
+        CALL Proc_T_Superviser_SuperviserTeam_Query_ByUserTag(#{id})
+    </select>
 </mapper>
