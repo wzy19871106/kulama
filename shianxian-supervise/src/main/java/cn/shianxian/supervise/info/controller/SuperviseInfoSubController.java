@@ -53,7 +53,7 @@ public class SuperviseInfoSubController {
     @ApiOperation(value = "保存监管业务（从表）", notes = "保存监管业务（从表）")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "subId", value = "监管业务主键"),
-            @ApiImplicitParam(paramType = "query", name = "mainId", value = "主表外键"),
+            @ApiImplicitParam(paramType = "query", name = "mainIds", value = "主表外键"),
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
             @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管项目编码"),
@@ -93,4 +93,82 @@ public class SuperviseInfoSubController {
         Result result = this.superviseInfoSubService.selectSuperviseInfoDetailById(id, pages);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 查询整改情况时间轴
+     * @return
+     */
+    @GetMapping("rectifyTime")
+    @ApiOperation(value = "查询整改情况时间轴", notes = "查询整改情况时间轴")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "mainId", value = "监管业务编码"),
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+    })
+    public ResponseEntity<Result> rectifyTime(SuperviseInfoSub superviseInfoSub) {
+        Result result = this.superviseInfoSubService.rectifyTime(superviseInfoSub);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 查询整改情况监管结果
+     * @return
+     */
+    @GetMapping("rectifyResult")
+    @ApiOperation(value = "查询整改情况监管结果", notes = "查询整改情况监管结果")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "mainId", value = "监管业务编码"),
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+    })
+    public ResponseEntity<Result> rectifyResult(SuperviseInfoSub superviseInfoSub) {
+        Result result = this.superviseInfoSubService.rectifyResult(superviseInfoSub);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据MAINIDS查询整改反馈页面的已整改项数量
+     * @return
+     */
+    @GetMapping("rectifyRequest")
+    @ApiOperation(value = "根据MAINIDS查询整改反馈页面的已整改项数量", notes = "根据MAINIDS查询整改反馈页面的已整改项数量")
+    @ApiImplicitParam(paramType = "query", name = "mainIds", value = "监管业务类型编码")
+    public ResponseEntity<Result> rectifyRequest(String mainIds) {
+        Result result = this.superviseInfoSubService.rectifyRequest(mainIds);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据MAINIDS查询整改回访页面的已整改项及未完成数量
+     * @return
+     */
+    @GetMapping("rectifyReturn")
+    @ApiOperation(value = "根据MAINIDS查询整改回访页面的已整改项及未完成数量", notes = "根据MAINIDS查询整改回访页面的已整改项及未完成数量")
+    @ApiImplicitParam(paramType = "query", name = "mainIds", value = "监管业务类型编码")
+    public ResponseEntity<Result> rectifyReturn(String mainIds) {
+        Result result = this.superviseInfoSubService.rectifyReturn(mainIds);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据监管编码及监管类型返回已整改项的列表
+     * @return
+     */
+    @GetMapping("correctiveFeedback")
+    @ApiOperation(value = "根据监管编码及监管类型返回已整改项的列表", notes = "根据监管编码及监管类型返回已整改项的列表")
+    @ApiImplicitParam(paramType = "query", name = "mainIds", value = "监管业务类型编码")
+    public ResponseEntity<Result> correctiveFeedback(String mainIds) {
+        Result result = this.superviseInfoSubService.correctiveFeedback(mainIds);
+        return ResponseEntity.ok(result);
+    }
+
+
+
+
+
 }

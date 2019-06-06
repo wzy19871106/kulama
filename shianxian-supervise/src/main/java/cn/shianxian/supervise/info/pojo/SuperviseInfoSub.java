@@ -3,10 +3,7 @@ package cn.shianxian.supervise.info.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -127,4 +124,9 @@ public class SuperviseInfoSub {
     @Column(name = "remark")
     private String remark;
 
+    /**
+     * 监管业务外键
+     */
+    @Transient
+    private String mainId;
 }

@@ -82,4 +82,44 @@ public interface SuperviseInfoSubService {
      * @return
      */
     Result saveSuperviseInfoSub(SuperviseInfoSub superviseInfoSub);
+
+
+    /**
+     * 查询整改情况时间轴
+     * @param superviseInfoSub
+     * @return
+     */
+    Result rectifyTime(SuperviseInfoSub superviseInfoSub);
+
+
+    /**
+     * 查询整改情况监管结果
+     * @param superviseInfoSub
+     * @return
+     */
+    Result rectifyResult(SuperviseInfoSub superviseInfoSub);
+
+
+    /**
+     * 根据MAINIDS查询整改反馈页面的已整改项数量
+     * @param mainIds
+     * @return
+     */
+    Result rectifyRequest(String mainIds);
+
+
+    /**
+     * 根据MAINIDS查询整改回访页面的已整改项及未完成数量
+     * @param mainIds
+     * @return
+     */
+    Result rectifyReturn(String mainIds);
+
+
+    /**
+     * 根据监管编码及监管类型返回已整改项的列表
+     * @param mainIds
+     * @return
+     */
+    Result correctiveFeedback(String mainIds);
 }

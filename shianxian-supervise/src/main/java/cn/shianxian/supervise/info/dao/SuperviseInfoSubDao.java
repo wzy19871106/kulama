@@ -2,8 +2,7 @@ package cn.shianxian.supervise.info.dao;
 
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
-import cn.shianxian.supervise.info.vo.RectifySumVO;
-import cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO;
+import cn.shianxian.supervise.info.vo.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -120,4 +119,44 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
      * @param superviseInfoSub
      */
     String saveSuperviseInfoSub(@Param("superviseInfoSub") SuperviseInfoSub superviseInfoSub);
+
+
+    /**
+     * 查询整改情况时间轴
+     * @param superviseInfoSub
+     * @return
+     */
+    List<RectifyTimeVO> rectifyTime(@Param("superviseInfoSub") SuperviseInfoSub superviseInfoSub);
+
+
+    /**
+     * 查询整改情况监管结果
+     * @param superviseInfoSub
+     * @return
+     */
+    RectifyResultVO rectifyResult(@Param("superviseInfoSub") SuperviseInfoSub superviseInfoSub);
+
+
+    /**
+     * 根据MAINIDS查询整改反馈页面的已整改项数量
+     * @param mainIds
+     * @return
+     */
+    RectifyStatusVO rectifyRequest(@Param("mainIds") String mainIds);
+
+
+    /**
+     * 根据MAINIDS查询整改回访页面的已整改项及未完成数量
+     * @param mainIds
+     * @return
+     */
+    RectifyStatusVO rectifyReturn(@Param("mainIds") String mainIds);
+
+
+    /**
+     * 根据监管编码及监管类型返回已整改项的列表
+     * @param mainIds
+     * @return
+     */
+    List<SuperviseInfoSub> correctiveFeedback(@Param("mainIds") String mainIds);
 }

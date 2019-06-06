@@ -118,4 +118,39 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
         return Result.successMsg();
     }
+
+
+    @Override
+    public Result rectifyTime(SuperviseInfoSub superviseInfoSub) {
+        List<RectifyTimeVO> list = this.superviseInfoSubDao.rectifyTime(superviseInfoSub);
+        return Result.data(list);
+    }
+
+
+    @Override
+    public Result rectifyResult(SuperviseInfoSub superviseInfoSub) {
+        RectifyResultVO rectifyResultVO = this.superviseInfoSubDao.rectifyResult(superviseInfoSub);
+        return Result.data(rectifyResultVO);
+    }
+
+
+    @Override
+    public Result rectifyRequest(String mainIds) {
+        RectifyStatusVO rectifyStatusVO = this.superviseInfoSubDao.rectifyRequest(mainIds);
+        return Result.data(rectifyStatusVO);
+    }
+
+
+    @Override
+    public Result rectifyReturn(String mainIds) {
+        RectifyStatusVO rectifyStatusVO = this.superviseInfoSubDao.rectifyReturn(mainIds);
+        return Result.data(rectifyStatusVO);
+    }
+
+
+    @Override
+    public Result correctiveFeedback(String mainIds) {
+        List<SuperviseInfoSub> list = this.superviseInfoSubDao.correctiveFeedback(mainIds);
+        return Result.data(list);
+    }
 }
