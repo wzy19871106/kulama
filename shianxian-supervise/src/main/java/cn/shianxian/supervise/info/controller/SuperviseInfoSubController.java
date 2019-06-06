@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.info.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.service.SuperviseInfoSubService;
@@ -73,6 +74,23 @@ public class SuperviseInfoSubController {
     public ResponseEntity<Result> saveSuperviseInfoSub(@Valid SuperviseInfoSub superviseInfoSub) {
         log.info("保存监管业务（从表）：{}", superviseInfoSub);
         Result result = this.superviseInfoSubService.saveSuperviseInfoSub(superviseInfoSub);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 根据所选监管业务（主类型）编码查询监管明细
+     * @return
+     */
+    @GetMapping("selectSuperviseInfoDetailById")
+    @ApiOperation(value = "根据所选监管业务（主类型）编码查询监管明细", notes = "根据所选监管业务（主类型）编码查询监管明细")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "监管业务id"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectSuperviseInfoDetailById(String id, Pages pages) {
+        Result result = this.superviseInfoSubService.selectSuperviseInfoDetailById(id, pages);
         return ResponseEntity.ok(result);
     }
 }
