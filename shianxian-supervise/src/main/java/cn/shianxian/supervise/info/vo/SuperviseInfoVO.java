@@ -77,6 +77,11 @@ public class SuperviseInfoVO {
     private String parentSuperviseName;
 
     /**
+     * 节点id
+     */
+    private String nodeTag;
+
+    /**
      * 节点名称
      */
     private String nodeName;
