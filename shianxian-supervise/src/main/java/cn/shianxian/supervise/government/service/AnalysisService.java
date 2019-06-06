@@ -6,37 +6,6 @@ import org.springframework.http.ResponseEntity;
 
 public interface AnalysisService {
 
-    /**
-     * 以月度为单位，展示本企业综合评分趋势
-     * @param queryPojo
-     * @return
-     */
-    ResponseEntity<Result> selectCompanyLine(QueryPojo queryPojo);
-
-
-    /**
-     * 根据时间段，企业编码，返回所需汇总数据(企业雷达图)
-     * @param queryPojo
-     * @return
-     */
-    ResponseEntity<Result> selectCompanyRadar(QueryPojo queryPojo);
-
-
-    /**
-     * 以月度为单位，展示本行业综合评分趋势
-     * @param queryPojo
-     * @return
-     */
-    ResponseEntity<Result> selectIndustryLine(QueryPojo queryPojo);
-
-
-    /**
-     * 根据时间段，企业编码，返回所需汇总数据(行业雷达图)
-     * @param queryPojo
-     * @return
-     */
-    ResponseEntity<Result> selectIndustryRadar(QueryPojo queryPojo);
-
 
     /**
      * 根据时间段，企业编码，返回所需汇总数据
@@ -52,4 +21,20 @@ public interface AnalysisService {
      * @return
      */
     ResponseEntity<Result> selectAnalysisScore(QueryPojo queryPojo);
+
+
+    /**
+     * 以月度为单位，展示本企业、本行业综合评分趋势
+     * @param queryPojo
+     * @return
+     */
+    ResponseEntity<Result> selectLine(QueryPojo queryPojo);
+
+
+    /**
+     * 根据时间段，企业编码，返回所需汇总数据(企业雷达图、行业雷达图)
+     * @param queryPojo
+     * @return
+     */
+    ResponseEntity<Result> selectRadar(QueryPojo queryPojo);
 }

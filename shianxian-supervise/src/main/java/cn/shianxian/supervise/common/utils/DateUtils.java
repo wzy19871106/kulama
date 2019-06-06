@@ -74,15 +74,29 @@ public class DateUtils {
 
 
     /**
-     * 通过时间秒毫秒数判断两个时间的间隔
-     * @param beginDate
-     * @param endDate
+     * 获取两个月份之差（支持跨年）
+     * @param startTime 开始时间
+     * @param endTime 结束时间
      * @return
      */
-    public static int differentDaysByMillisecond(LocalDateTime beginDate,LocalDateTime endDate) {
-        int days = (int) ((endDate.atZone(zoneId).toEpochSecond() - beginDate.atZone(zoneId).toEpochSecond()) / (3600*24));
-        return days;
+    public static int getMonthNum(LocalDateTime startTime, LocalDateTime endTime) {
+        return getMonthNum(0, startTime, endTime);
     }
 
 
+    /**
+     * 递归算出两个月份之差（支持跨年）
+     * @param i
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    private static int getMonthNum(int i, LocalDateTime startTime, LocalDateTime endTime) {
+        LocalDateTime temp = startTime.plusMonths(1);
+        if (temp.getYear() < endTime.getYear() || (temp.getYear() == endTime.getYear() && temp.getMonthValue() <= endTime.getMonthValue())) {
+            i++;
+            return getMonthNum(i, temp, endTime);
+        }
+        return i;
+    }
 }

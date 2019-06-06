@@ -29,66 +29,18 @@ public class AppAnalysisController {
 
 
     /**
-     * 以月度为单位，展示本企业综合评分趋势
+     * 根据时间段，企业编码，返回所需汇总数据(企业雷达图、行业雷达图)
      * @return
      */
-    @PostMapping("selectCompanyLine")
-    @ApiOperation(value = "以月度为单位，展示本企业综合评分趋势", notes = "以月度为单位，展示本企业综合评分趋势")
+    @PostMapping("selectRadar")
+    @ApiOperation(value = "根据时间段，企业编码，返回所需汇总数据(企业雷达图、行业雷达图)", notes = "根据时间段，企业编码，返回所需汇总数据(企业雷达图、行业雷达图)")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
             @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
     })
-    public ResponseEntity<Result> selectCompanyLine(QueryPojo queryPojo) {
-        return this.analysisService.selectCompanyLine(queryPojo);
-    }
-
-
-    /**
-     * 根据时间段，企业编码，返回所需汇总数据(企业雷达图)
-     * @return
-     */
-    @PostMapping("selectCompanyRadar")
-    @ApiOperation(value = "根据时间段，企业编码，返回所需汇总数据(企业雷达图)", notes = "根据时间段，企业编码，返回所需汇总数据(企业雷达图)")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
-            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
-            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
-    })
-    public ResponseEntity<Result> selectCompanyRadar(QueryPojo queryPojo) {
-        return this.analysisService.selectCompanyRadar(queryPojo);
-    }
-
-
-    /**
-     * 以月度为单位，展示本行业综合评分趋势
-     * @return
-     */
-    @PostMapping("selectIndustryLine")
-    @ApiOperation(value = "以月度为单位，展示本行业综合评分趋势", notes = "以月度为单位，展示本行业综合评分趋势")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
-            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
-            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
-    })
-    public ResponseEntity<Result> selectIndustryLine(QueryPojo queryPojo) {
-        return this.analysisService.selectIndustryLine(queryPojo);
-    }
-
-
-    /**
-     * 根据时间段，企业编码，返回所需汇总数据(行业雷达图)
-     * @return
-     */
-    @PostMapping("selectIndustryRadar")
-    @ApiOperation(value = "根据时间段，企业编码，返回所需汇总数据(行业雷达图)", notes = "根据时间段，企业编码，返回所需汇总数据(行业雷达图)")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
-            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
-            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
-    })
-    public ResponseEntity<Result> selectIndustryRadar(QueryPojo queryPojo) {
-        return this.analysisService.selectIndustryRadar(queryPojo);
+    public ResponseEntity<Result> selectRadar(QueryPojo queryPojo) {
+        return this.analysisService.selectRadar(queryPojo);
     }
 
 
@@ -122,4 +74,21 @@ public class AppAnalysisController {
     public ResponseEntity<Result> selectAnalysisScore(QueryPojo queryPojo) {
         return this.analysisService.selectAnalysisScore(queryPojo);
     }
+
+
+    /**
+     * 以月度为单位，展示本企业、本行业综合评分趋势
+     * @return
+     */
+    @PostMapping("selectLine")
+    @ApiOperation(value = "以月度为单位，展示本企业、本行业综合评分趋势", notes = "以月度为单位，展示本企业、本行业综合评分趋势")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+    })
+    public ResponseEntity<Result> selectLine(QueryPojo queryPojo) {
+        return this.analysisService.selectLine(queryPojo);
+    }
+
 }
