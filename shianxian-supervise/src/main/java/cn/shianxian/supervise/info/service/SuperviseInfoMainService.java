@@ -70,4 +70,12 @@ public interface SuperviseInfoMainService {
      * @return
      */
     Result selectSuperviseInfoByRectify(QueryPojo queryPojo, Pages pages);
+
+
+    /**
+     * 保存监管业务
+     * @param superviseInfoMain
+     * @return
+     */
+    Result saveSuperviseInfo(SuperviseInfoMain superviseInfoMain);
 }

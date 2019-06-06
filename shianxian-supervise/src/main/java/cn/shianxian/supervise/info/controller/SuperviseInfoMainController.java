@@ -12,10 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -119,6 +116,20 @@ public class SuperviseInfoMainController {
         Result result = this.superviseInfoMainService.selectSuperviseInfoByRectify(queryPojo, pages);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 保存监管业务
+     * @return
+     */
+    @PostMapping("saveSuperviseInfo")
+    @ApiOperation(value = "保存监管业务", notes = "保存监管业务")
+    public ResponseEntity<Result> saveSuperviseInfo(@RequestBody @Valid SuperviseInfoMain superviseInfoMain) {
+        log.info("保存监管业务（主表）：{}", superviseInfoMain);
+        Result result = this.superviseInfoMainService.saveSuperviseInfo(superviseInfoMain);
+        return ResponseEntity.ok(result);
+    }
+
 
 
 }

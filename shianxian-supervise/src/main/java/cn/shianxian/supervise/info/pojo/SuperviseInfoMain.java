@@ -3,11 +3,9 @@ package cn.shianxian.supervise.info.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 监管业务主表
@@ -73,5 +71,10 @@ public class SuperviseInfoMain {
     @Column(name = "ifDelete")
     private String ifDelete;
 
+    /**
+     * 监管类型集合
+     */
+    @Transient
+    List<SuperviseInfoMainType> superviseInfoMainTypes;
 
 }
