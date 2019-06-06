@@ -44,7 +44,6 @@ public class AnalysisServiceImpl implements AnalysisService {
         Map<String, Object> map = new HashMap<>();
         LocalDateTime startTime = queryPojo.getStartTime();
         LocalDateTime endTime = queryPojo.getEndTime();
-        startTime.plusMonths(1);
         List<Double> companyList = new ArrayList<>();
         List<Double> industryList = new ArrayList<>();
         List<String> monthList = new ArrayList<>();
