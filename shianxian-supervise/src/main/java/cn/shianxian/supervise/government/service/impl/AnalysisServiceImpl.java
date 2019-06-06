@@ -47,18 +47,23 @@ public class AnalysisServiceImpl implements AnalysisService {
         startTime.plusMonths(1);
         List<Double> companyList = new ArrayList<>();
         List<Double> industryList = new ArrayList<>();
+        List<String> monthList = new ArrayList<>();
         // 获取两个月份之差
         int monthNum = DateUtils.getMonthNum(startTime, endTime);
         for (int i = 0; i <= monthNum; i++) {
+            LocalDateTime tempStartTime = startTime.plusMonths(i);
+            queryPojo.setStartTime(tempStartTime);
             LocalDateTime tempEndTime = startTime.plusMonths(i + 1);
             queryPojo.setEndTime(tempEndTime);
             Double avgCompany = this.analysisDao.selectCompanyLine(queryPojo);
             Double avgIndustry = this.analysisDao.selectIndustryLine(queryPojo);
             companyList.add(avgCompany);
             industryList.add(avgIndustry);
+            monthList.add(DateUtils.yyyyMMddFormat(tempStartTime.toLocalDate()));
         }
         map.put("company", companyList);
         map.put("industry", industryList);
+        map.put("month", monthList);
         return ResponseEntity.ok(Result.data(map));
     }
 
