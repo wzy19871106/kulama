@@ -55,9 +55,17 @@ public class AnalysisServiceImpl implements AnalysisService {
             LocalDateTime tempEndTime = startTime.plusMonths(i + 1);
             queryPojo.setEndTime(tempEndTime);
             Double avgCompany = this.analysisDao.selectCompanyLine(queryPojo);
+            if (avgCompany == null) {
+                companyList.add(0.0);
+            } else {
+                companyList.add(avgCompany);
+            }
             Double avgIndustry = this.analysisDao.selectIndustryLine(queryPojo);
-            companyList.add(avgCompany);
-            industryList.add(avgIndustry);
+            if (avgIndustry == null) {
+                industryList.add(0.0);
+            } else {
+                industryList.add(avgIndustry);
+            }
             monthList.add(DateUtils.yyyyMMddFormat(tempStartTime.toLocalDate()));
         }
         map.put("company", companyList);
