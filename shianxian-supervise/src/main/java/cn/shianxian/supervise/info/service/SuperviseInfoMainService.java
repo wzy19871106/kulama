@@ -4,6 +4,9 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
+import cn.shianxian.supervise.sys.pojo.SuperviseType;
+
+import java.util.List;
 
 public interface SuperviseInfoMainService {
 
@@ -74,8 +77,8 @@ public interface SuperviseInfoMainService {
 
     /**
      * 保存监管业务
-     * @param superviseInfoMain
+     * @param superviseTypeList
      * @return
      */
-    Result saveSuperviseInfo(SuperviseInfoMain superviseInfoMain);
+    Result saveSuperviseInfo(List<SuperviseType> superviseTypeList);
 }

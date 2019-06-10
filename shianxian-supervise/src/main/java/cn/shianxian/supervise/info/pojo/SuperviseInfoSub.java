@@ -68,7 +68,7 @@ public class SuperviseInfoSub {
      * 结果分值
      */
     @Column(name = "score")
-    private Long score;
+    private Double score;
 
     /**
      * 整改意见

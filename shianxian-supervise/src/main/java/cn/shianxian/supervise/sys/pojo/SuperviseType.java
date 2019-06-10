@@ -81,4 +81,60 @@ public class SuperviseType {
      */
     @Transient
     private int num;
+
+    /**
+     * 计划任务id
+     */
+    @Transient
+    private Long planTag;
+
+    /**
+     * 企业id
+     */
+    @Transient
+    private String nodeTag;
+
+    /**
+     * 企业名称
+     */
+    @Transient
+    private String nodeName;
+
+    /**
+     * 执法队伍id
+     */
+    @Transient
+    private String superviseTeamTag;
+
+    /**
+     * 执法队伍名称
+     */
+    @Transient
+    private String superviseTeamName;
+
+    /**
+     * 执法人id
+     */
+    @Transient
+    private String superviserTag;
+
+    /**
+     * 执法人名称
+     */
+    @Transient
+    private String superviserName;
+
+
+    /**
+     * 负责人id
+     */
+    @Transient
+    private String functionaryTag;
+
+    /**
+     * 负责人名称
+     */
+    @Transient
+    private String functionaryName;
+
 }

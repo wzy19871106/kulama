@@ -3,10 +3,7 @@ package cn.shianxian.supervise.record.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDateTime;
 
@@ -105,4 +102,9 @@ public class Functionary {
     @Column(name = "weChatId")
     private String weChatId;
 
+    /**
+     * token
+     */
+    @Transient
+    private String token;
 }

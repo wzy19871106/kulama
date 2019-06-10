@@ -6,6 +6,7 @@
         CALL proc_T_Supervise_Info_Main_Type_Add
         (
         #{superviseInfoMainType.mainIds},
+        #{superviseInfoMainType.mainId},
         #{superviseInfoMainType.nodeTag},
         #{superviseInfoMainType.superviseTypeTag},
         #{superviseInfoMainType.superviseTeamTag},

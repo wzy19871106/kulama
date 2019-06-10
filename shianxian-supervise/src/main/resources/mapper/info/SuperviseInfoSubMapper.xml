@@ -102,7 +102,7 @@
     <select id="saveSuperviseInfoSub" resultType="java.lang.String">
         CALL proc_T_Supervise_Info_Sub_Add
         (
-        #{superviseInfoSub.mainId},
+        #{superviseInfoSub.mainIds},
         #{superviseInfoSub.nodeTag},
         #{superviseInfoSub.superviseTypeTag},
         #{superviseInfoSub.superviseTag},

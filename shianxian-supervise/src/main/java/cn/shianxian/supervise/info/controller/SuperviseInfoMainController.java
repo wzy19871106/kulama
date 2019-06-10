@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
 import cn.shianxian.supervise.info.service.SuperviseInfoMainService;
+import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 监管业务（主表）控制器
@@ -124,12 +126,10 @@ public class SuperviseInfoMainController {
      */
     @PostMapping("saveSuperviseInfo")
     @ApiOperation(value = "保存监管业务", notes = "保存监管业务")
-    public ResponseEntity<Result> saveSuperviseInfo(@RequestBody @Valid SuperviseInfoMain superviseInfoMain) {
-        log.info("保存监管业务（主表）：{}", superviseInfoMain);
-        Result result = this.superviseInfoMainService.saveSuperviseInfo(superviseInfoMain);
+    public ResponseEntity<Result> saveSuperviseInfo(@RequestBody @Valid List<SuperviseType> superviseTypeList) {
+        log.info("保存监管业务（主表）：{}", superviseTypeList);
+        Result result = this.superviseInfoMainService.saveSuperviseInfo(superviseTypeList);
         return ResponseEntity.ok(result);
     }
-
-
 
 }

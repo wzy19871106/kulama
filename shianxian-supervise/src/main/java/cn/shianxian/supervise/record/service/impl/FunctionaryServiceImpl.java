@@ -49,7 +49,9 @@ public class FunctionaryServiceImpl implements FunctionaryService {
         } else {
             functionary.setKeyUsed(0);
         }
-        this.redisService.set(Constants.APP_USER + UUIDGenerator.generatorUUID(), JSON.toJSONString(functionary), 14400);
+        String token = UUIDGenerator.generatorUUID();
+        this.redisService.set(Constants.APP_USER + token, JSON.toJSONString(functionary), 14400);
+        functionary.setToken(token);
         return ResponseEntity.ok(Result.data(functionary));
     }
 

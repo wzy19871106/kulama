@@ -108,4 +108,10 @@ public class User {
      */
     @Transient
     private String userGroupName;
+
+    /**
+     * token
+     */
+    @Transient
+    private String token;
 }

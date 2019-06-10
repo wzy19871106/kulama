@@ -39,7 +39,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
         if (request.getRequestURI().indexOf("app") == -1) {
             String userJson = redisService.get(Constants.USER + token);
-            if (StringUtils.isNotBlank(userJson)) {
+            if (StringUtils.isBlank(userJson)) {
                 log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
                 throw new CommonException(Constants.UNAUTHORIZED, "用户已失效！请重新登录！");
             } else {
@@ -52,7 +52,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         } else {
             String functionaryJson = redisService.get(Constants.APP_USER + token);
-            if (StringUtils.isNotBlank(functionaryJson)) {
+            if (StringUtils.isBlank(functionaryJson)) {
                 log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
                 throw new CommonException(Constants.UNAUTHORIZED, "用户已失效！请重新登录！");
             } else {
