@@ -32,7 +32,8 @@
         #{superviser.remark},
         #{superviser.ifUse},
         #{superviser.lastUpdateTime},
-        #{superviser.lastUpdateUser}
+        #{superviser.lastUpdateUser},
+        #{superviser.picTag}
         )
     </select>
 
