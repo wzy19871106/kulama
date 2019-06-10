@@ -128,25 +128,12 @@
         )
     </select>
 
-    <select id="rectifyResult" resultType="cn.shianxian.supervise.info.vo.RectifyResultVO">
-        CALL proc_T_Supervise_TraceInfo_Query_ByTag
-        (
-        #{superviseInfoSub.mainId},
-        #{superviseInfoSub.superviseTypeTag},
-        #{superviseInfoSub.nodeTag}
-        )
-    </select>
-
-    <select id="rectifyRequest" resultType="cn.shianxian.supervise.info.vo.RectifyStatusVO">
-        CALL proc_T_Supervise_TraceInfo_Requst_Query_ByTag(#{mainIds})
-    </select>
-
-    <select id="rectifyReturn" resultType="cn.shianxian.supervise.info.vo.RectifyStatusVO">
-        CALL proc_T_Supervise_TraceInfo_Return_Query_ByTag(#{mainIds})
-    </select>
-
     <select id="correctiveFeedback" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
         CALL Proc_T_Supervise_CorrectiveFeedback_ByTag(#{mainIds})
+    </select>
+
+    <select id="rectify" resultType="cn.shianxian.supervise.info.vo.RectifyResultVO">
+        CALL proc_T_Supervise_TraceInfo_Query_ByMainIDS(#{mainIds})
     </select>
 
 </mapper>

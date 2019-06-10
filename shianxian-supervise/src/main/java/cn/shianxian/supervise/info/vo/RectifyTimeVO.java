@@ -27,4 +27,9 @@ public class RectifyTimeVO {
      */
     private LocalDateTime superviseTime;
 
+    /**
+     * 监管内容
+     */
+    private RectifyResultVO rectifyResults;
+
 }

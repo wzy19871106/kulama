@@ -130,33 +130,17 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
 
 
     /**
-     * 查询整改情况监管结果
-     * @param superviseInfoSub
-     * @return
-     */
-    RectifyResultVO rectifyResult(@Param("superviseInfoSub") SuperviseInfoSub superviseInfoSub);
-
-
-    /**
-     * 根据MAINIDS查询整改反馈页面的已整改项数量
-     * @param mainIds
-     * @return
-     */
-    RectifyStatusVO rectifyRequest(@Param("mainIds") String mainIds);
-
-
-    /**
-     * 根据MAINIDS查询整改回访页面的已整改项及未完成数量
-     * @param mainIds
-     * @return
-     */
-    RectifyStatusVO rectifyReturn(@Param("mainIds") String mainIds);
-
-
-    /**
      * 根据监管编码及监管类型返回已整改项的列表
      * @param mainIds
      * @return
      */
     List<SuperviseInfoSub> correctiveFeedback(@Param("mainIds") String mainIds);
+
+
+    /**
+     * 查询整改情况
+     * @param mainIds
+     * @return
+     */
+    RectifyResultVO rectify(@Param("mainIds") String mainIds);
 }

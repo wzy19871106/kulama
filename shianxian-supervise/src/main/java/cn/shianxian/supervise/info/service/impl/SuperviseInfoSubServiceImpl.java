@@ -121,36 +121,17 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
 
 
     @Override
-    public Result rectifyTime(SuperviseInfoSub superviseInfoSub) {
-        List<RectifyTimeVO> list = this.superviseInfoSubDao.rectifyTime(superviseInfoSub);
-        return Result.data(list);
+    public Result rectify(SuperviseInfoSub superviseInfoSub) {
+        List<RectifyTimeVO> rectifyTimeList = this.superviseInfoSubDao.rectifyTime(superviseInfoSub);
+        for (RectifyTimeVO time : rectifyTimeList) {
+            RectifyResultVO result = this.superviseInfoSubDao.rectify(time.getMainIds());
+            if (result != null) {
+                List<SuperviseInfoSub> superviseInfoSubs = this.superviseInfoSubDao.correctiveFeedback(time.getMainIds());
+                result.setSuperviseInfoSubs(superviseInfoSubs);
+                time.setRectifyResults(result);
+            }
+        }
+        return Result.data(rectifyTimeList);
     }
 
-
-    @Override
-    public Result rectifyResult(SuperviseInfoSub superviseInfoSub) {
-        RectifyResultVO rectifyResultVO = this.superviseInfoSubDao.rectifyResult(superviseInfoSub);
-        return Result.data(rectifyResultVO);
-    }
-
-
-    @Override
-    public Result rectifyRequest(String mainIds) {
-        RectifyStatusVO rectifyStatusVO = this.superviseInfoSubDao.rectifyRequest(mainIds);
-        return Result.data(rectifyStatusVO);
-    }
-
-
-    @Override
-    public Result rectifyReturn(String mainIds) {
-        RectifyStatusVO rectifyStatusVO = this.superviseInfoSubDao.rectifyReturn(mainIds);
-        return Result.data(rectifyStatusVO);
-    }
-
-
-    @Override
-    public Result correctiveFeedback(String mainIds) {
-        List<SuperviseInfoSub> list = this.superviseInfoSubDao.correctiveFeedback(mainIds);
-        return Result.data(list);
-    }
 }
