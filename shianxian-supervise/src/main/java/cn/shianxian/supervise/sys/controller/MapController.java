@@ -2,6 +2,7 @@ package cn.shianxian.supervise.sys.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.service.RedisService;
+import cn.shianxian.supervise.sys.service.MapService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -22,19 +23,19 @@ public class MapController {
 
 
     @Autowired
-    private RedisService redisService;
+    private MapService mapService;
 
 
     /**
-     * 根据企业id获取位置
+     * 根据企业id获取企业位置，获取执法人员位置
      * @return
      */
     @GetMapping("site")
-    @ApiOperation(value = "根据企业id获取位置", notes = "根据企业id获取位置")
+    @ApiOperation(value = "根据企业id获取企业位置，获取执法人员位置", notes = "根据企业id获取企业位置，获取执法人员位置")
     @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业id")
     public ResponseEntity<Result> selectSite(String nodeTag) {
-        String site = this.redisService.get(nodeTag);
-        return ResponseEntity.ok(Result.data(site));
+        Result result = this.mapService.selectSite(nodeTag);
+        return ResponseEntity.ok(result);
     }
 
 
