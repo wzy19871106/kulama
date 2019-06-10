@@ -1,12 +1,14 @@
 package cn.shianxian.supervise.config.mvc;
 
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.convert.converter.Converter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -16,6 +18,7 @@ import java.time.format.DateTimeFormatter;
  * @author wangqingguo 2017/9/25
  */
 @SpringBootConfiguration
+@Slf4j
 public class MappingConverterAdapter {
 
     /**
@@ -28,13 +31,23 @@ public class MappingConverterAdapter {
         return new Converter<String, LocalDateTime>() {
             @Override
             public LocalDateTime convert(String source) {
-
-                DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 LocalDateTime date = null;
-                try {
-                    date = LocalDateTime.parse((String) source, df);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                DateTimeFormatter df = null;
+                if (source.indexOf(":") != -1) {
+                    df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    try {
+                        date = LocalDateTime.parse(source, df);
+                    } catch (Exception e) {
+                        log.error("LocalDateTime时间参数格式化错误，{}，信息：{}", e, e.getMessage());
+                    }
+                } else {
+                    df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    try {
+                        LocalDate localDate = LocalDate.parse(source, df);
+                        date = localDate.atStartOfDay();
+                    } catch (Exception e) {
+                        log.error("localDate时间参数格式化错误，{}，信息：{}", e, e.getMessage());
+                    }
                 }
                 return date;
             }
