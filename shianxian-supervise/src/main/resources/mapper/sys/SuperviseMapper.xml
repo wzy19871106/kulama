@@ -69,4 +69,12 @@
     <select id="selectSubSupervise" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
         CALL proc_T_Supervise_Query_Sub_ByParentTag(#{id})
     </select>
+
+    <select id="selectParentSuperviseByParentMainIds" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Parent_ByParentMainIDS(#{mainIds})
+    </select>
+
+    <select id="selectSubSuperviseByParentMainIds" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Sub_ByParentMainIDS(#{superviseTag}, #{mainIds})
+    </select>
 </mapper>

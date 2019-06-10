@@ -38,4 +38,8 @@
         CALL proc_T_SuperviseType_UserGroupDataAuthority_Edit_ByNodeTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
     </select>
 
+    <select id="selectSuperviseTypeByParentMainIds" resultType="cn.shianxian.supervise.sys.pojo.SuperviseType">
+        CALL proc_T_SuperviseType_Query_ByParentMainIDS(#{mainIds})
+    </select>
+
 </mapper>

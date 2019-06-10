@@ -55,4 +55,12 @@ public interface SuperviseResultService {
      * @return
      */
     Result selectSuperviseResultTree(String typeTag, String authority);
+
+
+    /**
+     * 查询整改反馈监管结果（树）
+     * @param mainIds
+     * @return
+     */
+    Result selectSuperviseResultRectifyTree(String mainIds);
 }

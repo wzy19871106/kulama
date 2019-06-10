@@ -80,4 +80,12 @@ public interface SuperviseTypeDao extends Mapper<SuperviseType> {
      * @param superviseType
      */
     String updateSuperviseTypeAuthority(@Param("superviseType") SuperviseType superviseType);
+
+
+    /**
+     * 根据需要被回访的MainIDS查询监管类型
+     * @param mainIds
+     * @return
+     */
+    List<SuperviseType> selectSuperviseTypeByParentMainIds(@Param("mainIds") String mainIds);
 }

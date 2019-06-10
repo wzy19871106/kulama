@@ -105,7 +105,6 @@ public class Supervise {
     @Transient
     private String superviseTypeName;
 
-
     /**
      * 监管结果集合
      */
@@ -117,4 +116,16 @@ public class Supervise {
      */
     @Transient
     private List<Supervise> superviseList;
+
+    /**
+     * 监管结果编码
+     */
+    @Transient
+    private String resultTag;
+
+    /**
+     * 监管结果值
+     */
+    @Transient
+    private String resultValue;
 }

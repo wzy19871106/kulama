@@ -121,4 +121,27 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         return Result.data(typeList);
     }
 
+
+    @Override
+    public Result selectSuperviseResultRectifyTree(String mainIds) {
+        List<SuperviseType> typeList = this.superviseTypeDao.selectSuperviseTypeByParentMainIds(mainIds);
+        int num = 0;
+        for (SuperviseType superviseType : typeList) {
+            List<Supervise> parentSuperviseList = this.superviseDao.selectParentSuperviseByParentMainIds(mainIds);
+            superviseType.setSuperviseList(parentSuperviseList);
+            for (Supervise supervise : parentSuperviseList) {
+                List<Supervise> subSuperviseList = this.superviseDao.selectSubSuperviseByParentMainIds(supervise.getSuperviseTag(), mainIds);
+                supervise.setSuperviseList(subSuperviseList);
+                num += subSuperviseList.size();
+                for (Supervise s : subSuperviseList) {
+                    List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(s.getSuperviseTag());
+                    s.setSuperviseResultList(results);
+                }
+            }
+            superviseType.setNum(num);
+            num = 0;
+        }
+        return Result.data(typeList);
+    }
+
 }

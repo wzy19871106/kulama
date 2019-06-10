@@ -137,4 +137,16 @@ public class SuperviseResultController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 查询整改反馈监管结果（树）
+     * @return
+     */
+    @GetMapping("selectSuperviseResultRectifyTree")
+    @ApiOperation(value = "查询整改反馈监管结果（树）", notes = "查询整改反馈监管结果（树）")
+    @ApiImplicitParam(paramType = "query", name = "mainIds", value = "监管类型编码")
+    public ResponseEntity<Result> selectSuperviseResultRectifyTree(String mainIds) {
+        Result result = this.superviseResultService.selectSuperviseResultRectifyTree(mainIds);
+        return ResponseEntity.ok(result);
+    }
 }
