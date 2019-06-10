@@ -10,6 +10,10 @@ public class Constants {
      */
     public static final String SUPERVISE_TOKEN = "supervise-token";
 
+    public static final String APP_USER = "appUser:";
+
+    public static final String USER = "user:";
+
     public static final String SUCCESS = "成功";
 
     public static final String FAIL = "失败";
@@ -17,8 +21,6 @@ public class Constants {
     public static final int ONE = 1;
 
     public static final int ZERO = 0;
-
-    public static final String PER_CENT = "%";
 
     /**
      * 状态码========================================================

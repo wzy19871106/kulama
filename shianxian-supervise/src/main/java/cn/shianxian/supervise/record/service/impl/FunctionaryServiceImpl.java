@@ -1,13 +1,17 @@
 package cn.shianxian.supervise.record.service.impl;
 
+import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.common.service.RedisService;
+import cn.shianxian.supervise.common.utils.UUIDGenerator;
 import cn.shianxian.supervise.record.dao.FunctionaryDao;
 import cn.shianxian.supervise.record.dao.FunctionaryForaduitDao;
 import cn.shianxian.supervise.record.pojo.Functionary;
 import cn.shianxian.supervise.record.pojo.FunctionaryForaduit;
 import cn.shianxian.supervise.record.service.FunctionaryService;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +34,10 @@ public class FunctionaryServiceImpl implements FunctionaryService {
     private FunctionaryDao functionaryDao;
 
 
+    @Autowired
+    private RedisService redisService;
+
+
     @Override
     public ResponseEntity<Result> appLogin(String id) {
         Functionary functionary = new Functionary();
@@ -41,6 +49,7 @@ public class FunctionaryServiceImpl implements FunctionaryService {
         } else {
             functionary.setKeyUsed(0);
         }
+        this.redisService.set(Constants.APP_USER + UUIDGenerator.generatorUUID(), JSON.toJSONString(functionary), 14400);
         return ResponseEntity.ok(Result.data(functionary));
     }
 

@@ -3,13 +3,16 @@ package cn.shianxian.supervise.sys.service.impl;
 import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.common.service.RedisService;
 import cn.shianxian.supervise.common.utils.MD5Utils;
+import cn.shianxian.supervise.common.utils.UUIDGenerator;
 import cn.shianxian.supervise.exception.CommonException;
 import cn.shianxian.supervise.sys.dao.UserDao;
 import cn.shianxian.supervise.sys.dao.UserGroupDao;
 import cn.shianxian.supervise.sys.pojo.User;
 import cn.shianxian.supervise.sys.pojo.UserGroup;
 import cn.shianxian.supervise.sys.service.UserService;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserGroupDao userGroupDao;
+
+
+    @Autowired
+    private RedisService redisService;
+
 
 
     @Override
@@ -88,6 +96,7 @@ public class UserServiceImpl implements UserService {
             User loginUser = userList.get(0);
             loginUser.setUserLastTime(LocalDateTime.now());
             this.userDao.updateByPrimaryKeySelective(user);
+            this.redisService.set(Constants.USER + UUIDGenerator.generatorUUID(), JSON.toJSONString(loginUser));
             log.info("用户：{}登录", loginUser);
             UserGroup userGroup = this.userGroupDao.selectByPrimaryKey(loginUser.getUserGroupTag());
             if (userGroup != null) {
