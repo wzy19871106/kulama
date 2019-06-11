@@ -31,7 +31,7 @@ public class SupervisePlanSubServiceImpl implements SupervisePlanSubService {
         if (null == supervisePlanSub.getIds()) {
             this.supervisePlanSubDao.insertSupervisePlanSub(supervisePlanSub);
         } else {
-            String s = this.supervisePlanSubDao.updateSupervisePlanSub(supervisePlanSub);
+            this.supervisePlanSubDao.updateSupervisePlanSub(supervisePlanSub);
         }
         return Result.successMsg();
     }
