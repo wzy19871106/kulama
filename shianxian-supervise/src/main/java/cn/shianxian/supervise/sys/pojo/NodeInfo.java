@@ -3,10 +3,7 @@ package cn.shianxian.supervise.sys.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -114,5 +111,29 @@ public class NodeInfo {
     @Column(name = "createTime")
     private LocalDateTime createTime;
 
+
+    /**
+     * 节点所属省
+     */
+    @Transient
+    private String nodeProviceName;
+
+    /**
+     * 节点所属市
+     */
+    @Transient
+    private String nodeCityName;
+
+    /**
+     * 节点所属区
+     */
+    @Transient
+    private String nodeAreaName;
+
+    /**
+     * 节点所属乡镇
+     */
+    @Transient
+    private String nodeVillageName;
 
 }
