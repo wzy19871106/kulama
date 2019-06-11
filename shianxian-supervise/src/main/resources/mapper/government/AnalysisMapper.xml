@@ -65,4 +65,13 @@
         )
     </select>
 
+    <select id="selectTypeColumn" resultType="cn.shianxian.supervise.government.vo.TypeColumnVO">
+        CALL sp_T_Supervise_Type_Analysis_Column
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
 </mapper>

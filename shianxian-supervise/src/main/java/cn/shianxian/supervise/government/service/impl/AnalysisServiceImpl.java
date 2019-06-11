@@ -8,6 +8,7 @@ import cn.shianxian.supervise.government.service.AnalysisService;
 import cn.shianxian.supervise.government.vo.AnalysisVO;
 import cn.shianxian.supervise.government.vo.NodeAnalysisVO;
 import cn.shianxian.supervise.government.vo.PieVO;
+import cn.shianxian.supervise.government.vo.TypeColumnVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -90,6 +91,13 @@ public class AnalysisServiceImpl implements AnalysisService {
     @Override
     public ResponseEntity<Result> selectPie(QueryPojo queryPojo) {
         List<PieVO> list = this.analysisDao.selectPie(queryPojo);
+        return ResponseEntity.ok(Result.data(list));
+    }
+
+
+    @Override
+    public ResponseEntity<Result> selectTypeColumn(QueryPojo queryPojo) {
+        List<TypeColumnVO> list = this.analysisDao.selectTypeColumn(queryPojo);
         return ResponseEntity.ok(Result.data(list));
     }
 

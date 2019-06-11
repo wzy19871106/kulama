@@ -45,4 +45,12 @@ public interface AnalysisService {
      * @return
      */
     ResponseEntity<Result> selectPie(QueryPojo queryPojo);
+
+
+    /**
+     * 监管类型分析
+     * @param queryPojo
+     * @return
+     */
+    ResponseEntity<Result> selectTypeColumn(QueryPojo queryPojo);
 }

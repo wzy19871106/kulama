@@ -107,4 +107,20 @@ public class AppAnalysisController {
         return this.analysisService.selectPie(queryPojo);
     }
 
+
+    /**
+     * 监管类型分析
+     * @return
+     */
+    @PostMapping("selectTypeColumn")
+    @ApiOperation(value = "监管类型分析", notes = "监管类型分析")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+    })
+    public ResponseEntity<Result> selectTypeColumn(QueryPojo queryPojo) {
+        return this.analysisService.selectTypeColumn(queryPojo);
+    }
+
 }

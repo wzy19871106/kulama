@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.government.vo.AnalysisVO;
 import cn.shianxian.supervise.government.vo.NodeAnalysisVO;
 import cn.shianxian.supervise.government.vo.PieVO;
+import cn.shianxian.supervise.government.vo.TypeColumnVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -72,4 +73,12 @@ public interface AnalysisDao {
      * @return
      */
     List<PieVO> selectPie(@Param("queryPojo") QueryPojo queryPojo);
+
+
+    /**
+     * 监管类型分析
+     * @param queryPojo
+     * @return
+     */
+    List<TypeColumnVO> selectTypeColumn(@Param("queryPojo") QueryPojo queryPojo);
 }
