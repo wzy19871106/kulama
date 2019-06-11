@@ -111,4 +111,11 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         }
         return ResponseEntity.ok(Result.successMsg());
     }
+
+
+    @Override
+    public ResponseEntity<Result> selectCompanyInfoFunctionaryForAduit(String nodeTag, Pages pages) {
+        List<List<?>> list = this.companyInfoForaduitDao.selectCompanyInfoFunctionaryForAduit(nodeTag, pages);
+        return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
+    }
 }

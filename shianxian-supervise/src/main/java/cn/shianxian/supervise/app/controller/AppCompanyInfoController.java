@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.app.controller;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.record.pojo.CompanyInfoForaduit;
 import cn.shianxian.supervise.record.service.CompanyInfoService;
@@ -98,6 +99,23 @@ public class AppCompanyInfoController {
     @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识")
     public ResponseEntity<Result> selectCompanyInfoById(String nodeTag) {
         return this.companyInfoService.selectCompanyInfoById(nodeTag);
+    }
+
+
+    /**
+     * 根据企业id查询企业、负责人审核表
+     * @param nodeTag
+     * @return
+     */
+    @PostMapping("selectCompanyInfoFunctionaryForAduit")
+    @ApiOperation(value = "根据企业id查询企业、负责人审核表", notes = "根据企业id查询企业、负责人审核表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectCompanyInfoFunctionaryForAduit(String nodeTag, Pages pages) {
+        return this.companyInfoService.selectCompanyInfoFunctionaryForAduit(nodeTag, pages);
     }
 
 }

@@ -90,4 +90,13 @@ public interface CompanyInfoService {
      * @return
      */
     ResponseEntity<Result> deleteCompanyInfo(String index);
+
+
+    /**
+     * 根据企业id查询企业、负责人审核表
+     * @param nodeTag
+     * @param pages
+     * @return
+     */
+    ResponseEntity<Result> selectCompanyInfoFunctionaryForAduit(String nodeTag, Pages pages);
 }

@@ -74,4 +74,11 @@ public interface CompanyInfoForaduitDao extends Mapper<CompanyInfoForaduit> {
     CompanyInfoForaduit selectCompanyInfoForaduitByIndex(@Param("index") Long index);
 
 
+    /**
+     * 根据企业id查询企业、负责人审核表
+     * @param nodeTag
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectCompanyInfoFunctionaryForAduit(@Param("nodeTag") String nodeTag, @Param("pages") Pages pages);
 }
