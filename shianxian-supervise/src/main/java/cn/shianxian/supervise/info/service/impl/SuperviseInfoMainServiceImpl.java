@@ -123,7 +123,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             superviseInfoMainType.setSuperviserName(superviseType.getSuperviserName());
             superviseInfoMainType.setFunctionaryTag(superviseType.getFunctionaryTag());
             superviseInfoMainType.setFunctionaryName(superviseType.getFunctionaryName());
-            superviseInfoMainType.setParentMainIds("");
+            superviseInfoMainType.setParentMainIds(superviseType.getParentTag());
             // 保存监管类型
             this.superviseInfoMainTypeDao.saveSuperviseInfoMainType(superviseInfoMainType);
             // 父级内容
