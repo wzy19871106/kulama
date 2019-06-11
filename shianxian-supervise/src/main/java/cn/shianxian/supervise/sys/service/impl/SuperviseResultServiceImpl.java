@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -130,12 +131,14 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
             List<Supervise> parentSuperviseList = this.superviseDao.selectParentSuperviseByParentMainIds(mainIds);
             superviseType.setSuperviseList(parentSuperviseList);
             for (Supervise supervise : parentSuperviseList) {
-                List<Supervise> subSuperviseList = this.superviseDao.selectSubSuperviseByParentMainIds(supervise.getSuperviseTag(), mainIds);
-                supervise.setSuperviseList(subSuperviseList);
-                num += subSuperviseList.size();
-                for (Supervise s : subSuperviseList) {
-                    List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(s.getSuperviseTag());
-                    s.setSuperviseResultList(results);
+                if (Optional.ofNullable(supervise).isPresent()) {
+                    List<Supervise> subSuperviseList = this.superviseDao.selectSubSuperviseByParentMainIds(supervise.getSuperviseTag(), mainIds);
+                    supervise.setSuperviseList(subSuperviseList);
+                    num += subSuperviseList.size();
+                    for (Supervise s : subSuperviseList) {
+                        List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(s.getSuperviseTag());
+                        s.setSuperviseResultList(results);
+                    }
                 }
             }
             superviseType.setNum(num);
