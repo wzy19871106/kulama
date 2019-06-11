@@ -129,4 +129,10 @@ public class SuperviseInfoSub {
      */
     @Transient
     private String mainId;
+
+    /**
+     * 企业名称
+     */
+    @Transient
+    private String nodeName;
 }
