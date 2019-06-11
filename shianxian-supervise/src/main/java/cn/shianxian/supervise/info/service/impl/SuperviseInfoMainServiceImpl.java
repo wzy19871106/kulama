@@ -139,8 +139,8 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                     superviseInfoSub.setMainIds(mainIds);
                     superviseInfoSub.setNodeTag(superviseType.getNodeTag());
                     superviseInfoSub.setSuperviseTypeTag(superviseType.getSuperviseTypeTag());
-                    superviseInfoSub.setSuperviseTag(results.get(0).getSuperviseTag());
-                    superviseInfoSub.setSuperviseName(results.get(0).getSuperviseName());
+                    superviseInfoSub.setSuperviseTag(sub.getSuperviseTag());
+                    superviseInfoSub.setSuperviseName(sub.getSuperviseName());
                     superviseInfoSub.setResultTag(results.get(0).getResultTag());
                     superviseInfoSub.setResultValue(results.get(0).getResultValue());
                     superviseInfoSub.setScore(results.get(0).getScore());
