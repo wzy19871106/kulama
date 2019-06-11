@@ -91,4 +91,20 @@ public class AppAnalysisController {
         return this.analysisService.selectLine(queryPojo);
     }
 
+
+    /**
+     * 根据监管内容分组查询当年的数据饼图
+     * @return
+     */
+    @PostMapping("selectPie")
+    @ApiOperation(value = "根据监管内容分组查询当年的数据饼图", notes = "根据监管内容分组查询当年的数据饼图")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
+            @ApiImplicitParam(paramType = "query", name = "startTime", value = "开始时间"),
+            @ApiImplicitParam(paramType = "query", name = "endTime", value = "结束时间"),
+    })
+    public ResponseEntity<Result> selectPie(QueryPojo queryPojo) {
+        return this.analysisService.selectPie(queryPojo);
+    }
+
 }

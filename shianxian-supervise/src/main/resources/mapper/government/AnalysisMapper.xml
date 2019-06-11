@@ -11,7 +11,7 @@
         )
     </select>
 
-    <select id="selectCompanyRadar" resultType="cn.shianxian.supervise.government.vo.Analysis">
+    <select id="selectCompanyRadar" resultType="cn.shianxian.supervise.government.vo.AnalysisVO">
         CALL sp_T_Supervise_Analysis_Company_Radar
         (
         #{queryPojo.startTime},
@@ -29,7 +29,7 @@
         )
     </select>
 
-    <select id="selectIndustryRadar" resultType="cn.shianxian.supervise.government.vo.Analysis">
+    <select id="selectIndustryRadar" resultType="cn.shianxian.supervise.government.vo.AnalysisVO">
         CALL sp_T_Supervise_Analysis_Industry_Radar
         (
         #{queryPojo.startTime},
@@ -38,7 +38,7 @@
         )
     </select>
 
-    <select id="selectAnalysisNodeInfo" resultType="cn.shianxian.supervise.government.vo.NodeAnalysis">
+    <select id="selectAnalysisNodeInfo" resultType="cn.shianxian.supervise.government.vo.NodeAnalysisVO">
         CALL sp_T_Supervise_Analysis_NodeInfo
         (
         #{queryPojo.startTime},
@@ -47,8 +47,17 @@
         )
     </select>
 
-    <select id="selectAnalysisScore" resultType="cn.shianxian.supervise.government.vo.NodeAnalysis">
+    <select id="selectAnalysisScore" resultType="cn.shianxian.supervise.government.vo.NodeAnalysisVO">
         CALL sp_T_Supervise_Analysis_Score_Column
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.id}
+        )
+    </select>
+
+    <select id="selectPie" resultType="cn.shianxian.supervise.government.vo.PieVO">
+        CALL sp_T_Supervise_Analysis_Pie
         (
         #{queryPojo.startTime},
         #{queryPojo.endTime},

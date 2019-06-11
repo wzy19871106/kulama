@@ -3,7 +3,7 @@ package cn.shianxian.supervise.government.vo;
 import lombok.Data;
 
 @Data
-public class Analysis {
+public class AnalysisVO {
 
 
     /**

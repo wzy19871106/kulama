@@ -1,8 +1,9 @@
 package cn.shianxian.supervise.government.dao;
 
 import cn.shianxian.supervise.common.pojo.QueryPojo;
-import cn.shianxian.supervise.government.vo.Analysis;
-import cn.shianxian.supervise.government.vo.NodeAnalysis;
+import cn.shianxian.supervise.government.vo.AnalysisVO;
+import cn.shianxian.supervise.government.vo.NodeAnalysisVO;
+import cn.shianxian.supervise.government.vo.PieVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +27,7 @@ public interface AnalysisDao {
      * @param queryPojo
      * @return
      */
-    Analysis selectCompanyRadar(@Param("queryPojo") QueryPojo queryPojo);
+    AnalysisVO selectCompanyRadar(@Param("queryPojo") QueryPojo queryPojo);
 
 
     /**
@@ -44,7 +45,7 @@ public interface AnalysisDao {
      * @param queryPojo
      * @return
      */
-    Analysis selectIndustryRadar(@Param("queryPojo") QueryPojo queryPojo);
+    AnalysisVO selectIndustryRadar(@Param("queryPojo") QueryPojo queryPojo);
 
 
     /**
@@ -53,7 +54,7 @@ public interface AnalysisDao {
      * @param queryPojo
      * @return
      */
-    NodeAnalysis selectAnalysisNodeInfo(@Param("queryPojo") QueryPojo queryPojo);
+    NodeAnalysisVO selectAnalysisNodeInfo(@Param("queryPojo") QueryPojo queryPojo);
 
 
     /**
@@ -62,5 +63,13 @@ public interface AnalysisDao {
      * @param queryPojo
      * @return
      */
-    List<NodeAnalysis> selectAnalysisScore(@Param("queryPojo") QueryPojo queryPojo);
+    List<NodeAnalysisVO> selectAnalysisScore(@Param("queryPojo") QueryPojo queryPojo);
+
+
+    /**
+     * 根据监管内容分组查询当年的数据饼图
+     * @param queryPojo
+     * @return
+     */
+    List<PieVO> selectPie(@Param("queryPojo") QueryPojo queryPojo);
 }
