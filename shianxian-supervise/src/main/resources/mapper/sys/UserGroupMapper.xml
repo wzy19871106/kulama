@@ -17,7 +17,8 @@
         (
         #{userGroup.userGroupTag},
         #{userGroup.userGroupName},
-        #{userGroup.picTag}
+        #{userGroup.picTag},
+        #{userGroup.userGroupDisabled}
         )
     </select>
 
