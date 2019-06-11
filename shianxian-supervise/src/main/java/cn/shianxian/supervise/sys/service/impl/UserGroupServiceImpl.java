@@ -66,8 +66,8 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 
     @Override
-    public Result selectUserGroupTree(String id) {
-        String tree = this.userGroupDao.selectUserGroupTree(id);
+    public Result selectUserGroupTree(String id, boolean flag) {
+        String tree = this.userGroupDao.selectUserGroupTree(id, flag);
         return Result.data(tree);
     }
 }

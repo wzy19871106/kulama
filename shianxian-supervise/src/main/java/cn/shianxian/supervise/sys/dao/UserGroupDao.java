@@ -54,5 +54,5 @@ public interface UserGroupDao extends Mapper<UserGroup> {
      * @param id
      * @return
      */
-    String selectUserGroupTree(@Param("id") String id);
+    String selectUserGroupTree(@Param("id") String id, @Param("flag") boolean flag);
 }

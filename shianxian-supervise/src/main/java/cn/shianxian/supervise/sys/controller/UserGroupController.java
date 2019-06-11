@@ -91,9 +91,12 @@ public class UserGroupController {
      */
     @GetMapping("selectUserGroupTree")
     @ApiOperation(value = "查询用户组（树形）", notes = "查询用户组（树形）")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
-    public ResponseEntity<Result> selectUserGroupTree(String id) {
-        Result result = this.userGroupService.selectUserGroupTree(id);
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
+            @ApiImplicitParam(paramType = "query", name = "flag", value = "标识[true:所有，false:有效]"),
+    })
+    public ResponseEntity<Result> selectUserGroupTree(String id, boolean flag) {
+        Result result = this.userGroupService.selectUserGroupTree(id, flag);
         return ResponseEntity.ok(result);
     }
 

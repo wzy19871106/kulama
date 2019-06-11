@@ -38,5 +38,5 @@ public interface UserGroupService {
      * @param id
      * @return
      */
-    Result selectUserGroupTree(String id);
+    Result selectUserGroupTree(String id, boolean flag);
 }
