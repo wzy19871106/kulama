@@ -110,10 +110,10 @@ public class UserController {
      */
     @DeleteMapping("deleteUserById")
     @ApiOperation(value = "删除用户接口", notes = "删除用户接口")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
-    public ResponseEntity<Result> deleteUserById(String id) {
-        log.info("删除用户：{}", id);
-        return this.userService.deleteUserById(id);
+    @ApiImplicitParam(paramType = "query", name = "ids", value = "ids")
+    public ResponseEntity<Result> deleteUserById(String ids) {
+        log.info("删除用户：{}", ids);
+        return this.userService.deleteUserById(ids);
     }
 
 

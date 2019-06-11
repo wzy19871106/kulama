@@ -44,10 +44,10 @@ public interface UserService {
 
     /**
      * 删除用户
-     * @param id
+     * @param ids
      * @return
      */
-    ResponseEntity<Result> deleteUserById(String id);
+    ResponseEntity<Result> deleteUserById(String ids);
 
 
     /**

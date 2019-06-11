@@ -119,11 +119,13 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public ResponseEntity<Result> deleteUserById(String id) {
-        log.info("删除用户：{}", id);
-        String flag = this.userDao.deleteUserById(id);
-        if (!"R001".equals(flag)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+    public ResponseEntity<Result> deleteUserById(String ids) {
+        String[] idArr = ids.split(",");
+        for (String id : idArr) {
+            String flag = this.userDao.deleteUserById(id);
+            if (!"R001".equals(flag)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+            }
         }
         return ResponseEntity.ok(Result.successMsg());
     }
