@@ -2,6 +2,7 @@ package cn.shianxian.supervise.config.mvc;
 
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -14,8 +15,6 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 转换解析器
- *
- * @author wangqingguo 2017/9/25
  */
 @SpringBootConfiguration
 @Slf4j
@@ -31,6 +30,9 @@ public class MappingConverterAdapter {
         return new Converter<String, LocalDateTime>() {
             @Override
             public LocalDateTime convert(String source) {
+                if (StringUtils.isBlank(source)) {
+                    return null;
+                }
                 LocalDateTime date = null;
                 DateTimeFormatter df = null;
                 if (source.indexOf(":") != -1) {
