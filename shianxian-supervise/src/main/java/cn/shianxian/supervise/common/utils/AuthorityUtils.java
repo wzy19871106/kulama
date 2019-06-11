@@ -24,13 +24,17 @@ public class AuthorityUtils {
             List<AuthorityDTO> authorityList = JSON.parseArray(roleAuthority, AuthorityDTO.class);
             for (AuthorityDTO a : authorityList) {
                 if (map.containsKey(a.getParentId())) {
-                    List<String> list = map.get(a.getParentId());
-                    list.add(a.getId().substring(a.getParentId().length()));
-                    map.put(a.getParentId(), list);
+                    if (StringUtils.isNotBlank(a.getParentId())) {
+                        List<String> list = map.get(a.getParentId());
+                        list.add(a.getId().substring(a.getParentId().length()));
+                        map.put(a.getParentId(), list);
+                    }
                 } else {
-                    List<String> list = new ArrayList<>();
-                    list.add(a.getId().substring(a.getParentId().length()));
-                    map.put(a.getParentId(), list);
+                    if (StringUtils.isNotBlank(a.getParentId())) {
+                        List<String> list = new ArrayList<>();
+                        list.add(a.getId().substring(a.getParentId().length()));
+                        map.put(a.getParentId(), list);
+                    }
                 }
             }
         }
