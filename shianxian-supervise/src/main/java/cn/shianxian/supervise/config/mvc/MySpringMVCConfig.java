@@ -32,6 +32,7 @@ public class MySpringMVCConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/druid/**")
                 .excludePathPatterns("/app/login")
                 .excludePathPatterns("/login")
+                .excludePathPatterns("/upload/img")
                 // swagger2页面
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/error/");
     }
