@@ -83,10 +83,10 @@ agora:
 # 上传配置
 upload:
   url: http://10.18.9.150/
-  path: D:/m/
+  path: /data/
 
 # 日志
 logging:
   level:
-    root: DEBUG
+    root: INFO
   config: classpath:log/logback-spring-dev.xml
