@@ -4,7 +4,6 @@ import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.service.RedisService;
-import cn.shianxian.supervise.common.utils.MD5Utils;
 import cn.shianxian.supervise.common.utils.UUIDGenerator;
 import cn.shianxian.supervise.exception.CommonException;
 import cn.shianxian.supervise.sys.dao.UserDao;
@@ -14,6 +13,7 @@ import cn.shianxian.supervise.sys.pojo.UserGroup;
 import cn.shianxian.supervise.sys.service.UserService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
     public Result updatePassword(String id, String password) {
         User user = new User();
         user.setUserTag(id);
-        user.setUserLoginPass(MD5Utils.md5(password));
+        user.setUserLoginPass(DigestUtils.md5Hex(password));
         this.userDao.updateByPrimaryKeySelective(user);
         return Result.successMsg();
     }
@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
             if (!userList.isEmpty()) {
                 return Result.msg("用户登录名已存在！");
             }
-            user.setUserLoginPass(MD5Utils.md5(user.getUserLoginPass()));
+            user.setUserLoginPass(DigestUtils.md5Hex(user.getUserLoginPass()));
             this.userDao.insertUser(user);
         } else {
             this.userDao.updateUser(user);
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
     public Result login(String username, String password) {
         User user = new User();
         user.setUserLoginName(username);
-        user.setUserLoginPass(MD5Utils.md5(password));
+        user.setUserLoginPass(DigestUtils.md5Hex(password));
         List<User> userList = this.userDao.select(user);
         if (1 == userList.size()) {
             User loginUser = userList.get(0);
