@@ -118,4 +118,17 @@ public class AppCompanyInfoController {
         return this.companyInfoService.selectCompanyInfoFunctionaryForAduit(nodeTag, pages);
     }
 
+
+    /**
+     * 删除企业表
+     * @return
+     */
+    @PostMapping("companyInfo")
+    @ApiOperation(value = "删除企业表", notes = "删除企业表")
+    @ApiImplicitParam(paramType = "query", name = "index", value = "企业流水号")
+    public ResponseEntity<Result> deleteCompanyInfo(@RequestParam() String index) {
+        log.info("删除企业表：{}", index);
+        return this.companyInfoService.deleteCompanyInfo(index);
+    }
+
 }
