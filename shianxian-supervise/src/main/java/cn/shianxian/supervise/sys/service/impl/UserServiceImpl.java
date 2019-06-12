@@ -70,6 +70,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Result saveOrUpdateUser(User user) {
+        user.setUserLoginPass(DigestUtils.md5Hex(user.getUserLoginPass()));
         if (StringUtils.isBlank(user.getUserTag())) {
             User u = new User();
             u.setUserLoginName(user.getUserLoginName());
@@ -77,7 +78,6 @@ public class UserServiceImpl implements UserService {
             if (!userList.isEmpty()) {
                 return Result.msg("用户登录名已存在！");
             }
-            user.setUserLoginPass(DigestUtils.md5Hex(user.getUserLoginPass()));
             this.userDao.insertUser(user);
         } else {
             this.userDao.updateUser(user);
