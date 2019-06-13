@@ -63,4 +63,13 @@ public interface FunctionaryDao extends Mapper<Functionary> {
      * @return
      */
     String saveFunctionary(@Param("functionary") Functionary functionary);
+
+
+    /**
+     * 根据负责人ID更新负责人信息表
+     * @param functionaryTag
+     * @param weChatId
+     * @return
+     */
+    String updateWeChatIdById(@Param("functionaryTag") String functionaryTag, @Param("weChatId") String weChatId);
 }

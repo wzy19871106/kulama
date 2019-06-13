@@ -196,4 +196,20 @@ public class AppFunctionaryController {
         log.info("保存企业负责人审核表：{}", functionaryForaduit);
         return this.functionaryService.saveFunctionaryForaduit(functionaryForaduit);
     }
+
+
+    /**
+     * 根据负责人ID更新负责人信息表
+     * @return
+     */
+    @PostMapping("updateWeChatIdById")
+    @ApiOperation(value = "根据负责人ID更新负责人信息表", notes = "根据负责人ID更新负责人信息表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
+            @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
+    })
+    public ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId) {
+        return this.functionaryService.updateWeChatIdById(functionaryTag, weChatId);
+    }
+
 }

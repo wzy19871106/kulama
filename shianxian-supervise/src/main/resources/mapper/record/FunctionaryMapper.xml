@@ -49,4 +49,12 @@
       )
     </select>
 
+    <select id="updateWeChatIdById" resultType="java.lang.String">
+      CALL Proc_T_Functionary_Edit_ByFunctionaryTag
+      (
+      #{functionaryTag},
+      #{weChatId}
+      )
+    </select>
+
 </mapper>

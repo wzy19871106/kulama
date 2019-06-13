@@ -120,4 +120,13 @@ public interface FunctionaryService {
      * @return
      */
     ResponseEntity<Result> selectFunctionaryByNodeTag(String nodeTag, Pages pages);
+
+
+    /**
+     * 根据负责人ID更新负责人信息表
+     * @param functionaryTag
+     * @param weChatId
+     * @return
+     */
+    ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId);
 }

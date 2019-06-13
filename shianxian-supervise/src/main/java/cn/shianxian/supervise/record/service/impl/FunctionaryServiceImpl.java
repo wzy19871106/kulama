@@ -163,4 +163,11 @@ public class FunctionaryServiceImpl implements FunctionaryService {
         List<List<?>> list = this.functionaryDao.selectFunctionaryByNodeTag(nodeTag, pages);
         return ResponseEntity.ok(Result.data((Long) list.get(2).get(0), list.get(0)));
     }
+
+
+    @Override
+    public ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId) {
+        this.functionaryDao.updateWeChatIdById(functionaryTag, weChatId);
+        return ResponseEntity.ok(Result.successMsg());
+    }
 }
