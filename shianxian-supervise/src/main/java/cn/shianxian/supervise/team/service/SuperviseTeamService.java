@@ -14,7 +14,7 @@ public interface SuperviseTeamService {
      * @param superviseTeam
      * @return
      */
-    Result saveSuperviseTeam(SuperviseTeam superviseTeam);
+    ResponseEntity<Result> saveSuperviseTeam(SuperviseTeam superviseTeam);
 
 
     /**

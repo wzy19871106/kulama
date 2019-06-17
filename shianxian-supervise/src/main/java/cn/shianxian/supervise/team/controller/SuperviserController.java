@@ -53,8 +53,7 @@ public class SuperviserController {
     })
     public ResponseEntity<Result> saveSuperviser(@Valid Superviser Superviser) {
         log.info("保存执法人员：{}", Superviser);
-        Result result = this.superviserService.saveSuperviser(Superviser);
-        return ResponseEntity.ok(result);
+        return this.superviserService.saveSuperviser(Superviser);
     }
 
 

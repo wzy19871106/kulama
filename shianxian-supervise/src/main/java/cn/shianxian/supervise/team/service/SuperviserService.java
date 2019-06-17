@@ -14,7 +14,7 @@ public interface SuperviserService {
      * @param superviser
      * @return
      */
-    Result saveSuperviser(Superviser superviser);
+    ResponseEntity<Result> saveSuperviser(Superviser superviser);
 
 
     /**

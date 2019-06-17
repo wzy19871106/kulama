@@ -50,8 +50,7 @@ public class SuperviseTeamController {
     })
     public ResponseEntity<Result> saveSuperviseTeam(@Valid SuperviseTeam SuperviseTeam) {
         log.info("保存执法队伍：{}", SuperviseTeam);
-        Result result = this.superviseTeamService.saveSuperviseTeam(SuperviseTeam);
-        return ResponseEntity.ok(result);
+        return this.superviseTeamService.saveSuperviseTeam(SuperviseTeam);
     }
 
 

@@ -28,9 +28,12 @@ public class SuperviserServiceImpl implements SuperviserService {
 
     @Transactional
     @Override
-    public Result saveSuperviser(Superviser superviser) {
-        this.superviserDao.insertSuperviser(superviser);
-        return Result.successMsg();
+    public ResponseEntity<Result> saveSuperviser(Superviser superviser) {
+        String flag = this.superviserDao.insertSuperviser(superviser);
+        if ("A002".equals(flag)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Result.msg("编码已存在！"));
+        }
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

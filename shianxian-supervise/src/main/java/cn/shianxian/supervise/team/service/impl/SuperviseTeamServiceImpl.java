@@ -28,9 +28,12 @@ public class SuperviseTeamServiceImpl implements SuperviseTeamService {
 
     @Transactional
     @Override
-    public Result saveSuperviseTeam(SuperviseTeam superviseTeam) {
-        this.superviseTeamDao.insertSuperviseTeam(superviseTeam);
-        return Result.successMsg();
+    public ResponseEntity<Result> saveSuperviseTeam(SuperviseTeam superviseTeam) {
+        String flag = this.superviseTeamDao.insertSuperviseTeam(superviseTeam);
+        if ("A002".equals(flag)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Result.msg("编码已存在！"));
+        }
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 
