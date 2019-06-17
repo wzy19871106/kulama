@@ -123,4 +123,10 @@ public class User {
      */
     @Transient
     private String token;
+
+    /**
+     * 所属用户角色名称
+     */
+    @Transient
+    private String roleName;
 }
