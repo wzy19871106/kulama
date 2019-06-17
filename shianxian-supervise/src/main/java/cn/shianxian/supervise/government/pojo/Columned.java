@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -30,12 +31,14 @@ public class Columned {
      */
     @Column(name = "`columnName`")
     @NotEmpty(message = "栏目名称不能为空！")
+    @Size(message = "栏目名称过长！", max = 200)
     private String columnName;
 
     /**
      * 是否启用
      */
     @Column(name = "`columnDisable`")
+    @Size(message = "是否启用过长！", max = 1)
     private String columnDisable;
 
 }

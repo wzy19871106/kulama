@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -26,12 +27,14 @@ public class SupervisePlanSub extends BasePojo {
      * 主任务编号
      */
     @Column(name = "`planTag`")
+    @Size(message = "主任务编号过长！", max = 11)
     private String planTag;
 
     /**
      * 计划监管类型(多个用半角逗号隔开）
      */
     @Column(name = "`superviseTypeTag`")
+    @Size(message = "计划监管类型过长！", max = 1000)
     private String superviseTypeTag;
 
     /**
@@ -44,24 +47,28 @@ public class SupervisePlanSub extends BasePojo {
      * 企业编码
      */
     @Column(name = "`nodeTag`")
+    @Size(message = "企业编码过长！", max = 60)
     private String nodeTag;
 
     /**
      * 企业名称
      */
     @Column(name = "`nodeName`")
+    @Size(message = "企业名称过长！", max = 100)
     private String nodeName;
 
     /**
      * 执法队伍编码
      */
     @Column(name = "`superviseTeamTag`")
+    @Size(message = "执法队伍编码过长！", max = 60)
     private String superviseTeamTag;
 
     /**
      * 执法队伍名称
      */
     @Column(name = "`superviseTeamName`")
+    @Size(message = "执法队伍名称过长！", max = 100)
     private String superviseTeamName;
 
     /**

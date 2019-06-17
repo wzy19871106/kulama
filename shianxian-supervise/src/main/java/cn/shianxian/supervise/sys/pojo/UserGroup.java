@@ -4,6 +4,7 @@ package cn.shianxian.supervise.sys.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -20,18 +21,21 @@ public class UserGroup {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "userGroupTag")
+    @Size(message = "数据权限标识过长！", max = 50)
     private String userGroupTag;
 
     /**
      * 父数据权限标识
      */
     @Column(name = "parentTag")
+    @Size(message = "父数据权限标识过长！", max = 50)
     private String parentTag;
 
     /**
      * 数据权限名称
      */
     @Column(name = "userGroupName")
+    @Size(message = "数据权限名称过长！", max = 200)
     private String userGroupName;
 
     /**
@@ -44,6 +48,7 @@ public class UserGroup {
      * 数据权限模板的维度模板
      */
     @Column(name = "userDataAuthority")
+    @Size(message = "数据权限模板的维度模板过长！", max = 200)
     private String userDataAuthority;
 
     /**

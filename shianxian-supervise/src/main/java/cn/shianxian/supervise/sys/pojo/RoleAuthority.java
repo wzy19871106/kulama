@@ -4,6 +4,7 @@ package cn.shianxian.supervise.sys.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 
@@ -26,18 +27,21 @@ public class RoleAuthority {
      * 角色标识
      */
     @Column(name = "RoleTag")
+    @Size(message = "角色标识过长！", max = 50)
     private String roleTag;
 
     /**
      * 权限标识
      */
     @Column(name = "AuthorityTag")
+    @Size(message = "权限标识过长！", max = 5000)
     private String authorityTag;
 
     /**
      * 模块标识
      */
     @Column(name = "moduleTag")
+    @Size(message = "模块标识过长！", max = 50)
     private String moduleTag;
 
     /**

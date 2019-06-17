@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 
@@ -24,60 +25,70 @@ public class CompanyInfo {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "nodeTag")
+    @Size(message = "企业标识过长！", max = 50)
     private String nodeTag;
 
     /**
      * 企业名称
      */
     @Column(name = "nodeName")
+    @Size(message = "企业名称过长！", max = 200)
     private String nodeName;
 
     /**
      * 企业统一社会信用代码
      */
     @Column(name = "nodeNo")
+    @Size(message = "企业统一社会信用代码过长！", max = 50)
     private String nodeNo;
 
     /**
      * 企业联系电话
      */
     @Column(name = "companyTel")
+    @Size(message = "企业联系电话过长！", max = 50)
     private String companyTel;
 
     /**
      * 企业地址
      */
     @Column(name = "companyAddress")
+    @Size(message = "企业地址过长！", max = 200)
     private String companyAddress;
 
     /**
      * 企业所属省
      */
     @Column(name = "companyProvice")
+    @Size(message = "企业所属省过长！", max = 50)
     private String companyProvice;
 
     /**
      * 企业所属市
      */
     @Column(name = "companyCity")
+    @Size(message = "企业所属市过长！", max = 50)
     private String companyCity;
 
     /**
      * 企业所属区
      */
     @Column(name = "companyArea")
+    @Size(message = "企业所属区过长！", max = 50)
     private String companyArea;
 
     /**
      * 企业所属乡镇
      */
     @Column(name = "companyVillage")
+    @Size(message = "企业所属乡镇过长！", max = 50)
     private String companyVillage;
 
     /**
      * 企业GIS经纬度
      */
     @Column(name = "companyGis")
+    @Size(message = "企业GIS经纬度过长！", max = 50)
     private String companyGis;
 
     /**

@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 /**
@@ -20,6 +21,7 @@ public class Role {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "roleTag")
+    @Size(message = "角色id过长！", max = 50)
     private String roleTag;
 
 
@@ -28,6 +30,7 @@ public class Role {
      */
     @NotEmpty(message = "角色名称不能为空！")
     @Column(name = "roleName")
+    @Size(message = "角色名称过长！", max = 200)
     private String roleName;
 
 

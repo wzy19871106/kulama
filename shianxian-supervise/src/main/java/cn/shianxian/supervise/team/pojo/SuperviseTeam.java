@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 /**
  * 执法队伍表
@@ -20,18 +21,21 @@ public class SuperviseTeam extends BasePojo {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "`teamTag`")
+    @Size(message = "执法队伍编码过长！", max = 50)
     private String teamTag;
 
     /**
      * 执法队伍名称
      */
     @Column(name = "`teamName`")
+    @Size(message = "执法队伍名称过长！", max = 100)
     private String teamName;
 
     /**
      * 备注
      */
     @Column(name = "`remark`")
+    @Size(message = "备注过长！", max = 2000)
     private String remark;
 
     /**

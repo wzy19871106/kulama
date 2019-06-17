@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 /**
  * 监管结果
@@ -21,18 +22,21 @@ public class SuperviseResult {
     @GeneratedValue(generator = "JDBC")
     @Column(name = "resultTag")
     @NotEmpty(message = "编码不能为空！")
+    @Size(message = "监管结果编码过长！", max = 50)
     private String resultTag;
 
     /**
      * 监管内容编码（外）
      */
     @Column(name = "superviseTag")
+    @Size(message = "监管内容编码过长！", max = 50)
     private String superviseTag;
 
     /**
      * 监管结果
      */
     @Column(name = "resultValue")
+    @Size(message = "监管结果过长！", max = 200)
     private String resultValue;
 
     /**
@@ -51,6 +55,7 @@ public class SuperviseResult {
      * 备注
      */
     @Column(name = "remark")
+    @Size(message = "监管结果过长！", max = 2000)
     private String remark;
 
     /**

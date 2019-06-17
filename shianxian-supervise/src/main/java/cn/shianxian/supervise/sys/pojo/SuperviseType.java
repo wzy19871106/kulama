@@ -4,6 +4,7 @@ package cn.shianxian.supervise.sys.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -20,18 +21,21 @@ public class SuperviseType {
     @Id
     @GeneratedValue(generator = "JDBC")
     @Column(name = "superviseTypeTag")
+    @Size(message = "监管类型编码过长！", max = 50)
     private String superviseTypeTag;
 
     /**
      * 父类型编码
      */
     @Column(name = "parentTag")
+    @Size(message = "父类型编码过长！", max = 50)
     private String parentTag;
 
     /**
-     * 监管类型名
+     * 监管类型名称
      */
     @Column(name = "superviseTypeName")
+    @Size(message = "监管类型名称过长！", max = 200)
     private String superviseTypeName;
 
     /**

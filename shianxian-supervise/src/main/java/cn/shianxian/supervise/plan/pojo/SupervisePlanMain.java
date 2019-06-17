@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 /**
@@ -27,6 +28,7 @@ public class SupervisePlanMain extends BasePojo {
      * 计划任务名称
      */
     @Column(name = "`planName`")
+    @Size(message = "计划任务名称过长！", max = 200)
     private String planName;
 
     /**
@@ -51,6 +53,7 @@ public class SupervisePlanMain extends BasePojo {
      * 备注
      */
     @Column(name = "`remark`")
+    @Size(message = "备注过长！", max = 100)
     private String remark;
 
     /**
