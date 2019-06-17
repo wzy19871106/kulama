@@ -30,7 +30,7 @@ public interface UserService {
      * @param user
      * @return
      */
-    Result saveOrUpdateUser(User user);
+    ResponseEntity<Result> saveOrUpdateUser(User user);
 
 
     /**

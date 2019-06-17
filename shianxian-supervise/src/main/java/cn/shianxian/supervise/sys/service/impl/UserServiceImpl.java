@@ -69,20 +69,20 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public Result saveOrUpdateUser(User user) {
+    public ResponseEntity<Result> saveOrUpdateUser(User user) {
         user.setUserLoginPass(DigestUtils.md5Hex(user.getUserLoginPass()));
         if (StringUtils.isBlank(user.getUserTag())) {
             User u = new User();
             u.setUserLoginName(user.getUserLoginName());
             List<User> userList = this.userDao.select(u);
             if (!userList.isEmpty()) {
-                return Result.msg("用户登录名已存在！");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body(Result.msg("用户登录名已存在！"));
             }
             this.userDao.insertUser(user);
         } else {
             this.userDao.updateUser(user);
         }
-        return Result.successMsg();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

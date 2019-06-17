@@ -99,8 +99,7 @@ public class UserController {
     })
     public ResponseEntity<Result> saveOrUpdateUser(@Valid User user) {
         log.info("保存、修改用户：{}", user);
-        Result result = this.userService.saveOrUpdateUser(user);
-        return ResponseEntity.ok(result);
+        return this.userService.saveOrUpdateUser(user);
     }
 
 
