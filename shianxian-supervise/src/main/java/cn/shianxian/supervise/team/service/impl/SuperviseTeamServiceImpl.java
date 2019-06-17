@@ -9,6 +9,8 @@ import cn.shianxian.supervise.team.service.SuperviseTeamService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,12 +45,16 @@ public class SuperviseTeamServiceImpl implements SuperviseTeamService {
 
     @Transactional
     @Override
-    public Result deleteSuperviseTeamById(String ids) {
+    public ResponseEntity<Result> deleteSuperviseTeamById(String ids) {
         String[] idArr = ids.split(",");
         for (String id : idArr) {
-            this.superviseTeamDao.deleteSuperviseTeamById(id);
+            String flag = this.superviseTeamDao.deleteSuperviseTeamById(id);
+            if (!"R001".equals(flag)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+            }
+
         }
-        return Result.successMsg();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

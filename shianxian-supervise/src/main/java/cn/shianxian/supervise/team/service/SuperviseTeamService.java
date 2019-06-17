@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.team.pojo.SuperviseTeam;
+import org.springframework.http.ResponseEntity;
 
 public interface SuperviseTeamService {
 
@@ -29,7 +30,7 @@ public interface SuperviseTeamService {
      * @param ids
      * @return
      */
-    Result deleteSuperviseTeamById(String ids);
+    ResponseEntity<Result> deleteSuperviseTeamById(String ids);
 
 
     /**

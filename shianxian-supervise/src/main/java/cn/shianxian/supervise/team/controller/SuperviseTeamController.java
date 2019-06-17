@@ -89,8 +89,7 @@ public class SuperviseTeamController {
     @ApiImplicitParam(paramType = "query", name = "ids", value = "ids，多个id用英文逗号连接")
     public ResponseEntity<Result> deleteSuperviseTeamById(String ids) {
         log.info("删除执法队伍：{}", ids);
-        Result result = this.superviseTeamService.deleteSuperviseTeamById(ids);
-        return ResponseEntity.ok(result);
+        return this.superviseTeamService.deleteSuperviseTeamById(ids);
     }
 
 
