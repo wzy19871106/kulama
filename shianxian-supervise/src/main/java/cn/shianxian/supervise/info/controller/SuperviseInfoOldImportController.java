@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 /**
  * 线下监管文件导入控制器
  */
@@ -43,7 +45,7 @@ public class SuperviseInfoOldImportController {
             @ApiImplicitParam(paramType = "query", name = "importTime", value = "导入时间"),
             @ApiImplicitParam(paramType = "query", name = "importResult", value = "导入结果 0为导入失败，1为导入成功"),
     })
-    public ResponseEntity<Result> saveSuperviseInfoOldImport(SuperviseInfoOldImport superviseInfoOldImport) {
+    public ResponseEntity<Result> saveSuperviseInfoOldImport(@Valid SuperviseInfoOldImport superviseInfoOldImport) {
         log.info("保存线下监管文件：{}", superviseInfoOldImport);
         Result result = this.superviseInfoOldImportService.saveSuperviseInfoOldImport(superviseInfoOldImport);
         return ResponseEntity.ok(result);
