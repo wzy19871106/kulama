@@ -147,4 +147,9 @@ public class NodeInfo {
     @Transient
     private String nodeVillageName;
 
+    /**
+     * 节点经济行业标识
+     */
+    @Transient
+    private String industryName;
 }
