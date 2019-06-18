@@ -62,7 +62,7 @@ public class Supervise {
      * 检查指南
      */
     @Column(name = "superviseGuide")
-    @Size(message = "检查指南过长！", max = 30)
+    @Size(message = "检查指南过长！", max = 2000)
     private String superviseGuide;
 
     /**
