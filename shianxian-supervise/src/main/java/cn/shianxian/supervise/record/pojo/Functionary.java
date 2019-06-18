@@ -19,8 +19,6 @@ public class Functionary {
     /**
      * 所属企业标识
      */
-    @Id
-    @GeneratedValue(generator = "JDBC")
     @Column(name = "nodeTag")
     @NotEmpty(message = "企业标识不能为空！")
     @Size(message = "企业标识过长！", max = 50)
@@ -29,6 +27,8 @@ public class Functionary {
     /**
      * 负责人标识
      */
+    @Id
+    @GeneratedValue(generator = "JDBC")
     @Column(name = "functionaryTag")
     @Size(message = "负责人标识过长！", max = 50)
     private String functionaryTag;
@@ -111,6 +111,13 @@ public class Functionary {
     @Column(name = "weChatId")
     @Size(message = "微信AppID过长！", max = 200)
     private String weChatId;
+
+    /**
+     * 人脸识别id
+     */
+    @Column(name = "faceTag")
+    @Size(message = "人脸识别id过长！", max = 50)
+    private Long faceTag;
 
     /**
      * token

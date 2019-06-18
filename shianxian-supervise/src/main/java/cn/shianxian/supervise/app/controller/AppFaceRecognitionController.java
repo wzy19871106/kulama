@@ -42,6 +42,7 @@ public class AppFaceRecognitionController {
             @ApiImplicitParam(paramType = "query", name = "eigenValue", value = "特征值"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
             @ApiImplicitParam(paramType = "query", name = "picAddress", value = "图片路径"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人id"),
     })
     public ResponseEntity<Result> saveFaceRecognition(@Valid FaceRecognition faceRecognition) {
         log.info("保存、修改人脸识别：{}", faceRecognition);

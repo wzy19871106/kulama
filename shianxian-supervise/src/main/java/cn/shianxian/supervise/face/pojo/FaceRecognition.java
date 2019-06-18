@@ -3,10 +3,7 @@ package cn.shianxian.supervise.face.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 /**
@@ -45,4 +42,9 @@ public class FaceRecognition {
     @Size(message = "图片路径过长！", max = 255)
     private String picAddress;
 
+    /**
+     * 负责人编码
+     */
+    @Transient
+    private String functionaryTag;
 }
