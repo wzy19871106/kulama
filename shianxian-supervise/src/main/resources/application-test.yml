@@ -75,11 +75,6 @@ spring:
         # 每次释放连接的最大数目
         num-tests-per-eviction-run: 1024
 
-agora:
-  appid: b676a4deb7964ee480fc51c72554c97e
-  certificate: 1101
-  account: 1101
-
 # 上传配置
 upload:
   url: http://10.18.9.151/
