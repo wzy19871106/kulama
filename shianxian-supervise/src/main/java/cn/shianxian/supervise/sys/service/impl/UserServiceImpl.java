@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
             loginUser.setUserLastTime(LocalDateTime.now());
             this.userDao.updateByPrimaryKeySelective(user);
             String token = UUIDGenerator.generatorUUID();
-            this.redisService.set(Constants.USER + token, JSON.toJSONString(loginUser));
+            this.redisService.set(Constants.USER + token, JSON.toJSONString(loginUser), 14400);
             log.info("用户：{}登录", loginUser);
             UserGroup userGroup = this.userGroupDao.selectByPrimaryKey(loginUser.getUserGroupTag());
             if (userGroup != null) {
