@@ -77,7 +77,7 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
             List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultById(superviseResult.getResultTag());
             return Result.data(results);
         } else if (StringUtils.isNotBlank(superviseResult.getSuperviseTag())) {
-            List<SuperviseResult> results = this.superviseResultDao.selectSuperviseResultBySuperviseTag(superviseResult.getSuperviseTag());
+            List<SuperviseResult> results = this.superviseResultDao.selectAllSuperviseResultBySuperviseTag(superviseResult.getSuperviseTag());
             return Result.data(results);
         } else if (StringUtils.isNotBlank(superviseResult.getSuperviseTypeTag())) {
             List<SuperviseResultDTO> results = this.superviseResultDao.selectSuperviseResultByTypeId(superviseResult.getSuperviseTypeTag());

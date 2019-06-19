@@ -52,6 +52,8 @@
         CALL proc_T_Supervise_Result_OrderDown_ByTag(#{id})
     </select>
 
-
+    <select id="selectAllSuperviseResultBySuperviseTag" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
+        CALL proc_T_Supervise_Result_QueryAll_By_SuperviseTag(#{id})
+    </select>
 
 </mapper>
