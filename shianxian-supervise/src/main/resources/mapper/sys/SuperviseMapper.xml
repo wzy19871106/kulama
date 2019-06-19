@@ -54,7 +54,7 @@
         CALL proc_T_Supervise_OrderDown_ByTag(#{id})
     </select>
 
-    <select id="selectSuperviseScore" resultType="java.lang.String">
+    <select id="selectSuperviseScore" resultType="java.lang.Double">
         CALL proc_T_Supervise_Query_Score_ByTag(#{id})
     </select>
 
