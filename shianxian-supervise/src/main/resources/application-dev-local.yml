@@ -75,6 +75,12 @@ spring:
         # 每次释放连接的最大数目
         num-tests-per-eviction-run: 1024
 
+# 虹软
+agora:
+  appId: 984NfMTD6XTdtHeqYsQca6Up7NtEcLAqVmG86GW9N7dr
+  sdkKey: CSaQxfj6oSJ9dsMNYuj3mxbZQZq2oYJsUqw5J7GYhDXv
+  path: D:/m/agora/
+
 # 上传配置
 upload:
   url: http://10.18.9.150/
