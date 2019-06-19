@@ -200,10 +200,12 @@ public class NodeInfoServiceImpl implements NodeInfoService {
             String[] authority = nodeInfo.getUserDataUsedAuthoritySet().split(",");
             UserGroup userGroup = new UserGroup();
             for (String a : authority) {
-                userGroup.setUserDataAuthority(a);
-                List<UserGroup> userGroupList = this.userGroupDao.select(userGroup);
-                if (!userGroupList.isEmpty()) {
-                    list.add(userGroupList.get(0).getUserGroupTag());
+                if (!"0".equals(a)) {
+                    userGroup.setUserDataAuthority(a);
+                    List<UserGroup> userGroupList = this.userGroupDao.select(userGroup);
+                    if (!userGroupList.isEmpty()) {
+                        list.add(userGroupList.get(0).getUserGroupTag());
+                    }
                 }
             }
         }
