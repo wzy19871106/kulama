@@ -38,7 +38,7 @@ public class FaceRecognitionController {
     @PostMapping("faceRecognition")
     @ApiOperation(value = "人脸识别", notes = "人脸识别")
     @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识")
-    public ResponseEntity<Result> faceRecognition(@ApiParam(value = "图片1", required = true) MultipartFile file, String functionaryTag) throws IOException {
+    public ResponseEntity<Result> faceRecognition(@ApiParam(value = "图片", required = true) MultipartFile file, String functionaryTag) throws IOException {
         return this.faceRecognitionService.faceRecognition(file, functionaryTag);
     }
 
