@@ -4,6 +4,7 @@ package cn.shianxian.supervise.info.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,7 +30,7 @@ public class SuperviseInfoMain {
      * 计划任务编号（非计划任务监管可为空)
      */
     @Column(name = "planTag")
-    @Size(message = "计划任务编号过长！", max = 11)
+    @Max(message = "计划任务编号过长！", value = Long.MAX_VALUE)
     private Long planTag;
 
     /**

@@ -4,6 +4,7 @@ package cn.shianxian.supervise.record.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -116,7 +117,7 @@ public class Functionary {
      * 人脸识别id
      */
     @Column(name = "faceTag")
-    @Size(message = "人脸识别id过长！", max = 50)
+    @Max(message = "人脸识别id过长！", value = Long.MAX_VALUE)
     private Long faceTag;
 
     /**

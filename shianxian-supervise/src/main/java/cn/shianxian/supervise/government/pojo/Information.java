@@ -4,6 +4,7 @@ package cn.shianxian.supervise.government.pojo;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -76,7 +77,7 @@ public class Information {
      * 栏目标识
      */
     @Column(name = "`columnTag`")
-    @Size(message = "栏目标识过长！", max = 50)
+    @Max(message = "栏目标识过长！", value = Long.MAX_VALUE)
     private Long columnTag;
 
     /**
