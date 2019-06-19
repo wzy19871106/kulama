@@ -114,4 +114,12 @@ public interface SuperviseDao extends Mapper<Supervise> {
      * @return
      */
     List<Supervise> selectSubSuperviseByParentMainIds(@Param("superviseTag") String superviseTag, @Param("mainIds") String mainIds);
+
+
+    /**
+     * 根据类型查询所有监管内容（树形）
+     * @param type
+     * @return
+     */
+    String selectSuperviseAllTree(@Param("type") String type);
 }

@@ -127,4 +127,18 @@ public class SuperviseController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 根据类型查询所有监管内容（树形）
+     * @return
+     */
+    @GetMapping("selectSuperviseAllTree")
+    @ApiOperation(value = "根据类型查询所有监管内容（树形）", notes = "根据类型查询所有监管内容（树形）")
+    @ApiImplicitParam(paramType = "query", name = "type", value = "监管类型编码")
+    public ResponseEntity<Result> selectSuperviseAllTree(String type) {
+        Result result = this.superviseService.selectSuperviseAllTree(type);
+        return ResponseEntity.ok(result);
+    }
+
+
 }

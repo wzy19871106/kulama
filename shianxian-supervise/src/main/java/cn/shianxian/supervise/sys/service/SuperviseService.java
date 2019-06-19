@@ -54,4 +54,12 @@ public interface SuperviseService {
      * @return
      */
     Result selectSuperviseTree(String type);
+
+
+    /**
+     * 根据类型查询所有监管内容（树形）
+     * @param type
+     * @return
+     */
+    Result selectSuperviseAllTree(String type);
 }

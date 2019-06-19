@@ -77,4 +77,9 @@
     <select id="selectSubSuperviseByParentMainIds" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
         CALL proc_T_Supervise_Query_Sub_ByParentMainIDS(#{superviseTag}, #{mainIds})
     </select>
+
+    <select id="selectSuperviseAllTree" resultType="java.lang.String">
+        CALL proc_T_Supervise_QueryAllTreeJson_ByType(#{type})
+    </select>
+
 </mapper>
