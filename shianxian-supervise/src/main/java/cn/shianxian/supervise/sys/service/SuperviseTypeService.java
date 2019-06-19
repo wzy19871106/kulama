@@ -87,4 +87,12 @@ public interface SuperviseTypeService {
      * @return
      */
     Result updateSuperviseTypeAuthority(SuperviseType superviseType);
+
+
+    /**
+     * 查询所有监管类型（树形）
+     * @param superviseType
+     * @return
+     */
+    Result selectSuperviseTypeAllTree(SuperviseType superviseType);
 }

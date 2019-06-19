@@ -88,4 +88,12 @@ public interface SuperviseTypeDao extends Mapper<SuperviseType> {
      * @return
      */
     List<SuperviseType> selectSuperviseTypeByParentMainIds(@Param("mainIds") String mainIds);
+
+
+    /**
+     * 查询所有监管类型（树形）
+     * @param superviseType
+     * @return
+     */
+    String selectSuperviseTypeAllTree(@Param("superviseType") SuperviseType superviseType);
 }

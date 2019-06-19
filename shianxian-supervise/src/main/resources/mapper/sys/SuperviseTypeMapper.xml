@@ -42,4 +42,8 @@
         CALL proc_T_SuperviseType_Query_ByParentMainIDS(#{mainIds})
     </select>
 
+    <select id="selectSuperviseTypeAllTree" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_QueryAllTreeJson_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
 </mapper>
