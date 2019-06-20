@@ -3,7 +3,6 @@ package cn.shianxian.supervise.record.vo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 /**
@@ -176,5 +175,10 @@ public class CompanyInfoFunctionaryForaduitVO {
      * 负责人职位，无固定
      */
     private String functionaryPostition;
+
+    /**
+     * 类型
+     */
+    private String norfType;
 
 }
