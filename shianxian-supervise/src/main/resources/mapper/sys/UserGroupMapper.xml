@@ -45,4 +45,8 @@
         CALL proc_T_UserGroup_QueryTreeJson_ByUserGroupTag(#{id}, #{flag})
     </select>
 
+    <select id="selectUserGroupAllTree" resultType="java.lang.String">
+        CALL proc_T_UserGroup_QueryAllTreeJson_ByUserGroupTag(#{id}, #{flag})
+    </select>
+
 </mapper>

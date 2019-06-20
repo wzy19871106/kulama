@@ -100,4 +100,20 @@ public class UserGroupController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 查询所有用户组（树形）
+     * @return
+     */
+    @GetMapping("selectUserGroupAllTree")
+    @ApiOperation(value = "查询所有用户组（树形）", notes = "查询所有用户组（树形）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "id"),
+            @ApiImplicitParam(paramType = "query", name = "flag", value = "标识[true:所有，false:有效]"),
+    })
+    public ResponseEntity<Result> selectUserGroupAllTree(String id, boolean flag) {
+        Result result = this.userGroupService.selectUserGroupAllTree(id, flag);
+        return ResponseEntity.ok(result);
+    }
+
 }

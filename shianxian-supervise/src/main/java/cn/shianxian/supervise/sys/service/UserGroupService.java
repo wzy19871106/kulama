@@ -39,4 +39,13 @@ public interface UserGroupService {
      * @return
      */
     Result selectUserGroupTree(String id, boolean flag);
+
+
+    /**
+     * 查询所有用户组（树形）
+     * @param id
+     * @param flag
+     * @return
+     */
+    Result selectUserGroupAllTree(String id, boolean flag);
 }

@@ -55,4 +55,13 @@ public interface UserGroupDao extends Mapper<UserGroup> {
      * @return
      */
     String selectUserGroupTree(@Param("id") String id, @Param("flag") boolean flag);
+
+
+    /**
+     * 查询所有用户组（树形）
+     * @param id
+     * @param flag
+     * @return
+     */
+    String selectUserGroupAllTree(@Param("id") String id, @Param("flag") boolean flag);
 }
