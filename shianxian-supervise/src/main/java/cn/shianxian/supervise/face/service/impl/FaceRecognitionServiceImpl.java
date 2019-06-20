@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.face.service.impl;
 
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.common.utils.Base64Utils;
 import cn.shianxian.supervise.common.utils.CommonUtils;
 import cn.shianxian.supervise.common.utils.FaceUtils;
 import cn.shianxian.supervise.common.utils.UUIDGenerator;
@@ -98,7 +99,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
 
 
     @Override
-    public ResponseEntity<Result> faceRecognition(MultipartFile file, String functionaryTag) throws IOException {
+    public ResponseEntity<Result> faceRecognition(String img, String functionaryTag) throws IOException {
         Functionary functionary = this.functionaryDao.selectByPrimaryKey(functionaryTag);
         // 判断证件照是否存在，不存在则人脸识别失败
         if (null != functionary && StringUtils.isNotBlank(functionary.getPicTag())) {
@@ -106,25 +107,20 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
             picInfo.setPicTag(functionary.getPicTag());
             List<PicInfo> picInfos = this.picInfoDao.select(picInfo);
             if (!picInfos.isEmpty()) {
-                String fileType = ".jpg.jpeg.png.JPG.JPEG.PNG";
-                String fileSuffix = CommonUtils.getFileSuffix(file.getOriginalFilename());
-                if (!fileType.contains(fileSuffix)) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("请上传图片！"));
-                }
-                String fileName = UUIDGenerator.generatorUUID();
                 File filePath = new File(path);
                 if (!filePath.exists()) {
                     filePath.mkdirs();
                     log.info("创建文件夹：{}", path);
                 }
-                File tmpFile = new File(path + fileName + fileSuffix);
-                file.transferTo(tmpFile);
-                for (PicInfo info : picInfos) {
-                    File tmpFile2 = new File(uploadPath + info.getPicAddress());
-                    if (tmpFile2.exists()) {
-                        boolean result = FaceUtils.faceEngine(appId, sdkKey, tmpFile, tmpFile2);
-                        if (result) {
-                            return ResponseEntity.ok(Result.data(result));
+                File file = Base64Utils.GenerateImage(img, path);
+                if (null != file) {
+                    for (PicInfo info : picInfos) {
+                        File file2 = new File(uploadPath + info.getPicAddress());
+                        if (file2.exists()) {
+                            boolean result = FaceUtils.faceEngine(appId, sdkKey, file, file2);
+                            if (result) {
+                                return ResponseEntity.ok(Result.data(result));
+                            }
                         }
                     }
                 }
@@ -132,4 +128,43 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         }
         return ResponseEntity.ok(Result.data(false));
     }
+
+
+    @Override
+    public ResponseEntity<Result> checlFace(String functionaryTag, MultipartFile file) throws IOException {
+        Functionary functionary = this.functionaryDao.selectByPrimaryKey(functionaryTag);
+        // 判断证件照是否存在，不存在则人脸识别失败
+        if (null != functionary && StringUtils.isNotBlank(functionary.getPicTag())) {
+            PicInfo picInfo = new PicInfo();
+            picInfo.setPicTag(functionary.getPicTag());
+            List<PicInfo> picInfos = this.picInfoDao.select(picInfo);
+            if (!picInfos.isEmpty()) {
+                File filePath = new File(path);
+                if (!filePath.exists()) {
+                    filePath.mkdirs();
+                    log.info("创建文件夹：{}", path);
+                }
+                String fileSuffix = CommonUtils.getFileSuffix(file.getOriginalFilename());
+                String fileType = ".jpg.jpeg.png.JPG.JPEG.PNG";
+                if (!fileType.contains(fileSuffix)) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("请上传图片！"));
+                }
+                File temp = new File(filePath + UUIDGenerator.generatorUUID() + fileSuffix);
+                file.transferTo(temp);
+                if (null != file) {
+                    for (PicInfo info : picInfos) {
+                        File file2 = new File(uploadPath + info.getPicAddress());
+                        if (file2.exists()) {
+                            boolean result = FaceUtils.faceEngine(appId, sdkKey, temp, file2);
+                            if (result) {
+                                return ResponseEntity.ok(Result.data(result));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return ResponseEntity.ok(Result.data(false));
+    }
+
 }

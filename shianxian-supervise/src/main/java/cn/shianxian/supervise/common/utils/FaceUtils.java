@@ -11,7 +11,6 @@ import java.awt.image.ColorConvertOp;
 import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +20,7 @@ import java.util.List;
  */
 public class FaceUtils {
 
-    public static void main(String[] args) throws UnsupportedEncodingException {
-        FaceUtils faceUtils= new FaceUtils();
-        boolean b = faceUtils.faceEngine("984NfMTD6XTdtHeqYsQca6Up7NtEcLAqVmG86GW9N7dr", "CSaQxfj6oSJ9dsMNYuj3mxbZQZq2oYJsUqw5J7GYhDXv", new File("D:/ss/timg (11).jpg"), new File("D:/s/timg.jpg"));
-        System.out.println(b);
-    }
+
     /**
      * 虹软人脸识别
      *
@@ -35,6 +30,7 @@ public class FaceUtils {
      * @param file2
      */
     public static boolean faceEngine(String appId, String sdkKey, File file1, File file2) {
+        boolean flag = false;
         FaceEngine faceEngine = new FaceEngine();
         //激活引擎
         faceEngine.active(appId, sdkKey);
@@ -59,7 +55,7 @@ public class FaceUtils {
         faceEngine.detectFaces(imageInfo.getRgbData(), imageInfo.getWidth(), imageInfo.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList2);
 
         if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
-            return false;
+            return flag;
         }
 
         //提取人脸特征
@@ -80,9 +76,10 @@ public class FaceUtils {
         faceEngine.compareFaceFeature(targetFaceFeature, sourceFaceFeature, faceSimilar);
 
         if (Math.abs(0.5) < Math.abs(faceSimilar.getScore())) {
-            return true;
+            flag = true;
         }
-        return false;
+        faceEngine.unInit();
+        return flag;
     }
 
     private static ImageInfo getRGBData(File file) {

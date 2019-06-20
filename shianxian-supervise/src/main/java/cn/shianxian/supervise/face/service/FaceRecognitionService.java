@@ -36,9 +36,17 @@ public interface FaceRecognitionService {
 
     /**
      * 人脸识别
-     * @param file
+     * @param img
      * @param functionaryTag
      * @return
      */
-    ResponseEntity<Result> faceRecognition(MultipartFile file, String functionaryTag) throws IOException;
+    ResponseEntity<Result> faceRecognition(String img, String functionaryTag) throws IOException;
+
+
+    /**
+     * app人脸识别
+     * @param file
+     * @return
+     */
+    ResponseEntity<Result> checlFace(String functionaryTag, MultipartFile file) throws IOException;
 }
