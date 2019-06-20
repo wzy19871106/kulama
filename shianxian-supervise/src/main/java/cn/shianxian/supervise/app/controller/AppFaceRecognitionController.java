@@ -84,7 +84,6 @@ public class AppFaceRecognitionController {
     @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识")
     public ResponseEntity<Result> checlFace(@ApiParam(value = "图片", required = true) MultipartFile file, String functionaryTag) throws IOException {
         log.info("app人脸识别：{}", functionaryTag);
-        log.info("====:{}", System.getProperty("java.library.path"));
         return this.faceRecognitionService.checlFace(functionaryTag, file);
     }
 
