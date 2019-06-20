@@ -7,7 +7,6 @@
         (
         #{userGroup.parentTag},
         #{userGroup.userGroupName},
-        #{userGroup.userGroupDisabled},
         #{userGroup.picTag}
         )
     </select>
