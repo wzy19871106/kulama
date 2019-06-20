@@ -13,6 +13,7 @@ import cn.shianxian.supervise.record.pojo.FunctionaryForaduit;
 import cn.shianxian.supervise.record.service.FunctionaryService;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -124,7 +125,7 @@ public class FunctionaryServiceImpl implements FunctionaryService {
 
     @Override
     public ResponseEntity<Result> selectFunctionary(Functionary functionary) {
-        if (null != functionary.getFunctionaryTag()) {
+        if (StringUtils.isNotBlank(functionary.getFunctionaryTag())) {
             functionary = this.functionaryDao.selectFunctionaryByFunctionaryTag(functionary.getFunctionaryTag());
         } else if (null != functionary.getWeChatId()) {
             functionary = this.functionaryDao.selectFunctionaryByWeChatId(functionary.getWeChatId());
