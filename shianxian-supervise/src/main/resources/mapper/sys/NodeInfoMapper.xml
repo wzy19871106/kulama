@@ -20,7 +20,8 @@
         CALL proc_T_NodeInfo_Edit_ByNodeTag
         (
         #{nodeInfo.nodeTag},
-        #{nodeInfo.nodeName}
+        #{nodeInfo.nodeName},
+        #{nodeInfo.picTag}
         )
     </select>
 
