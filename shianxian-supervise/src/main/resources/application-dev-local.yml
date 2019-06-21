@@ -82,6 +82,12 @@ agora:
   path: D:/m/agora/
   libPath: D:/ai/ArcSoft_ArcFace_Java_Windows_x64_V2.2/libs/WIN64
 
+# 百度
+baidu:
+  ak: ieg3BWPSEDTc1OKx5SNnmQuO4CRRA2wk
+  url:
+    geocoding: http://api.map.baidu.com/geocoding/v3/?address={address}&output=json&ak=${baidu.ak}&callback=showLocation
+
 # 上传配置
 upload:
   url: http://10.18.9.150/

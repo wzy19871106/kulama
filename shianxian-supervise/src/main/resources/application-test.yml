@@ -82,6 +82,12 @@ agora:
   path: /opt/img/agora/
   libPath: /usr/local/cloud/supervise/so
 
+# 百度
+baidu:
+  ak: ieg3BWPSEDTc1OKx5SNnmQuO4CRRA2wk
+  url:
+    geocoding: http://api.map.baidu.com/geocoding/v3/?address={address}&output=json&ak=${baidu.ak}&callback=showLocation
+
 # 上传配置
 upload:
   url: http://10.18.9.151/
