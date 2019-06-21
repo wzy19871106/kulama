@@ -56,6 +56,10 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     private String path;
 
 
+    @Value("${agora.libPath}")
+    private String libPath;
+
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -117,7 +121,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                     for (PicInfo info : picInfos) {
                         File file2 = new File(uploadPath + info.getPicAddress());
                         if (file2.exists()) {
-                            boolean result = FaceUtils.faceEngine(appId, sdkKey, file, file2);
+                            boolean result = FaceUtils.face(appId, sdkKey, libPath, file, file2);
                             if (result) {
                                 return ResponseEntity.ok(Result.data(result));
                             }
@@ -155,7 +159,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                     for (PicInfo info : picInfos) {
                         File file2 = new File(uploadPath + info.getPicAddress());
                         if (file2.exists()) {
-                            boolean result = FaceUtils.faceEngine(appId, sdkKey, temp, file2);
+                            boolean result = FaceUtils.face(appId, sdkKey, libPath, temp, file2);
                             if (result) {
                                 return ResponseEntity.ok(Result.data(result));
                             }
