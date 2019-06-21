@@ -57,6 +57,7 @@ public class FaceUtils {
         faceEngine.detectFaces(imageInfo.getRgbData(), imageInfo.getWidth(), imageInfo.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList2);
 
         if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
+            log.info("没有人脸信息");
             return flag;
         }
 
