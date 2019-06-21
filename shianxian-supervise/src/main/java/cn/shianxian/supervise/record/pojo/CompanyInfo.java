@@ -3,10 +3,7 @@ package cn.shianxian.supervise.record.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -115,4 +112,27 @@ public class CompanyInfo {
     @Column(name = "createTime")
     private LocalDateTime createTime;
 
+    /**
+     * 企业所属省
+     */
+    @Transient
+    private String companyProviceName;
+
+    /**
+     * 企业所属市
+     */
+    @Transient
+    private String companyCityName;
+
+    /**
+     * 企业所属区
+     */
+    @Transient
+    private String companyAreaName;
+
+    /**
+     * 企业所属乡镇
+     */
+    @Transient
+    private String companyVillageName;
 }
