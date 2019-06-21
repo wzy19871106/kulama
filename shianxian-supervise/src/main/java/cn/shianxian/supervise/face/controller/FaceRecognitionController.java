@@ -41,6 +41,7 @@ public class FaceRecognitionController {
         @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
     })
     public ResponseEntity<Result> faceRecognition(String img, String functionaryTag) throws IOException {
+        log.info("web人脸识别：{}", functionaryTag);
         return this.faceRecognitionService.faceRecognition(img, functionaryTag);
     }
 

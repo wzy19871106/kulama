@@ -3,6 +3,7 @@ package cn.shianxian.supervise.common.utils;
 
 import com.arcsoft.face.*;
 import com.arcsoft.face.enums.ImageFormat;
+import lombok.extern.slf4j.Slf4j;
 
 import javax.imageio.ImageIO;
 import java.awt.color.ColorSpace;
@@ -18,6 +19,7 @@ import java.util.List;
  * 虹软人脸识别
  * 启动时指定动态库位置
  */
+@Slf4j
 public class FaceUtils {
 
 
@@ -76,6 +78,7 @@ public class FaceUtils {
         faceEngine.compareFaceFeature(targetFaceFeature, sourceFaceFeature, faceSimilar);
 
         if (Math.abs(0.5) < Math.abs(faceSimilar.getScore())) {
+            log.info("人脸识别分数：{}", faceSimilar.getScore());
             flag = true;
         }
         faceEngine.unInit();
