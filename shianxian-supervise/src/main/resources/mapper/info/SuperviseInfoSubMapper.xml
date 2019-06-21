@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.info.dao.SuperviseInfoSubDao">
+
+    <resultMap id="info" type="cn.shianxian.supervise.info.vo.SuperviseInfoVO"></resultMap>
+
+    <resultMap id="superviseVO" type="cn.shianxian.supervise.info.vo.SuperviseVO"></resultMap>
+
+    <resultMap id="rectifyVO" type="cn.shianxian.supervise.info.vo.RectifyVO"></resultMap>
+
+    <select id="selectSuperviseRectifyByNode" resultMap="info,pageCount,totalCount">
+        CALL Proc_T_Superviser_Rectify_ByNode
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseRectifyById" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Superviser_Rectify_ByMainIDS
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoSubById" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
+        CALL proc_T_Supervise_Info_Sub_Query_ByIDS(#{id})
+    </select>
+
+    <select id="updateSuperviseInfoSubById" resultType="java.lang.String">
+        CALL Proc_T_Supervise_Info_Sub_Rectify_ByIDS
+        (
+        #{superviseInfoSub.subId},
+        #{superviseInfoSub.requst},
+        #{superviseInfoSub.picTag},
+        #{superviseInfoSub.lastUpdateUser}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoDetailById" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_Detail
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoAdviceById" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
+        CALL proc_T_Supervise_Info_Advice_Query_ByCondition(#{id})
+    </select>
+
+    <select id="selectSuperviseInfoSubParentId" resultMap="superviseVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Sub_Query_Parent_Supervise_By_MainIDS
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoSubId" resultMap="superviseVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Sub_Query_SubSupervise_By_Tag_MainIDS
+        (
+        #{superviseTag},
+        #{id},
+        1000,
+        1
+        )
+    </select>
+
+    <select id="selectSuperviseInfoSubScoreId" resultType="cn.shianxian.supervise.info.vo.SuperviseInfoScoreVO">
+        CALL proc_T_Supervise_Info_Sub_Query_Score_ByMainIDS(#{id})
+    </select>
+
+    <select id="selectRectify" resultMap="rectifyVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Rectify_Parent_Info_ByMainIDS
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectRectifyDetail" resultMap="rectifyVO,pageCount,totalCount">
+        CALL proc_T_Supervise_Rectify_Sub_Info_ByMainIDS
+        (
+        #{superviseTag},
+        #{id},
+        1000,
+        1
+        )
+    </select>
+
+    <select id="selectRectifySum" resultType="cn.shianxian.supervise.info.vo.RectifySumVO">
+        CALL proc_T_Supervise_Rectify_Info_ByMainIDS(#{id})
+    </select>
+
+    <select id="saveSuperviseInfoSub" resultType="java.lang.String">
+        CALL proc_T_Supervise_Info_Sub_Add
+        (
+        #{superviseInfoSub.mainIds},
+        #{superviseInfoSub.nodeTag},
+        #{superviseInfoSub.superviseTypeTag},
+        #{superviseInfoSub.superviseTag},
+        #{superviseInfoSub.superviseName},
+        #{superviseInfoSub.resultTag},
+        #{superviseInfoSub.resultValue},
+        #{superviseInfoSub.score},
+        #{superviseInfoSub.advice},
+        #{superviseInfoSub.requst},
+        #{superviseInfoSub.picTag},
+        #{superviseInfoSub.createUserTag},
+        #{superviseInfoSub.lastUpdateUser},
+        #{superviseInfoSub.remark}
+        )
+    </select>
+
+    <select id="rectifyTime" resultType="cn.shianxian.supervise.info.vo.RectifyTimeVO">
+        CALL proc_T_Supervise_TraceInfo_Time_Query_ByTag
+        (
+        #{superviseInfoSub.mainId},
+        #{superviseInfoSub.superviseTypeTag},
+        #{superviseInfoSub.nodeTag}
+        )
+    </select>
+
+    <select id="correctiveFeedback" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
+        CALL Proc_T_Supervise_CorrectiveFeedback_ByTag(#{mainIds})
+    </select>
+
+    <select id="rectify" resultType="cn.shianxian.supervise.info.vo.RectifyResultVO">
+        CALL proc_T_Supervise_TraceInfo_Query_ByMainIDS(#{mainIds})
+    </select>
+
+</mapper>

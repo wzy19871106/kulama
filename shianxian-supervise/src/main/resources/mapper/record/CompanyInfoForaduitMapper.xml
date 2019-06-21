@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.record.dao.CompanyInfoForaduitDao">
+
+    <resultMap id="companyInfoForaduit" type="cn.shianxian.supervise.record.pojo.CompanyInfoForaduit"></resultMap>
+
+    <resultMap id="companyInfoFunctionaryForaduitVO" type="cn.shianxian.supervise.record.vo.CompanyInfoFunctionaryForaduitVO"></resultMap>
+
+    <select id="saveCompanyInfoForaduit" resultType="java.lang.String">
+       CALL Proc_T_CompanyInfo_ForAduit_Add
+       (
+       #{companyInfoForaduit.nodeTag},
+       #{companyInfoForaduit.nodeName},
+       #{companyInfoForaduit.nodeNo},
+       #{companyInfoForaduit.companyTel},
+       #{companyInfoForaduit.companyAddress},
+       #{companyInfoForaduit.companyProvice},
+       #{companyInfoForaduit.companyCity},
+       #{companyInfoForaduit.companyArea},
+       #{companyInfoForaduit.companyVillage},
+       #{companyInfoForaduit.companyGis},
+       #{companyInfoForaduit.picTag}
+       )
+    </select>
+
+    <select id="updateCompanyInfoForaduit" resultType="java.lang.String">
+       CALL Proc_T_CompanyInfo_ForAduit_Edit_ByNodeTag
+       (
+       #{companyInfoForaduit.nodeTag},
+       #{companyInfoForaduit.nodeName},
+       #{companyInfoForaduit.nodeNo},
+       #{companyInfoForaduit.companyTel},
+       #{companyInfoForaduit.companyAddress},
+       #{companyInfoForaduit.companyProvice},
+       #{companyInfoForaduit.companyCity},
+       #{companyInfoForaduit.companyArea},
+       #{companyInfoForaduit.companyVillage},
+       #{companyInfoForaduit.companyGis},
+       #{companyInfoForaduit.picTag}
+       )
+    </select>
+
+    <select id="checkCompanyInfoForaduit" resultType="java.lang.String">
+      CALL Proc_T_CompanyInfo_ForAduit_Check_ByIndex(#{index})
+    </select>
+
+    <select id="backCompanyInfoForaduit" resultType="java.lang.String">
+      CALL Proc_T_CompanyInfo_ForAduit_Fail_ByIndex
+      (
+      #{companyInfoForaduit.index},
+      #{companyInfoForaduit.failReason}
+      )
+    </select>
+
+    <select id="deleteCompanyInfoForaduit" resultType="java.lang.String">
+      CALL Proc_T_CompanyInfo_ForAduit_Remove_ByNodeTag(#{id})
+    </select>
+
+    <select id="selectCompanyInfoForaduitByLike" resultMap="companyInfoForaduit,pageCount,totalCount">
+      CALL Proc_T_CompanyInfo_ForAduit_Query_ByCondition
+      (
+      #{companyInfoForaduit.companyProvice},
+      #{companyInfoForaduit.companyCity},
+      #{companyInfoForaduit.companyArea},
+      #{companyInfoForaduit.companyVillage},
+      #{companyInfoForaduit.nodeName},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
+    </select>
+
+    <select id="selectCompanyInfoForaduitById" resultType="cn.shianxian.supervise.record.pojo.CompanyInfoForaduit">
+      CALL Proc_T_CompanyInfo_ForAduit_Query_ByNodeTag(#{nodeTag})
+    </select>
+
+    <select id="selectCompanyInfoForaduitByIndex" resultType="cn.shianxian.supervise.record.pojo.CompanyInfoForaduit">
+      CALL Proc_T_CompanyInfo_ForAduit_Query_ByIndex(#{index})
+    </select>
+
+    <select id="selectCompanyInfoFunctionaryForAduit" resultMap="companyInfoFunctionaryForaduitVO,pageCount,totalCount">
+      CALL Proc_T_Functionary_Company_ForAduit_Query_ByNodeTag
+      (
+      #{nodeTag},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
+    </select>
+
+</mapper>

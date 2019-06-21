@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.government.dao.ColumnedDao">
+
+    <select id="saveColumned" resultType="java.lang.String">
+       CALL Proc_T_Column_Add(#{columned.columnName})
+    </select>
+
+    <select id="updateColumned" resultType="java.lang.String">
+       CALL proc_T_Information_Edit_ByIndex
+       (
+       #{columned.columnTag},
+       #{columned.columnName}
+       )
+    </select>
+
+    <select id="deleteColumned" resultType="java.lang.String">
+       CALL proc_T_Column_Remove_ByColumnTag(#{columnTag})
+    </select>
+
+    <resultMap id="columned" type="cn.shianxian.supervise.government.pojo.Columned"></resultMap>
+
+    <select id="selectColumned" resultMap="columned,pageCount,totalCount">
+        CALL proc_T_Column_Query_ByCondition
+        (
+        #{name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectColumnedById" resultMap="columned">
+        CALL proc_T_Column_Query_ByColumnTag(#{columnTag})
+    </select>
+
+</mapper>

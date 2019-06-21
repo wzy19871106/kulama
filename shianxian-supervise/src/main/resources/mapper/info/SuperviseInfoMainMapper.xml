@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.info.dao.SuperviseInfoMainDao">
+
+    <resultMap id="info" type="cn.shianxian.supervise.info.vo.SuperviseInfoVO"></resultMap>
+
+    <select id="selectSuperviseInfoByNodePlan" resultMap="info,pageCount,totalCount">
+        CALL Proc_T_Supervise_Info_Query_ByNode_Plan
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoByIdPlan" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByMainID_Plan
+        (
+        #{id},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoByNode" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByNode
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="saveSuperviseInfoMain" resultType="java.lang.String">
+        CALL proc_T_Supervise_Info_Main_Add
+        (
+        #{superviseInfoMain.mainId},
+        #{superviseInfoMain.planTag},
+        #{superviseInfoMain.nodeType},
+        #{superviseInfoMain.nodeTag},
+        #{superviseInfoMain.nodeName},
+        #{superviseInfoMain.createTime},
+        #{superviseInfoMain.remark},
+        #{superviseInfoMain.picTag}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoByPlan" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByCondition_Plan
+        (
+        #{planTag},
+        #{superviseTypeTag},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{queryPojo.authority},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoByLike" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByCondition
+        (
+        #{queryPojo.id},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{queryPojo.authority},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseInfoByRectify" resultMap="info,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Query_ByRectify
+        (
+        #{queryPojo.id},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{queryPojo.authority},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+</mapper>

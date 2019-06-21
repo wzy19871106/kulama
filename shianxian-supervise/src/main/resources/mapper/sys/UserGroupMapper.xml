@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.UserGroupDao">
+
+    <select id="insertUserGroup" resultType="java.lang.String">
+        CALL Proc_T_UserGroup_Add
+        (
+        #{userGroup.parentTag},
+        #{userGroup.userGroupName},
+        #{userGroup.picTag}
+        )
+    </select>
+
+    <select id="updateUserGroup" resultType="java.lang.String">
+        CALL proc_T_UserGroup_Edit_ByUserGroupTag
+        (
+        #{userGroup.userGroupTag},
+        #{userGroup.userGroupName},
+        #{userGroup.picTag},
+        #{userGroup.userGroupDisabled}
+        )
+    </select>
+
+    <select id="deleteUserGroupById" resultType="java.lang.String">
+        CALL proc_T_UserGroup_Remove_ByUserGroupTag(#{id})
+    </select>
+
+    <select id="selectUserGroupById" resultType="cn.shianxian.supervise.sys.pojo.UserGroup">
+        CALL proc_T_UserGroup_Query_ByUserGroupTag(#{id})
+    </select>
+
+    <resultMap id="userGroup" type="cn.shianxian.supervise.sys.pojo.UserGroup"></resultMap>
+
+    <select id="selectUserGroupByLike" resultMap="userGroup,pageCount,totalCount">
+        CALL proc_T_UserGroup_Query_ByCondition
+        (
+        #{queryPojo.parentId},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectUserGroupTree" resultType="java.lang.String">
+        CALL proc_T_UserGroup_QueryTreeJson_ByUserGroupTag(#{id}, #{flag})
+    </select>
+
+    <select id="selectUserGroupAllTree" resultType="java.lang.String">
+        CALL proc_T_UserGroup_QueryAllTreeJson_ByUserGroupTag(#{id}, #{flag})
+    </select>
+
+</mapper>

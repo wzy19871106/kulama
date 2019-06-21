@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseTypeDao">
+
+    <select id="insertSuperviseType" resultType="java.lang.String">
+        CALL Proc_T_SuperviseType_Add(#{superviseType.parentTag}, #{superviseType.superviseTypeName}, #{superviseType.ifUse}, #{superviseType.ifMenu})
+    </select>
+
+    <select id="updateSuperviseType" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_Edit_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.superviseTypeName}, #{superviseType.ifMenu}, #{superviseType.ifUse})
+    </select>
+
+    <select id="deleteSuperviseType" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_Remove_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseType" resultType="cn.shianxian.supervise.sys.pojo.SuperviseType">
+        CALL proc_T_SuperviseType_Query_ByTag(#{id}, #{userGroupDataAuthority})
+    </select>
+
+    <select id="updateSuperviseTypeByUpSort" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_OrderUp_ByTag(#{id})
+    </select>
+
+    <select id="updateSuperviseTypeByDownSort" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_OrderDown_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseTypeTree" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_QueryTreeJson_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
+    <select id="saveSuperviseTypeAuthority" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_UserGroupDataAuthority_Add(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
+    <select id="updateSuperviseTypeAuthority" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_UserGroupDataAuthority_Edit_ByNodeTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
+    <select id="selectSuperviseTypeByParentMainIds" resultType="cn.shianxian.supervise.sys.pojo.SuperviseType">
+        CALL proc_T_SuperviseType_Query_ByParentMainIDS(#{mainIds})
+    </select>
+
+    <select id="selectSuperviseTypeAllTree" resultType="java.lang.String">
+        CALL proc_T_SuperviseType_QueryAllTreeJson_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
+</mapper>

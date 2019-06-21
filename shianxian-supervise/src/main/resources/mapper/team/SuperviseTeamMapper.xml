@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.team.dao.SuperviseTeamDao">
+
+    <select id="selectSuperviseTeamById" resultType="cn.shianxian.supervise.team.pojo.SuperviseTeam">
+        CALL proc_T_SuperviseTeam_Query_ByTag(#{id})
+    </select>
+
+    <select id="insertSuperviseTeam" resultType="java.lang.String">
+        CALL Proc_T_SuperviseTeam_Add
+        (
+        #{superviseTeam.teamTag},
+        #{superviseTeam.teamName},
+        #{superviseTeam.remark},
+        #{superviseTeam.createTime},
+        #{superviseTeam.createUserTag},
+        #{superviseTeam.lastUpdateTime},
+        #{superviseTeam.lastUpdateUser},
+        #{superviseTeam.ifUse}
+        )
+    </select>
+
+    <select id="updateSuperviseTeam" resultType="java.lang.String">
+        CALL proc_T_SuperviseTeam_Edit_ByTag
+        (
+        #{superviseTeam.teamTag},
+        #{superviseTeam.teamName},
+        #{superviseTeam.remark},
+        #{superviseTeam.createTime},
+        #{superviseTeam.createUserTag},
+        #{superviseTeam.lastUpdateTime},
+        #{superviseTeam.lastUpdateUser},
+        #{superviseTeam.ifUse}
+        )
+    </select>
+
+    <select id="deleteSuperviseTeamById" resultType="java.lang.String">
+        CALL proc_T_SuperviseTeam_Remove_ByTag(#{id})
+    </select>
+
+    <resultMap id="superviseTeam" type="cn.shianxian.supervise.team.pojo.SuperviseTeam"></resultMap>
+
+    <select id="selectSuperviseTeamByLike" resultMap="superviseTeam,pageCount,totalCount">
+        CALL proc_T_SuperviseTeam_Query_ByCondition
+        (
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSuperviseTeamByUserId" resultMap="superviseTeam,pageCount,totalCount">
+        CALL Proc_T_Superviser_SuperviserTeam_Query_ByUserTag(#{id})
+    </select>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseResultDao">
+
+    <select id="insertSuperviseResult" resultType="java.lang.String">
+        CALL Proc_T_Supervise_Result_Add
+        (
+        #{superviseResult.resultTag},
+        #{superviseResult.superviseTag},
+        #{superviseResult.resultValue},
+        #{superviseResult.score},
+        #{superviseResult.remark},
+        #{superviseResult.advice},
+        #{superviseResult.ifUse}
+        )
+    </select>
+
+    <select id="updateSuperviseResult" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_Edit_ByTag
+        (
+        #{superviseResult.resultTag},
+        #{superviseResult.superviseTag},
+        #{superviseResult.resultValue},
+        #{superviseResult.score},
+        #{superviseResult.remark},
+        #{superviseResult.advice},
+        #{superviseResult.ifUse}
+        )
+    </select>
+
+    <select id="deleteSuperviseResult" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_Remove_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseResultById" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
+        CALL proc_T_Supervise_Result_Query_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseResultByTypeId" resultType="cn.shianxian.supervise.sys.dto.SuperviseResultDTO">
+        CALL proc_T_Supervise_Result_Query_ByType(#{id})
+    </select>
+
+    <select id="selectSuperviseResultBySuperviseTag" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
+        CALL proc_T_Supervise_Result_Query_By_SuperviseTag(#{id})
+    </select>
+
+    <select id="updateSuperviseResultByUpSort" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_OrderUp_ByTag(#{id})
+    </select>
+
+    <select id="updateSuperviseResultByDownSort" resultType="java.lang.String">
+        CALL proc_T_Supervise_Result_OrderDown_ByTag(#{id})
+    </select>
+
+    <select id="selectAllSuperviseResultBySuperviseTag" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
+        CALL proc_T_Supervise_Result_QueryAll_By_SuperviseTag(#{id})
+    </select>
+
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.record.dao.FunctionaryForaduitDao">
+
+    <select id="saveFunctionaryForaduit" resultType="java.lang.String">
+      CALL Proc_T_Functionary_ForAduit_Add
+      (
+      #{functionaryForaduit.nodeTag},
+      #{functionaryForaduit.functionaryName},
+      #{functionaryForaduit.functionaryNo},
+      #{functionaryForaduit.functionaryType},
+      #{functionaryForaduit.picTag},
+      #{functionaryForaduit.nodeName},
+      #{functionaryForaduit.functionaryPostition}
+      )
+    </select>
+
+    <select id="updateFunctionaryForaduit" resultType="java.lang.String">
+      CALL Proc_T_Functionary_ForAduit_Edit_ByFunctionaryTag
+      (
+      #{functionaryForaduit.functionaryTag},
+      #{functionaryForaduit.nodeTag},
+      #{functionaryForaduit.functionaryName},
+      #{functionaryForaduit.functionaryNo},
+      #{functionaryForaduit.functionaryType},
+      #{functionaryForaduit.picTag},
+      #{functionaryForaduit.nodeName},
+      #{functionaryForaduit.functionaryPostition}
+      )
+    </select>
+
+    <select id="checkFunctionaryForaduit" resultType="java.lang.String">
+      CALL Proc_T_Functionary_ForAduit_Check_ByIndex(#{index})
+    </select>
+
+    <select id="backFunctionaryForaduit" resultType="java.lang.String">
+      CALL Proc_T_Functionary_ForAduit_Fail_ByIndex
+      (
+      #{functionaryForaduit.index},
+      #{functionaryForaduit.failReason}
+      )
+    </select>
+
+    <resultMap id="functionaryForaduit" type="cn.shianxian.supervise.record.pojo.FunctionaryForaduit"></resultMap>
+
+    <select id="selectFunctionaryForaduitByLike" resultMap="functionaryForaduit,pageCount,totalCount">
+      CALL Proc_T_Functionary_ForAduit_Query_ByCondition
+      (
+      #{queryPojo.id},
+      #{queryPojo.name},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
+    </select>
+
+    <select id="selectFunctionaryForaduitByNodeTag" resultMap="functionaryForaduit,pageCount,totalCount">
+      CALL Proc_T_Functionary_ForAduit_Query_ByNodeTag
+      (
+      #{nodeTag},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
+    </select>
+
+    <select id="selectFunctionaryForaduitByIndex" resultType="cn.shianxian.supervise.record.pojo.FunctionaryForaduit">
+      CALL Proc_T_Functionary_ForAduit_Query_ByIndex(#{index})
+    </select>
+
+    <select id="deleteFunctionaryForaduit" resultType="java.lang.String">
+      CALL Proc_T_Functionary_Remove_ByFunctionaryTag(#{id})
+    </select>
+</mapper>

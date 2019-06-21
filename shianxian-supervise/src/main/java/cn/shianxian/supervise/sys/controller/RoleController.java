@@ -1,0 +1,81 @@
+package cn.shianxian.supervise.sys.controller;
+
+import cn.shianxian.supervise.common.pojo.Pages;
+import cn.shianxian.supervise.common.pojo.QueryPojo;
+import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.sys.pojo.Role;
+import cn.shianxian.supervise.sys.service.RoleService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+
+/**
+ * 角色控制器
+ */
+@RestController
+@RequestMapping("role")
+@Api(description = "角色控制器")
+@Slf4j
+public class RoleController {
+
+
+    @Autowired
+    private RoleService roleService;
+
+
+    /**
+     * 保存、修改角色
+     * @return
+     */
+    @PostMapping("saveOrUpdateRole")
+    @ApiOperation(value = "保存、修改角色接口", notes = "保存、修改角色接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "roleTag", value = "id"),
+            @ApiImplicitParam(paramType = "query", name = "roleName", value = "角色名称"),
+            @ApiImplicitParam(paramType = "query", name = "roleDisabled", value = "角色是否隐藏[1隐藏，0可见]"),
+            @ApiImplicitParam(paramType = "query", name = "moduleAuthority", value = "模块权限JSON"),
+    })
+    public ResponseEntity<Result> saveOrUpdateRole(@Valid Role role) {
+        log.info("保存、修改角色：{}", role);
+        Result result = this.roleService.saveOrUpdateRole(role);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 分页查询角色
+     * @return
+     */
+    @GetMapping("selectRoleByPage")
+    @ApiOperation(value = "分页查询角色接口", notes = "分页查询角色接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "name", value = "名称"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectRoleByPage(QueryPojo queryPojo, Pages pages) {
+        Result result = this.roleService.selectRoleByPage(queryPojo, pages);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 删除角色
+     * @return
+     */
+    @DeleteMapping("deleteRoleById")
+    @ApiOperation(value = "删除角色接口", notes = "删除角色接口")
+    @ApiImplicitParam(paramType = "query", name = "id", value = "id")
+    public ResponseEntity<Result> deleteRoleById(String id) {
+        log.info("删除角色：{}", id);
+        return this.roleService.deleteRoleById(id);
+    }
+
+}

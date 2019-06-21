@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.SuperviseDao">
+
+    <select id="insertSupervise" resultType="java.lang.String">
+        CALL Proc_T_Supervise_Add
+        (
+        #{supervise.parentTag},
+        #{supervise.superviseTypeTag},
+        #{supervise.superviseName},
+        #{supervise.superviseBasis},
+        #{supervise.superviseMode},
+        #{supervise.superviseGuide},
+        #{supervise.score},
+        #{supervise.ifMenu},
+        #{supervise.ifUse}
+        )
+    </select>
+
+    <select id="updateSupervise" resultType="java.lang.String">
+        CALL proc_T_Supervise_Edit_ByTag
+        (
+        #{supervise.superviseTag},
+        #{supervise.parentTag},
+        #{supervise.superviseTypeTag},
+        #{supervise.superviseName},
+        #{supervise.superviseBasis},
+        #{supervise.superviseMode},
+        #{supervise.superviseGuide},
+        #{supervise.score},
+        #{supervise.ifMenu},
+        #{supervise.ifUse}
+        )
+    </select>
+
+    <select id="deleteSupervise" resultType="java.lang.String">
+        CALL proc_T_Supervise_Remove_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseById" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseByType" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_ByType(#{type})
+    </select>
+
+
+    <select id="updateSuperviseByUpSort" resultType="java.lang.String">
+        CALL proc_T_Supervise_OrderUp_ByTag(#{id})
+    </select>
+
+    <select id="updateSuperviseByDownSort" resultType="java.lang.String">
+        CALL proc_T_Supervise_OrderDown_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseScore" resultType="java.lang.Double">
+        CALL proc_T_Supervise_Query_Score_ByTag(#{id})
+    </select>
+
+    <select id="selectSuperviseTree" resultType="java.lang.String">
+        CALL proc_T_Supervise_QueryTreeJson_ByType(#{type})
+    </select>
+
+    <select id="selectParentSupervise" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Parent_BySuperviseTypeTag(#{id})
+    </select>
+
+    <select id="selectSubSupervise" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Sub_ByParentTag(#{id})
+    </select>
+
+    <select id="selectParentSuperviseByParentMainIds" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Parent_ByParentMainIDS(#{mainIds})
+    </select>
+
+    <select id="selectSubSuperviseByParentMainIds" resultType="cn.shianxian.supervise.sys.pojo.Supervise">
+        CALL proc_T_Supervise_Query_Sub_ByParentMainIDS(#{superviseTag}, #{mainIds})
+    </select>
+
+    <select id="selectSuperviseAllTree" resultType="java.lang.String">
+        CALL proc_T_Supervise_QueryAllTreeJson_ByType(#{type})
+    </select>
+
+</mapper>
