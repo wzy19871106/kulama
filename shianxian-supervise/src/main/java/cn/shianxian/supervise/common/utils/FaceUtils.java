@@ -77,9 +77,8 @@ public class FaceUtils {
 
         FaceSimilar faceSimilar = new FaceSimilar();
         faceEngine.compareFaceFeature(targetFaceFeature, sourceFaceFeature, faceSimilar);
-
+        log.info("人脸识别分数：{}", faceSimilar.getScore());
         if (Math.abs(0.5) < Math.abs(faceSimilar.getScore())) {
-            log.info("人脸识别分数：{}", faceSimilar.getScore());
             flag = true;
         }
         faceEngine.unInit();
