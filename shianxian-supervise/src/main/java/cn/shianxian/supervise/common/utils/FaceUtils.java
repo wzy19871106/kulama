@@ -32,6 +32,8 @@ public class FaceUtils {
      * @param file2
      */
     public static boolean faceEngine(String appId, String sdkKey, File file1, File file2) {
+        log.info("人脸识别图片1：{}", file1.getPath());
+        log.info("人脸识别图片2：{}", file2.getPath());
         boolean flag = false;
         FaceEngine faceEngine = new FaceEngine();
         //激活引擎
