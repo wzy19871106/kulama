@@ -947,6 +947,11 @@ public class RecordingSampleM implements RecordingEventHandler {
             this.kbps = Integer.valueOf(sourceStrArray[3]).intValue();
         }
         // run jni event loop , or start a new thread to do it
+        log.info("appid:{}", appId);
+        log.info("channelKey:{}", channelKey);
+        log.info("name:{}", name);
+        log.info("config:{}", config);
+        log.info("logLevel:{}", logLevel);
         RecordingSDKInstance.createChannel(appId, channelKey, name, uid, config, logLevel);
         cleanTimer.cancel();
         System.out.println("jni layer has been exited...");
