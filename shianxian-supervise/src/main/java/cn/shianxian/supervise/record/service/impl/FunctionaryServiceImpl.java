@@ -167,8 +167,8 @@ public class FunctionaryServiceImpl implements FunctionaryService {
 
 
     @Override
-    public ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId) {
-        this.functionaryDao.updateWeChatIdById(functionaryTag, weChatId);
+    public ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId, String picTag) {
+        this.functionaryDao.updateWeChatIdById(functionaryTag, weChatId, picTag);
         return ResponseEntity.ok(Result.successMsg());
     }
 }

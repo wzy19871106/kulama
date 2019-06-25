@@ -207,9 +207,10 @@ public class AppFunctionaryController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
             @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
+            @ApiImplicitParam(paramType = "query", name = "picTag", value = "图片"),
     })
-    public ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId) {
-        return this.functionaryService.updateWeChatIdById(functionaryTag, weChatId);
+    public ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId, String picTag) {
+        return this.functionaryService.updateWeChatIdById(functionaryTag, weChatId, picTag);
     }
 
 }

@@ -128,5 +128,5 @@ public interface FunctionaryService {
      * @param weChatId
      * @return
      */
-    ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId);
+    ResponseEntity<Result> updateWeChatIdById(String functionaryTag, String weChatId, String picTag);
 }

@@ -53,7 +53,8 @@
       CALL Proc_T_Functionary_Edit_ByFunctionaryTag
       (
       #{functionaryTag},
-      #{weChatId}
+      #{weChatId},
+      #{picTag}
       )
     </select>
 

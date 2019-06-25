@@ -71,5 +71,5 @@ public interface FunctionaryDao extends Mapper<Functionary> {
      * @param weChatId
      * @return
      */
-    String updateWeChatIdById(@Param("functionaryTag") String functionaryTag, @Param("weChatId") String weChatId);
+    String updateWeChatIdById(@Param("functionaryTag") String functionaryTag, @Param("weChatId") String weChatId, @Param("picTag") String picTag);
 }
