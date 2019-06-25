@@ -25,7 +25,7 @@ public class TestController {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
         String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
-        "--uid", "55", "appliteDir", "/data/1", "--channel", "150055"
+        "--uid", "55", "--appliteDir", "/data/1", "--channel", "150055"
         };
         recordingSampleM.createChannel(args);
         recordingSampleM.unRegister();
@@ -38,7 +38,7 @@ public class TestController {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
         String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
-                "--uid", "123", "appliteDir", "/data/1", "--channel", "150055"
+                "--uid", "55", "--appliteDir", "/data/1", "--channel", "150055"
         };
         recordingSampleM.createChannel(args);
         long l = 0L;
