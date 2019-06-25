@@ -46,7 +46,7 @@ public class FunctionaryServiceImpl implements FunctionaryService {
         List<Functionary> functionaryList = this.functionaryDao.select(functionary);
         if (1 == functionaryList.size()) {
             functionary = functionaryList.get(0);
-            log.info("用户：{}登录", functionary);
+            log.info("app用户登录：{}", functionary);
         } else {
             functionary.setKeyUsed(0);
         }
