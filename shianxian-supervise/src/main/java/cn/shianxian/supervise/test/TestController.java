@@ -24,7 +24,7 @@ public class TestController {
     public ResponseEntity<Result> test() {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
-        String[] args = new String[] {"--appId", "b676a4deb7964ee480fc51c72554c97e",
+        String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
         "--uid", "55", "appliteDir", "/data/1", "--channel", "150055"
         };
         recordingSampleM.createChannel(args);
@@ -37,7 +37,7 @@ public class TestController {
     public ResponseEntity<Result> test2() {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
-        String[] args = new String[] {"--appId", "b676a4deb7964ee480fc51c72554c97e",
+        String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
                 "--uid", "123", "appliteDir", "/data/1", "--channel", "150055"
         };
         recordingSampleM.createChannel(args);
