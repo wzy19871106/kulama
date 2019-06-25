@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.test;
 
 import cn.shianxian.supervise.test.Common.*;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -36,6 +37,7 @@ class RecordingWorkerThread extends Thread {
     }
 }
 
+@Slf4j
 public class RecordingSampleM implements RecordingEventHandler {
     // java run status flag
     private boolean isMixMode = false;
