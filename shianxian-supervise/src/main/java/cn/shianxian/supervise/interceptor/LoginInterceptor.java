@@ -53,8 +53,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         } else {
             String functionaryJson = redisService.get(Constants.APP_USER + token);
             if (StringUtils.isBlank(functionaryJson)) {
-                log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
                 log.info("================={}", Constants.UNAUTHORIZED);
+                log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
                 throw new CommonException(Constants.UNAUTHORIZED, "用户已失效！请重新登录！");
             } else {
                 // 重新设置redis时间
