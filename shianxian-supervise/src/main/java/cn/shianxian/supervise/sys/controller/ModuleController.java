@@ -153,4 +153,16 @@ public class ModuleController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 根据用户id查询模块
+     * @return
+     */
+    @GetMapping("selectModuleByUserTag")
+    @ApiOperation(value = "根据用户id查询模块", notes = "根据用户id查询模块")
+    @ApiImplicitParam(paramType = "query", name = "userTag", value = "用户标识")
+    public ResponseEntity<Result> selectModuleByUserTag(String userTag) {
+        Result result = this.moduleService.selectModuleByUserId(userTag);
+        return ResponseEntity.ok(result);
+    }
 }

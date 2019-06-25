@@ -65,4 +65,12 @@ public interface ModuleService {
      * @return
      */
     Result selectModuleAuthorityDisabledTree();
+
+
+    /**
+     * 根据用户id查询模块
+     * @param userTag
+     * @return
+     */
+    Result selectModuleByUserId(String userTag);
 }

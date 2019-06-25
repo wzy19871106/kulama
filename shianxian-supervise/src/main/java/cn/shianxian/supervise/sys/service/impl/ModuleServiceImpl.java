@@ -90,4 +90,11 @@ public class ModuleServiceImpl implements ModuleService {
     }
 
 
+    @Override
+    public Result selectModuleByUserId(String userTag) {
+        String moduleJson = this.moduleDao.selectModuleByUserId(userTag);
+        return Result.data(moduleJson);
+    }
+
+
 }
