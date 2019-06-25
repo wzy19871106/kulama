@@ -823,7 +823,6 @@ public class RecordingSampleM implements RecordingEventHandler {
             System.out.println("M===Usage:" + usage);
             return;
         }
-        appId = String.valueOf(Appid);
         uid = Integer.parseInt(String.valueOf(Uid));
         appId = String.valueOf(Appid);
         name = String.valueOf(Channel);

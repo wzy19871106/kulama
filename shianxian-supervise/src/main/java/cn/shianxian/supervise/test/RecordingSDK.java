@@ -15,7 +15,8 @@ public class RecordingSDK {
 	/** Load Java library. */
 
 	static {
-		System.loadLibrary("recording");
+//		System.loadLibrary("recording");
+		System.loadLibrary("librecording");
 	}
 
   /** Main methods that can be invoked by your app.*/
