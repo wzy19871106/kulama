@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.handler;
 
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.exception.CommonException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,21 +9,27 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.List;
 
 /**
  * 统一异常处理
  */
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
 public class SuperExceptionHandler {
 
+
+    @ExceptionHandler(value = CommonException.class)
+    public ResponseEntity<Result> handlerException(CommonException e){
+        log.error("捕捉到异常：{}，具体信息：{}", e, e.getMsg());
+        return ResponseEntity.status(e.getCode()).body(Result.msg(e.getMsg()));
+    }
+
+
     @ExceptionHandler(value = Exception.class)
-    @ResponseBody
     public ResponseEntity<Result> handlerException(Exception eception){
         if (null != eception.getStackTrace()) {
             StackTraceElement[] stackTrace = eception.getStackTrace();
