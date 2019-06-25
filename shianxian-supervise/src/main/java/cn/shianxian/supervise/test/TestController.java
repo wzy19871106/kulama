@@ -24,10 +24,10 @@ public class TestController {
     public ResponseEntity<Result> test() {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
-        String[] ars = new String[] {"--appId", "b676a4deb7964ee480fc51c72554c97e",
+        String[] args = new String[] {"--appId", "b676a4deb7964ee480fc51c72554c97e",
         "--uid", "55", "appliteDir", "/data/1", "--channel", "150055"
         };
-        recordingSampleM.createChannel(ars);
+        recordingSampleM.createChannel(args);
         recordingSampleM.unRegister();
 
         return ResponseEntity.ok(Result.successMsg());
@@ -37,10 +37,10 @@ public class TestController {
     public ResponseEntity<Result> test2() {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
-        String[] ars = new String[] {"--appId", "b676a4deb7964ee480fc51c72554c97e",
+        String[] args = new String[] {"--appId", "b676a4deb7964ee480fc51c72554c97e",
                 "--uid", "123", "appliteDir", "/data/1", "--channel", "150055"
         };
-        recordingSampleM.createChannel(ars);
+        recordingSampleM.createChannel(args);
         long l = 0L;
         recordingSampleM.nativeObjectRef(l);
         log.info("录制引擎：{}", l);
