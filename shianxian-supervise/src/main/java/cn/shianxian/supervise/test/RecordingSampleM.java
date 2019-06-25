@@ -776,6 +776,7 @@ public class RecordingSampleM implements RecordingEventHandler {
             for (int i = 0; i < args.length - 1; i++) {
                 key = args[i];
                 value = args[i + 1];
+                log.info("key:{},value:{}", key, value);
                 map.put(key, value);
             }
         }
