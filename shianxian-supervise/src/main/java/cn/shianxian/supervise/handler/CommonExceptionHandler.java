@@ -18,7 +18,7 @@ public class CommonExceptionHandler {
     @ExceptionHandler(value = CommonException.class)
     @ResponseBody
     public ResponseEntity<Result> handlerException(CommonException e){
-        log.error("捕捉到异常：{}", e.getMsg(), e);
+        log.error("捕捉到异常：{}，具体信息：{}", e, e.getMsg());
         return ResponseEntity.status(e.getCode()).body(Result.msg(e.getMsg()));
     }
 
