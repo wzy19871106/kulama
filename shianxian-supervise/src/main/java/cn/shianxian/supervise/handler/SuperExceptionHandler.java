@@ -26,7 +26,9 @@ public class SuperExceptionHandler {
     public ResponseEntity<Result> handlerException(Exception eception){
         if (null != eception.getStackTrace()) {
             StackTraceElement[] stackTrace = eception.getStackTrace();
-            log.error("捕捉到异常具体信息：{}", stackTrace);
+            for (StackTraceElement stackTraceElement : stackTrace) {
+                log.error("捕捉到异常具体信息：{}", stackTraceElement);
+            }
         }
         log.error("捕捉到异常：{}，具体信息：{}", eception, eception.getMessage());
         if (eception instanceof MethodArgumentNotValidException) {
