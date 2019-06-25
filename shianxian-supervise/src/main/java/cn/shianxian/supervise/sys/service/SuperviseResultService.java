@@ -45,7 +45,7 @@ public interface SuperviseResultService {
      * @param type
      * @return
      */
-    Result updateSuperviseResultBySort(String id, int type);
+    ResponseEntity<Result> updateSuperviseResultBySort(String id, int type);
 
 
     /**

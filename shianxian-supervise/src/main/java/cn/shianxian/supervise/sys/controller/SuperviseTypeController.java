@@ -93,8 +93,7 @@ public class SuperviseTypeController {
     })
     public ResponseEntity<Result> updateSuperviseTypeBySort(String id, int type) {
         log.info("修改监管类型排序：{}，排序内容[1:升序，2:降序]：{}", id, type);
-        Result result = this.superviseTypeService.updateSuperviseTypeBySort(id, type);
-        return ResponseEntity.ok(result);
+        return this.superviseTypeService.updateSuperviseTypeBySort(id, type);
     }
 
 

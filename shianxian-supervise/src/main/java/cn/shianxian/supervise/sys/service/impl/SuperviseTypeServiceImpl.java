@@ -70,14 +70,18 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
 
     @Transactional
     @Override
-    public Result updateSuperviseTypeBySort(String id, int type) {
+    public ResponseEntity<Result> updateSuperviseTypeBySort(String id, int type) {
+        String flag = null;
         if (1 == type) {
-            this.superviseTypeDao.updateSuperviseTypeByUpSort(id);
+            flag = this.superviseTypeDao.updateSuperviseTypeByUpSort(id);
         }
         if (2 == type) {
-            this.superviseTypeDao.updateSuperviseTypeByDownSort(id);
+            flag = this.superviseTypeDao.updateSuperviseTypeByDownSort(id);
         }
-        return Result.successMsg();
+        if (!"O001".equals(flag)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.failMsg());
+        }
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 
