@@ -953,6 +953,7 @@ public class RecordingSampleM implements RecordingEventHandler {
         log.info("config:{}", config);
         log.info("logLevel:{}", logLevel);
         RecordingSDKInstance.createChannel(appId, channelKey, name, uid, config, logLevel);
+        log.info("==================即将完成.....");
         cleanTimer.cancel();
         System.out.println("jni layer has been exited...");
     }
