@@ -90,8 +90,8 @@ baidu:
 
 # 上传配置
 upload:
-  url: http://10.18.9.151/
-  path: /opt/img/
+  url: http://10.18.9.57/
+  path: /data/
 
 # 日志
 logging:
