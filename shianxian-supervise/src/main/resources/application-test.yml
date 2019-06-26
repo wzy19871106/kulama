@@ -79,7 +79,7 @@ spring:
 agora:
   appId: 984NfMTD6XTdtHeqYsQca6Up7NtEcLAqVmG86GW9N7dr
   sdkKey: CSaQxfj6oSJ9dsMNYuj3mxbZGTFrfRPB5RRfBoLXjVjN
-  path: /opt/img/agora/
+  path: /data/agora/
   libPath: /usr/local/cloud/supervise/so
 
 # 百度
