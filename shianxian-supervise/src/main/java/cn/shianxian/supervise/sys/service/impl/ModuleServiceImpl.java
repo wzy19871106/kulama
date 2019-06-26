@@ -8,6 +8,8 @@ import cn.shianxian.supervise.sys.pojo.Module;
 import cn.shianxian.supervise.sys.service.ModuleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,7 +39,11 @@ public class ModuleServiceImpl implements ModuleService {
     @Override
     public Result checkModule(Module module) {
         String s = this.moduleDao.checkModule(module);
-        return Result.data(s);
+        boolean flag = false;
+        if ("C001".equals(s)) {
+            flag = true;
+        }
+        return Result.data(flag);
     }
 
 
@@ -55,9 +61,15 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Transactional
     @Override
-    public Result deleteModuleById(String id) {
-        this.moduleDao.deleteModuleById(id);
-        return Result.successMsg();
+    public ResponseEntity<Result> deleteModuleById(String ids) {
+        String[] idArr = ids.split(",");
+        for (String id : idArr) {
+            String flag = this.moduleDao.deleteModuleById(id);
+            if (!"R001".equals(flag)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("不允许删除！"));
+            }
+        }
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 

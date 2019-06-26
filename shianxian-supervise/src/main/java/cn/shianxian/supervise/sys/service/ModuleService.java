@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.sys.pojo.Module;
+import org.springframework.http.ResponseEntity;
 
 public interface ModuleService {
 
@@ -32,10 +33,10 @@ public interface ModuleService {
 
     /**
      * 删除模块
-     * @param id
+     * @param ids
      * @return
      */
-    Result deleteModuleById(String id);
+    ResponseEntity<Result> deleteModuleById(String ids);
 
 
     /**

@@ -97,11 +97,10 @@ public class ModuleController {
      */
     @DeleteMapping("deleteModuleById")
     @ApiOperation(value = "删除模块", notes = "删除模块")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "模块标识")
-    public ResponseEntity<Result> deleteModuleById(String id) {
-        log.info("删除模块：{}", id);
-        Result result = this.moduleService.deleteModuleById(id);
-        return ResponseEntity.ok(result);
+    @ApiImplicitParam(paramType = "query", name = "ids", value = "模块标识")
+    public ResponseEntity<Result> deleteModuleById(String ids) {
+        log.info("删除模块：{}", ids);
+        return this.moduleService.deleteModuleById(ids);
     }
 
 
