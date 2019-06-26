@@ -7,7 +7,7 @@
     </select>
 
     <select id="checkModule" resultType="java.lang.String">
-        CALL Proc_T_Module_Exist_ByModuleURLModuleTag(#{module.moduleTag}, #{module.moduleUrl})
+        CALL Proc_T_Module_Exist_ByModuleURLModuleTag(#{module.moduleUrl}, #{module.moduleTag})
     </select>
 
     <select id="insertModule" resultType="java.lang.String">
