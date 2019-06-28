@@ -23,20 +23,19 @@ public class TestController {
 
     @GetMapping("test")
     public ResponseEntity<Result> test(String name, String uid) throws Exception {
-        final RecordingSample[] recordingSample = {};
+        RecordingSDK RecordingSdk = new RecordingSDK();
+        RecordingSample recordingSample = new RecordingSample(RecordingSdk);
         Executors.execute(new Runnable() {
             @Override
             public void run() {
                 String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
                         "--uid", uid, "--appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin", "--channel", name
                 };
-                RecordingSDK RecordingSdk = new RecordingSDK();
-                recordingSample[0] = new RecordingSample(RecordingSdk);
-                recordingSample[0].createChannel(args);
-                recordingSample[0].unRegister();
+                recordingSample.createChannel(args);
+                recordingSample.unRegister();
             }
         });
-        return ResponseEntity.ok(Result.data(recordingSample[0].getNativeHandle()));
+        return ResponseEntity.ok(Result.data(recordingSample.getNativeHandle()));
     }
 
 
