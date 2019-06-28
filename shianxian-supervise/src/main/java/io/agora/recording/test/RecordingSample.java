@@ -72,6 +72,7 @@ public class RecordingSample implements RecordingEventHandler {
         mNativeHandle = nativeHandle;
         log.info("开始获取录制引擎，mNativeHandle：{}，nativeHandle：{}", mNativeHandle, nativeHandle);
         Executors.nativeHandleMap.put(nameKey, nativeHandle);
+        log.info("map里面的值：{}", Executors.nativeHandleMap.get(nameKey));
     }
 
     public void onLeaveChannel(int reason) {

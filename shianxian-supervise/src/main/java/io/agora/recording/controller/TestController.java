@@ -24,8 +24,8 @@ public class TestController {
     @GetMapping("test")
     public ResponseEntity<Result> test(String name, String uid) throws Exception {
         RecordingSDK recordingSdk = new RecordingSDK();
-        final RecordingSample[] recordingSample = {new RecordingSample(recordingSdk)};
-        final Long[] nativeHandle = {0L};
+        RecordingSample[] recordingSample = {new RecordingSample(recordingSdk)};
+        Long[] nativeHandle = {0L};
         Executors.execute(new Runnable() {
             @Override
             public void run() {
@@ -40,15 +40,13 @@ public class TestController {
                 recordingSample[0].createChannel(args);
                 if (Executors.nativeHandleMap.containsKey(name)) {
                     nativeHandle[0] = Executors.nativeHandleMap.get(name);
-                    log.info("获取录制引擎：{}", nativeHandle[0]);
+                    log.info("录制引擎：{}", nativeHandle[0]);
                     Executors.nativeHandleMap.remove(name);
                 }
                 recordingSample[0].startService(nativeHandle[0]);
                 recordingSample[0].unRegister();
             }
         });
-
-
         return ResponseEntity.ok(Result.data(nativeHandle[0]));
     }
 
