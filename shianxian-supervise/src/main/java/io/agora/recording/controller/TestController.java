@@ -2,6 +2,7 @@ package io.agora.recording.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import io.agora.recording.RecordingSDK;
+import io.agora.recording.common.RecordingEngineProperties;
 import io.agora.recording.test.RecordingSample;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,8 @@ public class TestController {
 
     @GetMapping("test")
     public ResponseEntity<Result> test(String name, String uid) throws Exception {
-        RecordingSDK RecordingSdk = new RecordingSDK();
-        RecordingSample recordingSample = new RecordingSample(RecordingSdk);
+        RecordingSDK recordingSdk = new RecordingSDK();
+        RecordingSample recordingSample = new RecordingSample(recordingSdk);
         Executors.execute(new Runnable() {
             @Override
             public void run() {
@@ -35,7 +36,8 @@ public class TestController {
                 recordingSample.unRegister();
             }
         });
-        return ResponseEntity.ok(Result.data(recordingSample.getNativeHandle()));
+        RecordingEngineProperties recordingEngineProperties = new RecordingEngineProperties();
+        return ResponseEntity.ok(Result.data(recordingEngineProperties.GetStorageDir()));
     }
 
 
@@ -49,4 +51,3 @@ public class TestController {
     }
 
 }
-

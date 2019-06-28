@@ -62,22 +62,11 @@ public class RecordingSample implements RecordingEventHandler {
     public static final int VERTICALPRESENTATION_LAYOUT = 2;
 
 
-    public long getNativeHandle() {
-        return mNativeHandle;
-    }
-
     public RecordingSample(RecordingSDK recording) {
         this.RecordingSDKInstance = recording;
         RecordingSDKInstance.registerOberserver(this);
     }
 
-    public static void main(String[] args) {
-        //should config -Djava.library.path to load library
-        RecordingSDK RecordingSdk = new RecordingSDK();
-        RecordingSample ars = new RecordingSample(RecordingSdk);
-        ars.createChannel(args);
-        ars.unRegister();
-    }
 
     public void unRegister() {
         RecordingSDKInstance.unRegisterOberserver(this);
