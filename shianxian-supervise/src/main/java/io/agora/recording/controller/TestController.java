@@ -54,7 +54,8 @@ public class TestController {
             Executors.nativeHandleMap.remove(name);
             return nativeHandle;
         } else {
-           return getNativeHandle(name);
+            log.info("递归获取引擎.....");
+            return getNativeHandle(name);
         }
     }
 
