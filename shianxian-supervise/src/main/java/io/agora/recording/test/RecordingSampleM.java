@@ -57,7 +57,7 @@ public class RecordingSampleM implements RecordingEventHandler {
     private boolean m_receivingVideo = false;
     private CHANNEL_PROFILE_TYPE profile_type;
     Vector<Long> m_peers = new Vector<Long>();
-    private long mNativeHandle = 0;
+    public long mNativeHandle = 0;
     private RecordingConfig config = null;
     private RecordingSDK RecordingSDKInstance = null;
 
@@ -74,6 +74,8 @@ public class RecordingSampleM implements RecordingEventHandler {
         this.RecordingSDKInstance = recording;
         RecordingSDKInstance.registerOberserver(this);
     }
+
+
 
     private static void Help() {
         System.out.println("Type \"start\" to start recording!(Only valid when \"triggerMode=1\")");

@@ -34,7 +34,7 @@ public class TestController {
         };
         recordingSampleM.createChannel(args);
         recordingSampleM.unRegister();
-        return ResponseEntity.ok(Result.successMsg());
+        return ResponseEntity.ok(Result.data(recordingSampleM.mNativeHandle));
     }
 
     @GetMapping("test2")
