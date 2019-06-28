@@ -59,8 +59,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
 
     @Override
     public Result selectSuperviseInfoAdviceById(String id) {
-        List<SuperviseInfoSub> list = this.superviseInfoSubDao.selectSuperviseInfoAdviceById(id);
-        return Result.data(list);
+        String advice = this.superviseInfoSubDao.selectSuperviseInfoAdviceById(id);
+        return Result.data(advice);
     }
 
 

@@ -49,7 +49,7 @@
         )
     </select>
 
-    <select id="selectSuperviseInfoAdviceById" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
+    <select id="selectSuperviseInfoAdviceById" resultType="java.lang.String">
         CALL proc_T_Supervise_Info_Advice_Query_ByCondition(#{id})
     </select>
 
