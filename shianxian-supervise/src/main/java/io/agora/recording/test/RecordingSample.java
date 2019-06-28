@@ -61,6 +61,11 @@ public class RecordingSample implements RecordingEventHandler {
     public static final int BESTFIT_LAYOUT = 1;
     public static final int VERTICALPRESENTATION_LAYOUT = 2;
 
+
+    public long getNativeHandle() {
+        return mNativeHandle;
+    }
+
     public RecordingSample(RecordingSDK recording) {
         this.RecordingSDKInstance = recording;
         RecordingSDKInstance.registerOberserver(this);
