@@ -91,6 +91,12 @@ public class Module {
     private LocalDateTime createTime;
 
     /**
+     * 模块组件
+     */
+    @Column(name = "moduleComponent")
+    private String moduleComponent;
+
+    /**
      * 父模块名称
      */
     @Transient

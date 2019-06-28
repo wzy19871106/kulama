@@ -18,7 +18,8 @@
         #{module.moduleIcon},
         #{module.moduleUrl},
         #{module.moduleDescription},
-        #{module.ifMenu}
+        #{module.ifMenu},
+        #{module.moduleComponent}
         )
     </select>
 
@@ -31,7 +32,8 @@
         #{module.moduleIcon},
         #{module.moduleUrl},
         #{module.moduleDescription},
-        #{module.ifMenu}
+        #{module.ifMenu},
+        #{module.moduleComponent}
         )
     </select>
 

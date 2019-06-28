@@ -83,6 +83,7 @@ public class ModuleController {
             @ApiImplicitParam(paramType = "query", name = "ifMenu", value = "是否目录"),
             @ApiImplicitParam(paramType = "query", name = "index", value = "模块流水号"),
             @ApiImplicitParam(paramType = "query", name = "index", value = "模块流水号"),
+            @ApiImplicitParam(paramType = "query", name = "moduleComponent", value = "模块组件"),
     })
     public ResponseEntity<Result> saveOrUpdateModule(@Valid Module module) {
         log.info("保存、修改模块：{}", module);
