@@ -38,16 +38,24 @@ public class TestController {
                         "--triggerMode", "1",
                 };
                 recordingSample[0].createChannel(args);
-                if (Executors.nativeHandleMap.containsKey(name)) {
-                    nativeHandle[0] = Executors.nativeHandleMap.get(name);
-                    log.info("录制引擎：{}", nativeHandle[0]);
-                    Executors.nativeHandleMap.remove(name);
-                }
+                nativeHandle[0] = getNativeHandle(name);
                 recordingSample[0].startService(nativeHandle[0]);
                 recordingSample[0].unRegister();
             }
         });
         return ResponseEntity.ok(Result.data(nativeHandle[0]));
+    }
+
+
+    public Long getNativeHandle(String name) {
+        if (Executors.nativeHandleMap.containsKey(name)) {
+            Long nativeHandle = Executors.nativeHandleMap.get(name);
+            log.info("录制引擎：{}", nativeHandle);
+            Executors.nativeHandleMap.remove(name);
+            return nativeHandle;
+        } else {
+           return getNativeHandle(name);
+        }
     }
 
 
