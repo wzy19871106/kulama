@@ -9,7 +9,7 @@ public class RecordingEngineProperties {
     /**
      * Get the storage directory of the recording media files and log.
      */
-    public String GetStorageDir() {
+    public String getStorageDir() {
         return storageDir;
     }
 }

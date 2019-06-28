@@ -6,25 +6,18 @@ import io.agora.recording.common.Common;
 import io.agora.recording.common.Common.*;
 import io.agora.recording.common.RecordingConfig;
 import io.agora.recording.common.RecordingEngineProperties;
+import io.agora.recording.controller.Executors;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 
-class RecordingCleanTimer extends TimerTask {
-    RecordingSample rs;
-
-    public RecordingCleanTimer(RecordingSample rs) {
-        this.rs = rs;
-    }
-
-    @Override
-    public void run() {
-        rs.clean();
-    }
-}
 
 class UserInfo {
     long uid;
@@ -33,6 +26,7 @@ class UserInfo {
 }
 
 
+@Slf4j
 public class RecordingSample implements RecordingEventHandler {
     // java run status flag
     private boolean isMixMode = false;
@@ -40,10 +34,10 @@ public class RecordingSample implements RecordingEventHandler {
     private int height = 0;
     private int fps = 0;
     private int kbps = 0;
+    private String nameKey;
+
     private String storageDir = "./";
-    private long aCount = 0;
-    private long count = 0;
-    private long size = 0;
+
     private CHANNEL_PROFILE_TYPE profile_type;
     Vector<Long> m_peers = new Vector<Long>();
     private long mNativeHandle = 0;
@@ -54,10 +48,8 @@ public class RecordingSample implements RecordingEventHandler {
 
     HashMap<String, UserInfo> audioChannels = new HashMap<String, UserInfo>();
     HashMap<String, UserInfo> videoChannels = new HashMap<String, UserInfo>();
-    Timer cleanTimer = null;
     private int layoutMode = 0;
     private long maxResolutionUid = -1;
-    public static final int DEFAULT_LAYOUT = 0;
     public static final int BESTFIT_LAYOUT = 1;
     public static final int VERTICALPRESENTATION_LAYOUT = 2;
 
@@ -78,76 +70,40 @@ public class RecordingSample implements RecordingEventHandler {
 
     public void nativeObjectRef(long nativeHandle) {
         mNativeHandle = nativeHandle;
+        Executors.nativeHandleMap.put(nameKey, nativeHandle);
     }
 
     public void onLeaveChannel(int reason) {
-        System.out.println("RecordingSDK onLeaveChannel,code:" + reason);
+        log.info("RecordingSDK onLeaveChannel,code:" + reason);
     }
 
     public void onError(int error, int stat_code) {
-        System.out.println("RecordingSDK onError,error:" + error + ",stat code:" + stat_code);
+        log.info("RecordingSDK onError,error:" + error + ",stat code:" + stat_code);
     }
 
     public void onWarning(int warn) {
-        System.out.println("RecordingSDK onWarning,warn:" + warn);
+        log.info("RecordingSDK onWarning,warn:" + warn);
     }
 
     public void onJoinChannelSuccess(String channelId, long uid) {
-        if (config.decodeAudio != AUDIO_FORMAT_TYPE.AUDIO_FORMAT_DEFAULT_TYPE) {
-            cleanTimer.schedule(new RecordingCleanTimer(this), 10000);
-        }
-        System.out.println("RecordingSDK joinChannel success, channelId:" + channelId + ", uid:" + uid);
+        log.info("RecordingSDK joinChannel success, channelId:" + channelId + ", uid:" + uid);
     }
 
     public void onUserOffline(long uid, int reason) {
-        System.out.println("RecordingSDK onUserOffline uid:" + uid + ",offline reason:" + reason);
+        log.info("RecordingSDK onUserOffline uid:" + uid + ",offline reason:" + reason);
         m_peers.remove(uid);
         PrintUsersInfo(m_peers);
-        SetVideoMixingLayout();
-    }
-
-    protected void clean() {
-        synchronized (this) {
-            long now = System.currentTimeMillis();
-
-            Iterator<Map.Entry<String, UserInfo>> audio_it = audioChannels.entrySet().iterator();
-            while (audio_it.hasNext()) {
-                Map.Entry<String, UserInfo> entry = audio_it.next();
-                UserInfo info = entry.getValue();
-                if (now - info.last_receive_time > 3000) {
-                    try {
-                        info.channel.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    audio_it.remove();
-                }
-            }
-            Iterator<Map.Entry<String, UserInfo>> video_it = videoChannels.entrySet().iterator();
-            while (video_it.hasNext()) {
-                Map.Entry<String, UserInfo> entry = video_it.next();
-                UserInfo info = entry.getValue();
-                if (now - info.last_receive_time > 3000) {
-                    try {
-                        info.channel.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    video_it.remove();
-                }
-            }
-        }
-        cleanTimer.schedule(new RecordingCleanTimer(this), 10000);
+        this.setVideoMixingLayout();
     }
 
 
     public void onUserJoined(long uid, String recordingDir) {
-        System.out.println("onUserJoined uid:" + uid + ",recordingDir:" + recordingDir);
+        log.info("onUserJoined uid:" + uid + ",recordingDir:" + recordingDir);
         storageDir = recordingDir;
         m_peers.add(uid);
         PrintUsersInfo(m_peers);
         // When the user joined, we can re-layout the canvas
-        SetVideoMixingLayout();
+        this.setVideoMixingLayout();
     }
 
     private void checkUser(long uid, boolean isAudio) {
@@ -170,7 +126,7 @@ public class RecordingSample implements RecordingEventHandler {
                         info.last_receive_time = System.currentTimeMillis();
                         audioChannels.put(key, info);
                     } catch (FileNotFoundException e) {
-                        System.out.println("Can't find file : " + audioPath);
+                        log.info("Can't find file : " + audioPath);
                     }
                 }
             }
@@ -190,7 +146,7 @@ public class RecordingSample implements RecordingEventHandler {
                         info.last_receive_time = System.currentTimeMillis();
                         videoChannels.put(key, info);
                     } catch (FileNotFoundException e) {
-                        System.out.println("Can't find file : " + videoPath);
+                        log.info("Can't find file : " + videoPath);
                     }
                 }
             }
@@ -198,22 +154,22 @@ public class RecordingSample implements RecordingEventHandler {
     }
 
     public void onActiveSpeaker(long uid) {
-        System.out.println("User:" + uid + "is speaking");
+        log.info("User:" + uid + "is speaking");
     }
 
     public void onReceivingStreamStatusChanged(boolean receivingAudio, boolean receivingVideo) {
-        System.out.println("pre receiving audio status is " + m_receivingAudio + ", now receiving audio status is " + receivingAudio);
-        System.out.println("pre receiving video status is " + m_receivingVideo + ", now receiving video  status is " + receivingVideo);
+        log.info("pre receiving audio status is " + m_receivingAudio + ", now receiving audio status is " + receivingAudio);
+        log.info("pre receiving video status is " + m_receivingVideo + ", now receiving video  status is " + receivingVideo);
         m_receivingAudio = receivingAudio;
         m_receivingVideo = receivingVideo;
     }
 
     public void onConnectionLost() {
-        System.out.println("connection is lost");
+        log.info("connection is lost");
     }
 
     public void onConnectionInterrupted() {
-        System.out.println("connection is interrupted");
+        log.info("connection is interrupted");
     }
 
     public void onAudioVolumeIndication(AudioVolumeInfo[] infos) {
@@ -221,21 +177,21 @@ public class RecordingSample implements RecordingEventHandler {
             return;
 
         for (int i = 0; i < infos.length; i++) {
-            System.out.println("User:" + Long.toString(infos[i].uid) + ", audio volume:" + infos[i].volume);
+            log.info("User:" + Long.toString(infos[i].uid) + ", audio volume:" + infos[i].volume);
         }
     }
 
     public void onFirstRemoteVideoDecoded(long uid, int width, int height, int elapsed) {
-        System.out.println("onFirstRemoteVideoDecoded User:" + Long.toString(uid) + ", width:" + width
+        log.info("onFirstRemoteVideoDecoded User:" + Long.toString(uid) + ", width:" + width
                 + ", height:" + height + ", elapsed:" + elapsed);
     }
 
     public void onFirstRemoteAudioFrame(long uid, int elapsed) {
-        System.out.println("onFirstRemoteAudioFrame User:" + Long.toString(uid) + ", elapsed:" + elapsed);
+        log.info("onFirstRemoteAudioFrame User:" + Long.toString(uid) + ", elapsed:" + elapsed);
     }
 
     public void audioFrameReceived(long uid, AudioFrame frame) {
-        // System.out.println("java demo
+        // log.info("java demo
         // audioFrameReceived,uid:"+uid+",type:"+type);
         byte[] buf = null;
         long size = 0;
@@ -255,12 +211,12 @@ public class RecordingSample implements RecordingEventHandler {
         byte[] buf = null;
         long size = 0;
         checkUser(uid, false);
-        // System.out.println("java demovideoFrameReceived,uid:"+uid+",type:"+type);
+        // log.info("java demovideoFrameReceived,uid:"+uid+",type:"+type);
         if (type == 0) {// yuv
             buf = frame.yuv.buf;
             size = frame.yuv.bufSize;
             if (buf == null) {
-                System.out.println("java demo videoFrameReceived null");
+                log.info("java demo videoFrameReceived null");
             }
         } else if (type == 1) {// h264
             buf = frame.h264.buf;
@@ -274,7 +230,7 @@ public class RecordingSample implements RecordingEventHandler {
                 channel.write(buf, 0, (int) size);
                 channel.close();
             } catch (Exception e) {
-                System.out.println("Error write to " + path);
+                log.info("Error write to " + path);
             }
             return;
         }
@@ -285,7 +241,7 @@ public class RecordingSample implements RecordingEventHandler {
      * Brief: Callback when JNI layer exited
      */
     public void stopCallBack() {
-        System.out.println("java demo receive stop from JNI ");
+        log.info("java demo receive stop from JNI ");
     }
 
     /*
@@ -297,12 +253,12 @@ public class RecordingSample implements RecordingEventHandler {
         storageDir = path;
     }
 
-    private int SetVideoMixingLayout() {
+    private int setVideoMixingLayout() {
         Common ei = new Common();
         Common.VideoMixingLayout layout = ei.new VideoMixingLayout();
         int max_peers = profile_type == CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_COMMUNICATION ? 7 : 17;
         if (m_peers.size() > max_peers) {
-            System.out.println("peers size is bigger than max m_peers:" + m_peers.size());
+            log.info("peers size is bigger than max m_peers:" + m_peers.size());
             return -1;
         }
 
@@ -315,9 +271,9 @@ public class RecordingSample implements RecordingEventHandler {
         layout.regionCount = (int) (m_peers.size());
 
         if (!m_peers.isEmpty()) {
-            System.out.println("java setVideoMixingLayout m_peers is not empty, start layout");
+            log.info("java setVideoMixingLayout m_peers is not empty, start layout");
             Common.VideoMixingLayout.Region[] regionList = new Common.VideoMixingLayout.Region[m_peers.size()];
-            System.out.println("mixing layout mode:" + layoutMode);
+            log.info("mixing layout mode:" + layoutMode);
             if (layoutMode == BESTFIT_LAYOUT) {
                 adjustBestFitVideoLayout(regionList, layout);
             } else if (layoutMode == VERTICALPRESENTATION_LAYOUT) {
@@ -335,7 +291,7 @@ public class RecordingSample implements RecordingEventHandler {
     }
 
     private void adjustVerticalPresentationLayout(long maxResolutionUid, Common.VideoMixingLayout.Region[] regionList, Common.VideoMixingLayout layout) {
-        System.out.println("begin adjust vertical presentation layout,peers size:" + m_peers.size() + ", maxResolutionUid:" + maxResolutionUid);
+        log.info("begin adjust vertical presentation layout,peers size:" + m_peers.size() + ", maxResolutionUid:" + maxResolutionUid);
         if (m_peers.size() <= 5) {
             adjustVideo5Layout(maxResolutionUid, regionList, layout);
         } else if (m_peers.size() <= 7) {
@@ -361,7 +317,7 @@ public class RecordingSample implements RecordingEventHandler {
         } else if (m_peers.size() == 17) {
             adjustBestFitLayout_17(regionList, layout);
         } else {
-            System.out.println("adjustBestFitVideoLayout is more than 17 users");
+            log.info("adjustBestFitVideoLayout is more than 17 users");
         }
     }
 
@@ -431,17 +387,17 @@ public class RecordingSample implements RecordingEventHandler {
     }
 
     private void changeToVideo7Layout(long maxResolutionUid, Common.VideoMixingLayout.Region[] regionList, Common.VideoMixingLayout layout) {
-        System.out.println("changeToVideo7Layout");
+        log.info("changeToVideo7Layout");
         adjustVideo7Layout(maxResolutionUid, regionList, layout);
     }
 
     private void changeToVideo9Layout(long maxResolutionUid, Common.VideoMixingLayout.Region[] regionList, Common.VideoMixingLayout layout) {
-        System.out.println("changeToVideo9Layout");
+        log.info("changeToVideo9Layout");
         adjustVideo9Layout(maxResolutionUid, regionList, layout);
     }
 
     private void changeToVideo17Layout(long maxResolutionUid, Common.VideoMixingLayout.Region[] regionList, Common.VideoMixingLayout layout) {
-        System.out.println("changeToVideo17Layout");
+        log.info("changeToVideo17Layout");
         adjustVideo17Layout(maxResolutionUid, regionList, layout);
     }
 
@@ -488,7 +444,7 @@ public class RecordingSample implements RecordingEventHandler {
             regionList[i].renderMode = 0;
             if (i == 16) {
                 regionList[i].x = (1 - viewWidth) * (1.f / 2) * 1.f;
-                System.out.println("special layout for 17 x is:" + regionList[i].x);
+                log.info("special layout for 17 x is:" + regionList[i].x);
             } else {
                 regionList[i].x = 0.5f * viewWidth + viewWidth * xIndex;
             }
@@ -512,7 +468,7 @@ public class RecordingSample implements RecordingEventHandler {
         for (; i < m_peers.size(); i++) {
             regionList[i] = layout.new Region();
             if (maxResolutionUid == m_peers.get(i)) {
-                System.out.println("adjustVideo5Layout equal with configured user uid:" + maxResolutionUid);
+                log.info("adjustVideo5Layout equal with configured user uid:" + maxResolutionUid);
                 flag = true;
                 setMaxResolutionUid(number, maxResolutionUid, regionList, 0.8);
                 number++;
@@ -550,7 +506,7 @@ public class RecordingSample implements RecordingEventHandler {
         for (; i < m_peers.size(); i++) {
             regionList[i] = layout.new Region();
             if (maxResolutionUid == m_peers.get(i)) {
-                System.out.println("adjustVideo7Layout equal with configured user uid:" + maxResolutionUid);
+                log.info("adjustVideo7Layout equal with configured user uid:" + maxResolutionUid);
                 flag = true;
                 setMaxResolutionUid(number, maxResolutionUid, regionList, 6.f / 7);
                 number++;
@@ -588,7 +544,7 @@ public class RecordingSample implements RecordingEventHandler {
         for (; i < m_peers.size(); i++) {
             regionList[i] = layout.new Region();
             if (maxResolutionUid == m_peers.get(i)) {
-                System.out.println("adjustVideo9Layout equal with configured user uid:" + maxResolutionUid);
+                log.info("adjustVideo9Layout equal with configured user uid:" + maxResolutionUid);
                 flag = true;
                 setMaxResolutionUid(number, maxResolutionUid, regionList, 9.f / 5);
                 number++;
@@ -619,7 +575,7 @@ public class RecordingSample implements RecordingEventHandler {
         float viewHeight = viewWidth * (canvasWidth / canvasHeight);
         float viewVEdge = viewHEdge * (canvasWidth / canvasHeight);
         int number = 0;
-        System.out.println("adjustVideo17Layoutenter m_peers size is:" + m_peers.size() + ", maxResolutionUid:" + maxResolutionUid);
+        log.info("adjustVideo17Layoutenter m_peers size is:" + m_peers.size() + ", maxResolutionUid:" + maxResolutionUid);
         for (int i = 0; i < m_peers.size(); i++) {
             regionList[i] = layout.new Region();
             if (maxResolutionUid == m_peers.get(i)) {
@@ -629,7 +585,7 @@ public class RecordingSample implements RecordingEventHandler {
                 continue;
             }
             if (!flag && i == 16) {
-                System.out.println("Not the configured uid, and small regions is sixteen, so ignore this user:" + m_peers.get(i));
+                log.info("Not the configured uid, and small regions is sixteen, so ignore this user:" + m_peers.get(i));
                 break;
             }
 
@@ -648,7 +604,7 @@ public class RecordingSample implements RecordingEventHandler {
 
     private void WriteBytesToFileClassic(long uid, byte[] byteBuffer, long size, boolean isAudio) {
         if (byteBuffer == null) {
-            System.out.println("WriteBytesToFileClassic but byte buffer is null!");
+            log.info("WriteBytesToFileClassic but byte buffer is null!");
             return;
         }
 
@@ -660,7 +616,7 @@ public class RecordingSample implements RecordingEventHandler {
                     info.channel.flush();
                     info.last_receive_time = System.currentTimeMillis();
                 } else {
-                    System.out.println("Channel is null");
+                    log.info("Channel is null");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -677,15 +633,15 @@ public class RecordingSample implements RecordingEventHandler {
     }
 
     private void PrintUsersInfo(Vector vector) {
-        System.out.println("user size:" + vector.size());
+        log.info("user size:" + vector.size());
         for (Long l : m_peers) {
-            System.out.println("user:" + l);
+            log.info("user:" + l);
         }
     }
 
     private boolean checkEnumValue(int val, int max, String msg) {
         if (val < 0 || val > max) {
-            System.out.println(msg);
+            log.info(msg);
             return false;
         }
         return true;
@@ -738,7 +694,7 @@ public class RecordingSample implements RecordingEventHandler {
 
         // paser command line parameters
         if (args.length % 2 != 0) {
-            System.out.println("command line parameters error, should be '--key value' format!");
+            log.info("command line parameters error, should be '--key value' format!");
             return;
         }
         String key = "";
@@ -787,13 +743,14 @@ public class RecordingSample implements RecordingEventHandler {
         if (Appid == null || Uid == null || Channel == null || AppliteDir == null) {
             // print usage
             String usage = "java RecordingSDK --appId STRING --uid UINTEGER32 --channel STRING --appliteDir STRING --channelKey STRING --channelProfile UINTEGER32 --isAudioOnly --isVideoOnly --isMixingEnabled --mixResolution STRING --mixedVideoAudio --decryptionMode STRING --secret STRING --idle INTEGER32 --recordFileRootDir STRING --lowUdpPort INTEGER32 --highUdpPort INTEGER32 --getAudioFrame UINTEGER32 --getVideoFrame UINTEGER32 --captureInterval INTEGER32 --cfgFilePath STRING --streamType UINTEGER32 --triggerMode INTEGER32 \r\n --appId     (App Id/must) \r\n --uid     (User Id default is 0/must)  \r\n --channel     (Channel Id/must) \r\n --appliteDir     (directory of app lite 'AgoraCoreService', Must pointer to 'Agora_Server_SDK_for_Linux_FULL/bin/' folder/must) \r\n --channelKey     (channelKey/option)\r\n --channelProfile     (channel_profile:(0:COMMUNICATION),(1:broadcast) default is 0/option)  \r\n --isAudioOnly     (Default 0:A/V, 1:AudioOnly (0:1)/option) \r\n --isVideoOnly     (Default 0:A/V, 1:VideoOnly (0:1)/option)\r\n --isMixingEnabled     (Mixing Enable? (0:1)/option)\r\n --mixResolution     (change default resolution for vdieo mix mode/option)                 \r\n --mixedVideoAudio     (mixVideoAudio:(0:seperated Audio,Video) (1:mixed Audio & Video with legacy codec) (2:mixed Audio & Video with new codec) default is 0 /option)                 \r\n --decryptionMode     (decryption Mode, default is NULL/option)                 \r\n --secret     (input secret when enable decryptionMode/option)                 \r\n --idle     (Default 300s, should be above 3s/option)                 \r\n --recordFileRootDir     (recording file root dir/option)                 \r\n --lowUdpPort     (default is random value/option)                 \r\n --highUdpPort     (default is random value/option)                 \r\n --getAudioFrame     (default 0 (0:save as file, 1:aac frame, 2:pcm frame, 3:mixed pcm frame) (Can't combine with isMixingEnabled) /option)                 \r\n --getVideoFrame     (default 0 (0:save as file, 1:h.264, 2:yuv, 3:jpg buffer, 4:jpg file, 5:jpg file and video file) (Can't combine with isMixingEnabled) /option)              \r\n --captureInterval     (default 5 (Video snapshot interval (second)))                 \r\n --cfgFilePath     (config file path / option)                 \r\n --streamType     (remote video stream type(0:STREAM_HIGH,1:STREAM_LOW), default is 0/option)  \r\n --triggerMode     (triggerMode:(0: automatically mode, 1: manually mode) default is 0/option) \r\n --proxyServer     proxyServer:format ip:port, eg,\"127.0.0.1:1080\"/option \r\n --defaultVideoBg    (default user background image path/option) \r\n --defaultUserBg (default user background image path/option))  \r\n --audioProfile (audio profile(0: standard single channel, 1: high quality single channel, 2: high quality two channels) defualt is 0/option)   \r\n --logLevel (log level default INFO/option) \r\n --audioIndicationInterval(0: no indication, audio indication interval(ms) default is 0/option) \r\n --layoutMode    (mix video layout mode:(0: default layout, 1:bestFit Layout mode, 2:vertical presentation Layout mode, default is 0/option)(combine with isMixingEnabled)) \r\n --maxResolutionUid    (max resolution uid (uid with maxest resolution under vertical presentation Layout mode  ( default is -1 /option))";
-            System.out.println("Usage:" + usage);
+            log.info("Usage:" + usage);
             return;
         }
         appId = String.valueOf(Appid);
         uid = Integer.parseInt(String.valueOf(Uid));
         appId = String.valueOf(Appid);
         name = String.valueOf(Channel);
+        nameKey = name;
         applitePath = String.valueOf(AppliteDir);
 
         if (ChannelKey != null)
@@ -857,7 +814,7 @@ public class RecordingSample implements RecordingEventHandler {
         if (LogLevel != null) logLevel = Integer.parseInt(String.valueOf(LogLevel));
         if (LayoutMode != null) layoutMode = Integer.parseInt(String.valueOf(LayoutMode));
         if (MaxResolutionUid != null) maxResolutionUid = Long.parseLong(String.valueOf(MaxResolutionUid));
-        System.out.println(" maxResolutionUid = " + maxResolutionUid);
+        log.info(" maxResolutionUid = " + maxResolutionUid);
 
         if (audioProfile > 2) audioProfile = 2;
         if (audioProfile < 0) audioProfile = 0;
@@ -896,7 +853,7 @@ public class RecordingSample implements RecordingEventHandler {
          * ars.setFacility(LOCAL5_LOG_FCLT);
          */
 
-        System.out.println(System.getProperty("java.library.path"));
+        log.info(System.getProperty("java.library.path"));
 
         if (logLevel < 1) logLevel = 1;
         if (logLevel > 6) logLevel = 6;
@@ -906,7 +863,7 @@ public class RecordingSample implements RecordingEventHandler {
         if (isMixingEnabled && !isAudioOnly) {
             String[] sourceStrArray = mixResolution.split(",");
             if (sourceStrArray.length != 4) {
-                System.out.println("Illegal resolution:" + mixResolution);
+                log.info("Illegal resolution:" + mixResolution);
                 return;
             }
             this.width = Integer.valueOf(sourceStrArray[0]).intValue();
@@ -915,10 +872,8 @@ public class RecordingSample implements RecordingEventHandler {
             this.kbps = Integer.valueOf(sourceStrArray[3]).intValue();
         }
         // run jni event loop , or start a new thread to do it
-        cleanTimer = new Timer();
         RecordingSDKInstance.createChannel(appId, channelKey, name, uid, config, logLevel);
-        cleanTimer.cancel();
-        System.out.println("jni layer has been exited...");
+        log.info("jni layer has been exited...");
     }
 
     public boolean leaveChannel(long nativeHandle) {

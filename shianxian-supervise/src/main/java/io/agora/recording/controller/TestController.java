@@ -2,7 +2,6 @@ package io.agora.recording.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import io.agora.recording.RecordingSDK;
-import io.agora.recording.common.RecordingEngineProperties;
 import io.agora.recording.test.RecordingSample;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
@@ -25,19 +24,32 @@ public class TestController {
     @GetMapping("test")
     public ResponseEntity<Result> test(String name, String uid) throws Exception {
         RecordingSDK recordingSdk = new RecordingSDK();
-        RecordingSample recordingSample = new RecordingSample(recordingSdk);
+        final RecordingSample[] recordingSample = {new RecordingSample(recordingSdk)};
+        final Long[] nativeHandle = {0L};
         Executors.execute(new Runnable() {
             @Override
             public void run() {
                 String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
-                        "--uid", uid, "--appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin", "--channel", name
+                        "--uid", uid,
+                        "--appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin",
+                        "--channel", name,
+                        "--lowUdpPort", "10000",
+                        "--highUdpPort", "50000",
+                        "--triggerMode", "1",
                 };
-                recordingSample.createChannel(args);
-                recordingSample.unRegister();
+                recordingSample[0].createChannel(args);
+                if (Executors.nativeHandleMap.containsKey(name)) {
+                    nativeHandle[0] = Executors.nativeHandleMap.get(name);
+                    log.info("获取录制引擎：{}", nativeHandle[0]);
+                    Executors.nativeHandleMap.remove(name);
+                }
+                recordingSample[0].unRegister();
+                recordingSample[0].startService(nativeHandle[0]);
             }
         });
-        RecordingEngineProperties recordingEngineProperties = new RecordingEngineProperties();
-        return ResponseEntity.ok(Result.data(recordingEngineProperties.GetStorageDir()));
+
+
+        return ResponseEntity.ok(Result.data(nativeHandle[0]));
     }
 
 
