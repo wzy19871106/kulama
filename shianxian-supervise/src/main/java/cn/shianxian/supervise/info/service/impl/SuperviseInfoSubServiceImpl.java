@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
@@ -60,7 +62,9 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Override
     public Result selectSuperviseInfoAdviceById(String id) {
         String advice = this.superviseInfoSubDao.selectSuperviseInfoAdviceById(id);
-        return Result.data(advice);
+        Map<String, Object> map = new HashMap<>();
+        map.put("advice", advice);
+        return Result.data(map);
     }
 
 
