@@ -26,30 +26,24 @@ public class TestController {
 
 
     @GetMapping("test")
-    public ResponseEntity<Result> test() {
+    public ResponseEntity<Result> test(String name, String uid) {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
         String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
-        "--uid", "55", "--appliteDir", "/data/1", "--channel", "150055"
+        "--uid", uid, "--appliteDir", "/usr/local/cloud/supervise/agora/appliteDir/", "--channel", name
         };
         recordingSampleM.createChannel(args);
         recordingSampleM.unRegister();
-
         return ResponseEntity.ok(Result.successMsg());
     }
 
     @GetMapping("test2")
-    public ResponseEntity<Result> test2() {
+    public ResponseEntity<Result> test2(long nativeHandle) {
         RecordingSDK recordingSDK = new RecordingSDK();
         RecordingSampleM recordingSampleM = new RecordingSampleM(recordingSDK);
-        String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
-                "--uid", "55", "--appliteDir", "/data/1", "--channel", "150055"
-        };
-        recordingSampleM.createChannel(args);
-        long l = 0L;
-        recordingSampleM.nativeObjectRef(l);
-        log.info("录制引擎：{}", l);
-        recordingSampleM.leaveChannel(l);
+        recordingSampleM.nativeObjectRef(nativeHandle);
+        log.info("录制引擎：{}", nativeHandle);
+        recordingSampleM.leaveChannel(nativeHandle);
         return ResponseEntity.ok(Result.successMsg());
     }
 
