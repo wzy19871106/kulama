@@ -67,7 +67,7 @@ public class TestController {
         // 设置录制文件存放的根目录
         config.recordFileRootDir = "/usr/local/cloud/supervise/";
         // Recording_Dir 参数设置存放录制文件的绝对路径
-        config.cfgFilePath = "{'Recording_Dir' : '/usr/local/cloud/supervise/agora/so'}";
+//        config.cfgFilePath = "{'Recording_Dir' : '/usr/local/cloud/supervise/agora/so'}";
         // 设置视频解码格式
         config.decodeVideo = Common.VIDEO_FORMAT_TYPE.VIDEO_FORMAT_JPG_VIDEO_FILE_TYPE;
         // 设置音频解码格式
@@ -94,15 +94,14 @@ public class TestController {
         layout.canvasWidth = 100;
         recordingSDK.setVideoMixingLayout(handler.nativeHandle, layout);
         recordingSDK.startService(handler.nativeHandle);
-        return ResponseEntity.ok(Result.successMsg());
+        return ResponseEntity.ok(Result.data(handler.nativeHandle));
     }
 
 
     @GetMapping("test4")
-    public ResponseEntity<Result> test4() {
+    public ResponseEntity<Result> test4(long nativeHandle) {
         RecordingSDK recordingSDK = new RecordingSDK();
-        Handler handler = new Handler();
-        recordingSDK.startService(handler.nativeHandle);
+        recordingSDK.startService(nativeHandle);
         return ResponseEntity.ok(Result.successMsg());
     }
 }
