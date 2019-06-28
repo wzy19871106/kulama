@@ -61,7 +61,7 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
      * @param id
      * @return
      */
-    List<List<?>> selectSuperviseInfoAdviceById(@Param("id") String id);
+    List<SuperviseInfoSub> selectSuperviseInfoAdviceById(@Param("id") String id);
 
 
     /**
