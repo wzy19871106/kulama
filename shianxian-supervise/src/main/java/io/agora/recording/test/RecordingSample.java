@@ -70,6 +70,7 @@ public class RecordingSample implements RecordingEventHandler {
 
     public void nativeObjectRef(long nativeHandle) {
         mNativeHandle = nativeHandle;
+        log.info("开始获取录制引擎，mNativeHandle：{}，nativeHandle：{}", mNativeHandle, nativeHandle);
         Executors.nativeHandleMap.put(nameKey, nativeHandle);
     }
 
@@ -881,6 +882,7 @@ public class RecordingSample implements RecordingEventHandler {
     }
 
     public int startService(long nativeHandle) {
+        log.info("开始录制视频：{}", nativeHandle);
         return RecordingSDKInstance.startService(nativeHandle);
     }
 

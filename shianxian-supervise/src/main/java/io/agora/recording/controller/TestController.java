@@ -43,8 +43,8 @@ public class TestController {
                     log.info("获取录制引擎：{}", nativeHandle[0]);
                     Executors.nativeHandleMap.remove(name);
                 }
-                recordingSample[0].unRegister();
                 recordingSample[0].startService(nativeHandle[0]);
+                recordingSample[0].unRegister();
             }
         });
 
