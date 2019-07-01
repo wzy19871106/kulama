@@ -186,4 +186,18 @@ public class NodeInfoController {
     }
 
 
+    /**
+     * 根据计划任务标识，数据权限模板标识查询节点表
+     * @return
+     */
+    @GetMapping("selectNodeInfoByPlanTag")
+    @ApiOperation(value = "根据计划任务标识，数据权限模板标识查询节点表", notes = "根据计划任务标识，数据权限模板标识查询节点表")
+    @ApiImplicitParam(paramType = "query", name = "planTag", value = "计划任务标识")
+    public ResponseEntity<Result> selectNodeInfoByPlanTag(String planTag) {
+        Result result = this.nodeInfoService.selectNodeInfoByPlanTag(planTag);
+        return ResponseEntity.ok(result);
+    }
+
+
+
 }
