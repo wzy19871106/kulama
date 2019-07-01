@@ -10,7 +10,7 @@ import io.agora.recording.common.RecordingConfig;
 import io.agora.recording.common.RecordingEngineProperties;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.Map;
 import java.util.concurrent.Callable;
 
 @Slf4j
@@ -66,15 +66,17 @@ public class RecordingHandler implements RecordingEventHandler {
         log.info(System.getProperty("java.library.path"));
         boolean falg = recording.createChannel(appId, "", channel, uid, config, logLevel);
         log.info("创建并让录制 App 加入频道，是否成功：{}", falg);
-        log.info("录制引擎：{}", nativeHandle);
-        Callable<Long> callable = new Callable<Long>() {
-            @Override
-            public Long call() {
-                recording.startService(nativeHandle);
-                return nativeHandle;
-            }
-        };
-        log.info("开始录制...");
+        if (falg) {
+            log.info("录制引擎：{}", nativeHandle);
+            Callable<Long> callable = new Callable<Long>() {
+                @Override
+                public Long call() {
+                    recording.startService(nativeHandle);
+                    return nativeHandle;
+                }
+            };
+            log.info("开始录制...");
+        }
         return nativeHandle;
     }
 
