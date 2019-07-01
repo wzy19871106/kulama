@@ -33,6 +33,7 @@ public class RecordingHandler implements RecordingEventHandler {
         int uid = 0;
         String channel = map.get("channel");
         String appliteDir = map.get("appliteDir");
+        String recordFileRootDir = map.get("recordFileRootDir");
         int lowUdpPort = Integer.parseInt(map.get("lowUdpPort"));
         int highUdpPort = Integer.parseInt(map.get("highUdpPort"));
         int logLevel = 5;
@@ -44,12 +45,9 @@ public class RecordingHandler implements RecordingEventHandler {
         RecordingConfig config = new RecordingConfig();
         // 设置是否启用合流模式
         config.isMixingEnabled = false;
-        // 合流模式下将一个音频录制文件和一个视频录制文件实时混合成一个既有音频也有视频的 MP4 文件
-//        config.mixedVideoAudio = Common.MIXED_AV_CODEC_TYPE.MIXED_AV_CODEC_V2;
         // 设置为 AgoraCoreServices 存放的目录
         config.appliteDir = appliteDir;
-        // Recording_Dir 参数设置存放录制文件的绝对路径
-//        config.cfgFilePath = "{'Recording_Dir' : '/usr/local/cloud/supervise/agora/so'}";
+        config.recordFileRootDir = recordFileRootDir;
         // 设置视频解码格式
         config.decodeVideo = Common.VIDEO_FORMAT_TYPE.VIDEO_FORMAT_JPG_VIDEO_FILE_TYPE;
         // 设置音频解码格式
