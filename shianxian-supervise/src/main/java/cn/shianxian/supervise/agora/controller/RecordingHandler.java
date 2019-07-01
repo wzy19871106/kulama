@@ -49,7 +49,7 @@ public class RecordingHandler implements RecordingEventHandler {
         config.appliteDir = appliteDir;
         config.recordFileRootDir = recordFileRootDir;
         // 设置视频解码格式
-        config.decodeVideo = Common.VIDEO_FORMAT_TYPE.VIDEO_FORMAT_JPG_VIDEO_FILE_TYPE;
+        config.decodeVideo = Common.VIDEO_FORMAT_TYPE.VIDEO_FORMAT_DEFAULT_TYPE;
         // 设置音频解码格式
         config.decodeAudio = Common.AUDIO_FORMAT_TYPE.AUDIO_FORMAT_DEFAULT_TYPE;
         // 设置最低 UDP 端口
