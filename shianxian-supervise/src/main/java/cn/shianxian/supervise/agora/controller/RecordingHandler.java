@@ -64,7 +64,8 @@ public class RecordingHandler implements RecordingEventHandler {
 //        config.proxyServer = 1;
         this.config = config;
         log.info(System.getProperty("java.library.path"));
-        recording.createChannel(appId, "", channel, uid, config, logLevel);
+        boolean falg = recording.createChannel(appId, "", channel, uid, config, logLevel);
+        log.info("创建并让录制 App 加入频道，是否成功：{}", falg);
         log.info("录制引擎：{}", nativeHandle);
         Callable<Long> callable = new Callable<Long>() {
             @Override
