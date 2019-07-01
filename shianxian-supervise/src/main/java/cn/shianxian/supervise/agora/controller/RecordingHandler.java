@@ -64,6 +64,7 @@ public class RecordingHandler implements RecordingEventHandler {
         this.config = config;
         log.info(System.getProperty("java.library.path"));
         recording.createChannel(appId, "", channel, uid, config, logLevel);
+        log.info("录制引擎：{}", nativeHandle);
         recording.startService(nativeHandle);
         log.info("开始录制...");
     }
@@ -73,7 +74,7 @@ public class RecordingHandler implements RecordingEventHandler {
     }
 
     public int startService(long nativeHandle) {
-        log.info("开始录制：{}", nativeHandle);
+        log.info("开始录制，录制引擎：{}", nativeHandle);
         return recording.startService(nativeHandle);
     }
 
