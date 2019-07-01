@@ -3,6 +3,7 @@ package io.agora.recording.controller;
 import cn.shianxian.supervise.common.pojo.Result;
 import io.agora.recording.RecordingSDK;
 import io.agora.recording.test.RecordingSample;
+import io.agora.recording.test.RecordingSampleM;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -70,7 +71,7 @@ public class TestController {
     @GetMapping("test3")
     public ResponseEntity<Result> test3(String name, String uid) throws Exception {
         RecordingSDK recordingSdk = new RecordingSDK();
-        RecordingSample recordingSample = new RecordingSample(recordingSdk);
+        RecordingSampleM recordingSample = new RecordingSampleM(recordingSdk);
         String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
                 "--uid", uid,
                 "--appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin",
@@ -80,8 +81,19 @@ public class TestController {
                 "--triggerMode", "1",
         };
         recordingSample.createChannel(args);
+        recordingSample.startService(recordingSample.mNativeHandle);
         recordingSample.unRegister();
         return ResponseEntity.ok(Result.data(recordingSample.mNativeHandle));
     }
 
+
+    @GetMapping("test4")
+    public ResponseEntity<Result> test4(long nativeHandle) {
+        RecordingSDK RecordingSdk = new RecordingSDK();
+        RecordingSampleM recordingSample = new RecordingSampleM(RecordingSdk);
+        log.info("录制引擎：{}", nativeHandle);
+        recordingSample.stopService(nativeHandle);
+        recordingSample.leaveChannel(nativeHandle);
+        return ResponseEntity.ok(Result.successMsg());
+    }
 }
