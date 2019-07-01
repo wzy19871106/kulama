@@ -78,7 +78,6 @@ public class TestController {
                 "--channel", name,
                 "--lowUdpPort", "10000",
                 "--highUdpPort", "50000",
-                "--triggerMode", "1",
         };
         recordingSample.createChannel(args);
         recordingSample.startService(recordingSample.mNativeHandle);
