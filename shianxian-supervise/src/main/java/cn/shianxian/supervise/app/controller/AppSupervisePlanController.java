@@ -49,9 +49,12 @@ public class AppSupervisePlanController {
      */
     @PostMapping("selectSupervisePlanDetailByIds")
     @ApiOperation(value = "据子类型编码查询所有监管内容，按类型分组展示", notes = "据子类型编码查询所有监管内容，按类型分组展示")
-    @ApiImplicitParam(paramType = "query", name = "planTag", value = "子类型编码")
-    public ResponseEntity<Result> selectSupervisePlanDetailByIds(Integer planTag) {
-        Result result = this.supervisePlanMainService.selectSupervisePlanDetailByIds(planTag);
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点id"),
+            @ApiImplicitParam(paramType = "query", name = "planTag", value = "子类型编码")
+    })
+    public ResponseEntity<Result> selectSupervisePlanDetailByIds(String planTag, String nodeTag) {
+        Result result = this.supervisePlanMainService.selectSupervisePlanDetailByIds(planTag, nodeTag);
         return ResponseEntity.ok(result);
     }
 

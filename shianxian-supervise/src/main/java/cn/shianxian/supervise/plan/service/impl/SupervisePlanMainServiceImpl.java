@@ -72,8 +72,8 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
 
 
     @Override
-    public Result selectSupervisePlanDetailByIds(Integer planTag) {
-        List<SuperviseInfoVO> planList = this.supervisePlanMainDao.selectSupervisePlanDetailByIds(planTag);
+    public Result selectSupervisePlanDetailByIds(String planTag, String nodeTag) {
+        List<SuperviseInfoVO> planList = this.supervisePlanMainDao.selectSupervisePlanDetailByIds(planTag, nodeTag);
         return Result.data(planList);
     }
 

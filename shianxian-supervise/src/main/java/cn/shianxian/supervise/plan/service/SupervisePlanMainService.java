@@ -47,7 +47,7 @@ public interface SupervisePlanMainService {
      * @param planTag
      * @return
      */
-    Result selectSupervisePlanDetailByIds(Integer planTag);
+    Result selectSupervisePlanDetailByIds(String planTag, String nodeTag);
 
 
     /**

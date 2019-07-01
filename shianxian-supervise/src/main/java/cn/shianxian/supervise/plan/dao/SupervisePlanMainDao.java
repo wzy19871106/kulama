@@ -67,7 +67,7 @@ public interface SupervisePlanMainDao extends Mapper<SupervisePlanMain> {
      * @param planTag
      * @return
      */
-    List<SuperviseInfoVO> selectSupervisePlanDetailByIds(@Param("planTag") Integer planTag);
+    List<SuperviseInfoVO> selectSupervisePlanDetailByIds(@Param("planTag") String planTag, @Param("nodeTag") String nodeTag);
 
 
     /**
