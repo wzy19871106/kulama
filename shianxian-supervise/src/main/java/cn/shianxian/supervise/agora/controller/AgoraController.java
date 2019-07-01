@@ -43,8 +43,8 @@ public class AgoraController {
                 return nativeHandle;
             }
         };
-        callable.call();
-        return ResponseEntity.ok(Result.data(handler.nativeHandle));
+        new Thread(channel).start();
+        return ResponseEntity.ok(Result.successMsg());
     }
 
 
