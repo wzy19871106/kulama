@@ -25,7 +25,6 @@ public class TestController {
     public ResponseEntity<Result> test(String name, String uid) throws Exception {
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingSample[] recordingSample = {new RecordingSample(recordingSdk)};
-        Long[] nativeHandle = {0L};
         Executors.execute(new Runnable() {
             @Override
             public void run() {
@@ -38,12 +37,10 @@ public class TestController {
                         "--triggerMode", "1",
                 };
                 recordingSample[0].createChannel(args);
-                nativeHandle[0] = getNativeHandle(name);
-                recordingSample[0].startService(nativeHandle[0]);
                 recordingSample[0].unRegister();
             }
         });
-        return ResponseEntity.ok(Result.data(nativeHandle[0]));
+        return ResponseEntity.ok(Result.data(this.getNativeHandle(name)));
     }
 
 
