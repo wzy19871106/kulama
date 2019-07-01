@@ -25,12 +25,12 @@ public class AgoraController {
 
 
     @GetMapping("record")
-    public ResponseEntity<Result> test(String channel, String mainIds) {
+    public ResponseEntity<Result> record(String channel, String mainIds) throws Exception {
         Map<String, String> map = new ConcurrentHashMap<>();
         map.put("appId", "b676a4deb7964ee480fc51c72554c97e");
         map.put("channel", channel);
         map.put("appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin");
-        map.put("appliteDir", "/data/1");
+        map.put("recordFileRootDir", "/data/1");
         map.put("lowUdpPort", "20000");
         map.put("highUdpPort", "50000");
 
@@ -43,6 +43,7 @@ public class AgoraController {
                 return nativeHandle;
             }
         };
+        callable.call();
         return ResponseEntity.ok(Result.data(handler.nativeHandle));
     }
 
