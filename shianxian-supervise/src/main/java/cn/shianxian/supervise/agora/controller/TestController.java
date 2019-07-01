@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -24,7 +25,7 @@ public class TestController {
 
 
     @GetMapping("test")
-    public ResponseEntity<Result> test(String channel, String uid) throws Exception {
+    public ResponseEntity<Result> test(String channel) throws Exception {
 
 
 //        RecordingSDK recordingSdk = new RecordingSDK();
@@ -45,7 +46,6 @@ public class TestController {
 
         Map<String, String> map = new ConcurrentHashMap<>();
         map.put("appId", "b676a4deb7964ee480fc51c72554c97e");
-        map.put("uid", uid);
         map.put("channel", channel);
         map.put("appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin");
         map.put("lowUdpPort", "20000");
@@ -53,7 +53,14 @@ public class TestController {
 
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
-        long nativeHandle = handler.execute(map);
+        Callable<Long> callable = new Callable<Long>() {
+            @Override
+            public Long call() {
+                long nativeHandle = handler.execute(map);
+                return nativeHandle;
+            }
+        };
+        Long nativeHandle = callable.call();
         return ResponseEntity.ok(Result.data(nativeHandle));
     }
 
