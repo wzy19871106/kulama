@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
 
 
@@ -54,14 +53,7 @@ public class TestController {
 
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
-        Callable<Long> callable = new Callable<Long>() {
-            @Override
-            public Long call() {
-                handler.execute(map);
-                return handler.nativeHandle;
-            }
-        };
-        Long nativeHandle = callable.call();
+        long nativeHandle = handler.execute(map);
         return ResponseEntity.ok(Result.data(nativeHandle));
     }
 

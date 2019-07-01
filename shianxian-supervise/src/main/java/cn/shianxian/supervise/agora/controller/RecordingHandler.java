@@ -11,6 +11,7 @@ import io.agora.recording.common.RecordingEngineProperties;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
+import java.util.concurrent.Callable;
 
 @Slf4j
 public class RecordingHandler implements RecordingEventHandler {
@@ -28,7 +29,7 @@ public class RecordingHandler implements RecordingEventHandler {
     }
 
 
-    public void execute(Map<String, String> map) {
+    public long execute(Map<String, String> map) {
         String appId = map.get("appId");
         int uid = Integer.parseInt(map.get("uid"));
         String channel = map.get("channel");
@@ -39,7 +40,7 @@ public class RecordingHandler implements RecordingEventHandler {
 
         if (appId == null || channel == null || appliteDir == null) {
             log.warn("缺少参数，无法录制");
-            return;
+            return nativeHandle;
         }
         RecordingConfig config = new RecordingConfig();
         // 设置是否启用合流模式
@@ -65,8 +66,15 @@ public class RecordingHandler implements RecordingEventHandler {
         log.info(System.getProperty("java.library.path"));
         recording.createChannel(appId, "", channel, uid, config, logLevel);
         log.info("录制引擎：{}", nativeHandle);
-        recording.startService(nativeHandle);
+        Callable<Long> callable = new Callable<Long>() {
+            @Override
+            public Long call() {
+                recording.startService(nativeHandle);
+                return nativeHandle;
+            }
+        };
         log.info("开始录制...");
+        return nativeHandle;
     }
 
     public boolean leaveChannel(long nativeHandle) {
