@@ -65,6 +65,18 @@ public class RecordingHandler implements RecordingEventHandler {
         return nativeHandle;
     }
 
+    private int setVideoMixingLayout() {
+        Common ei = new Common();
+        Common.VideoMixingLayout layout = ei.new VideoMixingLayout();
+        layout.canvasHeight = 700;
+        layout.canvasWidth = 950;
+        layout.backgroundColor = "#23b9dc";
+        layout.regionCount = 0;
+
+        return recording.setVideoMixingLayout(nativeHandle, layout);
+    }
+
+
     public boolean leaveChannel(long nativeHandle) {
         return recording.leaveChannel(nativeHandle);
     }
@@ -111,11 +123,13 @@ public class RecordingHandler implements RecordingEventHandler {
     @Override
     public void onJoinChannelSuccess(String channelId, long uid) {
         log.info("录制 App 加入频道，channelId：{}，uid：{}", channelId, uid);
+        setVideoMixingLayout();
     }
 
     @Override
     public void onUserOffline(long uid, int reason) {
         log.info("其他用户离开当前频道，uid：{}，reason：{}", uid, reason);
+        setVideoMixingLayout();
     }
 
     @Override
