@@ -95,4 +95,12 @@ public interface ModuleDao extends Mapper<Module> {
      * @return
      */
     String selectModuleByUserId(@Param("userTag") String userTag);
+
+
+    /**
+     * 根据用户标识所对应的的权限查询模块
+     * @param userTag
+     * @return
+     */
+    String selectModuleAuthorityByUserTag(@Param("userTag") String userTag);
 }

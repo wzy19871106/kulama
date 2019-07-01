@@ -165,4 +165,17 @@ public class ModuleController {
         Result result = this.moduleService.selectModuleByUserId(userTag);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 根据用户标识所对应的的权限查询模块
+     * @return
+     */
+    @GetMapping("selectModuleAuthorityByUserTag")
+    @ApiOperation(value = "根据用户标识所对应的的权限查询模块", notes = "根据用户标识所对应的的权限查询模块")
+    @ApiImplicitParam(paramType = "query", name = "userTag", value = "用户标识")
+    public ResponseEntity<Result> selectModuleAuthorityByUserTag(String userTag) {
+        Result result = this.moduleService.selectModuleAuthorityByUserTag(userTag);
+        return ResponseEntity.ok(result);
+    }
 }

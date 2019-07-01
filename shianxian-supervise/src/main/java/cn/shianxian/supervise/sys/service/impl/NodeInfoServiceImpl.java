@@ -214,8 +214,8 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
 
     @Override
-    public Result selectNodeInfoByPlanTag(String planTag) {
-        List<NodeInfo> nodeInfos = this.nodeInfoDao.selectNodeInfoByPlanTag(planTag);
+    public Result selectNodeInfoByPlanTag(String planTag, String authority) {
+        List<NodeInfo> nodeInfos = this.nodeInfoDao.selectNodeInfoByPlanTag(planTag, authority);
         return Result.data(nodeInfos);
     }
 

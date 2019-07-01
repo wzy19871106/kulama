@@ -98,5 +98,5 @@ public interface NodeInfoDao extends Mapper<NodeInfo> {
      * @param planTag
      * @return
      */
-    List<NodeInfo> selectNodeInfoByPlanTag(@Param("planTag") String planTag);
+    List<NodeInfo> selectNodeInfoByPlanTag(@Param("planTag") String planTag, @Param("authority") String authority);
 }

@@ -95,5 +95,5 @@ public interface NodeInfoService {
      * @param planTag
      * @return
      */
-    Result selectNodeInfoByPlanTag(String planTag);
+    Result selectNodeInfoByPlanTag(String planTag, String authority);
 }

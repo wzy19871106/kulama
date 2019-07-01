@@ -80,7 +80,7 @@
     </select>
 
     <select id="selectNodeInfoByPlanTag" resultType="cn.shianxian.supervise.sys.pojo.NodeInfo">
-        CALL selectNodeInfoByPlanTag(#{planTag})
+        CALL proc_T_NodeInfo_Plan_QueryTree(#{planTag}, #{authority})
     </select>
 
 </mapper>

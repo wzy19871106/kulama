@@ -74,4 +74,12 @@ public interface ModuleService {
      * @return
      */
     Result selectModuleByUserId(String userTag);
+
+
+    /**
+     * 根据用户标识所对应的的权限查询模块
+     * @param userTag
+     * @return
+     */
+    Result selectModuleAuthorityByUserTag(String userTag);
 }

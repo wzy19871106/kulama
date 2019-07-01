@@ -67,4 +67,9 @@
     <select id="selectModuleByUserId" resultType="java.lang.String">
         CALL Proc_T_Module_QueryTreeJson_ByUserTag(#{userTag})
     </select>
+
+    <select id="selectModuleAuthorityByUserTag" resultType="java.lang.String">
+        CALL Proc_T_Module_Authority_QueryTreeJson_ByUserTag(#{userTag})
+    </select>
+
 </mapper>
