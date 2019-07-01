@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @SpringBootApplication
 @MapperScan(basePackages = {"cn.shianxian.supervise.*.dao"})
-@ComponentScan(basePackages = {"cn.shianxian", "io.agora.recording"})
+@ComponentScan(basePackages = {"cn.shianxian"})
 public class SuperviseApplication {
     public static void main(String[] args) {
         SpringApplication.run(SuperviseApplication.class, args);

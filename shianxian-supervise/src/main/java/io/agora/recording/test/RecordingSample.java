@@ -66,14 +66,6 @@ public class RecordingSample implements RecordingEventHandler {
         RecordingSDKInstance.registerOberserver(this);
     }
 
-    public static void main(String[] args) {
-        //should config -Djava.library.path to load library
-        RecordingSDK RecordingSdk = new RecordingSDK();
-        RecordingSample ars = new RecordingSample(RecordingSdk);
-        ars.createChannel(args);
-        ars.unRegister();
-    }
-
     public void unRegister() {
         RecordingSDKInstance.unRegisterOberserver(this);
     }
