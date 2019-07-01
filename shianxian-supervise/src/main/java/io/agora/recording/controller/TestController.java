@@ -67,7 +67,21 @@ public class TestController {
     }
 
 
-
-
+    @GetMapping("test3")
+    public ResponseEntity<Result> test3(String name, String uid) throws Exception {
+        RecordingSDK recordingSdk = new RecordingSDK();
+        RecordingSample recordingSample = new RecordingSample(recordingSdk);
+        String[] args = {"--appId", "b676a4deb7964ee480fc51c72554c97e",
+                "--uid", uid,
+                "--appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin",
+                "--channel", name,
+                "--lowUdpPort", "10000",
+                "--highUdpPort", "50000",
+                "--triggerMode", "1",
+        };
+        recordingSample.createChannel(args);
+        recordingSample.unRegister();
+        return ResponseEntity.ok(Result.data(recordingSample.mNativeHandle));
+    }
 
 }

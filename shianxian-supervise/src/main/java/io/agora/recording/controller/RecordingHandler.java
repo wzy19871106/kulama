@@ -10,23 +10,121 @@ import io.agora.recording.common.RecordingConfig;
 import io.agora.recording.common.RecordingEngineProperties;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Map;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.*;
 
+class RecordingCleanTimer extends TimerTask {
+    RecordingHandler handler;
+
+    public RecordingCleanTimer(RecordingHandler handler) {
+        this.handler = handler;
+    }
+
+    @Override
+    public void run() {
+        handler.clean();
+    }
+}
+
+class UserInfo {
+    long last_receive_time;
+    FileOutputStream channel;
+}
 
 @Slf4j
 public class RecordingHandler implements RecordingEventHandler {
 
     private RecordingConfig config = null;
+
     private RecordingSDK recording = null;
+
+    private Timer cleanTimer = null;
+
+    HashMap<String, UserInfo> audioChannels = new HashMap<>();
+    HashMap<String, UserInfo> videoChannels = new HashMap<>();
+    Vector<Long> peers = new Vector<>();
 
     public long nativeHandle;
 
+    private Common.CHANNEL_PROFILE_TYPE profileType;
 
     public RecordingHandler(RecordingSDK recording) {
         this.recording = recording;
         recording.registerOberserver(this);
     }
 
+    protected void clean() {
+        synchronized (this) {
+            long now = System.currentTimeMillis();
+
+            Iterator<Map.Entry<String, UserInfo>> audio_it = audioChannels.entrySet().iterator();
+            while (audio_it.hasNext()) {
+                Map.Entry<String, UserInfo> entry = audio_it.next();
+                UserInfo info = entry.getValue();
+                if (now - info.last_receive_time > 3000) {
+                    try {
+                        info.channel.close();
+                    } catch (IOException e) {
+                        log.error("录制clean错误：{}，具体信息：{}", e, e.getMessage());
+                    }
+                    audio_it.remove();
+                }
+            }
+            Iterator<Map.Entry<String, UserInfo>> video_it = videoChannels.entrySet().iterator();
+            while (video_it.hasNext()) {
+                Map.Entry<String, UserInfo> entry = video_it.next();
+                UserInfo info = entry.getValue();
+                if (now - info.last_receive_time > 3000) {
+                    try {
+                        info.channel.close();
+                    } catch (IOException e) {
+                        log.error("录制clean错误：{}，具体信息：{}", e, e.getMessage());
+                    }
+                    video_it.remove();
+                }
+            }
+        }
+        cleanTimer.schedule(new RecordingCleanTimer(this), 10000);
+    }
+
+
+//    private int SetVideoMixingLayout() {
+//        Common ei = new Common();
+//        Common.VideoMixingLayout layout = ei.new VideoMixingLayout();
+//        int max_peers = profileType == Common.CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_COMMUNICATION ? 7 : 17;
+//        if (peers.size() > max_peers) {
+//            log.info("peers size is bigger than max m_peers:" + peers.size());
+//            return -1;
+//        }
+//
+//        if (!isMixMode())
+//            return -1;
+//
+//        layout.canvasHeight = height;
+//        layout.canvasWidth = width;
+//        layout.backgroundColor = "#23b9dc";
+//        layout.regionCount = (int) (m_peers.size());
+//
+//        if (!m_peers.isEmpty()) {
+//            System.out.println("java setVideoMixingLayout m_peers is not empty, start layout");
+//            Common.VideoMixingLayout.Region[] regionList = new Common.VideoMixingLayout.Region[m_peers.size()];
+//            System.out.println("mixing layout mode:" + layoutMode);
+//            if (layoutMode == BESTFIT_LAYOUT) {
+//                adjustBestFitVideoLayout(regionList, layout);
+//            } else if (layoutMode == VERTICALPRESENTATION_LAYOUT) {
+//                adjustVerticalPresentationLayout(maxResolutionUid, regionList, layout);
+//            } else {
+//                adjustDefaultVideoLayout(regionList, layout);
+//            }
+//
+//            layout.regions = regionList;
+//
+//        } else {
+//            layout.regions = null;
+//        }
+//        return RecordingSDKInstance.setVideoMixingLayout(mNativeHandle, layout);
+//    }
 
     public void createChannel(Map<String, String> map) {
         String appId = map.get("appid");
@@ -104,6 +202,8 @@ public class RecordingHandler implements RecordingEventHandler {
 
         // run jni event loop , or start a new thread to do it
         recording.createChannel(appId, channelKey, channel, uid, config, logLevel);
+        cleanTimer = new Timer();
+        cleanTimer.cancel();
         log.info("开始录制...");
     }
 
@@ -150,12 +250,18 @@ public class RecordingHandler implements RecordingEventHandler {
 
     @Override
     public void onJoinChannelSuccess(String channelId, long uid) {
+        if (config.decodeAudio != Common.AUDIO_FORMAT_TYPE.AUDIO_FORMAT_DEFAULT_TYPE) {
+            cleanTimer.schedule(new RecordingCleanTimer(this), 10000);
+        }
         log.info("录制 App 加入频道，channelId：{}，uid：{}", channelId, uid);
     }
 
     @Override
     public void onUserOffline(long uid, int reason) {
         log.info("其他用户离开当前频道，uid：{}，reason：{}", uid, reason);
+        peers.remove(uid);
+//        PrintUsersInfo(m_peers);
+//        SetVideoMixingLayout();
     }
 
     @Override
