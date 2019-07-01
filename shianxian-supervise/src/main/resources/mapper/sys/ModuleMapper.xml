@@ -19,7 +19,8 @@
         #{module.moduleUrl},
         #{module.moduleDescription},
         #{module.ifMenu},
-        #{module.moduleComponent}
+        #{module.moduleComponent},
+        #{module.userTag}
         )
     </select>
 

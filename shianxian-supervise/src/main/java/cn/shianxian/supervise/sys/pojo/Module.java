@@ -101,4 +101,12 @@ public class Module {
      */
     @Transient
     private String parentModuleName;
+
+    /**
+     * 用户id
+     */
+    @Transient
+    private String userTag;
+
+
 }
