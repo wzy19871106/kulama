@@ -60,8 +60,7 @@ public class TestController {
                 return nativeHandle;
             }
         };
-        Long nativeHandle = callable.call();
-        return ResponseEntity.ok(Result.data(nativeHandle));
+        return ResponseEntity.ok(Result.data(handler.nativeHandle));
     }
 
 
