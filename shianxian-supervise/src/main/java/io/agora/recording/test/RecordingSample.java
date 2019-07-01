@@ -6,6 +6,7 @@ import io.agora.recording.common.Common;
 import io.agora.recording.common.Common.*;
 import io.agora.recording.common.RecordingConfig;
 import io.agora.recording.common.RecordingEngineProperties;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,6 +34,7 @@ class UserInfo {
 }
 
 
+@Slf4j
 public class RecordingSample implements RecordingEventHandler {
     // java run status flag
     private boolean isMixMode = false;
@@ -75,6 +77,7 @@ public class RecordingSample implements RecordingEventHandler {
     }
 
     public void nativeObjectRef(long nativeHandle) {
+        log.info("mNativeHandle============:{}", nativeHandle);
         mNativeHandle = nativeHandle;
     }
 
@@ -304,8 +307,10 @@ public class RecordingSample implements RecordingEventHandler {
             return -1;
         }
 
-        if (!IsMixMode())
+        if (!IsMixMode()) {
+            System.out.println("是否合流模式：" + IsMixMode());
             return -1;
+        }
 
         layout.canvasHeight = height;
         layout.canvasWidth = width;
@@ -329,6 +334,7 @@ public class RecordingSample implements RecordingEventHandler {
         } else {
             layout.regions = null;
         }
+        System.out.println("布局：" + layout);
         return RecordingSDKInstance.setVideoMixingLayout(mNativeHandle, layout);
     }
 
