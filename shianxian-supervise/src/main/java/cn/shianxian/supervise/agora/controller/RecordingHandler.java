@@ -44,7 +44,7 @@ public class RecordingHandler implements RecordingEventHandler {
         }
         RecordingConfig config = new RecordingConfig();
         // 设置是否启用合流模式
-        config.isMixingEnabled = true;
+        config.isMixingEnabled = false;
         // 设置为 AgoraCoreServices 存放的目录
         config.appliteDir = appliteDir;
         config.recordFileRootDir = recordFileRootDir;
@@ -72,7 +72,7 @@ public class RecordingHandler implements RecordingEventHandler {
         layout.canvasWidth = 950;
         layout.backgroundColor = "#23b9dc";
         layout.regionCount = 0;
-
+        log.info("画布布局...");
         return recording.setVideoMixingLayout(nativeHandle, layout);
     }
 
