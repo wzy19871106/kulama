@@ -46,7 +46,7 @@ public class RecordingHandler implements RecordingEventHandler {
         // 设置是否启用合流模式
         config.isMixingEnabled = false;
         // 合流模式下将一个音频录制文件和一个视频录制文件实时混合成一个既有音频也有视频的 MP4 文件
-        config.mixedVideoAudio = Common.MIXED_AV_CODEC_TYPE.MIXED_AV_CODEC_V2;
+//        config.mixedVideoAudio = Common.MIXED_AV_CODEC_TYPE.MIXED_AV_CODEC_V2;
         // 设置为 AgoraCoreServices 存放的目录
         config.appliteDir = appliteDir;
         // Recording_Dir 参数设置存放录制文件的绝对路径
@@ -59,9 +59,6 @@ public class RecordingHandler implements RecordingEventHandler {
         config.lowUdpPort = lowUdpPort;
         // 设置最高 UDP 端口
         config.highUdpPort = highUdpPort;
-        // 选择录制启动模式
-        config.triggerMode = 1;
-//        config.proxyServer = 1;
         this.config = config;
         log.info(System.getProperty("java.library.path"));
         boolean falg = recording.createChannel(appId, "", channel, uid, config, logLevel);
