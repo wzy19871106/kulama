@@ -163,52 +163,55 @@ public class SuperviseInfoMainController {
     @ApiImplicitParam(paramType = "query", name = "mainId", value = "监管业务id")
     public ResponseEntity<Result> downloadVideo(String mainId, HttpServletResponse response) {
         log.info("下载视频：{}", mainId);
-        File file = null;
         File folder = new File(recordFileRootDir + mainId);
-        File[] folderArr1 = folder.listFiles();
-        a:for (File f1 : folderArr1) {
-            File[] folderArr2 = f1.listFiles();
-            for (File f2 : folderArr2) {
-                File[] folderArr3 = f2.listFiles();
-                for (File f3 : folderArr3) {
-                    if (f3.getName().contains("mp4") || f3.getName().contains("MP4")) {
-                        file = f3;
-                        break a;
+        if (folder.exists() && !folder.isFile()) {
+            File file = null;
+            File[] folderArr1 = folder.listFiles();
+            a:for (File f1 : folderArr1) {
+                File[] folderArr2 = f1.listFiles();
+                for (File f2 : folderArr2) {
+                    File[] folderArr3 = f2.listFiles();
+                    for (File f3 : folderArr3) {
+                        if (f3.getName().contains("mp4") || f3.getName().contains("MP4")) {
+                            file = f3;
+                            break a;
+                        }
                     }
                 }
             }
-        }
-        // 清空输出流
-        response.reset();
-        response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", file.getName()));
-        response.setCharacterEncoding("UTF-8");
-        InputStream is = null;
-        OutputStream os = null;
-        try {
-            is = new BufferedInputStream(new FileInputStream(file));
-            os = new BufferedOutputStream(response.getOutputStream());
-            //输出文件
-            int bytes = 0;
-            byte[] bufferOut = new byte[1024];
-            while ((bytes = is.read(bufferOut)) != -1) {
-                os.write(bufferOut, 0, bytes);
-                os.flush();
-            }
-        } catch (IOException e) {
-            log.error("下载视频错误：{}，信息：{}", e, e.getMessage());
-        } finally {
-            if (is != null) {
-                try {
-                    is.close();
-                } catch (IOException e) {
-                    log.error("下载视频错误：{}，信息：{}", e, e.getMessage());
+
+            // 清空输出流
+            response.reset();
+            response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+            response.setCharacterEncoding("UTF-8");
+            InputStream is = null;
+            OutputStream os = null;
+            try {
+                is = new BufferedInputStream(new FileInputStream(file));
+                os = new BufferedOutputStream(response.getOutputStream());
+                //输出文件
+                int bytes = 0;
+                byte[] bufferOut = new byte[1024];
+                while ((bytes = is.read(bufferOut)) != -1) {
+                    os.write(bufferOut, 0, bytes);
+                    os.flush();
                 }
-            }
-            if (os != null) {
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    log.error("下载视频错误：{}，信息：{}", e, e.getMessage());
+            } catch (IOException e) {
+                log.error("下载视频错误：{}，信息：{}", e, e.getMessage());
+            } finally {
+                if (is != null) {
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        log.error("下载视频错误：{}，信息：{}", e, e.getMessage());
+                    }
+                }
+                if (os != null) {
+                    try {
+                        os.close();
+                    } catch (IOException e) {
+                        log.error("下载视频错误：{}，信息：{}", e, e.getMessage());
+                    }
                 }
             }
         }

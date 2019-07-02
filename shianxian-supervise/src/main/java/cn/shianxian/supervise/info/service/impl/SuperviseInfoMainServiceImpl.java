@@ -171,17 +171,19 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
 
     @Override
     public Result getVideoUrl(String mainId) {
-        String url = null;
+        String url = "";
         File folder = new File(recordFileRootDir + mainId);
-        File[] folderArr1 = folder.listFiles();
-        a:for (File f1 : folderArr1) {
-            File[] folderArr2 = f1.listFiles();
-            for (File f2 : folderArr2) {
-                File[] folderArr3 = f2.listFiles();
-                for (File f3 : folderArr3) {
-                    if (f3.getName().contains("mp4") || f3.getName().contains("MP4")) {
-                        url = f3.getAbsolutePath();
-                        break a;
+        if (folder.exists() && !folder.isFile()) {
+            File[] folderArr1 = folder.listFiles();
+            a:for (File f1 : folderArr1) {
+                File[] folderArr2 = f1.listFiles();
+                for (File f2 : folderArr2) {
+                    File[] folderArr3 = f2.listFiles();
+                    for (File f3 : folderArr3) {
+                        if (f3.getName().contains("mp4") || f3.getName().contains("MP4")) {
+                            url = f3.getAbsolutePath();
+                            break a;
+                        }
                     }
                 }
             }
