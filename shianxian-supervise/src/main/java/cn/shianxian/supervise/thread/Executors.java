@@ -11,11 +11,10 @@ public class Executors {
     public static ExecutorService pool = new ThreadPoolExecutor(
             5,
             200,
-            0L,
+            300,
             TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<Runnable>(1024),
+            new LinkedBlockingQueue<Runnable>(200),
             namedThreadFactory,
             new ThreadPoolExecutor.AbortPolicy());
-
 
 }
