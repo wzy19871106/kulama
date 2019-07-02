@@ -6,7 +6,7 @@ import java.util.concurrent.*;
 
 public class Executors {
 
-    private static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("demo-pool-%d").build();
+    private static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("record-pool-%d").build();
 
     public static ExecutorService pool = new ThreadPoolExecutor(
             5,
