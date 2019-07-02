@@ -141,4 +141,10 @@ public class SuperviseType {
     @Transient
     private String functionaryName;
 
+    /**
+     * 类型业务id
+     */
+    @Transient
+    private String mainId;
+
 }

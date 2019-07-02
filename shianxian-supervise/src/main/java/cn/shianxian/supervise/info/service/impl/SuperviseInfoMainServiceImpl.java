@@ -99,6 +99,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
         String mainId = UUIDGenerator.generatorUUID();
         for (SuperviseType superviseType : superviseTypeList) {
             if (flag) {
+                mainId = superviseType.getMainId();
                 superviseInfoMain.setMainId(mainId);
                 superviseInfoMain.setPlanTag(superviseType.getPlanTag());
                 NodeInfo nodeInfo = this.nodeInfoDao.selectByPrimaryKey(superviseType.getNodeTag());
