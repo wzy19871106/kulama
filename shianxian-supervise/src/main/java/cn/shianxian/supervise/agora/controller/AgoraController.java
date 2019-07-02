@@ -36,6 +36,8 @@ public class AgoraController {
         map.put("recordFileRootDir", "/data/1");
         map.put("lowUdpPort", "20000");
         map.put("highUdpPort", "50000");
+        map.put("androidUid", "50000");
+        map.put("pcUid", "50000");
 
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);

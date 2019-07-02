@@ -21,7 +21,10 @@ public class RecordingHandler implements RecordingEventHandler {
 
     public long nativeHandle;
 
-    public String channel;
+    private String channel;
+
+    private int androidUid;
+    private int pcUid;
 
 
     public RecordingHandler(RecordingSDK recording) {
@@ -38,6 +41,8 @@ public class RecordingHandler implements RecordingEventHandler {
         String recordFileRootDir = map.get("recordFileRootDir");
         int lowUdpPort = Integer.parseInt(map.get("lowUdpPort"));
         int highUdpPort = Integer.parseInt(map.get("highUdpPort"));
+        androidUid = Integer.parseInt(map.get("androidUid"));
+        pcUid = Integer.parseInt(map.get("pcUid"));
         int logLevel = 5;
 
         if (appId == null || channel == null || appliteDir == null) {
@@ -80,16 +85,18 @@ public class RecordingHandler implements RecordingEventHandler {
         layout.backgroundColor = "#000000";
         layout.regionCount = 2;
         Common.VideoMixingLayout.Region[] regions = new Common.VideoMixingLayout.Region[2];
+        // 安卓端
         Common.VideoMixingLayout.Region region1 = layout.new Region();
-        region1.uid = 44;
+        region1.uid = androidUid;
         region1.x = 0.0;
         region1.y = 0.0;
         region1.width = 1.0;
         region1.height = 1.0;
         region1.alpha = 1.0;
         region1.renderMode = 1;
+        // pc端
         Common.VideoMixingLayout.Region region2 = layout.new Region();
-        region2.uid = 123;
+        region2.uid = pcUid;
         region2.x = 0.0;
         region2.y = 0.0;
         region2.width = 0.0;
@@ -100,7 +107,6 @@ public class RecordingHandler implements RecordingEventHandler {
         regions[1] = region2;
         layout.regions = regions;
         log.info("画布布局...");
-
         return recording.setVideoMixingLayout(nativeHandle, layout);
     }
 
