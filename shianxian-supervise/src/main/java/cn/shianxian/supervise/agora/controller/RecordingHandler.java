@@ -79,13 +79,20 @@ public class RecordingHandler implements RecordingEventHandler {
         layout.canvasWidth = 950;
         layout.backgroundColor = "#23b9dc";
         layout.regionCount = 1;
-        Common.VideoMixingLayout.Region[] regions = new Common.VideoMixingLayout.Region[1];
+        Common.VideoMixingLayout.Region[] regions = new Common.VideoMixingLayout.Region[2];
         regions[0].uid = 44;
-        regions[0].x = 0;
-        regions[0].y = 0;
-        regions[0].width = 0;
-        regions[0].height = 0;
+        regions[0].x = 1;
+        regions[0].y = 1;
+        regions[0].width = 1;
+        regions[0].height = 1;
         regions[0].renderMode = 2;
+
+        regions[1].uid = 123;
+        regions[1].x = 0;
+        regions[1].y = 0;
+        regions[1].width = 0;
+        regions[1].height = 0;
+        regions[1].renderMode = 2;
         layout.regions = regions;
         log.info("画布布局...");
         return recording.setVideoMixingLayout(nativeHandle, layout);
