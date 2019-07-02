@@ -55,6 +55,7 @@ public class AgoraController {
             @ApiImplicitParam(paramType = "query", name = "pcUid", value = "pc端uid"),
     })
     public ResponseEntity<Result> start(@Valid AgoreConfig agoreConfig) throws Exception {
+        log.info("开始录制视频：{}", agoreConfig);
         agoreConfig.setAppId(appId);
         agoreConfig.setAppliteDir(appliteDir);
         agoreConfig.setRecordFileRootDir(recordFileRootDir);

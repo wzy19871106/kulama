@@ -36,6 +36,9 @@ public class RecordingHandler implements RecordingEventHandler {
         int uid = 0;
         int logLevel = 5;
 
+        androidUid = agoreConfig.getAndroidUid();
+        pcUid = agoreConfig.getPcUid();
+
         RecordingConfig config = new RecordingConfig();
         // 设置是否启用合流模式
         config.isMixingEnabled = true;
