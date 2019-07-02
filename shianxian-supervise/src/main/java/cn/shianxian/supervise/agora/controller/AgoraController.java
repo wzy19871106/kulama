@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.FutureTask;
 
 
 /**
@@ -43,18 +44,18 @@ public class AgoraController {
                 return nativeHandle;
             }
         };
-        callable.call();
-        return ResponseEntity.ok(Result.successMsg());
+        FutureTask<Long> task = new FutureTask<>(callable);
+        task.run();
+        return ResponseEntity.ok(Result.data(task.get()));
     }
 
 
-    @GetMapping("test2")
+    @GetMapping("stop")
     public ResponseEntity<Result> test2(long nativeHandle) {
         log.info("录制引擎：{}", nativeHandle);
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
-        handler.stopService(nativeHandle);
-        handler.unRegister();
+        handler.leaveChannel(nativeHandle);
         return ResponseEntity.ok(Result.successMsg());
     }
 
