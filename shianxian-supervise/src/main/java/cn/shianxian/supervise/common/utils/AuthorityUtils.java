@@ -23,17 +23,19 @@ public class AuthorityUtils {
         if (StringUtils.isNotBlank(roleAuthority)) {
             List<AuthorityDTO> authorityList = JSON.parseArray(roleAuthority, AuthorityDTO.class);
             for (AuthorityDTO a : authorityList) {
-                if (map.containsKey(a.getParentId())) {
-                    if (StringUtils.isNotBlank(a.getParentId())) {
-                        List<String> list = map.get(a.getParentId());
-                        list.add(a.getId().substring(a.getParentId().length()));
-                        map.put(a.getParentId(), list);
-                    }
-                } else {
-                    if (StringUtils.isNotBlank(a.getParentId())) {
-                        List<String> list = new ArrayList<>();
-                        list.add(a.getId().substring(a.getParentId().length()));
-                        map.put(a.getParentId(), list);
+                if (a.getId().contains("P")) {
+                    if (map.containsKey(a.getParentId())) {
+                        if (StringUtils.isNotBlank(a.getParentId())) {
+                            List<String> list = map.get(a.getParentId());
+                            list.add(a.getId().substring(a.getParentId().length()));
+                            map.put(a.getParentId(), list);
+                        }
+                    } else {
+                        if (StringUtils.isNotBlank(a.getParentId())) {
+                            List<String> list = new ArrayList<>();
+                            list.add(a.getId().substring(a.getParentId().length()));
+                            map.put(a.getParentId(), list);
+                        }
                     }
                 }
             }
