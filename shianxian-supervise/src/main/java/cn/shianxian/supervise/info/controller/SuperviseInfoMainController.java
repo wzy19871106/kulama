@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.*;
@@ -161,7 +162,7 @@ public class SuperviseInfoMainController {
     @GetMapping("downloadVideo")
     @ApiOperation(value = "下载视频", notes = "下载视频")
     @ApiImplicitParam(paramType = "query", name = "mainId", value = "监管业务id")
-    public ResponseEntity<Result> downloadVideo(String mainId, HttpServletResponse response) {
+    public ResponseEntity<Result> downloadVideo(String mainId, HttpServletResponse response, HttpServletRequest request) {
         log.info("下载视频：{}", mainId);
         File folder = new File(recordFileRootDir + mainId);
         if (folder.exists() && !folder.isFile()) {
@@ -179,10 +180,10 @@ public class SuperviseInfoMainController {
                     }
                 }
             }
-
             // 清空输出流
             response.reset();
             response.setHeader("Content-disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+            response.setHeader("Access-Control-Allow-Origin", "*");
             response.setCharacterEncoding("UTF-8");
             InputStream is = null;
             OutputStream os = null;
