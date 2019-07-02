@@ -20,8 +20,6 @@ public class RecordingHandler implements RecordingEventHandler {
 
     public long nativeHandle;
 
-    private String channel;
-
     private int androidUid;
     private int pcUid;
 
@@ -61,7 +59,7 @@ public class RecordingHandler implements RecordingEventHandler {
         this.config = config;
         log.info(System.getProperty("java.library.path"));
         log.info("录制参数：{}", agoreConfig);
-        boolean falg = recording.createChannel(agoreConfig.getAppId(), "", channel, uid, config, logLevel);
+        boolean falg = recording.createChannel(agoreConfig.getAppId(), "", agoreConfig.getChannel(), uid, config, logLevel);
         log.info("创建并让录制 App 加入频道，是否成功：{}", falg);
         log.info("录制引擎：{}", nativeHandle);
         log.info("开始录制...");
