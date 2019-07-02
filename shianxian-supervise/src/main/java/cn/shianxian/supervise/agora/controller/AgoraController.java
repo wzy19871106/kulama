@@ -47,6 +47,13 @@ public class AgoraController {
     @Value("${agora.highUdpPort}")
     private int highUdpPort;
 
+
+    /**
+     * 开始录制
+     * @param agoreConfig
+     * @return
+     * @throws Exception
+     */
     @GetMapping("start")
     @ApiOperation(value = "开始录制", notes = "开始录制")
     @ApiImplicitParams({
@@ -77,11 +84,34 @@ public class AgoraController {
         };
         FutureTask<Long> task = new FutureTask<>(callable);
         Executors.pool.execute(task);
-        Thread.sleep(2000);
+        // 睡眠一秒，获取录制引擎
+        Thread.sleep(1000);
         return ResponseEntity.ok(Result.data(handler.nativeHandle));
     }
 
 
+    /**
+     * 暂停录制
+     * @param nativeHandle
+     * @return
+     */
+    @GetMapping("pause")
+    @ApiOperation(value = "暂停录制", notes = "暂停录制")
+    @ApiImplicitParam(paramType = "query", name = "nativeHandle", value = "录制引擎")
+    public ResponseEntity<Result> pause(long nativeHandle) {
+        log.info("录制引擎：{}", nativeHandle);
+        RecordingSDK recordingSdk = new RecordingSDK();
+        RecordingHandler handler = new RecordingHandler(recordingSdk);
+        handler.stopService(nativeHandle);
+        return ResponseEntity.ok(Result.successMsg());
+    }
+
+
+    /**
+     * 停止录制
+     * @param nativeHandle
+     * @return
+     */
     @GetMapping("stop")
     @ApiOperation(value = "停止录制", notes = "停止录制")
     @ApiImplicitParam(paramType = "query", name = "nativeHandle", value = "录制引擎")
@@ -89,6 +119,7 @@ public class AgoraController {
         log.info("录制引擎：{}", nativeHandle);
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
+        handler.stopService(nativeHandle);
         handler.leaveChannel(nativeHandle);
         return ResponseEntity.ok(Result.successMsg());
     }

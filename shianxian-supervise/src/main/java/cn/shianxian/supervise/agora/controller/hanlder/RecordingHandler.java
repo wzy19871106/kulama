@@ -8,7 +8,6 @@ import io.agora.recording.common.Common.AudioFrame;
 import io.agora.recording.common.Common.AudioVolumeInfo;
 import io.agora.recording.common.Common.VideoFrame;
 import io.agora.recording.common.RecordingConfig;
-import io.agora.recording.common.RecordingEngineProperties;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -55,13 +54,17 @@ public class RecordingHandler implements RecordingEventHandler {
         config.channelProfile = Common.CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING;
         config.mixedVideoAudio = Common.MIXED_AV_CODEC_TYPE.MIXED_AV_CODEC_V2;
         config.mixResolution = "960,720,15,1820";
+        // 录制启动模式 0：自动，1：手动
+        config.triggerMode = 1;
 
         this.config = config;
         log.info(System.getProperty("java.library.path"));
         log.info("录制参数：{}", agoreConfig);
         boolean falg = recording.createChannel(agoreConfig.getAppId(), "", agoreConfig.getChannel(), uid, config, logLevel);
         log.info("创建并让录制 App 加入频道，是否成功：{}", falg);
+        this.unRegister();
         log.info("录制引擎：{}", nativeHandle);
+        this.startService(nativeHandle);
         log.info("开始录制...");
         return nativeHandle;
     }
@@ -110,18 +113,14 @@ public class RecordingHandler implements RecordingEventHandler {
     }
 
     public int stopService(long nativeHandle) {
-        log.info("结束录制：录制引擎{}", nativeHandle);
+        log.info("暂停录制：录制引擎{}", nativeHandle);
         return recording.stopService(nativeHandle);
     }
 
-    public RecordingEngineProperties getProperties(long nativeHandle) {
-        return recording.getProperties(nativeHandle);
-    }
-
     public void unRegister() {
+        log.info("删除以前注册的观测器");
         recording.unRegisterOberserver(this);
     }
-
 
     public void nativeObjectRef(long nativeHandle) {
         this.nativeHandle = nativeHandle;
