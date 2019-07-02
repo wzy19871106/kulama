@@ -89,11 +89,11 @@ public class RecordingHandler implements RecordingEventHandler {
         region1.renderMode = 2;
         Common.VideoMixingLayout.Region region2 = layout.new Region();
         region2.uid = 123;
-        region2.x = 0.0;
-        region2.y = 0.0;
-        region2.width = 0.0;
-        region2.height = 0.0;
-        region2.alpha = 0.0;
+        region2.x = 0.012;
+        region2.y = 0.861063;
+        region2.width = 0.235;
+        region2.height = 0.132188;
+        region2.alpha = 1.0;
         region2.renderMode = 2;
         regions[0] = region1;
         regions[1] = region2;
