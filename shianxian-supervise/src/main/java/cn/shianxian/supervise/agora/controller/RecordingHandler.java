@@ -85,6 +85,7 @@ public class RecordingHandler implements RecordingEventHandler {
         regions[0].y = 1;
         regions[0].width = 1;
         regions[0].height = 1;
+        regions[0].alpha = 1;
         regions[0].renderMode = 2;
 
         regions[1].uid = 123;
@@ -92,6 +93,7 @@ public class RecordingHandler implements RecordingEventHandler {
         regions[1].y = 0;
         regions[1].width = 0;
         regions[1].height = 0;
+        regions[1].alpha = 0;
         regions[1].renderMode = 2;
         layout.regions = regions;
         log.info("画布布局...");
