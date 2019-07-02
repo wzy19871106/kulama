@@ -60,12 +60,12 @@ public class RecordingHandler implements RecordingEventHandler {
         this.config = config;
         log.info(System.getProperty("java.library.path"));
         log.info("录制参数：{}", agoreConfig);
+        this.startService(nativeHandle);
+        log.info("录制引擎：{}", nativeHandle);
+        log.info("开始录制...");
         boolean falg = recording.createChannel(agoreConfig.getAppId(), "", agoreConfig.getChannel(), uid, config, logLevel);
         log.info("创建并让录制 App 加入频道，是否成功：{}", falg);
         this.unRegister();
-        log.info("录制引擎：{}", nativeHandle);
-        this.startService(nativeHandle);
-        log.info("开始录制...");
         return nativeHandle;
     }
 
