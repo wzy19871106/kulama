@@ -91,18 +91,26 @@ public class AgoraController {
 
 
     /**
-     * 暂停录制
+     * 启动录制、暂停录制
      * @param nativeHandle
      * @return
      */
     @GetMapping("pause")
-    @ApiOperation(value = "暂停录制", notes = "暂停录制")
-    @ApiImplicitParam(paramType = "query", name = "nativeHandle", value = "录制引擎")
-    public ResponseEntity<Result> pause(long nativeHandle) {
+    @ApiOperation(value = "启动录制、暂停录制", notes = "启动录制、暂停录制")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nativeHandle", value = "录制引擎"),
+            @ApiImplicitParam(paramType = "query", name = "type", value = "[1:启动录制，2暂停录制]"),
+    })
+
+    public ResponseEntity<Result> pause(long nativeHandle, int type) {
         log.info("录制引擎：{}", nativeHandle);
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
-        handler.stopService(nativeHandle);
+        if (1 == type) {
+            handler.startService(nativeHandle);
+        } else if (2 == type) {
+            handler.stopService(nativeHandle);
+        }
         return ResponseEntity.ok(Result.successMsg());
     }
 
