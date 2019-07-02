@@ -70,8 +70,8 @@ public class RecordingHandler implements RecordingEventHandler {
     private int setVideoMixingLayout() {
         Common ei = new Common();
         Common.VideoMixingLayout layout = ei.new VideoMixingLayout();
-        layout.canvasHeight = 700;
-        layout.canvasWidth = 950;
+        layout.canvasHeight = 720;
+        layout.canvasWidth = 960;
         layout.backgroundColor = "#000000";
         layout.regionCount = 2;
         Common.VideoMixingLayout.Region[] regions = new Common.VideoMixingLayout.Region[2];
