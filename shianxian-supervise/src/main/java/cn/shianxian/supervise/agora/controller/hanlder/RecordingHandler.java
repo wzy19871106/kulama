@@ -152,7 +152,10 @@ public class RecordingHandler implements RecordingEventHandler {
     @Override
     public void onUserOffline(long uid, int reason) {
         log.info("其他用户离开当前频道，uid：{}，reason：{}", uid, reason);
-        this.setVideoMixingLayout();
+        log.info("停止录制...");
+        this.stopService(nativeHandle);
+        log.info("录制APP离开频道...");
+        this.leaveChannel(nativeHandle);
     }
 
     @Override
