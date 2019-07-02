@@ -110,7 +110,7 @@ public class RecordingHandler implements RecordingEventHandler {
     }
 
     public int stopService(long nativeHandle) {
-        log.info("结束录制：{}", nativeHandle);
+        log.info("结束录制：录制引擎{}", nativeHandle);
         return recording.stopService(nativeHandle);
     }
 

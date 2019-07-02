@@ -77,7 +77,8 @@ public class AgoraController {
         };
         FutureTask<Long> task = new FutureTask<>(callable);
         Executors.pool.execute(task);
-        return ResponseEntity.ok(Result.data(1));
+        Thread.sleep(2000);
+        return ResponseEntity.ok(Result.data(handler.nativeHandle));
     }
 
 
