@@ -3,6 +3,7 @@ package cn.shianxian.supervise.agora.controller;
 import cn.shianxian.supervise.agora.controller.hanlder.RecordingHandler;
 import cn.shianxian.supervise.agora.controller.pojo.AgoreConfig;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.thread.Executors;
 import io.agora.recording.RecordingSDK;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -75,8 +76,8 @@ public class AgoraController {
             }
         };
         FutureTask<Long> task = new FutureTask<>(callable);
-        task.run();
-        return ResponseEntity.ok(Result.data(task.get()));
+        Executors.pool.execute(task);
+        return ResponseEntity.ok(Result.data(1));
     }
 
 
