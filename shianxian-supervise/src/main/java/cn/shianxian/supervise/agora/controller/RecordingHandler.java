@@ -60,6 +60,7 @@ public class RecordingHandler implements RecordingEventHandler {
         config.highUdpPort = highUdpPort;
         // 直播模式
         config.channelProfile = Common.CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING;
+        config.mixedVideoAudio = Common.MIXED_AV_CODEC_TYPE.MIXED_AV_CODEC_V2;
 
         this.config = config;
         log.info(System.getProperty("java.library.path"));
@@ -128,13 +129,13 @@ public class RecordingHandler implements RecordingEventHandler {
     @Override
     public void onJoinChannelSuccess(String channelId, long uid) {
         log.info("录制 App 加入频道，channelId：{}，uid：{}", channelId, uid);
-        setVideoMixingLayout();
+        this.setVideoMixingLayout();
     }
 
     @Override
     public void onUserOffline(long uid, int reason) {
         log.info("其他用户离开当前频道，uid：{}，reason：{}", uid, reason);
-        setVideoMixingLayout();
+        this.setVideoMixingLayout();
     }
 
     @Override
