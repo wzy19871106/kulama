@@ -58,10 +58,10 @@ public class AgoraController {
         log.info("开始录制视频：{}", agoreConfig);
         agoreConfig.setAppId(appId);
         agoreConfig.setAppliteDir(appliteDir);
-        agoreConfig.setRecordFileRootDir(recordFileRootDir);
+        agoreConfig.setRecordFileRootDir(recordFileRootDir + agoreConfig.getMainId());
         agoreConfig.setLowUdpPort(lowUdpPort);
         agoreConfig.setHighUdpPort(highUdpPort);
-        File file = new File(recordFileRootDir + agoreConfig.getMainId());
+        File file = new File(agoreConfig.getRecordFileRootDir());
         if (!file.exists()) {
             file.mkdirs();
         }
