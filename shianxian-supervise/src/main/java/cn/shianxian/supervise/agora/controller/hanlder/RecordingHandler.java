@@ -1,5 +1,6 @@
-package cn.shianxian.supervise.agora.controller;
+package cn.shianxian.supervise.agora.controller.hanlder;
 
+import cn.shianxian.supervise.agora.controller.pojo.AgoreConfig;
 import io.agora.recording.RecordingEventHandler;
 import io.agora.recording.RecordingSDK;
 import io.agora.recording.common.Common;
@@ -9,8 +10,6 @@ import io.agora.recording.common.Common.VideoFrame;
 import io.agora.recording.common.RecordingConfig;
 import io.agora.recording.common.RecordingEngineProperties;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Map;
 
 @Slf4j
 public class RecordingHandler implements RecordingEventHandler {
@@ -33,36 +32,24 @@ public class RecordingHandler implements RecordingEventHandler {
     }
 
 
-    public long execute(Map<String, String> map) {
-        String appId = map.get("appId");
+    public long execute(AgoreConfig agoreConfig) {
         int uid = 0;
-        channel = map.get("channel");
-        String appliteDir = map.get("appliteDir");
-        String recordFileRootDir = map.get("recordFileRootDir");
-        int lowUdpPort = Integer.parseInt(map.get("lowUdpPort"));
-        int highUdpPort = Integer.parseInt(map.get("highUdpPort"));
-        androidUid = Integer.parseInt(map.get("androidUid"));
-        pcUid = Integer.parseInt(map.get("pcUid"));
         int logLevel = 5;
 
-        if (appId == null || channel == null || appliteDir == null) {
-            log.warn("缺少参数，无法录制");
-            return nativeHandle;
-        }
         RecordingConfig config = new RecordingConfig();
         // 设置是否启用合流模式
         config.isMixingEnabled = true;
         // 设置为 AgoraCoreServices 存放的目录
-        config.appliteDir = appliteDir;
-        config.recordFileRootDir = recordFileRootDir;
+        config.appliteDir = agoreConfig.getAppliteDir();
+        config.recordFileRootDir = agoreConfig.getRecordFileRootDir();
         // 设置视频解码格式
         config.decodeVideo = Common.VIDEO_FORMAT_TYPE.VIDEO_FORMAT_DEFAULT_TYPE;
         // 设置音频解码格式
         config.decodeAudio = Common.AUDIO_FORMAT_TYPE.AUDIO_FORMAT_DEFAULT_TYPE;
         // 设置最低 UDP 端口
-        config.lowUdpPort = lowUdpPort;
+        config.lowUdpPort = agoreConfig.getLowUdpPort();
         // 设置最高 UDP 端口
-        config.highUdpPort = highUdpPort;
+        config.highUdpPort = agoreConfig.getHighUdpPort();
         // 直播模式
         config.channelProfile = Common.CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING;
         config.mixedVideoAudio = Common.MIXED_AV_CODEC_TYPE.MIXED_AV_CODEC_V2;
@@ -70,7 +57,7 @@ public class RecordingHandler implements RecordingEventHandler {
 
         this.config = config;
         log.info(System.getProperty("java.library.path"));
-        boolean falg = recording.createChannel(appId, "", channel, uid, config, logLevel);
+        boolean falg = recording.createChannel(agoreConfig.getAppId(), "", channel, uid, config, logLevel);
         log.info("创建并让录制 App 加入频道，是否成功：{}", falg);
         log.info("录制引擎：{}", nativeHandle);
         log.info("开始录制...");

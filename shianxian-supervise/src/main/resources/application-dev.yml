@@ -76,10 +76,10 @@ spring:
         num-tests-per-eviction-run: 1024
 
 # 虹软
-agora:
+arcsoft:
   appId: 984NfMTD6XTdtHeqYsQca6Up7NtEcLAqVmG86GW9N7dr
   sdkKey: CSaQxfj6oSJ9dsMNYuj3mxbZGTFrfRPB5RRfBoLXjVjN
-  path: /data/agora/
+  path: /data/arcsoft/
   libPath: /usr/local/cloud/supervise/so
 
 # 百度
@@ -98,3 +98,11 @@ logging:
   level:
     root: INFO
   config: classpath:log/logback-spring-dev.xml
+
+# 声网
+agora:
+  appId: b676a4deb7964ee480fc51c72554c97e
+  appliteDir: /usr/local/cloud/supervise/agora/appliteDir/
+  recordFileRootDir: /data/agora/
+  lowUdpPort: 20000
+  highUdpPort: 50000

@@ -44,19 +44,19 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     private PicInfoDao picInfoDao;
 
 
-    @Value("${agora.appId}")
+    @Value("${arcsoft.appId}")
     private String appId;
 
 
-    @Value("${agora.sdkKey}")
+    @Value("${arcsoft.sdkKey}")
     private String sdkKey;
 
 
-    @Value("${agora.path}")
+    @Value("${arcsoft.path}")
     private String path;
 
 
-    @Value("${agora.libPath}")
+    @Value("${arcsoft.libPath}")
     private String libPath;
 
 

@@ -1,50 +1,75 @@
 package cn.shianxian.supervise.agora.controller;
 
+import cn.shianxian.supervise.agora.controller.hanlder.RecordingHandler;
+import cn.shianxian.supervise.agora.controller.pojo.AgoreConfig;
 import cn.shianxian.supervise.common.pojo.Result;
 import io.agora.recording.RecordingSDK;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
+import javax.validation.Valid;
+import java.io.File;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.FutureTask;
 
 
 /**
- * 虹软控制器
+ * 声网控制器
  */
 @RestController
 @RequestMapping("agora")
-@Api(description = "测试控制器")
+@Api(description = "声网控制器")
 @Slf4j
 public class AgoraController {
 
 
+    @Value("${agora.appId}")
+    private String appId;
 
+    @Value("${agora.appliteDir}")
+    private String appliteDir;
 
-    @GetMapping("record")
-    public ResponseEntity<Result> record(String channel, String mainIds) throws Exception {
-        Map<String, String> map = new ConcurrentHashMap<>();
-        map.put("appId", "b676a4deb7964ee480fc51c72554c97e");
-        map.put("channel", channel);
-        map.put("appliteDir", "/usr/local/cloud/supervise/agora/Agora_Recording_SDK_for_Linux_FULL/bin");
-        map.put("recordFileRootDir", "/data/1");
-        map.put("lowUdpPort", "20000");
-        map.put("highUdpPort", "50000");
-        map.put("androidUid", "50000");
-        map.put("pcUid", "50000");
+    @Value("${agora.recordFileRootDir}")
+    private String recordFileRootDir;
 
+    @Value("${agora.lowUdpPort}")
+    private int lowUdpPort;
+
+    @Value("${agora.highUdpPort}")
+    private int highUdpPort;
+
+    @GetMapping("start")
+    @ApiOperation(value = "开始录制", notes = "开始录制")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "mainId", value = "监管业务id"),
+            @ApiImplicitParam(paramType = "query", name = "channel", value = "频道号"),
+            @ApiImplicitParam(paramType = "query", name = "androidUid", value = "安卓uid"),
+            @ApiImplicitParam(paramType = "query", name = "pcUid", value = "pc端uid"),
+    })
+    public ResponseEntity<Result> start(@Valid AgoreConfig agoreConfig) throws Exception {
+        agoreConfig.setAppId(appId);
+        agoreConfig.setAppliteDir(appliteDir);
+        agoreConfig.setRecordFileRootDir(recordFileRootDir);
+        agoreConfig.setLowUdpPort(lowUdpPort);
+        agoreConfig.setHighUdpPort(highUdpPort);
+        File file = new File(recordFileRootDir + agoreConfig.getMainId());
+        if (!file.exists()) {
+            file.mkdirs();
+        }
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
         Callable<Long> callable = new Callable<Long>() {
             @Override
             public Long call() {
-                long nativeHandle = handler.execute(map);
+                long nativeHandle = handler.execute(agoreConfig);
                 return nativeHandle;
             }
         };
@@ -55,14 +80,15 @@ public class AgoraController {
 
 
     @GetMapping("stop")
-    public ResponseEntity<Result> test2(long nativeHandle) {
+    @ApiOperation(value = "停止录制", notes = "停止录制")
+    @ApiImplicitParam(paramType = "query", name = "nativeHandle", value = "录制引擎")
+    public ResponseEntity<Result> stop(long nativeHandle) {
         log.info("录制引擎：{}", nativeHandle);
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
         handler.leaveChannel(nativeHandle);
         return ResponseEntity.ok(Result.successMsg());
     }
-
 
 
 }
