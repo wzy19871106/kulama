@@ -21,6 +21,8 @@ public class RecordingHandler implements RecordingEventHandler {
 
     public long nativeHandle;
 
+    public String channel;
+
 
     public RecordingHandler(RecordingSDK recording) {
         this.recording = recording;
@@ -31,7 +33,7 @@ public class RecordingHandler implements RecordingEventHandler {
     public long execute(Map<String, String> map) {
         String appId = map.get("appId");
         int uid = 0;
-        String channel = map.get("channel");
+        channel = map.get("channel");
         String appliteDir = map.get("appliteDir");
         String recordFileRootDir = map.get("recordFileRootDir");
         int lowUdpPort = Integer.parseInt(map.get("lowUdpPort"));
@@ -102,6 +104,7 @@ public class RecordingHandler implements RecordingEventHandler {
 
     public void nativeObjectRef(long nativeHandle) {
         this.nativeHandle = nativeHandle;
+        AgoraController.map.put(channel, nativeHandle);
         log.info("开始获取录制引擎，nativeHandle：{}", nativeHandle);
     }
 
