@@ -97,6 +97,11 @@ public class SuperviseInfoVO {
     private String superviseTeamName;
 
     /**
+     * 监管队伍人员名称
+     */
+    private String superviserName;
+
+    /**
      * 分数
      */
     private String score;
