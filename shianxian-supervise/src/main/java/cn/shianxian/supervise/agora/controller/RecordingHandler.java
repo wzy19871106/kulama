@@ -61,6 +61,7 @@ public class RecordingHandler implements RecordingEventHandler {
         // 直播模式
         config.channelProfile = Common.CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING;
         config.mixedVideoAudio = Common.MIXED_AV_CODEC_TYPE.MIXED_AV_CODEC_V2;
+        config.mixResolution = "360,640,15,500";
 
         this.config = config;
         log.info(System.getProperty("java.library.path"));
