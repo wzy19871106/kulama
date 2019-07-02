@@ -71,7 +71,7 @@ public class RecordingHandler implements RecordingEventHandler {
         layout.canvasHeight = 700;
         layout.canvasWidth = 950;
         layout.backgroundColor = "#23b9dc";
-        layout.regionCount = 1;
+        layout.regionCount = 0;
         log.info("画布布局...");
         return recording.setVideoMixingLayout(nativeHandle, layout);
     }
