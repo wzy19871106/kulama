@@ -18,9 +18,11 @@ import cn.shianxian.supervise.sys.pojo.SuperviseResult;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import cn.shianxian.supervise.thread.UserThreadLocal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -40,6 +42,11 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
     @Autowired
     private NodeInfoDao nodeInfoDao;
 
+    @Value("${agora.recordFileRootDir}")
+    private String recordFileRootDir;
+
+    @Value("${upload.url}")
+    private String uploadUrl;
 
     @Override
     public Result selectSuperviseInfoByNodePlan(String nodeTag, Pages pages) {
@@ -160,4 +167,27 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
         }
         return Result.successMsg();
     }
+
+
+    @Override
+    public Result getVideoUrl(String mainId) {
+        String url = null;
+        File folder = new File(recordFileRootDir + mainId);
+        File[] folderArr1 = folder.listFiles();
+        a:for (File f1 : folderArr1) {
+            File[] folderArr2 = f1.listFiles();
+            for (File f2 : folderArr2) {
+                File[] folderArr3 = f2.listFiles();
+                for (File f3 : folderArr3) {
+                    if (f3.getName().contains("mp4") || f3.getName().contains("MP4")) {
+                        url = f3.getAbsolutePath();
+                        break a;
+                    }
+                }
+            }
+        }
+        return Result.data(url.replace("/data/", uploadUrl));
+    }
+
+
 }

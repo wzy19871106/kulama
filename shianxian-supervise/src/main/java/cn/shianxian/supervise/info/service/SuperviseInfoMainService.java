@@ -81,4 +81,12 @@ public interface SuperviseInfoMainService {
      * @return
      */
     Result saveSuperviseInfo(List<SuperviseType> superviseTypeList);
+
+
+    /**
+     * 获取播放视频url
+     * @param mainId
+     * @return
+     */
+    Result getVideoUrl(String mainId);
 }

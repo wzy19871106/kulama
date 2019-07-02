@@ -103,6 +103,6 @@ logging:
 agora:
   appId: b676a4deb7964ee480fc51c72554c97e
   appliteDir: /usr/local/cloud/supervise/agora/appliteDir/
-  recordFileRootDir: /data/agora/
+  recordFileRootDir: D:/m/agora/
   lowUdpPort: 20000
   highUdpPort: 50000

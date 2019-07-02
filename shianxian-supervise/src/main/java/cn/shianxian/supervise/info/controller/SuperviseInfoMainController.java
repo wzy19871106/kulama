@@ -132,4 +132,20 @@ public class SuperviseInfoMainController {
         return ResponseEntity.ok(result);
     }
 
+
+    /**
+     * 获取播放视频url
+     * @return
+     */
+    @GetMapping("getVideoUrl")
+    @ApiOperation(value = "获取播放视频url", notes = "获取播放视频url")
+    @ApiImplicitParam(paramType = "query", name = "mainId", value = "监管业务id")
+    public ResponseEntity<Result> getVideoUrl(String mainId) {
+        log.info("获取播放视频url：{}", mainId);
+        Result result = this.superviseInfoMainService.getVideoUrl(mainId);
+        return ResponseEntity.ok(result);
+    }
+
+
+
 }
