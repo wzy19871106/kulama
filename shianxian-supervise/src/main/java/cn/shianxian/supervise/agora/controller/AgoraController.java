@@ -25,7 +25,6 @@ import java.util.concurrent.FutureTask;
 public class AgoraController {
 
 
-    public static Map<String, Long> map = new ConcurrentHashMap<>();
 
 
     @GetMapping("record")
@@ -49,10 +48,7 @@ public class AgoraController {
         };
         FutureTask<Long> task = new FutureTask<>(callable);
         task.run();
-        String s = map.get(channel);
-        log.info("录制引擎：{}", s);
-        map.remove(channel);
-        return ResponseEntity.ok(Result.data(s));
+        return ResponseEntity.ok(Result.data(task.get()));
     }
 
 

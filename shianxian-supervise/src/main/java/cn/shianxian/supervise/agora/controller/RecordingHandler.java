@@ -46,7 +46,7 @@ public class RecordingHandler implements RecordingEventHandler {
         }
         RecordingConfig config = new RecordingConfig();
         // 设置是否启用合流模式
-        config.isMixingEnabled = false;
+        config.isMixingEnabled = true;
         // 设置为 AgoraCoreServices 存放的目录
         config.appliteDir = appliteDir;
         config.recordFileRootDir = recordFileRootDir;
@@ -58,6 +58,9 @@ public class RecordingHandler implements RecordingEventHandler {
         config.lowUdpPort = lowUdpPort;
         // 设置最高 UDP 端口
         config.highUdpPort = highUdpPort;
+        // 直播模式
+        config.channelProfile = Common.CHANNEL_PROFILE_TYPE.CHANNEL_PROFILE_LIVE_BROADCASTING;
+
         this.config = config;
         log.info(System.getProperty("java.library.path"));
         boolean falg = recording.createChannel(appId, "", channel, uid, config, logLevel);
@@ -104,7 +107,6 @@ public class RecordingHandler implements RecordingEventHandler {
 
     public void nativeObjectRef(long nativeHandle) {
         this.nativeHandle = nativeHandle;
-        AgoraController.map.put(channel, nativeHandle);
         log.info("开始获取录制引擎，nativeHandle：{}", nativeHandle);
     }
 
