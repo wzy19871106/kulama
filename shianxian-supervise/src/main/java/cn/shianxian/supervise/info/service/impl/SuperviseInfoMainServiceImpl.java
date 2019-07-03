@@ -180,7 +180,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 for (File f2 : folderArr2) {
                     File[] folderArr3 = f2.listFiles();
                     for (File f3 : folderArr3) {
-                        if (f3.getName().contains("mp4") || f3.getName().contains("MP4")) {
+                        if (f3.getName().indexOf("mp4") != -1 || f3.getName().indexOf("MP4") != -1) {
                             url = f3.getAbsolutePath();
                             break a;
                         }
