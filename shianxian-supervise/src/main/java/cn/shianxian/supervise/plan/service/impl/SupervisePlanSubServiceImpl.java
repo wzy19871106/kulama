@@ -1,11 +1,15 @@
 package cn.shianxian.supervise.plan.service.impl;
 
+import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.exception.CommonException;
 import cn.shianxian.supervise.plan.dao.SupervisePlanSubDao;
 import cn.shianxian.supervise.plan.pojo.SupervisePlanSub;
 import cn.shianxian.supervise.plan.service.SupervisePlanSubService;
+import cn.shianxian.supervise.sys.dao.NodeInfoDao;
+import cn.shianxian.supervise.sys.pojo.NodeInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -24,12 +29,25 @@ public class SupervisePlanSubServiceImpl implements SupervisePlanSubService {
     @Autowired
     private SupervisePlanSubDao supervisePlanSubDao;
 
+    
+    @Autowired
+    private NodeInfoDao nodeInfoDao;
+    
 
     @Transactional
     @Override
     public Result saveOrUpdateSupervisePlanSub(SupervisePlanSub supervisePlanSub) {
         if (null == supervisePlanSub.getIds()) {
-            this.supervisePlanSubDao.insertSupervisePlanSub(supervisePlanSub);
+            List<String> nodeTagList = supervisePlanSub.getNodeTagList();
+            for (String nodeTag : nodeTagList) {
+                NodeInfo nodeInfo = this.nodeInfoDao.selectByPrimaryKey(nodeTag);
+                if (!Optional.ofNullable(nodeInfo).isPresent()) {
+                    throw new CommonException(Constants.CONFLICT, "节点不存在！");
+                }
+                supervisePlanSub.setNodeTag(nodeTag);
+                supervisePlanSub.setNodeName(nodeInfo.getNodeName());
+                this.supervisePlanSubDao.insertSupervisePlanSub(supervisePlanSub);
+            }
         } else {
             this.supervisePlanSubDao.updateSupervisePlanSub(supervisePlanSub);
         }

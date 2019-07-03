@@ -3,9 +3,14 @@ package cn.shianxian.supervise.plan.pojo;
 import cn.shianxian.supervise.common.pojo.BasePojo;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 计划任务子表
@@ -88,4 +93,11 @@ public class SupervisePlanSub extends BasePojo {
      */
     @Transient
     private String planName;
+
+    /**
+     * 企业id集合
+     */
+    @Transient
+    private List<String> nodeTagList;
+
 }
