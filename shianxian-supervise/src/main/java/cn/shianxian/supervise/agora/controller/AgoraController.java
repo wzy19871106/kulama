@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,6 +65,11 @@ public class AgoraController {
     })
     public ResponseEntity<Result> start(@Valid AgoreConfig agoreConfig) throws Exception {
         log.info("开始录制视频：{}", agoreConfig);
+        int poolSize = Executors.pool.getPoolSize();
+        log.info("线程池当前的线程数：{}", poolSize);
+        if (8 >= poolSize) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("服务器正忙，不可录制！ "));
+        }
         agoreConfig.setAppId(appId);
         agoreConfig.setAppliteDir(appliteDir);
         agoreConfig.setRecordFileRootDir(recordFileRootDir + agoreConfig.getMainId());
@@ -75,12 +81,9 @@ public class AgoraController {
         }
         RecordingSDK recordingSdk = new RecordingSDK();
         RecordingHandler handler = new RecordingHandler(recordingSdk);
-        Callable<Long> callable = new Callable<Long>() {
-            @Override
-            public Long call() {
-                long nativeHandle = handler.execute(agoreConfig);
-                return nativeHandle;
-            }
+        Callable<Long> callable = () -> {
+            long nativeHandle = handler.execute(agoreConfig);
+            return nativeHandle;
         };
         FutureTask<Long> task = new FutureTask<>(callable);
         Executors.pool.execute(task);
@@ -129,6 +132,7 @@ public class AgoraController {
         RecordingHandler handler = new RecordingHandler(recordingSdk);
         handler.stopService(nativeHandle);
         handler.leaveChannel(nativeHandle);
+        Executors.pool.shutdown();
         return ResponseEntity.ok(Result.successMsg());
     }
 

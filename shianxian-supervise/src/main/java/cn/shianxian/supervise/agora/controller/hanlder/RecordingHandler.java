@@ -13,14 +13,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RecordingHandler implements RecordingEventHandler {
 
-    private RecordingConfig config = null;
+    private volatile RecordingConfig config = null;
 
-    private RecordingSDK recording = null;
+    private volatile RecordingSDK recording = null;
 
-    public long nativeHandle;
+    public volatile long nativeHandle;
 
-    private int androidUid;
-    private int pcUid;
+    private volatile int androidUid;
+    private volatile int pcUid;
 
 
     public RecordingHandler(RecordingSDK recording) {

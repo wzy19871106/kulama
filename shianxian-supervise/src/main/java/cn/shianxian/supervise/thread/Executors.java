@@ -2,18 +2,21 @@ package cn.shianxian.supervise.thread;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
-import java.util.concurrent.*;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Executors {
 
-    private static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("record-pool-%d").build();
+    private volatile static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("record-pool-%d").build();
 
-    public static ExecutorService pool = new ThreadPoolExecutor(
-            5,
-            200,
+    public volatile static ThreadPoolExecutor pool = new ThreadPoolExecutor(
+            8,
+            10,
             300,
             TimeUnit.MILLISECONDS,
-            new LinkedBlockingQueue<Runnable>(200),
+            new LinkedBlockingQueue<>(50),
             namedThreadFactory,
             new ThreadPoolExecutor.AbortPolicy());
 
