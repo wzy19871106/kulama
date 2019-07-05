@@ -14,7 +14,7 @@ public class Executors {
     public static ThreadPoolExecutor pool = new ThreadPoolExecutor(
             8,
             10,
-            300,
+            3000,
             TimeUnit.MILLISECONDS,
             new LinkedBlockingQueue<>(50),
             namedThreadFactory,
