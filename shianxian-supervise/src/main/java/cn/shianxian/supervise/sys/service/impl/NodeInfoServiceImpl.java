@@ -71,17 +71,8 @@ public class NodeInfoServiceImpl implements NodeInfoService {
 
     @Override
     public Result selectNodeInfo(NodeInfo nodeInfo, Pages pages) {
-        List<NodeInfo> nodeInfos = new ArrayList<>();
-        if (StringUtils.isNotBlank(nodeInfo.getNodeTag())) {
-            nodeInfos = this.nodeInfoDao.selectNodeInfoById(nodeInfo.getNodeTag());
-        } else if (null != nodeInfo.getNodeTag() &&
-                null != nodeInfo.getNodeName() &&
-                null != nodeInfo.getIndustryTag() &&
-                null != nodeInfo.getUserDataUsedAuthoritySet()) {
-            List<List<?>> list = this.nodeInfoDao.selectNodeInfoByLike(nodeInfo, pages);
-            return Result.data((Long) list.get(2).get(0), list.get(0));
-        }
-        return Result.data((long) nodeInfos.size(), nodeInfos);
+        List<List<?>> list = this.nodeInfoDao.selectNodeInfoByLike(nodeInfo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
     }
 
 
