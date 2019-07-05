@@ -61,7 +61,7 @@ public class UserGroupServiceImpl implements UserGroupService {
             List<List<?>> list = this.userGroupDao.selectUserGroupByLike(queryPojo, pages);
             return Result.data((Long) list.get(2).get(0), list.get(0));
         }
-        return Result.data(userGroupList);
+        return Result.data((long) userGroupList.size(), userGroupList);
     }
 
 

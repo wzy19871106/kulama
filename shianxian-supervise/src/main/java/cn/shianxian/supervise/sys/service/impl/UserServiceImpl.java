@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
     private RedisService redisService;
 
 
-
     @Override
     public Result selectUserByPage(User user, Pages pages) {
         List<User> users = new ArrayList<>();
@@ -52,7 +51,7 @@ public class UserServiceImpl implements UserService {
             List<List<?>> list = this.userDao.selectUserByLike(user, pages);
             return Result.data((Long) list.get(2).get(0), list.get(0));
         }
-        return Result.data(users);
+        return Result.data((long) users.size(), users);
     }
 
 

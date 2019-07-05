@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -53,14 +54,14 @@ public class SupervisePlanMainServiceImpl implements SupervisePlanMainService {
 
     @Override
     public Result selectSupervisePlanMain(QueryPojo queryPojo, Pages pages) {
+        List<SupervisePlanMain> planMainList = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
-            List<SupervisePlanMain> planMainList = this.supervisePlanMainDao.selectSupervisePlanMainById(queryPojo.getId());
-            return Result.data(planMainList);
+            planMainList = this.supervisePlanMainDao.selectSupervisePlanMainById(queryPojo.getId());
         } else if (null != queryPojo.getName() && null != queryPojo.getStartTime() && null != queryPojo.getEndTime()) {
             List<List<?>> list = this.supervisePlanMainDao.selectSupervisePlanMainByLike(queryPojo, pages);
             return Result.data((Long) list.get(2).get(0), list.get(0));
         }
-        return Result.data(null);
+        return Result.data((long) planMainList.size(), planMainList);
     }
 
 

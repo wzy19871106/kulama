@@ -81,7 +81,7 @@ public class NodeInfoServiceImpl implements NodeInfoService {
             List<List<?>> list = this.nodeInfoDao.selectNodeInfoByLike(nodeInfo, pages);
             return Result.data((Long) list.get(2).get(0), list.get(0));
         }
-        return Result.data(nodeInfos);
+        return Result.data((long) nodeInfos.size(), nodeInfos);
     }
 
 

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,14 +26,14 @@ public class ModuleServiceImpl implements ModuleService {
 
     @Override
     public Result selectModule(QueryPojo queryPojo, Pages pages) {
+        List<Module> modules = new ArrayList<>();
         if (StringUtils.isNotBlank(queryPojo.getId())) {
-            List<Module> modules = this.moduleDao.selectModuleById(queryPojo.getId());
-            return Result.data(modules);
+            modules = this.moduleDao.selectModuleById(queryPojo.getId());
         } else if (null != queryPojo.getParentId() && null != queryPojo.getName()) {
             List<List<?>> list = this.moduleDao.selectModuleByLike(queryPojo, pages);
             return Result.data((Long) list.get(2).get(0), list.get(0));
         }
-        return Result.data(null);
+        return Result.data((long) modules.size(), modules);
     }
 
 
