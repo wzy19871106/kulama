@@ -1,4 +1,4 @@
-package cn.shianxian.supervise.agora.controller.pojo;
+package cn.shianxian.supervise.agora.pojo;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package cn.shianxian.supervise.agora.controller;
 
-import cn.shianxian.supervise.agora.controller.hanlder.RecordingHandler;
-import cn.shianxian.supervise.agora.controller.pojo.AgoreConfig;
+import cn.shianxian.supervise.agora.hanlder.RecordingHandler;
+import cn.shianxian.supervise.agora.pojo.AgoreConfig;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.thread.Executors;
 import io.agora.recording.RecordingSDK;
@@ -67,7 +67,7 @@ public class AgoraController {
         log.info("开始录制视频：{}", agoreConfig);
         int poolSize = Executors.pool.getPoolSize();
         log.info("线程池当前的线程数：{}", poolSize);
-        if (8 >= poolSize) {
+        if (8 <= poolSize) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("服务器正忙，不可录制！ "));
         }
         agoreConfig.setAppId(appId);

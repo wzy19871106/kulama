@@ -1,6 +1,6 @@
-package cn.shianxian.supervise.agora.controller.hanlder;
+package cn.shianxian.supervise.agora.hanlder;
 
-import cn.shianxian.supervise.agora.controller.pojo.AgoreConfig;
+import cn.shianxian.supervise.agora.pojo.AgoreConfig;
 import io.agora.recording.RecordingEventHandler;
 import io.agora.recording.RecordingSDK;
 import io.agora.recording.common.Common;
