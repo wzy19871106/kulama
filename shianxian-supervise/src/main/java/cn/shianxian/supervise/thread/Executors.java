@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Executors {
 
-    private volatile static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("record-pool-%d").build();
+    private static ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("record-pool-%d").build();
 
-    public volatile static ThreadPoolExecutor pool = new ThreadPoolExecutor(
+    public static ThreadPoolExecutor pool = new ThreadPoolExecutor(
             8,
             10,
             300,
