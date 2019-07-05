@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.io.File;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
@@ -70,6 +71,8 @@ public class AgoraController {
         if (8 <= poolSize) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("服务器正忙，不可录制！ "));
         }
+        BlockingQueue<Runnable> queue = Executors.pool.getQueue();
+        log.info("线程池当前的队列数：{}", queue.size());
         agoreConfig.setAppId(appId);
         agoreConfig.setAppliteDir(appliteDir);
         agoreConfig.setRecordFileRootDir(recordFileRootDir + agoreConfig.getMainId());
