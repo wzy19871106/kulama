@@ -1,4 +1,4 @@
-package io.agora.recording.common;
+package cn.shianxian.supervise.agora.recording.common;
 
 import java.nio.ByteBuffer;
 
@@ -258,8 +258,8 @@ public class Common {
         /**
          * 5: JPEG file format + MPEG-4 video.
          * <ul>
-         * <li>Individual Mode ({@link io.agora.recording.common.RecordingConfig#isMixingEnabled isMixingEnabled} is set as false): MPEG-4 video and JPEG files are supported. </li>
-         * <li>Composite Mode ({@link io.agora.recording.common.RecordingConfig#isMixingEnabled isMixingEnabled} is set as true): MPEG-4 video files for combined streams and JPEG files for individual streams are supported. </li>
+         * <li>Individual Mode ({@link cn.shianxian.supervise.agora.recording.common.RecordingConfig#isMixingEnabled isMixingEnabled} is set as false): MPEG-4 video and JPEG files are supported. </li>
+         * <li>Composite Mode ({@link cn.shianxian.supervise.agora.recording.common.RecordingConfig#isMixingEnabled isMixingEnabled} is set as true): MPEG-4 video files for combined streams and JPEG files for individual streams are supported. </li>
          * </ul>
          */
         VIDEO_FORMAT_JPG_VIDEO_FILE_TYPE(5);

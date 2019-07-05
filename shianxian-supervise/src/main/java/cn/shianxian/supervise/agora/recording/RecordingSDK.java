@@ -1,11 +1,11 @@
-package io.agora.recording;
+package cn.shianxian.supervise.agora.recording;
 
-import io.agora.recording.common.Common.AudioFrame;
-import io.agora.recording.common.Common.AudioVolumeInfo;
-import io.agora.recording.common.Common.VideoFrame;
-import io.agora.recording.common.Common.VideoMixingLayout;
-import io.agora.recording.common.RecordingConfig;
-import io.agora.recording.common.RecordingEngineProperties;
+import cn.shianxian.supervise.agora.recording.common.Common.AudioFrame;
+import cn.shianxian.supervise.agora.recording.common.Common.AudioVolumeInfo;
+import cn.shianxian.supervise.agora.recording.common.Common.VideoFrame;
+import cn.shianxian.supervise.agora.recording.common.Common.VideoMixingLayout;
+import cn.shianxian.supervise.agora.recording.common.RecordingConfig;
+import cn.shianxian.supervise.agora.recording.common.RecordingEngineProperties;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,7 +4,7 @@ import cn.shianxian.supervise.agora.hanlder.RecordingHandler;
 import cn.shianxian.supervise.agora.pojo.AgoreConfig;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.thread.Executors;
-import io.agora.recording.RecordingSDK;
+import cn.shianxian.supervise.agora.recording.RecordingSDK;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

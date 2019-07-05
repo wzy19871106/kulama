@@ -1,4 +1,4 @@
-package io.agora.recording.common;
+package cn.shianxian.supervise.agora.recording.common;
 
 /**
  * This class returns the recording properties.

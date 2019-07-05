@@ -1,8 +1,8 @@
-package io.agora.recording;
+package cn.shianxian.supervise.agora.recording;
 
-import io.agora.recording.common.Common.AudioFrame;
-import io.agora.recording.common.Common.VideoFrame;
-import io.agora.recording.common.Common.AudioVolumeInfo;
+import cn.shianxian.supervise.agora.recording.common.Common.AudioFrame;
+import cn.shianxian.supervise.agora.recording.common.Common.VideoFrame;
+import cn.shianxian.supervise.agora.recording.common.Common.AudioVolumeInfo;
 
 public interface RecordingEventHandler {
 
@@ -17,7 +17,7 @@ public interface RecordingEventHandler {
     /**
      * This callback is triggered when a user leaves the channel.
      *
-     * @param reason The reasons why the recording app leaves the channel. See {@link io.agora.recording.common.Common#LEAVE_PATH_CODE LEAVE_PATH_CODE}.
+     * @param reason The reasons why the recording app leaves the channel. See {@link cn.shianxian.supervise.agora.recording.common.Common#LEAVE_PATH_CODE LEAVE_PATH_CODE}.
      */
     void onLeaveChannel(int reason);
 
@@ -27,8 +27,8 @@ public interface RecordingEventHandler {
      * The SDK cannot fix the issue or resume running, which requires intervention
      * from the app and informs the user on the issue.
      *
-     * @param error     {@link io.agora.recording.common.Common#ERROR_CODE_TYPE Error codes}.
-     * @param stat_code {@link io.agora.recording.common.Common#STAT_CODE_TYPE State codes}.
+     * @param error     {@link cn.shianxian.supervise.agora.recording.common.Common#ERROR_CODE_TYPE Error codes}.
+     * @param stat_code {@link cn.shianxian.supervise.agora.recording.common.Common#STAT_CODE_TYPE State codes}.
      */
     void onError(int error, int stat_code);
 
@@ -38,7 +38,7 @@ public interface RecordingEventHandler {
      * In most cases, the app can ignore the warnings reported by the SDK because
      * the SDK can usually fix the issue and resume running.
      *
-     * @param warn {@link io.agora.recording.common.Common#WARN_CODE_TYPE Warning codes}.
+     * @param warn {@link cn.shianxian.supervise.agora.recording.common.Common#WARN_CODE_TYPE Warning codes}.
      */
     void onWarning(int warn);
 
@@ -59,7 +59,7 @@ public interface RecordingEventHandler {
      * A poor network connection may lead to false detections, so use signaling for reliable offline detection.
      *
      * @param uid    User ID of the user.
-     * @param reason The rerasons why the user leaves the channel or goes offline. See {@link io.agora.recording.common.Common#USER_OFFLINE_REASON_TYPE USER_OFFLINE_REASON_TYPE}.
+     * @param reason The rerasons why the user leaves the channel or goes offline. See {@link cn.shianxian.supervise.agora.recording.common.Common#USER_OFFLINE_REASON_TYPE USER_OFFLINE_REASON_TYPE}.
      */
     void onUserOffline(long uid, int reason);
 
@@ -126,9 +126,9 @@ public interface RecordingEventHandler {
 
     /**
      * Reports the list of users who are speaking and their volumes.
-     * This callback works only when {@link io.agora.recording.common.RecordingConfig#audioIndicationInterval audioIndicationInterval} > 0.
+     * This callback works only when {@link cn.shianxian.supervise.agora.recording.common.RecordingConfig#audioIndicationInterval audioIndicationInterval} > 0.
      *
-     * @param speakers   An array containing the user ID and volume information for each speaker. For more information, see {@link io.agora.recording.common.Common#AudioVolumeInfo AudioVolumeInfo}。
+     * @param speakers   An array containing the user ID and volume information for each speaker. For more information, see {@link cn.shianxian.supervise.agora.recording.common.Common#AudioVolumeInfo AudioVolumeInfo}。
      * @param speakerNum The total number of users who are speaking.
      */
     void onAudioVolumeIndication(AudioVolumeInfo[] infos);
