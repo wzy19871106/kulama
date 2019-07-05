@@ -69,7 +69,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public ResponseEntity<Result> saveOrUpdateUser(User user) {
-        user.setUserLoginPass(DigestUtils.md5Hex(user.getUserLoginPass()));
+        if (StringUtils.isNotBlank(user.getUserLoginPass())) {
+            user.setUserLoginPass(DigestUtils.md5Hex(user.getUserLoginPass()));
+        }
         if (StringUtils.isBlank(user.getUserTag())) {
             User u = new User();
             u.setUserLoginName(user.getUserLoginName());
