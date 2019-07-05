@@ -1,11 +1,11 @@
-package cn.shianxian.supervise.agora.recording.common;
+package io.agora.recording.common;
 
 
-import cn.shianxian.supervise.agora.recording.common.Common.AUDIO_FORMAT_TYPE;
-import cn.shianxian.supervise.agora.recording.common.Common.CHANNEL_PROFILE_TYPE;
-import cn.shianxian.supervise.agora.recording.common.Common.REMOTE_VIDEO_STREAM_TYPE;
-import cn.shianxian.supervise.agora.recording.common.Common.VIDEO_FORMAT_TYPE;
-import cn.shianxian.supervise.agora.recording.common.Common.MIXED_AV_CODEC_TYPE;
+import io.agora.recording.common.Common.AUDIO_FORMAT_TYPE;
+import io.agora.recording.common.Common.CHANNEL_PROFILE_TYPE;
+import io.agora.recording.common.Common.REMOTE_VIDEO_STREAM_TYPE;
+import io.agora.recording.common.Common.VIDEO_FORMAT_TYPE;
+import io.agora.recording.common.Common.MIXED_AV_CODEC_TYPE;
 
 public class RecordingConfig {
     public RecordingConfig() {
