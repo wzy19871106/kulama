@@ -12,6 +12,7 @@ import cn.shianxian.supervise.info.service.SuperviseInfoOldService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -51,9 +52,14 @@ public class SuperviseInfoOldServiceImpl implements SuperviseInfoOldService {
         int flag = 3;
         String fileName = file.getOriginalFilename();
         // 校验Excel
-        POIUtils.checkFile(fileName);
+        int tyep = POIUtils.checkFile(fileName);
         // 获取Excel
-        Workbook workbook = new XSSFWorkbook(file.getInputStream());
+        Workbook workbook = null;
+        if (1 == tyep) {
+            workbook = new XSSFWorkbook(file.getInputStream());
+        } if (2 == tyep) {
+            workbook = new HSSFWorkbook(file.getInputStream());
+        }
         Sheet sheet = workbook.getSheetAt(0);
         Integer num = sheet.getLastRowNum();
         if (num <= 1) {

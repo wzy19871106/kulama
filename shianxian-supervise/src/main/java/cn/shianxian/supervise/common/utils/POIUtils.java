@@ -176,11 +176,20 @@ public class POIUtils {
      *
      * @param fileName
      * @throws CommonException
+     * @return type 1:xlsx 2:xls
      */
-    public static void checkFile(String fileName) throws CommonException {
-        if (!StringUtils.isEmpty(fileName) && !(fileName.endsWith(".xlsx"))) {
-            throw new CommonException(Constants.BAD_REQUEST, "不是.xlsx文件！");
+    public static int checkFile(String fileName) throws CommonException {
+        int tyep = 0;
+        if (StringUtils.isNotBlank(fileName)) {
+            if (fileName.endsWith(".xlsx")) {
+                tyep = 1;
+            } else if (fileName.endsWith(".xls")) {
+                tyep = 2;
+            } else {
+                throw new CommonException(Constants.BAD_REQUEST, "不是Excel文件！");
+            }
         }
+        return tyep;
     }
 
 
