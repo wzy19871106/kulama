@@ -67,7 +67,7 @@ public class AgoraController {
         log.info("开始录制视频：{}", agoreConfig);
         int activeCount = ThreadPool.getInstance().getActiveCount();
         log.info("线程池正在执行任务大概线程数：{}", activeCount);
-        if (2 <= activeCount) {
+        if (8 <= activeCount) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("服务器正忙，不可录制！ "));
         }
         agoreConfig.setAppId(appId);

@@ -16,8 +16,8 @@ public class ThreadPool {
 
     private static final ThreadPool THREAD_POOL = new ThreadPool();
 
-    private static final int CORE_POOL_SIZE = 2;
-    private static final int MAXIMUM_POOL_SIZE = 3;
+    private static final int CORE_POOL_SIZE = 8;
+    private static final int MAXIMUM_POOL_SIZE = 10;
     private static final int KEEP_ALIVE_TIME = 3000;
 
     private final ThreadFactory namedThreadFactory = new ThreadFactoryBuilder().setNameFormat("record-pool-%d").build();
@@ -49,11 +49,5 @@ public class ThreadPool {
     public int getActiveCount(){
         return pool.getActiveCount();
     }
-
-
-    public int getQueueSize() {
-        return pool.getQueue().size();
-    }
-
 
 }
