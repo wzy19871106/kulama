@@ -65,9 +65,9 @@ public class AgoraController {
     })
     public ResponseEntity<Result> start(@Valid AgoreConfig agoreConfig) throws Exception {
         log.info("开始录制视频：{}", agoreConfig);
-        int poolSize = ThreadPool.getInstance().getPoolSize();
-        log.info("线程池当前的线程数：{}", poolSize);
-        if (8 <= poolSize) {
+        int activeCount = ThreadPool.getInstance().getActiveCount();
+        log.info("线程池正在执行任务大概线程数：{}", activeCount);
+        if (2 <= activeCount) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("服务器正忙，不可录制！ "));
         }
         log.info("线程池当前的队列数：{}", ThreadPool.getInstance().getQueueSize());
