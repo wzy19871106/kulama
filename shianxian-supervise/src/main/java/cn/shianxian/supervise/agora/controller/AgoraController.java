@@ -3,7 +3,7 @@ package cn.shianxian.supervise.agora.controller;
 import cn.shianxian.supervise.agora.hanlder.RecordingHandler;
 import cn.shianxian.supervise.agora.pojo.AgoreConfig;
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.thread.Executors;
+import cn.shianxian.supervise.thread.ThreadPool;
 import io.agora.recording.RecordingSDK;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -65,12 +65,12 @@ public class AgoraController {
     })
     public ResponseEntity<Result> start(@Valid AgoreConfig agoreConfig) throws Exception {
         log.info("开始录制视频：{}", agoreConfig);
-        int poolSize = Executors.pool.getPoolSize();
+        int poolSize = ThreadPool.getInstance().getPoolSize();
         log.info("线程池当前的线程数：{}", poolSize);
         if (8 <= poolSize) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("服务器正忙，不可录制！ "));
         }
-        log.info("线程池当前的队列数：{}", Executors.pool.getQueue().size());
+        log.info("线程池当前的队列数：{}", ThreadPool.getInstance().getQueueSize());
         agoreConfig.setAppId(appId);
         agoreConfig.setAppliteDir(appliteDir);
         agoreConfig.setRecordFileRootDir(recordFileRootDir + agoreConfig.getMainId());
@@ -87,7 +87,7 @@ public class AgoraController {
             return nativeHandle;
         };
         FutureTask<Long> task = new FutureTask<>(callable);
-        Executors.pool.execute(task);
+        ThreadPool.getInstance().addExecuteTask(task);
         // 睡眠一秒，获取录制引擎
         Thread.sleep(1000);
         return ResponseEntity.ok(Result.data(handler.nativeHandle));
