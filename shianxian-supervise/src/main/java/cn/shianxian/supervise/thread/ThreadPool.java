@@ -1,12 +1,14 @@
 package cn.shianxian.supervise.thread;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class ThreadPool {
 
     private ThreadPool(){
@@ -37,6 +39,8 @@ public class ThreadPool {
 
     public void addExecuteTask(Runnable task) {
         if (task != null) {
+            log.info("线程池核心线程数：{}", pool.getPoolSize());
+            log.info("线程池当前的队列数：{}", pool.getQueue().size());
             pool.execute(task);
         }
     }

@@ -70,7 +70,6 @@ public class AgoraController {
         if (2 <= activeCount) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("服务器正忙，不可录制！ "));
         }
-        log.info("线程池当前的队列数：{}", ThreadPool.getInstance().getQueueSize());
         agoreConfig.setAppId(appId);
         agoreConfig.setAppliteDir(appliteDir);
         agoreConfig.setRecordFileRootDir(recordFileRootDir + agoreConfig.getMainId());
