@@ -26,8 +26,6 @@
         #{superviseTeam.teamTag},
         #{superviseTeam.teamName},
         #{superviseTeam.remark},
-        #{superviseTeam.createTime},
-        #{superviseTeam.createUserTag},
         #{superviseTeam.lastUpdateTime},
         #{superviseTeam.lastUpdateUser},
         #{superviseTeam.ifUse}
