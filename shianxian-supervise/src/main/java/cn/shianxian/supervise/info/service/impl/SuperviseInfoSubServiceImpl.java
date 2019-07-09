@@ -130,8 +130,15 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         for (RectifyTimeVO time : rectifyTimeList) {
             RectifyResultVO result = this.superviseInfoSubDao.rectify(time.getMainIds());
             if (result != null) {
-                List<SuperviseInfoSub> superviseInfoSubs = this.superviseInfoSubDao.correctiveFeedback(time.getMainIds());
-                result.setSuperviseInfoSubs(superviseInfoSubs);
+                // 所有整改项
+                List<SuperviseInfoSub> allList = this.superviseInfoSubDao.allCorrectiveFeedback(time.getMainIds());
+                result.setAllSuperviseInfoSubs(allList);
+                // 已整改项
+                List<SuperviseInfoSub> doneList = this.superviseInfoSubDao.doneCorrectiveFeedback(time.getMainIds());
+                result.setDoneSuperviseInfoSubs(doneList);
+                // 未整改项
+                List<SuperviseInfoSub> ontList = this.superviseInfoSubDao.correctiveFeedback(time.getMainIds());
+                result.setNotSuperviseInfoSubs(ontList);
                 time.setRectifyResults(result);
             }
         }

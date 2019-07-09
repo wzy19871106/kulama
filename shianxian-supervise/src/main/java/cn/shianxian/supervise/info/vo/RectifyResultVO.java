@@ -93,7 +93,18 @@ public class RectifyResultVO {
     private Long UnCheckStatus;
 
     /**
+     * 总整改项集合
+     */
+    private List<SuperviseInfoSub> allSuperviseInfoSubs;
+
+    /**
+     * 未整改项集合
+     */
+    private List<SuperviseInfoSub> notSuperviseInfoSubs;
+
+    /**
      * 已整改项集合
      */
-    private List<SuperviseInfoSub> superviseInfoSubs;
+    private List<SuperviseInfoSub> doneSuperviseInfoSubs;
+
 }

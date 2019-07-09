@@ -130,17 +130,33 @@ public interface SuperviseInfoSubDao extends Mapper<SuperviseInfoSub> {
 
 
     /**
-     * 根据监管编码及监管类型返回已整改项的列表
-     * @param mainIds
-     * @return
-     */
-    List<SuperviseInfoSub> correctiveFeedback(@Param("mainIds") String mainIds);
-
-
-    /**
      * 查询整改情况
      * @param mainIds
      * @return
      */
     RectifyResultVO rectify(@Param("mainIds") String mainIds);
+
+
+    /**
+     * 根据监管编码及监管类型返回所有整改项的列表
+     * @param mainIds
+     * @return
+     */
+    List<SuperviseInfoSub> allCorrectiveFeedback (@Param("mainIds") String mainIds);
+
+    /**
+     * 根据监管编码及监管类型返回已整改项的列表
+     * @param mainIds
+     * @return
+     */
+    List<SuperviseInfoSub> doneCorrectiveFeedback(@Param("mainIds") String mainIds);
+
+
+    /**
+     * 根据监管编码及监管类型返回未整改项的列表
+     * @param mainIds
+     * @return
+     */
+    List<SuperviseInfoSub> correctiveFeedback(@Param("mainIds") String mainIds);
+
 }
