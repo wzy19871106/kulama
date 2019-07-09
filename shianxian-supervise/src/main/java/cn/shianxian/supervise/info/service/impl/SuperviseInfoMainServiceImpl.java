@@ -17,6 +17,7 @@ import cn.shianxian.supervise.sys.pojo.Supervise;
 import cn.shianxian.supervise.sys.pojo.SuperviseResult;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import cn.shianxian.supervise.thread.UserThreadLocal;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -131,7 +132,11 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             superviseInfoMainType.setSuperviserName(superviseType.getSuperviserName());
             superviseInfoMainType.setFunctionaryTag(superviseType.getFunctionaryTag());
             superviseInfoMainType.setFunctionaryName(superviseType.getFunctionaryName());
-            superviseInfoMainType.setParentMainIds(superviseType.getParentTag());
+            if (StringUtils.isNotBlank(superviseType.getParentTag())) {
+                superviseInfoMainType.setParentMainIds(superviseType.getParentTag());
+            } else {
+                superviseInfoMainType.setParentMainIds(null);
+            }
             // 保存监管类型
             this.superviseInfoMainTypeDao.saveSuperviseInfoMainType(superviseInfoMainType);
             // 父级内容
