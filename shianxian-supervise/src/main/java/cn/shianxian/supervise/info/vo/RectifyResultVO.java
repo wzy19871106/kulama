@@ -70,11 +70,6 @@ public class RectifyResultVO {
     /**
      * 所有整改项
      */
-    private Long AllStatus;
-
-    /**
-     * 所有整改项
-     */
     private Long allStatus;
 
     /**
@@ -90,7 +85,7 @@ public class RectifyResultVO {
     /**
      * （整改反馈）已经整改项
      */
-    private Long UnCheckStatus;
+    private Long unCheckStatus;
 
     /**
      * 总整改项集合
