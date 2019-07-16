@@ -27,29 +27,32 @@ public class MappingConverterAdapter {
      */
     @Bean
     public Converter<String, LocalDateTime> LocalDateTimeConvert() {
-        return source -> {
-            if (StringUtils.isBlank(source)) {
-                return null;
-            }
-            LocalDateTime date = null;
-            DateTimeFormatter df = null;
-            if (source.indexOf(":") != -1) {
-                df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-                try {
-                    date = LocalDateTime.parse(source, df);
-                } catch (Exception e) {
-                    log.error("LocalDateTime时间参数格式化错误，{}，信息：{}", e, e.getMessage());
+        return new Converter<String, LocalDateTime>() {
+            @Override
+            public LocalDateTime convert(String source) {
+                if (StringUtils.isBlank(source)) {
+                    return null;
                 }
-            } else {
-                df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                try {
-                    LocalDate localDate = LocalDate.parse(source, df);
-                    date = localDate.atStartOfDay();
-                } catch (Exception e) {
-                    log.error("localDate时间参数格式化错误，{}，信息：{}", e, e.getMessage());
+                LocalDateTime date = null;
+                DateTimeFormatter df = null;
+                if (source.indexOf(":") != -1) {
+                    df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    try {
+                        date = LocalDateTime.parse(source, df);
+                    } catch (Exception e) {
+                        log.error("LocalDateTime时间参数格式化错误，{}，信息：{}", e, e.getMessage());
+                    }
+                } else {
+                    df = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    try {
+                        LocalDate localDate = LocalDate.parse(source, df);
+                        date = localDate.atStartOfDay();
+                    } catch (Exception e) {
+                        log.error("localDate时间参数格式化错误，{}，信息：{}", e, e.getMessage());
+                    }
                 }
+                return date;
             }
-            return date;
         };
     }
 
