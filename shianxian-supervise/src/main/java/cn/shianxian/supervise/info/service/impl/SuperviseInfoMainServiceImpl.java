@@ -156,7 +156,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                     superviseInfoSub.setScore(results.get(0).getScore());
                     superviseInfoSub.setAdvice(results.get(0).getAdvice());
                     superviseInfoSub.setRequst("");
-                    superviseInfoSub.setPicTag("");
+                    superviseInfoSub.setPicTag( sub.getPicTag());
                     superviseInfoSub.setCreateUserTag(UserThreadLocal.getUser().getUserTag());
                     superviseInfoSub.setLastUpdateUser(UserThreadLocal.getUser().getUserTag());
                     superviseInfoSub.setRemark(sub.getRemark());
