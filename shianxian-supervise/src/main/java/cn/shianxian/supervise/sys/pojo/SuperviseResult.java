@@ -88,4 +88,5 @@ public class SuperviseResult {
     @Transient
     private String superviseName;
 
+    
 }
