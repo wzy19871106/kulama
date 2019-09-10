@@ -12,10 +12,7 @@ import cn.shianxian.supervise.info.pojo.SuperviseInfoMainType;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.service.SuperviseInfoMainService;
 import cn.shianxian.supervise.sys.dao.NodeInfoDao;
-import cn.shianxian.supervise.sys.pojo.NodeInfo;
-import cn.shianxian.supervise.sys.pojo.Supervise;
-import cn.shianxian.supervise.sys.pojo.SuperviseResult;
-import cn.shianxian.supervise.sys.pojo.SuperviseType;
+import cn.shianxian.supervise.sys.pojo.*;
 import cn.shianxian.supervise.thread.UserThreadLocal;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,7 +139,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             // 父级内容
             List<Supervise> superviseList = superviseType.getSuperviseList();
             for (Supervise supervise : superviseList) {
-                List<Supervise> subList = supervise.getSuperviseList();
+                List<SupervisePic> subList = supervise.getSuperviseList();
                 sub:for (Supervise sub : subList) {
                     List<SuperviseResult> results = sub.getSuperviseResultList();
                     if (results.isEmpty()) {
