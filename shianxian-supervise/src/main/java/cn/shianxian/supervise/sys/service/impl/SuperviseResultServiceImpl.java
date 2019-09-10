@@ -5,6 +5,7 @@ import cn.shianxian.supervise.sys.dao.SuperviseDao;
 import cn.shianxian.supervise.sys.dao.SuperviseResultDao;
 import cn.shianxian.supervise.sys.dao.SuperviseTypeDao;
 import cn.shianxian.supervise.sys.dto.SuperviseResultDTO;
+import cn.shianxian.supervise.sys.pojo.PicInfo;
 import cn.shianxian.supervise.sys.pojo.Supervise;
 import cn.shianxian.supervise.sys.pojo.SuperviseResult;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
@@ -17,8 +18,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -150,5 +154,4 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         }
         return Result.data(typeList);
     }
-
 }

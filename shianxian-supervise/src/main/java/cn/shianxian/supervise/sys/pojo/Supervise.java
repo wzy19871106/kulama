@@ -126,4 +126,9 @@ public class Supervise {
     @Transient
     private List<Supervise> superviseList;
 
+    /**
+     *  截图
+     */
+    @Column(name = "picTag")
+    private String picTag;
 }
