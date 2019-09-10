@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.sys.dao;
 
 import cn.shianxian.supervise.sys.pojo.Supervise;
+import cn.shianxian.supervise.sys.pojo.SupervisePic;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import tk.mybatis.mapper.common.Mapper;
@@ -96,7 +97,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
      * @param id
      * @return
      */
-    List<Supervise> selectSubSupervise(@Param("id") String id);
+    List<SupervisePic> selectSubSupervise(@Param("id") String id);
 
 
     /**
@@ -113,7 +114,7 @@ public interface SuperviseDao extends Mapper<Supervise> {
      * @param mainIds
      * @return
      */
-    List<Supervise> selectSubSuperviseByParentMainIds(@Param("superviseTag") String superviseTag, @Param("mainIds") String mainIds);
+    List<SupervisePic> selectSubSuperviseByParentMainIds(@Param("superviseTag") String superviseTag, @Param("mainIds") String mainIds);
 
 
     /**

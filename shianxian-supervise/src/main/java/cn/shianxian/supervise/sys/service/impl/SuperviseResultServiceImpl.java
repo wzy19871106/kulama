@@ -5,9 +5,7 @@ import cn.shianxian.supervise.sys.dao.SuperviseDao;
 import cn.shianxian.supervise.sys.dao.SuperviseResultDao;
 import cn.shianxian.supervise.sys.dao.SuperviseTypeDao;
 import cn.shianxian.supervise.sys.dto.SuperviseResultDTO;
-import cn.shianxian.supervise.sys.pojo.Supervise;
-import cn.shianxian.supervise.sys.pojo.SuperviseResult;
-import cn.shianxian.supervise.sys.pojo.SuperviseType;
+import cn.shianxian.supervise.sys.pojo.*;
 import cn.shianxian.supervise.sys.service.SuperviseResultService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -17,8 +15,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Slf4j
@@ -112,7 +113,7 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
             List<Supervise> parentSuperviseList = this.superviseDao.selectParentSupervise(superviseType.getSuperviseTypeTag());
             superviseType.setSuperviseList(parentSuperviseList);
             for (Supervise supervise : parentSuperviseList) {
-                List<Supervise> subSuperviseList = this.superviseDao.selectSubSupervise(supervise.getSuperviseTag());
+                List<SupervisePic> subSuperviseList = this.superviseDao.selectSubSupervise(supervise.getSuperviseTag());
                 supervise.setSuperviseList(subSuperviseList);
                 num += subSuperviseList.size();
                 for (Supervise s : subSuperviseList) {
@@ -136,7 +137,7 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
             superviseType.setSuperviseList(parentSuperviseList);
             for (Supervise supervise : parentSuperviseList) {
                 if (Optional.ofNullable(supervise).isPresent()) {
-                    List<Supervise> subSuperviseList = this.superviseDao.selectSubSuperviseByParentMainIds(supervise.getSuperviseTag(), mainIds);
+                    List<SupervisePic> subSuperviseList = this.superviseDao.selectSubSuperviseByParentMainIds(supervise.getSuperviseTag(), mainIds);
                     supervise.setSuperviseList(subSuperviseList);
                     num += subSuperviseList.size();
                     for (Supervise s : subSuperviseList) {
@@ -150,5 +151,4 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         }
         return Result.data(typeList);
     }
-
 }
