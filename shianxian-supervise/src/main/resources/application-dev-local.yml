@@ -79,7 +79,7 @@ spring:
 arcsoft:
   appId: 984NfMTD6XTdtHeqYsQca6Up7NtEcLAqVmG86GW9N7dr
   sdkKey: CSaQxfj6oSJ9dsMNYuj3mxbZQZq2oYJsUqw5J7GYhDXv
-  path: D:/m/arcsoft/
+  path: /data/arcsoft/
   libPath: D:/ai/ArcSoft_ArcFace_Java_Windows_x64_V2.2/libs/WIN64
 
 # 百度
@@ -91,7 +91,7 @@ baidu:
 # 上传配置
 upload:
   url: http://10.18.9.150/
-  path: D:/m/
+  path: /data/
 
 # 日志
 logging:
