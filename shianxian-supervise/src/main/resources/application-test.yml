@@ -91,7 +91,7 @@ baidu:
 # 上传配置
 upload:
   url: http://10.18.9.57/
-  path: /data/
+  path: /data/img/
 
 # 日志
 logging:
