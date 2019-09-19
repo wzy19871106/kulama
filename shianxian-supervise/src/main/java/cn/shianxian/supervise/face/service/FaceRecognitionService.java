@@ -1,10 +1,10 @@
 package cn.shianxian.supervise.face.service;
 
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.face.pojo.FaceRecognition;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 
 public interface FaceRecognitionService {
@@ -25,4 +25,12 @@ public interface FaceRecognitionService {
      * @return
      */
     ResponseEntity<Result> checlFace(String functionaryTag, MultipartFile file) throws IOException;
+
+    /**
+     * 负责人备案图片
+     * @param functionaryTag
+     * @return
+     * @throws IOException
+     */
+    Result facePrincipal(String functionaryTag) throws IOException;
 }
