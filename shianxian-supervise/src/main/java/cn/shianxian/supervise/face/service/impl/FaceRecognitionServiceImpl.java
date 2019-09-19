@@ -5,8 +5,6 @@ import cn.shianxian.supervise.common.utils.Base64Utils;
 import cn.shianxian.supervise.common.utils.CommonUtils;
 import cn.shianxian.supervise.common.utils.FaceUtils;
 import cn.shianxian.supervise.common.utils.UUIDGenerator;
-import cn.shianxian.supervise.face.dao.FaceRecognitionDao;
-import cn.shianxian.supervise.face.pojo.FaceRecognition;
 import cn.shianxian.supervise.face.service.FaceRecognitionService;
 import cn.shianxian.supervise.record.dao.FunctionaryDao;
 import cn.shianxian.supervise.record.pojo.Functionary;
@@ -19,12 +17,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -129,4 +125,22 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         return ResponseEntity.ok(Result.data(false));
     }
 
+    @Override
+    public  Result facePrincipal(String functionaryTag) throws IOException {
+        Functionary functionary = this.functionaryDao.selectByPrimaryKey(functionaryTag);
+        // 判断证件照是否存在
+        if (null != functionary && StringUtils.isNotBlank(functionary.getPicTag())) {
+            PicInfo picInfo = new PicInfo();
+            picInfo.setPicTag(functionary.getPicTag());
+            List<PicInfo> picInfos = this.picInfoDao.select(picInfo);
+            if (!picInfos.isEmpty()) {
+                for (PicInfo info : picInfos) {
+                    String fileURL = uploadPath + info.getPicAddress();
+                    System.out.println(fileURL);
+                    return Result.data(fileURL);
+                }
+            }
+        }
+        return null;
+    }
 }

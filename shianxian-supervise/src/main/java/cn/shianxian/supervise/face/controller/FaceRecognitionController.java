@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,5 +46,17 @@ public class FaceRecognitionController {
         return this.faceRecognitionService.faceRecognition(img, functionaryTag);
     }
 
-
+    /**
+     * 负责人备案图片
+     * @param functionaryTag
+     * @return
+     * @throws IOException
+     */
+    @GetMapping("facePrincipal")
+    @ApiOperation(value = "负责人备案照片",notes = "负责人备案照片")
+    @ApiImplicitParam(paramType = "query", name = "functionaryTag",value = "负责人标识")
+    public Result facePrincipal(String functionaryTag) throws IOException {
+        log.info("负责人标识：{}",functionaryTag);
+        return this.faceRecognitionService.facePrincipal(functionaryTag);
+    }
 }
