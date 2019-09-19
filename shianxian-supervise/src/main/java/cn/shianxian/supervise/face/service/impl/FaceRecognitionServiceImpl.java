@@ -136,7 +136,6 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
             if (!picInfos.isEmpty()) {
                 for (PicInfo info : picInfos) {
                     String fileURL = uploadPath + info.getPicAddress();
-                    System.out.println(fileURL);
                     return Result.data(fileURL);
                 }
             }
