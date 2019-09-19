@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -75,9 +76,11 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                     for (PicInfo info : picInfos) {
                         File file2 = new File(uploadPath + info.getPicAddress());
                         if (file2.exists()) {
-                            boolean result = FaceUtils.face(appId, sdkKey, libPath, file, file2);
-                            if (result) {
-                                return ResponseEntity.ok(Result.data(result));
+//                            boolean result = FaceUtils.face(appId, sdkKey, libPath, file, file2);
+                            Map<Object,Object> face = FaceUtils.face(appId, sdkKey, libPath, file, file2);
+                            boolean flag = (boolean) face.get("flag");
+                            if (flag) {
+                                return ResponseEntity.ok(Result.data(face));
                             }
                         }
                     }
@@ -113,9 +116,11 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                     for (PicInfo info : picInfos) {
                         File file2 = new File(uploadPath + info.getPicAddress());
                         if (file2.exists()) {
-                            boolean result = FaceUtils.face(appId, sdkKey, libPath, temp, file2);
-                            if (result) {
-                                return ResponseEntity.ok(Result.data(result));
+//                           boolean result = FaceUtils.face(appId, sdkKey, libPath, temp, file2);
+                            Map<Object,Object> face = FaceUtils.face(appId, sdkKey, libPath, temp, file2);
+                            boolean flag = (boolean) face.get("flag");
+                            if (flag) {
+                                return ResponseEntity.ok(Result.data(face));
                             }
                         }
                     }

@@ -11,7 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.arcsoft.face.toolkit.ImageFactory.getRGBData;
 
@@ -20,9 +22,11 @@ import static com.arcsoft.face.toolkit.ImageFactory.getRGBData;
 public class FaceUtils {
 
 
-    public static boolean face(String appId, String sdkKey, String libPath, File file1, File file2) {
+    public static Map face(String appId, String sdkKey, String libPath, File file1, File file2) {
         log.info("人脸识别图片1：{}", file1.getPath());
         log.info("人脸识别图片2：{}", file2.getPath());
+        List list = new ArrayList();
+        Map<Object,Object> map = new HashMap();
         boolean flag = false;
         FaceEngine faceEngine = new FaceEngine(libPath);
         // 激活引擎
@@ -61,7 +65,8 @@ public class FaceUtils {
 
         if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
             log.info("没有人脸信息");
-            return flag;
+            map.put("flag",flag);
+            return map;
         }
         // 特征提取
         FaceFeature faceFeature = new FaceFeature();
@@ -80,9 +85,12 @@ public class FaceUtils {
         if (Math.abs(0.6) < Math.abs(faceSimilar.getScore())) {
             flag = true;
         }
-        // 引擎卸载
         faceEngine.unInit();
-        return flag;
+        float score = faceSimilar.getScore();
+        map.put("flag",flag);
+        map.put("score",score);
+        // 引擎卸载
+        return map;
     }
 
 }
