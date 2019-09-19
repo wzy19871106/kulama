@@ -78,8 +78,8 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                         if (file2.exists()) {
 //                            boolean result = FaceUtils.face(appId, sdkKey, libPath, file, file2);
                             Map<Object,Object> face = FaceUtils.face(appId, sdkKey, libPath, file, file2);
-                            boolean flag = (boolean) face.get("flag");
-                            if (flag) {
+                            Object flag = face.get("flag");
+                            if (flag.equals(true)) {
                                 return ResponseEntity.ok(Result.data(face));
                             }
                         }
@@ -118,8 +118,8 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                         if (file2.exists()) {
 //                           boolean result = FaceUtils.face(appId, sdkKey, libPath, temp, file2);
                             Map<Object,Object> face = FaceUtils.face(appId, sdkKey, libPath, temp, file2);
-                            boolean flag = (boolean) face.get("flag");
-                            if (flag) {
+                            Object flag = face.get("flag");
+                            if (flag.equals(true)) {
                                 return ResponseEntity.ok(Result.data(face));
                             }
                         }

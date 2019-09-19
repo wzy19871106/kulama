@@ -65,7 +65,7 @@ public class FaceUtils {
 
         if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
             log.info("没有人脸信息");
-            map.put("flag",flag);
+            map.put("flag",false);
             return map;
         }
         // 特征提取
@@ -87,7 +87,7 @@ public class FaceUtils {
         }
         faceEngine.unInit();
         float score = faceSimilar.getScore();
-        map.put("flag",flag);
+        map.put("flag",true);
         map.put("score",score);
         // 引擎卸载
         return map;
