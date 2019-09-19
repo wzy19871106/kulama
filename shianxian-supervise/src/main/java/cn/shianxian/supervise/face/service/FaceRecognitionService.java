@@ -27,10 +27,10 @@ public interface FaceRecognitionService {
     ResponseEntity<Result> checlFace(String functionaryTag, MultipartFile file) throws IOException;
 
     /**
-     * 负责人备案图片
+     * 查询负责人备案图片
      * @param functionaryTag
      * @return
      * @throws IOException
      */
-    Result facePrincipal(String functionaryTag) throws IOException;
+   Result selectPrincipalPicResultByFunctionaryTag(String functionaryTag) throws IOException;
 }

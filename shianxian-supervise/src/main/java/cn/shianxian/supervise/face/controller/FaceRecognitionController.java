@@ -53,10 +53,10 @@ public class FaceRecognitionController {
      * @throws IOException
      */
     @GetMapping("facePrincipal")
-    @ApiOperation(value = "负责人备案照片",notes = "负责人备案照片")
+    @ApiOperation(value = "查询负责人备案照片",notes = "查询负责人备案照片")
     @ApiImplicitParam(paramType = "query", name = "functionaryTag",value = "负责人标识")
-    public Result facePrincipal(String functionaryTag) throws IOException {
-        log.info("负责人标识：{}",functionaryTag);
-        return this.faceRecognitionService.facePrincipal(functionaryTag);
+    public ResponseEntity<Result> selectPrincipalPicResultByFunctionaryTag(String functionaryTag) throws IOException {
+        Result result = this.faceRecognitionService.selectPrincipalPicResultByFunctionaryTag(functionaryTag);
+        return ResponseEntity.ok(result);
     }
 }

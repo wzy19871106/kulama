@@ -126,7 +126,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
     }
 
     @Override
-    public  Result facePrincipal(String functionaryTag) throws IOException {
+    public  Result selectPrincipalPicResultByFunctionaryTag(String functionaryTag) throws IOException {
         Functionary functionary = this.functionaryDao.selectByPrimaryKey(functionaryTag);
         // 判断证件照是否存在
         if (null != functionary && StringUtils.isNotBlank(functionary.getPicTag())) {
@@ -140,6 +140,6 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                 }
             }
         }
-        return null;
+        return Result.msg("无负责人备案照片");
     }
 }
