@@ -53,19 +53,28 @@ public class FaceUtils {
         if (initCode != ErrorInfo.MOK.getValue()) {
             log.info("虹软初始化引擎失败");
         }
-        // 人脸检测
-        ImageInfo imageInfo = getRGBData(file1);
-        List<FaceInfo> faceInfoList = new ArrayList<FaceInfo>();
-        faceEngine.detectFaces(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList);
-        // 人脸检测2
-        ImageInfo imageInfo2 = getRGBData(file2);
-        List<FaceInfo> faceInfoList2 = new ArrayList<FaceInfo>();
-        faceEngine.detectFaces(imageInfo2.getImageData(), imageInfo2.getWidth(), imageInfo2.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList2);
+        ImageInfo imageInfo = null;
+        List<FaceInfo> faceInfoList = null;
+        ImageInfo imageInfo2 = null;
+        List<FaceInfo> faceInfoList2 = null;
+        try {
+            // 人脸检测
+            imageInfo = getRGBData(file1);
+            faceInfoList = new ArrayList<FaceInfo>();
+            faceEngine.detectFaces(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList);
+            // 人脸检测2
+            imageInfo2 = getRGBData(file2);
+            faceInfoList2 = new ArrayList<FaceInfo>();
+            faceEngine.detectFaces(imageInfo2.getImageData(), imageInfo2.getWidth(), imageInfo2.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList2);
 
-        if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
-            log.info("没有人脸信息");
-            map.put("message","没有检测到人脸");
-            map.put("status",404);
+            if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
+                log.info("没有人脸信息");
+                map.put("message","没有检测到人脸");
+                map.put("status",404);
+                return map;
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
             return map;
         }
         // 特征提取
