@@ -131,9 +131,11 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         if (null != functionary && StringUtils.isNotBlank(functionary.getPicTag())) {
             PicInfo picInfo = new PicInfo();
             picInfo.setPicTag(functionary.getPicTag());
+            picInfo.setPicName("注册人脸");
             List<PicInfo> picInfos = this.picInfoDao.select(picInfo);
             if (!picInfos.isEmpty()) {
                 for (PicInfo info : picInfos) {
+                    System.out.println(info);
                     String fileURL = uploadPath + info.getPicAddress();
                     return Result.data(fileURL);
                 }
