@@ -25,7 +25,6 @@ public class FaceUtils {
     public static Map face(String appId, String sdkKey, String libPath, File file1, File file2) {
         log.info("人脸识别图片1：{}", file1.getPath());
         log.info("人脸识别图片2：{}", file2.getPath());
-        List list = new ArrayList();
         Map<Object,Object> map = new HashMap();
         boolean flag = false;
         FaceEngine faceEngine = new FaceEngine(libPath);
@@ -82,13 +81,15 @@ public class FaceUtils {
         FaceSimilar faceSimilar = new FaceSimilar();
         faceEngine.compareFaceFeature(targetFaceFeature, sourceFaceFeature, faceSimilar);
         log.info("相似度：{}", faceSimilar.getScore());
+        float score = faceSimilar.getScore();
+        map.put("score",score);
         if (Math.abs(0.6) < Math.abs(faceSimilar.getScore())) {
             flag = true;
+            map.put("flag",true);
+        } else {
+            map.put("flag",false);
         }
         faceEngine.unInit();
-        float score = faceSimilar.getScore();
-        map.put("flag",true);
-        map.put("score",score);
         // 引擎卸载
         return map;
     }

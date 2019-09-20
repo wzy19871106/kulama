@@ -82,6 +82,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                             if (flag.equals(true)) {
                                 return ResponseEntity.ok(Result.data(face));
                             }
+                            return ResponseEntity.ok(Result.data(face));
                         }
                     }
                 }
@@ -122,6 +123,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
                             if (flag.equals(true)) {
                                 return ResponseEntity.ok(Result.data(face));
                             }
+                            return ResponseEntity.ok(Result.data(face));
                         }
                     }
                 }
