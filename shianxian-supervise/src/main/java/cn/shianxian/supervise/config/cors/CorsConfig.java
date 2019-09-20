@@ -25,9 +25,9 @@ public class CorsConfig {
         // 允许向该服务器提交请求的URI，*表示全部允许，在SpringMVC中，如果设成*，会自动转成当前请求头中的Origin
         List<String> list = new ArrayList<>();
         // 本地测试
-        list.add("http://127.0.0.1:8083");
-        list.add("http://supervise.dev.shianxian.cn");
-        list.add("http://supervise.test.shianxian.cn");
+        list.add("https://127.0.0.1:8083");
+        list.add("https://supervise.dev.shianxian.cn");
+        list.add("https://supervise.test.shianxian.cn");
         config.setAllowedOrigins(list);
         // 允许访问的头信息,*表示全部
         config.addAllowedHeader("*");
