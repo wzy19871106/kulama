@@ -65,6 +65,7 @@ public class FaceUtils {
         if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
             log.info("没有人脸信息");
             map.put("flag",false);
+            map.put("status",404);
             return map;
         }
         // 特征提取
