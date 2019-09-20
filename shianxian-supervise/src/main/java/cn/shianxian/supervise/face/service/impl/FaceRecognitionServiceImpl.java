@@ -64,6 +64,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         if (null != functionary && StringUtils.isNotBlank(functionary.getPicTag())) {
             PicInfo picInfo = new PicInfo();
             picInfo.setPicTag(functionary.getPicTag());
+            picInfo.setPicName("注册人脸");
             List<PicInfo> picInfos = this.picInfoDao.select(picInfo);
             if (!picInfos.isEmpty()) {
                 File filePath = new File(path);
@@ -95,6 +96,7 @@ public class FaceRecognitionServiceImpl implements FaceRecognitionService {
         if (null != functionary && StringUtils.isNotBlank(functionary.getPicTag())) {
             PicInfo picInfo = new PicInfo();
             picInfo.setPicTag(functionary.getPicTag());
+            picInfo.setPicName("注册人脸");
             List<PicInfo> picInfos = this.picInfoDao.select(picInfo);
             if (!picInfos.isEmpty()) {
                 File filePath = new File(path);
