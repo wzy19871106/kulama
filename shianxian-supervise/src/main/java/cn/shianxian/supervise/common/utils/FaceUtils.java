@@ -25,7 +25,7 @@ public class FaceUtils {
     public static Map face(String appId, String sdkKey, String libPath, File file1, File file2) {
         log.info("人脸识别图片1：{}", file1.getPath());
         log.info("人脸识别图片2：{}", file2.getPath());
-        Map<Object,Object> map = new HashMap();
+        Map<Object, Object> map = new HashMap();
         boolean flag = false;
         FaceEngine faceEngine = new FaceEngine(libPath);
         // 激活引擎
@@ -53,28 +53,19 @@ public class FaceUtils {
         if (initCode != ErrorInfo.MOK.getValue()) {
             log.info("虹软初始化引擎失败");
         }
-        ImageInfo imageInfo = null;
-        List<FaceInfo> faceInfoList = null;
-        ImageInfo imageInfo2 = null;
-        List<FaceInfo> faceInfoList2 = null;
-        try {
-            // 人脸检测
-            imageInfo = getRGBData(file1);
-            faceInfoList = new ArrayList<FaceInfo>();
-            faceEngine.detectFaces(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList);
-            // 人脸检测2
-            imageInfo2 = getRGBData(file2);
-            faceInfoList2 = new ArrayList<FaceInfo>();
-            faceEngine.detectFaces(imageInfo2.getImageData(), imageInfo2.getWidth(), imageInfo2.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList2);
+        // 人脸检测
+        ImageInfo imageInfo = getRGBData(file1);
+        List<FaceInfo> faceInfoList = new ArrayList<FaceInfo>();
+        faceEngine.detectFaces(imageInfo.getImageData(), imageInfo.getWidth(), imageInfo.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList);
+        // 人脸检测2
+        ImageInfo imageInfo2 = getRGBData(file2);
+        List<FaceInfo> faceInfoList2 = new ArrayList<FaceInfo>();
+        faceEngine.detectFaces(imageInfo2.getImageData(), imageInfo2.getWidth(), imageInfo2.getHeight(), ImageFormat.CP_PAF_BGR24, faceInfoList2);
 
-            if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
-                log.info("没有人脸信息");
-                map.put("message","没有检测到人脸");
-                map.put("status",404);
-                return map;
-            }
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        if (faceInfoList.isEmpty() || faceInfoList2.isEmpty()) {
+            log.info("没有人脸信息");
+            map.put("message", "没有检测到人脸");
+            map.put("status", 404);
             return map;
         }
         // 特征提取
@@ -92,12 +83,12 @@ public class FaceUtils {
         faceEngine.compareFaceFeature(targetFaceFeature, sourceFaceFeature, faceSimilar);
         log.info("相似度：{}", faceSimilar.getScore());
         float score = faceSimilar.getScore();
-        map.put("score",score);
+        map.put("score", score);
         if (Math.abs(0.6) < Math.abs(faceSimilar.getScore())) {
             flag = true;
-            map.put("flag",true);
+            map.put("flag", true);
         } else {
-            map.put("flag",false);
+            map.put("flag", false);
         }
         faceEngine.unInit();
         // 引擎卸载
