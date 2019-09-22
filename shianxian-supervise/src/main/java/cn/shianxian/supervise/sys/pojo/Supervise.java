@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -118,13 +119,13 @@ public class Supervise {
      * 监管结果集合
      */
     @Transient
-    private List<SuperviseResult> superviseResultList;
+    private List<SuperviseResult> superviseResultList = new ArrayList<>();
 
     /**
      * 监管内容子集
      */
     @Transient
-    private List<SupervisePic> superviseList;
+    private List<SupervisePic> superviseList = new ArrayList<>();
 
     /**
      *  截图
