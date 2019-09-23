@@ -92,40 +92,40 @@ public class UploadController {
     @PostMapping("imgs")
     @ApiOperation(value = "多张图片上传接口", notes = "上传到服务器")
     @ApiImplicitParam(paramType = "query", name = "key", value = "文件名，可传可不传，如果文件名在服务器存在会删除该文件，然后存储。请带上后缀名。")
-    public ResponseEntity<Result> uploadImgs(@ApiParam(value = "要上传的图片集合", required = true) List<MultipartFile> files, @RequestParam(value = "key", required = false) String key) throws IOException {
-        if (files.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Result.msg("未接收到图片！"));
-        }
-        for (int i = 0; i < files.size(); ++i) {
-            MultipartFile file = files.get(i);
-            if (!file.isEmpty()) {
-                String fileSuffix = CommonUtils.getFileSuffix(file.getOriginalFilename());
-                if (!fileType.contains(fileSuffix)) {
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("请上传图片！"));
-                }
-                String fileName = UUIDGenerator.generatorUUID();
-                // 如果是修改图片，先把之前的图片删除
-                if (StringUtils.isNotEmpty(key)) {
-                    // 删除临时文件
-                    File oldFile = new File(uploadPath + key);
-                    if (oldFile.exists()) {
-                        oldFile.delete();
+    public ResponseEntity<Result> uploadImgs(@ApiParam(value = "要上传的图片集合", required = true) MultipartFile[] files, @RequestParam(value = "key", required = false) String key) throws IOException {
+        if (files != null && files.length > 0) {
+            for (int i = 0; i < files.length; i++) {
+                MultipartFile file = files[i];
+                if (!file.isEmpty()) {
+                    String fileSuffix = CommonUtils.getFileSuffix(file.getOriginalFilename());
+                    if (!fileType.contains(fileSuffix)) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("请上传图片！"));
                     }
-                    fileName = key.substring(0, key.lastIndexOf("."));
+                    String fileName = UUIDGenerator.generatorUUID();
+                    // 如果是修改图片，先把之前的图片删除
+                    if (StringUtils.isNotEmpty(key)) {
+                        // 删除临时文件
+                        File oldFile = new File(uploadPath + key);
+                        if (oldFile.exists()) {
+                            oldFile.delete();
+                        }
+                        fileName = key.substring(0, key.lastIndexOf("."));
+                    }
+                    File f = new File(uploadPath);
+                    if (!f.exists()) {
+                        f.mkdirs();
+                        log.info("创建文件夹：{}", uploadPath);
+                    }
+                    fileName = fileName + fileSuffix;
+                    String filepath = uploadPath + fileName;
+                    File tmpFile = new File(filepath);
+                    file.transferTo(tmpFile);
+                    log.info("上传文件成功：{}", fileName);
+                    return ResponseEntity.ok(Result.data(uploadUrl + fileName));
                 }
-                File f = new File(uploadPath);
-                if (!f.exists()) {
-                    f.mkdirs();
-                    log.info("创建文件夹：{}", uploadPath);
-                }
-                fileName = fileName + fileSuffix;
-                String filepath = uploadPath + fileName;
-                File tmpFile = new File(filepath);
-                file.transferTo(tmpFile);
-                log.info("上传文件成功：{}", fileName);
-                return ResponseEntity.ok(Result.data(uploadUrl + fileName));
+
             }
         }
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("未接收到图片！"));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("请上传图片！"));
     }
 }
