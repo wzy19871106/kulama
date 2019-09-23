@@ -150,4 +150,9 @@ public class SuperviseInfoVO {
      * 监管类型总分
      */
     private String superviseTypeScoreValue;
+
+    /**
+     * 整改截图
+     */
+    private String picTag;
 }
