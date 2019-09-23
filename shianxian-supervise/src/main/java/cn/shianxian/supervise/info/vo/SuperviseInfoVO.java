@@ -155,4 +155,9 @@ public class SuperviseInfoVO {
      * 整改截图
      */
     private String picTag;
+
+    /**
+     * 备注
+     */
+    private String remark;
 }
