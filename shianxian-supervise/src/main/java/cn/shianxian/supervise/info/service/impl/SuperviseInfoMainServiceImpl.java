@@ -190,7 +190,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 }
             }
         }
-        return Result.data(url.replace("/data/agora/", uploadUrl));
+        return Result.data(url.replace("/data/", uploadUrl));
     }
 
 
