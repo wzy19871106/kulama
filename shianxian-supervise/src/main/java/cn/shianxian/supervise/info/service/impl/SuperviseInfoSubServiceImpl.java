@@ -58,8 +58,7 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                     sb.append(sub);
                 }
             }
-            String pic = sb.toString();
-            infoSub.setPicTag(pic);
+            infoSub.setPicTag(sb.toString());
             return Result.data(infoSub);
         }
         return Result.failMsg();
