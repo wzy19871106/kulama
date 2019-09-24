@@ -40,7 +40,18 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Override
     public Result selectSuperviseInfoSubById(String id) {
         SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(id);
-        return Result.data(infoSub);
+        String substring = infoSub.getPicTag().substring(infoSub.getPicTag().indexOf(",") + 1);
+        String[] splits = substring.split("反馈:");
+        if (splits != null && splits.length > 0) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < splits.length; i++) {
+                    sb.append(splits[i]);
+            }
+            String pic = sb.toString();
+            infoSub.setPicTag(pic);
+            return Result.data(infoSub);
+        }
+        return Result.failMsg();
     }
 
 
