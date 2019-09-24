@@ -38,6 +38,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             throw new CommonException(Constants.UNAUTHORIZED, "请先登录！");
         }
         if (request.getRequestURI().indexOf("app") == -1) {
+            String requestURI = request.getRequestURI();
+            System.out.println(requestURI);
             String userJson = redisService.get(Constants.USER + token);
             if (StringUtils.isBlank(userJson)) {
                 log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
