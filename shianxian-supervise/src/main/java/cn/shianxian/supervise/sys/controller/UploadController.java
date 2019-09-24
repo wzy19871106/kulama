@@ -122,11 +122,11 @@ public class UploadController {
                     File tmpFile = new File(filepath);
                     file.transferTo(tmpFile);
                     log.info("上传文件成功：{}", fileName);
-                    msg.add(filepath);
-                    return ResponseEntity.ok(Result.data(msg));
+                    String url = uploadUrl + fileName;
+                    msg.add(url);
                 }
-
             }
+            return ResponseEntity.ok(Result.data(msg));
        }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Result.msg("请上传图片！"));
     }
