@@ -140,6 +140,10 @@
             <artifactId>poi-ooxml</artifactId>
             <version>${org.apache.poi}</version>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
     </dependencies>
 
     <distributionManagement>

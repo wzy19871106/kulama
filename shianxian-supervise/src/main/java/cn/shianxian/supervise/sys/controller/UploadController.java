@@ -122,7 +122,7 @@ public class UploadController {
                     File tmpFile = new File(filepath);
                     file.transferTo(tmpFile);
                     log.info("上传文件成功：{}", fileName);
-                    String url = uploadUrl + fileName;
+                    String url = "img:"+uploadUrl + fileName;
                     msg.add(url);
                 }
             }
