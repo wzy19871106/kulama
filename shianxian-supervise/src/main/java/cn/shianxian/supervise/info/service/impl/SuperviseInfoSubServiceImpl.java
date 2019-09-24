@@ -40,7 +40,7 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Override
     public Result selectSuperviseInfoSubById(String id) {
         SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(id);
-        String substring = infoSub.getPicTag().substring(infoSub.getPicTag().indexOf(",") + 1);
+        String substring = infoSub.getPicTag().substring(infoSub.getPicTag().indexOf("反"));
         String[] splits = substring.split("反馈:");
         if (splits != null && splits.length > 0) {
             StringBuilder sb = new StringBuilder();
@@ -58,6 +58,12 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Transactional
     @Override
     public Result updateSuperviseInfoSubById(SuperviseInfoSub superviseInfoSub) {
+        String subId = String.valueOf(superviseInfoSub.getSubId());
+        SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(subId);
+        if (!infoSub.getPicTag().isEmpty()){
+            infoSub.setPicTag("");
+            this.superviseInfoSubDao.updateSuperviseInfoSubById(infoSub);
+        }
         this.superviseInfoSubDao.updateSuperviseInfoSubById(superviseInfoSub);
         return Result.successMsg();
     }
