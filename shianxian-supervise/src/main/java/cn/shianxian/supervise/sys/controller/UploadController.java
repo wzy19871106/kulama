@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -91,6 +93,7 @@ public class UploadController {
     @ApiOperation(value = "多张图片上传接口", notes = "上传到服务器")
     @ApiImplicitParam(paramType = "query", name = "key", value = "文件名，可传可不传，如果文件名在服务器存在会删除该文件，然后存储。请带上后缀名。")
     public ResponseEntity<Result> uploadImgs(@ApiParam(value = "要上传的图片集合", required = true) MultipartFile[] files, @RequestParam(value = "key", required = false) String key) throws IOException {
+        List<String> msg = new ArrayList<>();
         if (files != null && files.length > 0) {
             for (int i = 0; i < files.length; i++) {
                 MultipartFile file = files[i];
@@ -119,7 +122,8 @@ public class UploadController {
                     File tmpFile = new File(filepath);
                     file.transferTo(tmpFile);
                     log.info("上传文件成功：{}", fileName);
-                    return ResponseEntity.ok(Result.data(uploadUrl + fileName));
+                    msg.add(filepath);
+                    return ResponseEntity.ok(Result.data(msg));
                 }
 
             }
