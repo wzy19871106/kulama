@@ -49,13 +49,15 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         String[] splits = picTag.split(",");
         if (splits != null && splits.length > 0) {
             StringBuilder sb = new StringBuilder();
-            for (String split : splits) {
-               // 判断是否是反馈
-                if (split.indexOf("反馈") != -1) {
-                    // 截掉前三个字符  反馈:
-                    String substring = split.substring(3);
-                    String sub = substring + ",";
-                    sb.append(sub);
+            if (splits.length > 0) {
+                for (String split : splits) {
+                    // 判断是否是反馈
+                    if (split.indexOf("反馈") != -1) {
+                        // 截掉前三个字符  反馈:
+                        String substring = split.substring(3);
+                        String sub = substring + ",";
+                        sb.append(sub);
+                    }
                 }
             }
             infoSub.setPicTag(sb.toString());
