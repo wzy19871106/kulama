@@ -10,10 +10,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.ls.LSException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
@@ -40,12 +44,23 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Override
     public Result selectSuperviseInfoSubById(String id) {
         SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(id);
-        String substring = infoSub.getPicTag().substring(infoSub.getPicTag().indexOf("反"));
-        String[] splits = substring.split("反馈:");
+        String picTag = infoSub.getPicTag();
+        // 正则表达式 截取从 馈 开始 到 ，的字符串
+        String regex="馈(.*?),";
+        Pattern p=Pattern.compile(regex);
+        Matcher m=p.matcher(picTag);
+        List<String> list = new ArrayList<>();
+        while(m.find()){
+            list.add(m.group(1));
+        }
+        // 将list转换成String
+        String join = String.join("", list);
+        // 去掉 : 号
+        String[] splits = join.split(":");
         if (splits != null && splits.length > 0) {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < splits.length; i++) {
-                    sb.append(splits[i]);
+                    sb.append(splits[i]+",");
             }
             String pic = sb.toString();
             infoSub.setPicTag(pic);
@@ -58,12 +73,6 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Transactional
     @Override
     public Result updateSuperviseInfoSubById(SuperviseInfoSub superviseInfoSub) {
-        String subId = String.valueOf(superviseInfoSub.getSubId());
-        SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(subId);
-        if (!infoSub.getPicTag().isEmpty()){
-            infoSub.setPicTag("");
-            this.superviseInfoSubDao.updateSuperviseInfoSubById(infoSub);
-        }
         this.superviseInfoSubDao.updateSuperviseInfoSubById(superviseInfoSub);
         return Result.successMsg();
     }
