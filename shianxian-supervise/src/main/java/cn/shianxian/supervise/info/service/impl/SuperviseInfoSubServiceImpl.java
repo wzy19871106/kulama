@@ -45,22 +45,18 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     public Result selectSuperviseInfoSubById(String id) {
         SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(id);
         String picTag = infoSub.getPicTag();
-        // 正则表达式 截取从 馈 开始 到 ，的字符串
-        String regex="馈(.*?),";
-        Pattern p=Pattern.compile(regex);
-        Matcher m=p.matcher(picTag);
-        List<String> list = new ArrayList<>();
-        while(m.find()){
-            list.add(m.group(1));
-        }
-        // 将list转换成String
-        String join = String.join("", list);
-        // 去掉 : 号
-        String[] splits = join.split(":");
+        // 去掉 , 号
+        String[] splits = picTag.split(",");
         if (splits != null && splits.length > 0) {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < splits.length; i++) {
-                    sb.append(splits[i]+",");
+            for (String split : splits) {
+               // 判断是否是反馈
+                if (split.indexOf("反馈") != -1) {
+                    // 截掉前三个字符  反馈:
+                    String substring = split.substring(3);
+                    String sub = substring + ",";
+                    sb.append(sub);
+                }
             }
             String pic = sb.toString();
             infoSub.setPicTag(pic);
