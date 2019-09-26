@@ -154,12 +154,12 @@ public class SuperviseInfoSub {
      * 截图取证
      */
     @Transient
-    private List<String> screenshot;
+    private String screenshot;
 
     /**
      * 反馈
      */
     @Transient
-    private List<String> feedback;
+    private String feedback;
 
 }

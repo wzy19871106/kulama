@@ -11,9 +11,11 @@ import java.util.*;
 public class PicTagCutoutUtils {
     public static Map Cutout(String picTag) {
         // 存截图
-        List<String> screenshot = new LinkedList<>();
+//        List<String> screenshot = new LinkedList<>();
+        StringBuilder screenshot = new StringBuilder();
         // 存反馈
-        List<String> feedback = new LinkedList<>();
+//        List<String> feedback = new LinkedList<>();
+        StringBuilder feedback = new StringBuilder();
         // 存返回
         Map map = new HashMap();
         if (StringUtils.isNotBlank(picTag)) {
@@ -29,14 +31,14 @@ public class PicTagCutoutUtils {
                             String sub = substring + ",";
                             // String 转 List<String>
                             // List<String> strings = Arrays.asList(sub.split(""));
-                            feedback.add(sub);
+                            feedback.append(sub);
                         }
                         if (split.indexOf("截屏") != -1) {
                             String substring = split.substring(5);
                             String sub = substring + ",";
                             // String 转 List<String>
                             // List<String> strings = Arrays.asList(sub.split(""));
-                            screenshot.add(sub);
+                            screenshot.append(sub);
                         }
                     }
                 }
@@ -48,19 +50,25 @@ public class PicTagCutoutUtils {
                     String sub = substring + ",";
                     // String 转 List<String>
 //                List<String> strings = Arrays.asList(sub.split(""));
-                    feedback.add(sub);
+                    feedback.append(sub);
                 }
                 if (picTag.indexOf("截屏") != -1) {
                     String substring = picTag.substring(5);
                     String sub = substring + ",";
                     // String 转 List<String>
                     // List<String> strings = Arrays.asList(sub.split(""));
-                    screenshot.add(sub);
+                    screenshot.append(sub);
                 }
             }
         }
-        map.put("feedback", feedback);
-        map.put("screenshot", screenshot);
+        if (StringUtils.isNotBlank(feedback.toString())){
+            String substring = feedback.toString().substring(0, feedback.toString().length() - 1);
+            map.put("feedback", substring);
+        }
+        if (StringUtils.isNotBlank(screenshot.toString())){
+            String substring = screenshot.toString().substring(0, screenshot.toString().length() - 1);
+            map.put("screenshot", substring);
+        }
         return map;
     }
 }
