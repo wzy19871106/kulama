@@ -44,19 +44,20 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     public Result selectSuperviseInfoSubById(String id) {
         SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(id);
         if (StringUtils.isNotBlank(infoSub.getPicTag())) {
-            // 判断是否多张图片
-            if (infoSub.getPicTag().indexOf(",") != -1){
-            // 去掉 , 号
-            String[] splits = infoSub.getPicTag().split(",");
             StringBuilder sb = new StringBuilder();
-            if (splits != null && splits.length > 0) {
-                for (String split : splits) {
-                    // 判断是否是反馈
-                    if (split.indexOf("反馈") != -1) {
-                        // 截掉前三个字符  反馈:
-                        String substring = split.substring(3);
-                        String sub = substring + ",";
-                        sb.append(sub);
+            // 判断是否多张图片
+            if (infoSub.getPicTag().indexOf(",") != -1) {
+                // 去掉 , 号
+                String[] splits = infoSub.getPicTag().split(",");
+                if (splits != null && splits.length > 0) {
+                    for (String split : splits) {
+                        // 判断是否是反馈
+                        if (split.indexOf("反馈") != -1) {
+                            // 截掉前三个字符  反馈:
+                            String substring = split.substring(3);
+                            String sub = substring + ",";
+                            sb.append(sub);
+                        }
                     }
                 }
             } else {
@@ -68,9 +69,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                     sb.append(sub);
                 }
             }
-                infoSub.setPicTag(sb.toString());
-                return Result.data(infoSub);
-            }
+            infoSub.setPicTag(sb.toString());
+            return Result.data(infoSub);
         }
         return Result.failMsg();
     }
