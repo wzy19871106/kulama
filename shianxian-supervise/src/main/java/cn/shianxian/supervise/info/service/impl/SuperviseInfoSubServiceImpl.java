@@ -43,7 +43,7 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Override
     public Result selectSuperviseInfoSubById(String id) {
         SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(id);
-        if (!infoSub.getPicTag().isEmpty()) {
+        if (StringUtils.isNotBlank(infoSub.getPicTag())) {
             // 去掉 , 号
             String[] splits = infoSub.getPicTag().split(",");
             StringBuilder sb = new StringBuilder();
