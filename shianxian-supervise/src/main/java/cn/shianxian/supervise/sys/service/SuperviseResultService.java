@@ -63,4 +63,11 @@ public interface SuperviseResultService {
      * @return
      */
     Result selectSuperviseResultRectifyTree(String mainIds);
+
+    /**
+     * 根据监管内容编码查询满分的监管结果
+     * @param id
+     * @return
+     */
+    Result selectSuperviseFullResultById(String id);
 }

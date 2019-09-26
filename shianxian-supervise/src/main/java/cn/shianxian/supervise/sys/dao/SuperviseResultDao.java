@@ -82,4 +82,11 @@ public interface SuperviseResultDao extends Mapper<SuperviseResult> {
      * @return
      */
     List<SuperviseResult> selectAllSuperviseResultBySuperviseTag(@Param("id") String id);
+
+    /**
+     * 根据监管内容编码查询满分的监管结果
+     * @param id
+     * @return
+     */
+    List<SuperviseResult> selectSuperviseFullResultBySuperviseTag(@Param("id") String id);
 }

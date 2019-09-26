@@ -151,4 +151,10 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         }
         return Result.data(typeList);
     }
+
+    @Override
+    public Result selectSuperviseFullResultById(String id) {
+        List<SuperviseResult> results = this.superviseResultDao.selectSuperviseFullResultBySuperviseTag(id);
+        return Result.data(results);
+    }
 }

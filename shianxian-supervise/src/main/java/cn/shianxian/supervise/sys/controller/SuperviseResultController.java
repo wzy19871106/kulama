@@ -148,4 +148,17 @@ public class SuperviseResultController {
         Result result = this.superviseResultService.selectSuperviseResultRectifyTree(mainIds);
         return ResponseEntity.ok(result);
     }
+
+    /**
+     * 根据监管内容编码查询满分的监管结果
+     * @param superviseTag
+     * @return
+     */
+    @GetMapping("selectSuperviseFullResultById")
+    @ApiOperation(value = "查询满分的监管结果",notes = "查询满分的监管结果")
+    @ApiImplicitParam(paramType = "query",name = "superviseTag",value = "监管内容编码")
+    public ResponseEntity<Result> selectSuperviseFullResultById(String superviseTag){
+        Result result = this.superviseResultService.selectSuperviseFullResultById(superviseTag);
+        return ResponseEntity.ok(result);
+    }
 }

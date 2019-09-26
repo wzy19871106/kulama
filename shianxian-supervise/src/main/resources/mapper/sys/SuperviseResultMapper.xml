@@ -56,4 +56,7 @@
         CALL proc_T_Supervise_Result_QueryAll_By_SuperviseTag(#{id})
     </select>
 
+    <select id="selectSuperviseFullResultBySuperviseTag" resultType="cn.shianxian.supervise.sys.pojo.SuperviseResult">
+        CALL proc_T_Supervise_Result_QueryBest_By_SuperviseTag(#{id})
+    </select>
 </mapper>
