@@ -1,7 +1,9 @@
 package cn.shianxian.supervise.info.service.impl;
 
+import cn.shianxian.supervise.common.constants.Constants;
 import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.common.utils.PicTagCutoutUtils;
 import cn.shianxian.supervise.info.dao.SuperviseInfoSubDao;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.service.SuperviseInfoSubService;
@@ -12,10 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.ls.LSException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,24 +43,24 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
     @Override
     public Result selectSuperviseInfoSubById(String id) {
         SuperviseInfoSub infoSub = this.superviseInfoSubDao.selectSuperviseInfoSubById(id);
-       if (!infoSub.getPicTag().isEmpty()) {
-           // 去掉 , 号
-           String[] splits = infoSub.getPicTag().split(",");
-           StringBuilder sb = new StringBuilder();
-           if (splits != null && splits.length > 0) {
-               for (String split : splits) {
-                   // 判断是否是反馈
-                   if (split.indexOf("反馈") != -1) {
-                       // 截掉前三个字符  反馈:
-                       String substring = split.substring(3);
-                       String sub = substring + ",";
-                       sb.append(sub);
-                   }
-               }
-               infoSub.setPicTag(sb.toString());
-               return Result.data(infoSub);
-           }
-       }
+        if (!infoSub.getPicTag().isEmpty()) {
+            // 去掉 , 号
+            String[] splits = infoSub.getPicTag().split(",");
+            StringBuilder sb = new StringBuilder();
+            if (splits != null && splits.length > 0) {
+                for (String split : splits) {
+                    // 判断是否是反馈
+                    if (split.indexOf("反馈") != -1) {
+                        // 截掉前三个字符  反馈:
+                        String substring = split.substring(3);
+                        String sub = substring + ",";
+                        sb.append(sub);
+                    }
+                }
+                infoSub.setPicTag(sb.toString());
+                return Result.data(infoSub);
+            }
+        }
         return Result.failMsg();
     }
 
@@ -152,15 +151,68 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
         for (RectifyTimeVO time : rectifyTimeList) {
             RectifyResultVO result = this.superviseInfoSubDao.rectify(time.getMainIds());
             if (result != null) {
-                // 所有整改项
-                List<SuperviseInfoSub> allList = this.superviseInfoSubDao.allCorrectiveFeedback(time.getMainIds());
+                // 所有监管项、
+                List<SuperviseInfoSub> allList = this.superviseInfoSubDao.rectifyAndReformFeedback(time.getMainIds(), Constants.STATUS_NULL);
+                if (!allList.isEmpty()) {
+                    for (SuperviseInfoSub infoSub : allList) {
+                        if (StringUtils.isNotBlank(infoSub.getPicTag())) {
+                            Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
+                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
+                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                        }
+                    }
+                }
                 result.setAllSuperviseInfoSubs(allList);
-                // 已整改项
-                List<SuperviseInfoSub> doneList = this.superviseInfoSubDao.doneCorrectiveFeedback(time.getMainIds());
+
+                // 已整改通过项
+                List<SuperviseInfoSub> doneList = this.superviseInfoSubDao.rectifyAndReformFeedback(time.getMainIds(), Constants.STATUS_NOE);
+                if (!doneList.isEmpty()) {
+                    for (SuperviseInfoSub infoSub : doneList) {
+                        if (StringUtils.isNotBlank(infoSub.getPicTag())) {
+                            Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
+                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
+                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                        }
+                    }
+                }
                 result.setDoneSuperviseInfoSubs(doneList);
-                // 未整改项
-                List<SuperviseInfoSub> ontList = this.superviseInfoSubDao.correctiveFeedback(time.getMainIds());
+
+                // 需监管项
+                List<SuperviseInfoSub> ontList = this.superviseInfoSubDao.rectifyAndReformFeedback(time.getMainIds(), Constants.STATUS_TWO_THREE);
+                if (!ontList.isEmpty()) {
+                    for (SuperviseInfoSub infoSub : ontList) {
+                        if (StringUtils.isNotBlank(infoSub.getPicTag())) {
+                            Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
+                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
+                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                        }
+                    }
+                }
                 result.setNotSuperviseInfoSubs(ontList);
+                // 已整改未监管项
+                List<SuperviseInfoSub> doneRectifyList = this.superviseInfoSubDao.rectifyAndReformFeedback(time.getMainIds(), Constants.STATUS_THREE);
+                if (!doneRectifyList.isEmpty()) {
+                    for (SuperviseInfoSub infoSub : doneRectifyList) {
+                        if (StringUtils.isNotBlank(infoSub.getPicTag())) {
+                            Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
+                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
+                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                        }
+                    }
+                }
+                result.setDoneRectifyNotSuperviseInfoSub(doneRectifyList);
+                // 未整改未监管项
+                List<SuperviseInfoSub> notRectifyList = this.superviseInfoSubDao.rectifyAndReformFeedback(time.getMainIds(), Constants.STATUS_TWO);
+                if (!notRectifyList.isEmpty()) {
+                    for (SuperviseInfoSub infoSub : notRectifyList) {
+                        if (StringUtils.isNotBlank(infoSub.getPicTag())) {
+                            Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
+                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
+                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                        }
+                    }
+                }
+                result.setNotRectifyNotSuperviseInfoSub(notRectifyList);
                 time.setRectifyResults(result);
             }
         }

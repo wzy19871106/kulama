@@ -44,4 +44,17 @@ public class Constants {
     /**
      * 状态码========================================================
      */
+
+
+    /**
+     * 监管项状态码=========================================
+     */
+    public static final String STATUS_NULL = "";
+    public static final String STATUS_NOE = "1";
+    public static final String STATUS_TWO_THREE = "2,3";
+    public static final String STATUS_THREE = "3";
+    public static final String STATUS_TWO = "2";
+    /**
+     * 监管项状态码=========================================
+     */
 }

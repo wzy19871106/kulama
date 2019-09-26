@@ -144,4 +144,8 @@
         CALL Proc_T_Supervise_CorrectiveFeedback_ByTag(#{mainIds})
     </select>
 
+    <select id="rectifyAndReformFeedback" resultType="cn.shianxian.supervise.info.pojo.SuperviseInfoSub">
+        CALL Proc_T_Supervise_Feedback_ByTag(#{mainIds},#{status})
+    </select>
+
 </mapper>

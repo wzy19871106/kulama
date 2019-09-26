@@ -66,6 +66,30 @@ public class RectifyResultVO {
      * 负责人名称
      */
     private String functionaryName;
+    /**
+     * 执法队伍编码
+     */
+    private String superviseTeamTag;
+
+    /**
+     *执法队伍名称
+     */
+    private String superviseTeamName;
+
+    /**
+     *执法人员编码
+     */
+    private String superviserTag;
+
+    /**
+     *负责人编码
+     */
+    private String functionaryTag;
+
+    /**
+     * 计划任务编号
+     */
+    private String planTag;
 
     /**
      * 所有整改项
@@ -88,18 +112,29 @@ public class RectifyResultVO {
     private Long unCheckStatus;
 
     /**
-     * 总整改项集合
+     * 所有监管项
      */
     private List<SuperviseInfoSub> allSuperviseInfoSubs;
 
     /**
-     * 未整改项集合
+     * 需监管项
      */
     private List<SuperviseInfoSub> notSuperviseInfoSubs;
 
     /**
-     * 已整改项集合
+     * 已整改通过项
      */
     private List<SuperviseInfoSub> doneSuperviseInfoSubs;
+
+    /**
+     * 已整改未监管项
+     */
+    private List<SuperviseInfoSub> doneRectifyNotSuperviseInfoSub;
+
+    /**
+     * 未整改未监管项
+     */
+    private List<SuperviseInfoSub> notRectifyNotSuperviseInfoSub;
+
 
 }
