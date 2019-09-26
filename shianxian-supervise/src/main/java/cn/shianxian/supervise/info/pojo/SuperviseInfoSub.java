@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.List;
 
 
 /**
@@ -162,4 +161,9 @@ public class SuperviseInfoSub {
     @Transient
     private String feedback;
 
+    /**
+     * 前端需要 并无意义
+     */
+    @Transient
+    private boolean by = true;
 }
