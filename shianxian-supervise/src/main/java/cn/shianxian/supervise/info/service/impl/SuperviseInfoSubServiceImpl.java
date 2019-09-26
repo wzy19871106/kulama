@@ -157,8 +157,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                     for (SuperviseInfoSub infoSub : allList) {
                         if (StringUtils.isNotBlank(infoSub.getPicTag())) {
                             Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
-                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
-                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                            infoSub.setFeedback((List<String>) cutout.get("feedback"));
+                            infoSub.setScreenshot((List<String>) cutout.get("screenshot"));
                         }
                     }
                 }
@@ -170,8 +170,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                     for (SuperviseInfoSub infoSub : doneList) {
                         if (StringUtils.isNotBlank(infoSub.getPicTag())) {
                             Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
-                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
-                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                            infoSub.setFeedback((List<String>) cutout.get("feedback"));
+                            infoSub.setScreenshot((List<String>) cutout.get("screenshot"));
                         }
                     }
                 }
@@ -183,8 +183,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                     for (SuperviseInfoSub infoSub : ontList) {
                         if (StringUtils.isNotBlank(infoSub.getPicTag())) {
                             Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
-                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
-                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                            infoSub.setFeedback((List<String>) cutout.get("feedback"));
+                            infoSub.setScreenshot((List<String>) cutout.get("screenshot"));
                         }
                     }
                 }
@@ -195,8 +195,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                     for (SuperviseInfoSub infoSub : doneRectifyList) {
                         if (StringUtils.isNotBlank(infoSub.getPicTag())) {
                             Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
-                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
-                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                            infoSub.setFeedback((List<String>) cutout.get("feedback"));
+                            infoSub.setScreenshot((List<String>) cutout.get("screenshot"));
                         }
                     }
                 }
@@ -207,8 +207,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                     for (SuperviseInfoSub infoSub : notRectifyList) {
                         if (StringUtils.isNotBlank(infoSub.getPicTag())) {
                             Map cutout = PicTagCutoutUtils.Cutout(infoSub.getPicTag());
-                            infoSub.setFeedback((List<String>) cutout.get("screenshot"));
-                            infoSub.setScreenshot((List<String>) cutout.get("feedback"));
+                            infoSub.setFeedback((List<String>) cutout.get("feedback"));
+                            infoSub.setScreenshot((List<String>) cutout.get("screenshot"));
                         }
                     }
                 }
