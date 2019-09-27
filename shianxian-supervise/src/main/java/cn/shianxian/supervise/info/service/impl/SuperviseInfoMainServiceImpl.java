@@ -237,33 +237,20 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                     this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
                 }
             }
-            for (SuperviseInfoSub superviseInfoSub : unCheckedList) {
-                List<Supervise> superviseLists = superviseType.getSuperviseList();
-                for (Supervise supervise : superviseLists) {
-                    List<SupervisePic> subList = supervise.getSuperviseList();
-                    sub:for (Supervise sub : subList) {
-                        List<SuperviseResult> results = sub.getSuperviseResultList();
-                        if (results.isEmpty()) {
-                            continue sub;
-                        }
-                        superviseInfoSub.setMainIds(mainIds);
-                        superviseInfoSub.setNodeTag(superviseType.getNodeTag());
-                        superviseInfoSub.setSuperviseTypeTag(superviseType.getSuperviseTypeTag());
-                        superviseInfoSub.setSuperviseTag(sub.getSuperviseTag());
-                        superviseInfoSub.setSuperviseName(sub.getSuperviseName());
-                        superviseInfoSub.setResultTag(results.get(0).getResultTag());
-                        superviseInfoSub.setResultValue(results.get(0).getResultValue());
-                        superviseInfoSub.setScore(results.get(0).getScore());
-                        superviseInfoSub.setAdvice(results.get(0).getAdvice());
-                        superviseInfoSub.setRequst("");
-                        superviseInfoSub.setPicTag( sub.getPicTag());
-                        superviseInfoSub.setCreateUserTag(UserThreadLocal.getUser().getUserTag());
-                        superviseInfoSub.setLastUpdateUser(UserThreadLocal.getUser().getUserTag());
-                        superviseInfoSub.setRemark(sub.getRemark());
-                        // 保存监管从表(未整改未监管项)
-                        this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
-                    }
-                }
+            for (SuperviseInfoSub unCheckedLists : unCheckedList) {
+                SuperviseInfoSub superviseInfoSub = new SuperviseInfoSub();
+                superviseInfoSub.setMainIds(mainIds);
+                superviseInfoSub.setNodeTag(unCheckedLists.getNodeTag());
+                superviseInfoSub.setSuperviseTypeTag(unCheckedLists.getSuperviseTypeTag());
+                superviseInfoSub.setSuperviseTag(unCheckedLists.getSuperviseTag());
+                superviseInfoSub.setSuperviseName(unCheckedLists.getSuperviseName());
+                superviseInfoSub.setResultTag(unCheckedLists.getResultTag());
+                superviseInfoSub.setResultValue(unCheckedLists.getResultValue());
+                superviseInfoSub.setScore(unCheckedLists.getScore());
+                superviseInfoSub.setCreateUserTag(UserThreadLocal.getUser().getUserTag());
+                superviseInfoSub.setLastUpdateUser(UserThreadLocal.getUser().getUserTag());
+                // 保存监管从表
+                this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
             }
             // 修改监管类型
             this.superviseInfoMainTypeDao.updateSuperviseInfoMainType(superviseInfoMainType.getMainIds());
