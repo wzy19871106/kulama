@@ -171,9 +171,9 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
     }
 
     @Override
-    public Result saveSuperviseInfoCheck(List<?> JsonResult) {
-        List<SuperviseType> superviseTypeList = (List<SuperviseType>) JsonResult.get(0);
-        List<SuperviseInfoSub> unCheckedList = (List<SuperviseInfoSub>) JsonResult.get(1);
+    public Result saveSuperviseInfoCheck(List<?> jsonResult) {
+        List<SuperviseType> superviseTypeList = (List<SuperviseType>) jsonResult.get(0);
+        List<SuperviseInfoSub> unCheckedList = (List<SuperviseInfoSub>) jsonResult.get(1);
         SuperviseInfoMain superviseInfoMain = new SuperviseInfoMain();
         boolean flag = true;
         String mainId = UUIDGenerator.generatorUUID();
