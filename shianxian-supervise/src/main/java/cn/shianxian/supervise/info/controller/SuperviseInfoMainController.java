@@ -153,36 +153,7 @@ public class SuperviseInfoMainController {
      */
     @PostMapping("saveNotSuperviseInfo")
     @ApiOperation(value = "保存监管业务(未整改未监管项)", notes = "保存监管业务(未整改未监管项)")
-    @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
-            @ApiImplicitParam(paramType = "query", name = "parentTag", value = "父类型编码"),
-            @ApiImplicitParam(paramType = "query", name = "superviseTypeName", value = "监管类型名称"),
-            @ApiImplicitParam(paramType = "query", name = "order", value = "监管类型位置"),
-            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "数据权限模板拥有该监管类型的数据权限"),
-            @ApiImplicitParam(paramType = "query", name = "ifMenu", value = "是否可以为该栏目添加信息"),
-            @ApiImplicitParam(paramType = "query", name = "ifUse", value = "栏目启用"),
-            @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "栏目禁用"),
-            @ApiImplicitParam(paramType = "query", name = "subId", value = "自增编码"),
-            @ApiImplicitParam(paramType = "query", name = "mainIds", value = "监管业务主类型表外键"),
-            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业编码"),
-            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
-            @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管内容编码"),
-            @ApiImplicitParam(paramType = "query", name = "superviseName", value = "监管内容名称"),
-            @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
-            @ApiImplicitParam(paramType = "query", name = "resultValue", value = "监管结果值"),
-            @ApiImplicitParam(paramType = "query", name = "score", value = "结果分值"),
-            @ApiImplicitParam(paramType = "query", name = "advice", value = "整改意见"),
-            @ApiImplicitParam(paramType = "query", name = "requst", value = "整改反馈"),
-            @ApiImplicitParam(paramType = "query", name = "picTag", value = "整改反馈附件"),
-            @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建日期"),
-            @ApiImplicitParam(paramType = "query", name = "createUserTag", value = "创建人"),
-            @ApiImplicitParam(paramType = "query", name = "lastUpdateTime", value = "最后更新日期"),
-            @ApiImplicitParam(paramType = "query", name = "lastUpdateUser", value = "最后更新人"),
-            @ApiImplicitParam(paramType = "query", name = "status", value = "整改状态"),
-            @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
-            @ApiImplicitParam(paramType = "query", name = "unCheckedList" , value = "未整改未监管项")
-    })
-    public ResponseEntity<Result> saveSuperviseInfoCheck(@RequestBody @Valid List<SuperviseType> superviseTypeList, List<SuperviseInfoSub> unCheckedList) {
+    public ResponseEntity<Result> saveSuperviseInfoCheck(@RequestBody @Valid List<SuperviseType> superviseTypeList,@RequestBody @Valid List<SuperviseInfoSub> unCheckedList) {
         log.info("保存监管业务（主表-未整改未监管项）：{}", superviseTypeList, unCheckedList);
         Result result = this.superviseInfoMainService.saveSuperviseInfoCheck(superviseTypeList, unCheckedList);
         return ResponseEntity.ok(result);
