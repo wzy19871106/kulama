@@ -70,4 +70,12 @@ public interface SuperviseResultService {
      * @return
      */
     Result selectSuperviseFullResultById(String id);
+
+
+    /**
+     * 根据监管内容编码查询最低分的监管结果
+     * @param id
+     * @return
+     */
+    Result selectSuperviseWorstResultById(String id);
 }

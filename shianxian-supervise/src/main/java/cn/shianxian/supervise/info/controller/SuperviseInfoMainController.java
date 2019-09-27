@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
+import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.service.SuperviseInfoMainService;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import io.swagger.annotations.Api;
@@ -42,6 +43,7 @@ public class SuperviseInfoMainController {
 
     /**
      * 保存监管业务（主表）
+     *
      * @return
      */
     @PostMapping("superviseInfoMain")
@@ -66,6 +68,7 @@ public class SuperviseInfoMainController {
 
     /**
      * 根据登录用户的数据访问权限查询计划任务监管日志列表
+     *
      * @return
      */
     @GetMapping("selectSuperviseInfoByPlan")
@@ -88,6 +91,7 @@ public class SuperviseInfoMainController {
 
     /**
      * 根据登录用户的数据访问权限查询计划任务监管日志列表（日常抽查）
+     *
      * @return
      */
     @GetMapping("selectSuperviseInfoByLike")
@@ -109,6 +113,7 @@ public class SuperviseInfoMainController {
 
     /**
      * 根据登录用户的数据访问权限及条件查询需要整改的监管列表，已企业，监管类型分组显示
+     *
      * @return
      */
     @GetMapping("selectSuperviseInfoByRectify")
@@ -130,6 +135,7 @@ public class SuperviseInfoMainController {
 
     /**
      * 保存监管业务
+     *
      * @return
      */
     @PostMapping("saveSuperviseInfo")
@@ -140,9 +146,51 @@ public class SuperviseInfoMainController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 保存监管业务(未整改未监管项)
+     *
+     * @return
+     */
+    @PostMapping("saveNotSuperviseInfo")
+    @ApiOperation(value = "保存监管业务(未整改未监管项)", notes = "保存监管业务(未整改未监管项)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "parentTag", value = "父类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeName", value = "监管类型名称"),
+            @ApiImplicitParam(paramType = "query", name = "order", value = "监管类型位置"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "数据权限模板拥有该监管类型的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "ifMenu", value = "是否可以为该栏目添加信息"),
+            @ApiImplicitParam(paramType = "query", name = "ifUse", value = "栏目启用"),
+            @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "栏目禁用"),
+            @ApiImplicitParam(paramType = "query", name = "subId", value = "自增编码"),
+            @ApiImplicitParam(paramType = "query", name = "mainIds", value = "监管业务主类型表外键"),
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管内容编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseName", value = "监管内容名称"),
+            @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
+            @ApiImplicitParam(paramType = "query", name = "resultValue", value = "监管结果值"),
+            @ApiImplicitParam(paramType = "query", name = "score", value = "结果分值"),
+            @ApiImplicitParam(paramType = "query", name = "advice", value = "整改意见"),
+            @ApiImplicitParam(paramType = "query", name = "requst", value = "整改反馈"),
+            @ApiImplicitParam(paramType = "query", name = "picTag", value = "整改反馈附件"),
+            @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建日期"),
+            @ApiImplicitParam(paramType = "query", name = "createUserTag", value = "创建人"),
+            @ApiImplicitParam(paramType = "query", name = "lastUpdateTime", value = "最后更新日期"),
+            @ApiImplicitParam(paramType = "query", name = "lastUpdateUser", value = "最后更新人"),
+            @ApiImplicitParam(paramType = "query", name = "status", value = "整改状态"),
+            @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
+            @ApiImplicitParam(paramType = "query", name = "unCheckedList" , value = "未整改未监管项")
+    })
+    public ResponseEntity<Result> saveSuperviseInfoCheck(@RequestBody @Valid List<SuperviseType> superviseTypeList, List<SuperviseInfoSub> unCheckedList) {
+        log.info("保存监管业务（主表-未整改未监管项）：{}", superviseTypeList, unCheckedList);
+        Result result = this.superviseInfoMainService.saveSuperviseInfoCheck(superviseTypeList, unCheckedList);
+        return ResponseEntity.ok(result);
+    }
 
     /**
      * 获取播放视频url
+     *
      * @return
      */
     @GetMapping("getVideoUrl")
@@ -157,6 +205,7 @@ public class SuperviseInfoMainController {
 
     /**
      * 下载视频
+     *
      * @return
      */
     @GetMapping("downloadVideo")
@@ -168,7 +217,8 @@ public class SuperviseInfoMainController {
         if (folder.exists() && !folder.isFile()) {
             File file = null;
             File[] folderArr1 = folder.listFiles();
-            a:for (File f1 : folderArr1) {
+            a:
+            for (File f1 : folderArr1) {
                 File[] folderArr2 = f1.listFiles();
                 for (File f2 : folderArr2) {
                     File[] folderArr3 = f2.listFiles();
@@ -218,7 +268,6 @@ public class SuperviseInfoMainController {
         }
         return ResponseEntity.ok(Result.successMsg());
     }
-
 
 
 }

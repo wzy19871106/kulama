@@ -161,4 +161,18 @@ public class SuperviseResultController {
         Result result = this.superviseResultService.selectSuperviseFullResultById(superviseTag);
         return ResponseEntity.ok(result);
     }
+
+
+    /**
+     * 根据监管内容编码查询最低分的监管结果
+     * @param superviseTag
+     * @return
+     */
+    @GetMapping("selectSuperviseWorstResultById")
+    @ApiOperation(value = "查询满分的监管结果",notes = "查询满分的监管结果")
+    @ApiImplicitParam(paramType = "query",name = "superviseTag",value = "监管内容编码")
+    public ResponseEntity<Result> selectSuperviseWorstResultById(String superviseTag){
+        Result result = this.superviseResultService.selectSuperviseWorstResultById(superviseTag);
+        return ResponseEntity.ok(result);
+    }
 }

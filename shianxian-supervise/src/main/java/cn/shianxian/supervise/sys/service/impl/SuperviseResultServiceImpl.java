@@ -157,4 +157,10 @@ public class SuperviseResultServiceImpl implements SuperviseResultService {
         List<SuperviseResult> results = this.superviseResultDao.selectSuperviseFullResultBySuperviseTag(id);
         return Result.data(results);
     }
+
+    @Override
+    public Result selectSuperviseWorstResultById(String id) {
+        List<SuperviseResult> results = this.superviseResultDao.selectSuperviseWorstResultBySuperviseTag(id);
+        return Result.data(results);
+    }
 }

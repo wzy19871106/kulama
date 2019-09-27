@@ -89,4 +89,13 @@ public interface SuperviseResultDao extends Mapper<SuperviseResult> {
      * @return
      */
     List<SuperviseResult> selectSuperviseFullResultBySuperviseTag(@Param("id") String id);
+
+    /**
+     * 根据监管内容编码查询最低分的监管结果
+     * @param id
+     * @return
+     */
+    List<SuperviseResult> selectSuperviseWorstResultBySuperviseTag(@Param("id") String id);
+
+
 }

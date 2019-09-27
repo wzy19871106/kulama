@@ -4,6 +4,7 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
+import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 
 import java.util.List;
@@ -82,6 +83,13 @@ public interface SuperviseInfoMainService {
      */
     Result saveSuperviseInfo(List<SuperviseType> superviseTypeList);
 
+
+    /**
+     * 保存监管业务(未整改未监管项)
+     *
+     * @return
+     */
+    Result saveSuperviseInfoCheck(List<SuperviseType> superviseTypeList,List<SuperviseInfoSub>  unCheckedList);
 
     /**
      * 获取播放视频url
