@@ -89,7 +89,7 @@ public interface SuperviseInfoMainService {
      *
      * @return
      */
-    Result saveSuperviseInfoCheck(List<SuperviseType> superviseTypeList,List<SuperviseInfoSub>  unCheckedList);
+    Result saveSuperviseInfoCheck(List<?> JsonResult);
 
     /**
      * 获取播放视频url

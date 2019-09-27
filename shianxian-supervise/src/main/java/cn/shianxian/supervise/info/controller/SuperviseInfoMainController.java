@@ -153,9 +153,9 @@ public class SuperviseInfoMainController {
      */
     @PostMapping("saveNotSuperviseInfo")
     @ApiOperation(value = "保存监管业务(未整改未监管项)", notes = "保存监管业务(未整改未监管项)")
-    public ResponseEntity<Result> saveSuperviseInfoCheck(@RequestBody @Valid List<SuperviseType> superviseTypeList,@RequestBody @Valid List<SuperviseInfoSub> unCheckedList) {
-        log.info("保存监管业务（主表-未整改未监管项）：{}", superviseTypeList, unCheckedList);
-        Result result = this.superviseInfoMainService.saveSuperviseInfoCheck(superviseTypeList, unCheckedList);
+    public ResponseEntity<Result> saveSuperviseInfoCheck(@RequestBody @Valid List<?> JsonResult) {
+        log.info("保存监管业务（主表-未整改未监管项）：{}", JsonResult);
+        Result result = this.superviseInfoMainService.saveSuperviseInfoCheck(JsonResult);
         return ResponseEntity.ok(result);
     }
 
