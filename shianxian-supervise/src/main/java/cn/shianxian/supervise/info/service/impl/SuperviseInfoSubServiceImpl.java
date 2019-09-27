@@ -70,9 +70,8 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
                 }
             }
             infoSub.setPicTag(sb.toString());
-            return Result.data(infoSub);
         }
-        return Result.failMsg();
+        return Result.data(infoSub);
     }
 
 
