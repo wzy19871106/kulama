@@ -169,7 +169,7 @@ public class SuperviseResultController {
      * @return
      */
     @GetMapping("selectSuperviseWorstResultById")
-    @ApiOperation(value = "查询满分的监管结果",notes = "查询满分的监管结果")
+    @ApiOperation(value = "查询最低分的监管结果",notes = "查询最低分的监管结果")
     @ApiImplicitParam(paramType = "query",name = "superviseTag",value = "监管内容编码")
     public ResponseEntity<Result> selectSuperviseWorstResultById(String superviseTag){
         Result result = this.superviseResultService.selectSuperviseWorstResultById(superviseTag);
