@@ -177,7 +177,6 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
         boolean flag = true;
         String mainId = UUIDGenerator.generatorUUID();
         for (SuperviseType superviseType : superviseTypeList) {
-            System.out.println(superviseType);
             if (flag) {
                 mainId = superviseType.getMainId();
                 superviseInfoMain.setMainId(mainId);
@@ -243,7 +242,6 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             List<SuperviseInfoSub> unCheckedList = superviseType.getUnCheckedList();
             if (!unCheckedList.isEmpty()) {
                 for (SuperviseInfoSub unCheckedLists : unCheckedList) {
-                    System.out.println(unCheckedLists);
                     SuperviseInfoSub superviseInfoSub = new SuperviseInfoSub();
                     superviseInfoSub.setMainIds(mainIds);
                     superviseInfoSub.setNodeTag(unCheckedLists.getNodeTag());
