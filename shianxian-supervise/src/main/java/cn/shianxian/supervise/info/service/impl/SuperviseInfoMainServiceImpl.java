@@ -140,7 +140,8 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             List<Supervise> superviseList = superviseType.getSuperviseList();
             for (Supervise supervise : superviseList) {
                 List<SupervisePic> subList = supervise.getSuperviseList();
-                sub:for (Supervise sub : subList) {
+                sub:
+                for (Supervise sub : subList) {
                     List<SuperviseResult> results = sub.getSuperviseResultList();
                     if (results.isEmpty()) {
                         continue sub;
@@ -156,7 +157,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                     superviseInfoSub.setScore(results.get(0).getScore());
                     superviseInfoSub.setAdvice(results.get(0).getAdvice());
                     superviseInfoSub.setRequst("");
-                    superviseInfoSub.setPicTag( sub.getPicTag());
+                    superviseInfoSub.setPicTag(sub.getPicTag());
                     superviseInfoSub.setCreateUserTag(UserThreadLocal.getUser().getUserTag());
                     superviseInfoSub.setLastUpdateUser(UserThreadLocal.getUser().getUserTag());
                     superviseInfoSub.setRemark(sub.getRemark());
@@ -214,7 +215,8 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             List<Supervise> superviseList = superviseType.getSuperviseList();
             for (Supervise supervise : superviseList) {
                 List<SupervisePic> subList = supervise.getSuperviseList();
-                sub:for (Supervise sub : subList) {
+                sub:
+                for (Supervise sub : subList) {
                     List<SuperviseResult> results = sub.getSuperviseResultList();
                     if (results.isEmpty()) {
                         continue sub;
@@ -230,7 +232,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                     superviseInfoSub.setScore(results.get(0).getScore());
                     superviseInfoSub.setAdvice(results.get(0).getAdvice());
                     superviseInfoSub.setRequst("");
-                    superviseInfoSub.setPicTag( sub.getPicTag());
+                    superviseInfoSub.setPicTag(sub.getPicTag());
                     superviseInfoSub.setCreateUserTag(UserThreadLocal.getUser().getUserTag());
                     superviseInfoSub.setLastUpdateUser(UserThreadLocal.getUser().getUserTag());
                     superviseInfoSub.setRemark(sub.getRemark());
@@ -239,21 +241,23 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 }
             }
             List<SuperviseInfoSub> unCheckedList = superviseType.getUnCheckedList();
-            for (SuperviseInfoSub unCheckedLists : unCheckedList) {
-                System.out.println(unCheckedLists);
-                SuperviseInfoSub superviseInfoSub = new SuperviseInfoSub();
-                superviseInfoSub.setMainIds(mainIds);
-                superviseInfoSub.setNodeTag(unCheckedLists.getNodeTag());
-                superviseInfoSub.setSuperviseTypeTag(unCheckedLists.getSuperviseTypeTag());
-                superviseInfoSub.setSuperviseTag(unCheckedLists.getSuperviseTag());
-                superviseInfoSub.setSuperviseName(unCheckedLists.getSuperviseName());
-                superviseInfoSub.setResultTag(unCheckedLists.getResultTag());
-                superviseInfoSub.setResultValue(unCheckedLists.getResultValue());
-                superviseInfoSub.setScore(unCheckedLists.getScore());
-                superviseInfoSub.setCreateUserTag(UserThreadLocal.getUser().getUserTag());
-                superviseInfoSub.setLastUpdateUser(UserThreadLocal.getUser().getUserTag());
-                // 保存监管从表
-                this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
+            if (!unCheckedList.isEmpty()) {
+                for (SuperviseInfoSub unCheckedLists : unCheckedList) {
+                    System.out.println(unCheckedLists);
+                    SuperviseInfoSub superviseInfoSub = new SuperviseInfoSub();
+                    superviseInfoSub.setMainIds(mainIds);
+                    superviseInfoSub.setNodeTag(unCheckedLists.getNodeTag());
+                    superviseInfoSub.setSuperviseTypeTag(unCheckedLists.getSuperviseTypeTag());
+                    superviseInfoSub.setSuperviseTag(unCheckedLists.getSuperviseTag());
+                    superviseInfoSub.setSuperviseName(unCheckedLists.getSuperviseName());
+                    superviseInfoSub.setResultTag(unCheckedLists.getResultTag());
+                    superviseInfoSub.setResultValue(unCheckedLists.getResultValue());
+                    superviseInfoSub.setScore(unCheckedLists.getScore());
+                    superviseInfoSub.setCreateUserTag(UserThreadLocal.getUser().getUserTag());
+                    superviseInfoSub.setLastUpdateUser(UserThreadLocal.getUser().getUserTag());
+                    // 保存监管从表
+                    this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
+                }
             }
             // 修改监管类型
             this.superviseInfoMainTypeDao.updateSuperviseInfoMainType(superviseInfoMainType.getMainIds());
@@ -268,7 +272,8 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
         File folder = new File(recordFileRootDir + mainId);
         if (folder.exists() && !folder.isFile()) {
             File[] folderArr1 = folder.listFiles();
-            a:for (File f1 : folderArr1) {
+            a:
+            for (File f1 : folderArr1) {
                 File[] folderArr2 = f1.listFiles();
                 for (File f2 : folderArr2) {
                     File[] folderArr3 = f2.listFiles();
