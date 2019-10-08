@@ -5,9 +5,11 @@ import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoMain;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
+import cn.shianxian.supervise.info.vo.SuperviseVO;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SuperviseInfoMainService {
 
@@ -89,7 +91,7 @@ public interface SuperviseInfoMainService {
      *
      * @return
      */
-    Result saveSuperviseInfoCheck(List<?> jsonResult);
+    Result saveSuperviseInfoCheck(List<SuperviseType> superviseTypeList);
 
     /**
      * 获取播放视频url

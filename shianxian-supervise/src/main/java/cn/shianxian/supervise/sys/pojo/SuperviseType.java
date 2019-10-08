@@ -1,7 +1,9 @@
 package cn.shianxian.supervise.sys.pojo;
 
 
+import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import lombok.Data;
+import org.w3c.dom.ls.LSException;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -147,4 +149,9 @@ public class SuperviseType {
     @Transient
     private String mainId;
 
+    /**
+     * 未整改未监管
+     */
+    @Transient
+    private List<SuperviseInfoSub> unCheckedList;
 }

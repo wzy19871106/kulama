@@ -171,13 +171,12 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
     }
 
     @Override
-    public Result saveSuperviseInfoCheck(List<?> jsonResult) {
-        List<SuperviseType> superviseTypeList = (List<SuperviseType>) jsonResult.get(0);
-        List<SuperviseInfoSub> unCheckedList = (List<SuperviseInfoSub>) jsonResult.get(1);
+    public Result saveSuperviseInfoCheck(List<SuperviseType> superviseTypeList) {
         SuperviseInfoMain superviseInfoMain = new SuperviseInfoMain();
         boolean flag = true;
         String mainId = UUIDGenerator.generatorUUID();
         for (SuperviseType superviseType : superviseTypeList) {
+            System.out.println(superviseType);
             if (flag) {
                 mainId = superviseType.getMainId();
                 superviseInfoMain.setMainId(mainId);
@@ -239,7 +238,9 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                     this.superviseInfoSubDao.saveSuperviseInfoSub(superviseInfoSub);
                 }
             }
+            List<SuperviseInfoSub> unCheckedList = superviseType.getUnCheckedList();
             for (SuperviseInfoSub unCheckedLists : unCheckedList) {
+                System.out.println(unCheckedLists);
                 SuperviseInfoSub superviseInfoSub = new SuperviseInfoSub();
                 superviseInfoSub.setMainIds(mainIds);
                 superviseInfoSub.setNodeTag(unCheckedLists.getNodeTag());
