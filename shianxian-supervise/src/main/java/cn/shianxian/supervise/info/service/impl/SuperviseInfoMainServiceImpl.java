@@ -171,6 +171,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
         return Result.successMsg();
     }
 
+    @Transactional
     @Override
     public Result saveSuperviseInfoCheck(List<SuperviseType> superviseTypeList) {
         SuperviseInfoMain superviseInfoMain = new SuperviseInfoMain();
