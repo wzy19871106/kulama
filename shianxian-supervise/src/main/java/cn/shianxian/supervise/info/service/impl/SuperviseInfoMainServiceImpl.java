@@ -43,8 +43,8 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
     @Value("${agora.recordFileRootDir}")
     private String recordFileRootDir;
 
-    @Value("${upload.url}")
-    private String uploadUrl;
+    @Value("${upload.vourl}")
+    private String uploadVourl;
 
     @Override
     public Result selectSuperviseInfoByNodePlan(String nodeTag, Pages pages) {
@@ -285,7 +285,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 }
             }
         }
-        return Result.data(url.replace("/data/", uploadUrl));
+        return Result.data(url.replace("/data/", uploadVourl));
     }
 
 

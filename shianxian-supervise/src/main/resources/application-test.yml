@@ -92,6 +92,7 @@ baidu:
 upload:
   url: http://10.18.9.57/
   path: /data/img/
+  vourl: https://sapi.dev.shianxian.cn/
 
 # 日志
 logging:
