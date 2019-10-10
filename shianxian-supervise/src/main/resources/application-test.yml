@@ -90,7 +90,7 @@ baidu:
 
 # 上传配置
 upload:
-  url: https://10.18.9.57/
+  url: http://10.18.9.57/
   path: /data/img/
 
 # 日志
