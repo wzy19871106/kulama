@@ -32,7 +32,6 @@ public class AppVersionController {
      */
     @GetMapping("selectAppVersionById")
     @ApiOperation(value = "根据id查询app版本号",notes = "根据id查询app版本号")
-    @ApiImplicitParam(paramType = "query", name = "id", value = "app版本号id")
     public ResponseEntity<Result> selectAppVersionById(){
         Result result = this.appVersionService.selectAppVersion();
         return ResponseEntity.ok(Result.data(result));
