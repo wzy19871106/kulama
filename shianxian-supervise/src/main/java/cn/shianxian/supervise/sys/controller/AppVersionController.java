@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * app获取版本号
  */
@@ -32,9 +35,12 @@ public class AppVersionController {
      */
     @GetMapping("selectAppVersionById")
     @ApiOperation(value = "根据id查询app版本号",notes = "根据id查询app版本号")
-    public ResponseEntity<Result> selectAppVersionById(){
-        Result result = this.appVersionService.selectAppVersion();
-        return ResponseEntity.ok(result);
+    public Result selectAppVersionById(){
+        String version = this.appVersionService.selectAppVersion();
+        Map map = new HashMap();
+        map.put("version",version);
+        map.put("url","url");
+        return Result.data(map);
     }
 
 }
