@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,8 +29,9 @@ public class AppVersionController {
     @Autowired
     private AppVersionService appVersionService;
 
+    private static final String filepath = "http://sapi.dev.shianxian.cn/app/";
     /**
-     * 根据id查询app版本号
+     * 根据id查询app版本号，返回文件下载路径
      * @param
      * @return
      */
@@ -39,7 +41,8 @@ public class AppVersionController {
         String version = this.appVersionService.selectAppVersion();
         Map map = new HashMap();
         map.put("version",version);
-        map.put("url","url");
+        File file = new File(filepath);
+        map.put("url",filepath+file.getName()+"app-debug.apk");
         return Result.data(map);
     }
 
