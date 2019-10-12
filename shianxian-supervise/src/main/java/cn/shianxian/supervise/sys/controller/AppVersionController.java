@@ -34,7 +34,7 @@ public class AppVersionController {
     @ApiOperation(value = "根据id查询app版本号",notes = "根据id查询app版本号")
     public ResponseEntity<Result> selectAppVersionById(){
         Result result = this.appVersionService.selectAppVersion();
-        return ResponseEntity.ok(Result.data(result));
+        return ResponseEntity.ok(result);
     }
 
 }
