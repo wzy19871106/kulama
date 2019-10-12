@@ -14,8 +14,8 @@ public class AppVersionServiecImpl implements AppVersionService {
 
 
     @Override
-    public Result selectAppVersion(int id) {
-        String version = this.appVersionDao.selectAppVersion(id);
+    public Result selectAppVersion() {
+        String version = this.appVersionDao.selectAppVersion();
         return Result.data(version);
     }
 }
