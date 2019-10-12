@@ -26,6 +26,7 @@ public class CorsConfig {
         List<String> list = new ArrayList<>();
         // 本地测试
         list.add("http://127.0.0.1:8083");
+        list.add("https://127.0.0.1:8083");
         list.add("https://supervise.dev.shianxian.cn");
         list.add("http://supervise.dev.shianxian.cn");
         list.add("https://supervise.test.shianxian.cn");
