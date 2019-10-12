@@ -7,5 +7,5 @@ public interface AppVersionService {
     /**
      * 查询app版本号
      */
-    Result selectAppVersion(int id);
+    Result selectAppVersion();
 }

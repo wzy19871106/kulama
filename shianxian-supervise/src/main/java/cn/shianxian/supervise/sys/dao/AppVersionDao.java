@@ -10,5 +10,5 @@ public interface AppVersionDao {
      * 根据id查询app版本号
      */
 
-    String selectAppVersion(@Param("id") int id);
+    String selectAppVersion();
 }
