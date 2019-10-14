@@ -21,7 +21,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("app/version")
+@RequestMapping("version")
 @Api(description = "app版本获取控制器")
 @Slf4j
 public class AppVersionController {
