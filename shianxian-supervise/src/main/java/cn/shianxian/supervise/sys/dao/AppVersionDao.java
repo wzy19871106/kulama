@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public interface AppVersionDao {
 
     /**
-     * 根据id查询app版本号
+     * 查询app版本号,返回更新路径
      */
 
     String selectAppVersion();

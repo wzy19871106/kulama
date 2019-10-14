@@ -29,20 +29,20 @@ public class AppVersionController {
     @Autowired
     private AppVersionService appVersionService;
 
-    private static final String filepath = "http://sapi.dev.shianxian.cn/app/";
+    private static final String filePath = "http://sapi.dev.shianxian.cn/app/";
+    private static final String fileName = "app-debug.apk";
     /**
      * 根据id查询app版本号，返回文件下载路径
      * @param
-     * @return
+     * @return http://sapi.dev.shianxian.cn/app/app-debug.apk
      */
     @GetMapping("selectAppVersionById")
-    @ApiOperation(value = "根据id查询app版本号",notes = "根据id查询app版本号")
+    @ApiOperation(value = "查询app版本号,返回更新路径",notes = "查询app版本号，返回更新路径")
     public Result selectAppVersionById(){
         String version = this.appVersionService.selectAppVersion();
-        Map map = new HashMap();
+        Map<String,String> map = new HashMap();
         map.put("version",version);
-        File file = new File(filepath);
-        map.put("url",filepath+file.getName()+"app-debug.apk");
+        map.put("url",filePath+fileName);
         return Result.data(map);
     }
 
