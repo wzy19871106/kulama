@@ -31,7 +31,7 @@ import java.util.concurrent.FutureTask;
 @RequestMapping("agora")
 @Api(description = "声网控制器")
 @Slf4j
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class AgoraController {
 
 
