@@ -29,6 +29,7 @@ public class AppVersionController {
     @Autowired
     private AppVersionService appVersionService;
 
+    // 10.18.9.57 /data/apps
     private static final String filePath = "http://sapi.dev.shianxian.cn/apps/";
     private static final String fileName = "app-debug.apk";
     /**
