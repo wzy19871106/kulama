@@ -61,7 +61,7 @@ public class JpushUtil {
 
     //极光推送>>ios
     //Map<String, String> parm是我自己传过来的参数,可以自定义参数
-    public static void jpushIOS(Map<String, String> parm) {
+    public static Result jpushIOS(Map<String, String> parm) {
 
         //创建JPushClient
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY);
@@ -84,10 +84,13 @@ public class JpushUtil {
         try {
             PushResult pu = jpushClient.sendPush(payload);
 //            System.out.println(pu.toString());
+            return Result.data(pu);
         } catch (APIConnectionException e) {
             e.printStackTrace();
+            return Result.failMsg();
         } catch (APIRequestException e) {
             e.printStackTrace();
+            return Result.failMsg();
         }
     }
 
