@@ -2,6 +2,7 @@ package cn.shianxian.supervise.push.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.JpushUtil;
+import cn.shianxian.supervise.push.vo.JpushVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -35,13 +36,14 @@ public class PushController {
             @ApiImplicitParam(paramType = "query", name = "alias", value = "别名"),
             @ApiImplicitParam(paramType = "query", name = "id", value = "registrationId指定用户")
     })
-    public ResponseEntity<Result> JpushAndroid(String msg, String title, String alias,String id){
+    public ResponseEntity<Result> JpushAndroid(JpushVO jpushVO){
         Map<String, String> parm = new HashMap<>();
-        parm.put("msg",msg);
-        parm.put("title",title);
-        parm.put("alias",alias);
-        parm.put("id",id);
+        parm.put("msg",jpushVO.getMsg());
+        parm.put("title",jpushVO.getTitle());
+        parm.put("alias",jpushVO.getAlias());
+        parm.put("id",jpushVO.getId());
         Result result = JpushUtil.jpushAndroid(parm);
+        log.info("极光推送，{}",result);
         return ResponseEntity.ok(result);
     }
 }
