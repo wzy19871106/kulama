@@ -23,8 +23,8 @@ import java.util.Map;
 public class JpushUtil {
 
     // 设置好账号的app_key和masterSecret是必须的
-    private static String APP_KEY = "8d4eea39e0adc06932086f3e";
-    private static String MASTER_SECRET = "f2043b41c089a40167531c25";
+    private static final String APP_KEY = "8d4eea39e0adc06932086f3e";
+    private static final String MASTER_SECRET = "f2043b41c089a40167531c25";
 
     //极光推送>>Android
     //Map<String, String> parm是我自己传过来的参数,可以自定义参数
