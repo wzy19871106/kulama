@@ -21,7 +21,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("app/version")
+@RequestMapping("version")
 @Api(description = "app版本获取控制器")
 @Slf4j
 public class AppVersionController {
@@ -29,12 +29,13 @@ public class AppVersionController {
     @Autowired
     private AppVersionService appVersionService;
 
-    private static final String filePath = "http://sapi.dev.shianxian.cn/app/";
+    // 10.18.9.57 /data/apps
+    private static final String filePath = "http://sapi.dev.shianxian.cn/apps/";
     private static final String fileName = "app-debug.apk";
     /**
      * 根据id查询app版本号，返回文件下载路径
      * @param
-     * @return http://sapi.dev.shianxian.cn/app/app-debug.apk
+     * @return http://sapi.dev.shianxian.cn/apps/app-debug.apk
      */
     @GetMapping("selectAppVersionById")
     @ApiOperation(value = "查询app版本号,返回更新路径",notes = "查询app版本号，返回更新路径")

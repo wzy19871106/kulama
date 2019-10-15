@@ -30,7 +30,7 @@ public class Information {
      */
     @Column(name = "`title`")
     @NotEmpty(message = "标题不能为空！")
-    @Size(message = "政企互动标题过长！", max = 200)
+    @Size(message = "政企互动标题过长！", max = 1000)
     private String title;
 
     /**
@@ -44,7 +44,7 @@ public class Information {
      */
     @Column(name = "`content`")
     @NotEmpty(message = "内容不能为空！")
-    @Size(message = "政企互动内容过长！", max = 2000)
+    @Size(message = "政企互动内容过长！", max = 8000)
     private String content;
 
     /**
