@@ -71,6 +71,12 @@ public class SuperviseType {
     private Boolean ifDelete;
 
     /**
+     * 回访状态
+     */
+    @Transient
+    private String ifVisit;
+
+    /**
      * 父类型名称
      */
     @Transient
