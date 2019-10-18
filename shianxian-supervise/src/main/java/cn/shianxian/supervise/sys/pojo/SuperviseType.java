@@ -74,7 +74,7 @@ public class SuperviseType {
      * 回访状态
      */
     @Transient
-    private String ifVisit;
+    private Boolean ifVisit;
 
     /**
      * 父类型名称

@@ -116,7 +116,7 @@ public class SuperviseInfoMainType {
      * 回访状态
      */
     @Column(name = "ifVisit")
-    private String ifVisit;
+    private Boolean ifVisit;
 
     /**
      * 逻辑删除
