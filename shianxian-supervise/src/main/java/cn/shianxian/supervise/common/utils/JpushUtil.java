@@ -39,7 +39,7 @@ public class JpushUtil {
                 //.setAudience(Audience.tag("tag1"))//设置按标签发送，相当于群发
 //                .setAudience(Audience.registrationId(parm.get("id")))//registrationId指定用户
 
-                .setNotification(Notification.android(parm.get("msg"), parm.get("title"), parm))  //发送内容
+//                .setNotification(Notification.android(parm.get("msg"), parm.get("title"), parm))  //发送内容
                 .setOptions(Options.newBuilder().setApnsProduction(true).setTimeToLive(7200).build())
                 // apnProduction指定开发环境 true为生产模式 false 为测试模式 (android不区分模式,ios区分模式) 不用设置也没关系
                 // TimeToLive 两个小时的缓存时间
