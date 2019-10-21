@@ -35,7 +35,7 @@ public class JpushUtil {
         PushPayload payload = PushPayload.newBuilder()
                 .setPlatform(Platform.android())//指定android平台的用户
                 .setAudience(Audience.all())//你项目中的所有用户
-//                .setAudience(Audience.alias(parm.get("alias")))//设置别名发送,单发，点对点方式
+                .setAudience(Audience.alias(parm.get("alias")))//设置别名发送,单发，点对点方式
                 //.setAudience(Audience.tag("tag1"))//设置按标签发送，相当于群发
 //                .setAudience(Audience.registrationId(parm.get("id")))//registrationId指定用户
 
