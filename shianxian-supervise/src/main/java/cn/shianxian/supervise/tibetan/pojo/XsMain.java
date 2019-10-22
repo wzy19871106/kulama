@@ -110,4 +110,18 @@ public class XsMain {
     @Column(name = "xs_checkmc")
     @Size(message = "巡查员名称过长！",max =200 )
     private String xscheckmc;
+
+    /**
+     * 支付方式编码（1现金 2 银行卡 3 记账）
+     */
+    @Column(name = "xs_paydm")
+    @Size(message = "支付方式编码过长！",max = 1)
+    private String xspaydm;
+
+    /**
+     * 支付方式名称
+     */
+    @Column(name = "xs_paymc")
+    @Size(message = "支付方式名称过长！",max = 20)
+    private String xspaymc;
 }

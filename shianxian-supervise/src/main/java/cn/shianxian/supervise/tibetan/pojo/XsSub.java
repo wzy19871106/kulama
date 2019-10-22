@@ -46,8 +46,8 @@ public class XsSub {
     /**
      * 销售重量
      */
-    @Column(name = "xs_zj")
-    private BigDecimal xszj;
+    @Column(name = "xs_zl" )
+    private BigDecimal xszl;
 
     /**
      * 销售单价

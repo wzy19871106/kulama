@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +29,7 @@ public class JhMainController {
      * @param jhkhdm
      * @return
      */
-    @GetMapping("selectPurchaseDmByjhkhdm")
+    @PostMapping("selectPurchaseDmByjhkhdm")
     @ApiOperation(value = "根据进货客户编码查询进货批次号",notes = "根据进货客户编码查询进货批次号")
     @ApiImplicitParam(paramType = "query",name = "jhkhdm",value = "进货客户编码")
     public ResponseEntity selectPurchaseInfoByjhkhdm(String jhkhdm){
@@ -43,7 +43,7 @@ public class JhMainController {
      * @param jhdm
      * @return
      */
-    @GetMapping("selectPurchaseInfoByjhdm")
+   @PostMapping("selectPurchaseInfoByjhdm")
     @ApiOperation(value = "根据进货客户编码和进货批次号查询进货信息",notes = "根据进货客户编码和进货批次号查询进货信息")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query",name = "jhkhdm",value = "进货客户编码"),
