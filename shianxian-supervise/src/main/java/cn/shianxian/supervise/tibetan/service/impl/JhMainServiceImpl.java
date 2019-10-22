@@ -1,5 +1,6 @@
 package cn.shianxian.supervise.tibetan.service.impl;
 
+import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.tibetan.dao.JhMainDao;
 import cn.shianxian.supervise.tibetan.pojo.JhSub;
@@ -15,8 +16,14 @@ public class JhMainServiceImpl implements JhMainService {
     @Autowired
     private JhMainDao jhMainDao;
     @Override
-    public Result selectPurchaseInfoByjhkhdm(String jhkhdm) {
-        List<JhSub> jhMains = this.jhMainDao.selectPurchaseInfo(jhkhdm);
-        return Result.data(jhMains);
+    public Result selectPurchaseDmByjhkhdm(String jhkhdm) {
+        String purchaseDm = this.jhMainDao.selectPurchaseDm(jhkhdm);
+        return Result.data(purchaseDm);
+    }
+
+    @Override
+    public Result selectPurchaseInfoByjhdm(String jhkhdm, String jhdm, Pages pages) {
+        List<JhSub> jhSubs = this.jhMainDao.selectPurchaseInfo(jhkhdm, jhdm,pages);
+        return Result.data(jhSubs);
     }
 }
