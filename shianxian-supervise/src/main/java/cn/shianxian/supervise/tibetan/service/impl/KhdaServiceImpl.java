@@ -12,9 +12,13 @@ public class KhdaServiceImpl implements KhdaService {
 
     @Autowired
     private KhdaDao khdaDao;
+
     @Override
     public Result selectCustomerInfoByNameAndPass(Khda khda) {
         Khda khda1 = this.khdaDao.selectCustomerInfo(khda);
-        return Result.data(khda1);
+        if (khda1 != null) {
+            return Result.data(khda1);
+        }
+        return Result.msg("登录失败");
     }
 }
