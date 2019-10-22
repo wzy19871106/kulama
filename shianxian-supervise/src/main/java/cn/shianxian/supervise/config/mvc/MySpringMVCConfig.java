@@ -35,7 +35,7 @@ public class MySpringMVCConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/upload/img")
                 .excludePathPatterns("/upload/imgs")
                 .excludePathPatterns("/version/selectAppVersionById")
-                .excludePathPatterns("/KhSelect/selectCustomerInfoByNameAndPass")
+                .excludePathPatterns("/app/KhSelect/selectCustomerInfoByNameAndPass")
                 .excludePathPatterns("/JhSelect/selectPurchaseDmByjhkhdm")
                 .excludePathPatterns("/JhSelect/selectPurchaseInfoByjhdm")
                 // swagger2页面

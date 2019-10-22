@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
  * 客户信息控制器
  */
 @RestController
-@RequestMapping("KhSelect")
+@RequestMapping("app/KhSelect")
 @Api(description = "客户信息控制器")
+@Slf4j
 public class KhdaController {
 
     @Autowired
@@ -33,7 +35,7 @@ public class KhdaController {
     })
     public ResponseEntity selectCustomerInfoByNameAndPass(Khda khda){
         Result result = this.khdaService.selectCustomerInfoByNameAndPass(khda);
-        System.out.println(result);
+        log.info("测试",ResponseEntity.ok(result));
         return ResponseEntity.ok(result);
     }
 }
