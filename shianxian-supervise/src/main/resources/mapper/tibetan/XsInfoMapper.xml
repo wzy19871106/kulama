@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.tibetan.dao.XsInfoDao">
+    <select id="selectXsje" resultType="java.math.BigDecimal">
+        select xs_zje from qzgy_xs_main where xs_xjmc= #{xsxjmc}
+    </select>
+
+    <select id="insertSalesMainInfo" resultType="java.lang.String">
+        CALL Proc_XsInsert_Main(
+        #{xssjdm,jdbcType=VARCHAR},
+        #{xssjmc,jdbcType=VARCHAR},
+        #{xsxjdm,jdbcType=VARCHAR},
+        #{xsxjmc,jdbcType=VARCHAR},
+        #{xsdm,jdbcType=VARCHAR},
+        #{xszje,jdbcType=DECIMAL},
+        #{xszzl,jdbcType=DECIMAL},
+        #{xscheckmark,jdbcType=VARCHAR},
+        #{xscheckdm,jdbcType=VARCHAR},
+        #{xscheckmc,jdbcType=VARCHAR},
+        #{xspaydm,jdbcType=VARCHAR},
+        #{xspaymc,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <!--<select id="insertSalesSubInfo" resultType="java.lang.String">-->
+        <!--CALL Proc_XsInsert_Sub(-->
+          <!--#{xsdm,jdbcType=VARCHAR},-->
+          <!--#{xsspdm,jdbcType=VARCHAR},-->
+          <!--#{xsspmc,jdbcType=VARCHAR},-->
+          <!--#{xszl,jdbcType=DECIMAL},-->
+          <!--#{xsdj,jdbcType=DECIMAL},-->
+          <!--#{xsje,jdbcType=DECIMAL},-->
+          <!--#{xsindex,jdbcType=INT},-->
+          <!--#{jhdm,jdbcType=VARCHAR}-->
+        <!--)-->
+    <!--</select>-->
+
+    <select id="selectXsInfo" resultType="cn.shianxian.supervise.tibetan.vo.XsInfoVO">
+        CALL Proc_XsSelect(#{xssjdm},#{xsxjdm},#{xschecked})
+    </select>
+</mapper>
