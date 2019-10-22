@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 进货控制器
  */
 @RestController
-@RequestMapping("JhSelect")
+@RequestMapping("app/JhSelect")
 @Api(description = "进货信息控制器")
 public class JhMainController {
 

@@ -10,7 +10,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,8 +35,6 @@ public class KhdaController {
     })
     public ResponseEntity selectCustomerInfoByNameAndPass(Khda khda){
         Result result = this.khdaService.selectCustomerInfoByNameAndPass(khda);
-        System.out.println(ResponseEntity.ok(result));
-        System.out.println(result);
         return ResponseEntity.ok(result);
     }
 }
