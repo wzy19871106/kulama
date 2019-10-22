@@ -38,7 +38,13 @@ public class JpushUtil {
                 .setAudience(Audience.alias(parm.get("alias")))//设置别名发送,单发，点对点方式
                 //.setAudience(Audience.tag("tag1"))//设置按标签发送，相当于群发
 //                .setAudience(Audience.registrationId(parm.get("id")))//registrationId指定用户
-
+                .setNotification(Notification.newBuilder()
+                        .addPlatformNotification(IosNotification.newBuilder() //发送android
+                                .setAlert(parm.get("msg")) //消息体
+                                .setSound("test") //提示音
+                                .addExtras(parm) //附加参数
+                                .build())
+                        .build())
 //                .setNotification(Notification.android(parm.get("msg"), parm.get("title"), parm))  //发送内容
                 .setOptions(Options.newBuilder().setApnsProduction(true).setTimeToLive(7200).build())
                 // apnProduction指定开发环境 true为生产模式 false 为测试模式 (android不区分模式,ios区分模式) 不用设置也没关系
