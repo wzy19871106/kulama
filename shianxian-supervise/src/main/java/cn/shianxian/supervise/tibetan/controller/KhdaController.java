@@ -35,7 +35,8 @@ public class KhdaController {
     })
     public ResponseEntity selectCustomerInfoByNameAndPass(Khda khda){
         Result result = this.khdaService.selectCustomerInfoByNameAndPass(khda);
-        log.info("测试",ResponseEntity.ok(result));
+        System.out.println(ResponseEntity.ok(result));
+        System.out.println(result);
         return ResponseEntity.ok(result);
     }
 }
