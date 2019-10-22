@@ -49,6 +49,11 @@ public class XsInfoVO {
     private String xssjmc;
 
     /**
+     * 下家名称
+     */
+    private String xsxjmc;
+
+    /**
      * 进货批次号
      */
     private String jhdm;
@@ -78,5 +83,8 @@ public class XsInfoVO {
      */
     private String jhindex;
 
-
+    /**
+     * 总金额
+     */
+    private BigDecimal amount;
 }

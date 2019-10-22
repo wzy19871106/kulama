@@ -38,4 +38,5 @@
     <select id="selectXsInfo" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
         CALL Proc_XsSelect(#{xssjdm},#{xsxjdm},#{xschecked})
     </select>
+
 </mapper>

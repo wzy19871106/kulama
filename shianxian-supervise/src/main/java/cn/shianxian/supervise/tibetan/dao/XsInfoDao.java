@@ -37,4 +37,10 @@ public interface XsInfoDao {
      */
     XsInfoDTO selectXsInfo(String xssjdm, String xsxjdm, String xschecked);
 
+    /**
+     * 更新销售信息
+     * @param xsInfoVO
+     * @return
+     */
+    String updateXsInfo(XsInfoVO xsInfoVO);
 }

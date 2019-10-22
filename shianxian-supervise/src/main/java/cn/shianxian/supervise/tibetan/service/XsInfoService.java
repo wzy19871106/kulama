@@ -21,4 +21,12 @@ public interface XsInfoService {
      * @return
      */
     Result selectXsInfo(String xssjdm,String xsxjdm,String xschecked);
+
+    /**
+     * 插入销售金额
+     * @param xsInfoVO
+     * @return
+     */
+    Result saveAmount(List<XsInfoVO> xsInfoVO);
+
 }

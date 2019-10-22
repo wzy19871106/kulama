@@ -10,6 +10,7 @@ import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,7 @@ public class XsInfoServiceImpl implements XsInfoService {
     private static int LENGTH = 6;
 
     @Override
+    @Transactional
     public Result saveSalesInfo(List<XsInfoVO> xsInfoVO) {
         // 根据进货批次号排序
         Collections.sort(xsInfoVO, new Comparator<XsInfoVO>() {
@@ -36,7 +38,7 @@ public class XsInfoServiceImpl implements XsInfoService {
         });
         HashMap<Object, Object> map = new HashMap<>();
         // 总金额
-       BigDecimal totalAmount = new BigDecimal(0);
+        BigDecimal totalAmount = new BigDecimal(0);
 
         SEQUENCE = SEQUENCE >= 999999 ? 1 : SEQUENCE + 1;
         String datetime = new SimpleDateFormat("yyyyMMddHHmmss")
@@ -49,7 +51,7 @@ public class XsInfoServiceImpl implements XsInfoService {
             // 销售金额
             BigDecimal xsje = infoDTO.getXsje();
             totalAmount = xsje.add(totalAmount);
-            map.put("totalAmount",totalAmount);
+            map.put("totalAmount", totalAmount);
             // 销售日期
             infoDTO.setXsrq(time);
             // 销售商品编码
@@ -59,8 +61,8 @@ public class XsInfoServiceImpl implements XsInfoService {
                 // 进货批次号
                 infoDTO.setJhdm(increase);
                 String subInfo = xsInfoDao.insertSalesSubInfo(infoDTO);
-                if (StringUtils.isNotBlank(subInfo) || Integer.parseInt(subInfo) > 0){
-                    map.put("xsspdm",infoDTO.getXsspdm());
+                if (StringUtils.isNotBlank(subInfo) || Integer.parseInt(subInfo) > 0) {
+                    map.put("xsspdm", infoDTO.getXsspdm());
                     return Result.data(map);
                 }
                 return Result.msg("插入销售从表失败");
@@ -74,6 +76,21 @@ public class XsInfoServiceImpl implements XsInfoService {
     public Result selectXsInfo(String xssjdm, String xsxjdm, String xschecked) {
         XsInfoDTO xsInfoDTO = this.xsInfoDao.selectXsInfo(xssjdm, xsxjdm, xschecked);
         return Result.data(xsInfoDTO);
+    }
+
+    @Override
+    @Transactional
+    public Result saveAmount(List<XsInfoVO> xsInfoVO) {
+        for (XsInfoVO infoVO : xsInfoVO) {
+            // 总金额
+            BigDecimal amount = infoVO.getAmount();
+            // 买家余额
+            BigDecimal xsje = xsInfoDao.selectXsje(infoVO.getXsxjmc());
+            if (amount.compareTo(xsje) > -1) {
+                String xsInfo = xsInfoDao.updateXsInfo(infoVO);
+            }
+        }
+        return null;
     }
 
 }
