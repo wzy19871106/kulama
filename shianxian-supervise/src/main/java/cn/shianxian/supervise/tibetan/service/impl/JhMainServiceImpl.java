@@ -18,8 +18,8 @@ public class JhMainServiceImpl implements JhMainService {
     private JhMainDao jhMainDao;
     @Override
     public Result selectPurchaseDmByjhkhdm(String jhkhdm) {
-        String purchaseDm = this.jhMainDao.selectPurchaseDm(jhkhdm);
-        if (StringUtils.isNotBlank(purchaseDm)){
+        List<String> purchaseDm = this.jhMainDao.selectPurchaseDm(jhkhdm);
+        if (!purchaseDm.isEmpty()){
             return Result.data(purchaseDm);
         }
         return Result.msg("无数据");

@@ -15,7 +15,7 @@ public interface JhMainDao {
      * @param jhkhdm
      * @return
      */
-    String selectPurchaseDm(@Param("jhkhdm") String jhkhdm);
+    List<String> selectPurchaseDm(@Param("jhkhdm") String jhkhdm);
 
     /**
      * 根据进货客户编码和进货批次号查询进货信息，并排序
