@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +27,7 @@ public class KhdaController {
     @Autowired
     private KhdaService khdaService;
 
-    @PostMapping("selectCustomerInfoByNameAndPass")
+    @GetMapping("selectCustomerInfoByNameAndPass")
     @ApiOperation(value = "根据用户名和密码查询客户信息",notes = "根据用户名和密码查询客户信息")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query",name = "khloginname",value = "登录用户名"),
