@@ -6,73 +6,109 @@ import java.math.BigDecimal;
 
 @Data
 public class XsInfoDTO {
-
-    /**
-     * 销售商品编码
-     */
-    private String xsspdm;
-
     /**
      * 销售日期
      */
-    private String xsrq;
+    private String xs_rq;
 
     /**
-     * 销售商品名称
+     *销售上家编码
      */
-    private String xsspmc;
+    private String xs_sjdm;
 
     /**
-     * 销售重量
+     *销售上家名称
      */
-    private BigDecimal xszl;
+    private String xs_sjmc;
 
     /**
-     * 销售单价
+     *销售下家编码
      */
-    private BigDecimal xsdj;
+    private String xs_xjdm;
 
     /**
-     * 销售金额
+     *销售下家名称
      */
-    private BigDecimal xsje;
+    private String xs_xjmc;
 
     /**
-     * 上家编码
+     *销售批次号
      */
-    private String xssjdm;
+    private String xs_dm;
 
     /**
-     * 上家名称
+     *巡视状态
      */
-    private String xssjmc;
+    private String xs_checked;
 
     /**
-     * 进货批次号
+     *巡视意见
      */
-    private String jhdm;
+    private String xs_check_mark;
 
     /**
-     * 记录状态（1正常 2删除）
+     *巡查员编码
      */
-    private String xsused = "0";
+    private String xs_checkdm;
 
     /**
-     * 巡视状态（1 已巡视 0未巡视）
+     *巡查员名称
      */
-    private String xschecked = "0";
+    private String xs_checkmc;
 
     /**
-     * 支付方式编码（1现金 2 银行卡 3 记账）
+     *商品编码
      */
-    private String xspaydm;
+    private String xs_spdm;
 
     /**
-     * 支付方式名称
+     *商品名称
      */
-    private String xspaymc;
+    private String xs_spmc;
 
+    /**
+     *重量
+     */
+    private BigDecimal xs_zl;
 
+    /**
+     *单价
+     */
+    private BigDecimal xs_dj;
 
+    /**
+     *金额
+     */
+    private BigDecimal xs_je;
+
+    /**
+     *批次顺序号
+     */
+    private Long xs_index;
+
+    /**
+     *进货批次号
+     */
+    private String jh_dm;
+
+    /**
+     *支付方式编码
+     */
+    private String xs_paydm;
+
+    /**
+     *支付方式名称
+     */
+    private String xs_paymc;
+
+    /**
+     *总金额
+     */
+    private BigDecimal zje;
+
+    /**
+     *总重量
+     */
+    private BigDecimal zzl;
 
 }

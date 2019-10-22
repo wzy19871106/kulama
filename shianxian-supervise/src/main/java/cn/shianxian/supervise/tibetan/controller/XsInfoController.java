@@ -1,7 +1,7 @@
 package cn.shianxian.supervise.tibetan.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
+import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -10,10 +10,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,9 +35,10 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query",name = "xsspmc",value = "品种"),
             @ApiImplicitParam(paramType = "query",name = "xsdj",value = "单价"),
             @ApiImplicitParam(paramType = "query",name = "xsje",value = "金额"),
+            @ApiImplicitParam(paramType = "query",name = "jhindex",value = "排列序号")
     })
-    public ResponseEntity saveSalesInfo(List<XsInfoDTO> xsInfoDTO){
-        Result result = this.xsInfoService.saveSalesInfo(xsInfoDTO);
+    public ResponseEntity saveSalesInfo(@RequestBody List<XsInfoVO> xsInfoVO){
+        Result result = this.xsInfoService.saveSalesInfo(xsInfoVO);
         return ResponseEntity.ok(result);
     }
 

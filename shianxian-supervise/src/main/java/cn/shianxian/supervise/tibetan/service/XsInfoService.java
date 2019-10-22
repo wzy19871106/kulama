@@ -1,17 +1,17 @@
 package cn.shianxian.supervise.tibetan.service;
 
 import cn.shianxian.supervise.common.pojo.Result;
-import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
+import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 
 import java.util.List;
 
 public interface XsInfoService {
     /**
      *插入销售信息
-     * @param xsInfoDTO
+     * @param xsInfoVO
      * @return
      */
-    Result saveSalesInfo(List<XsInfoDTO> xsInfoDTO);
+    Result saveSalesInfo(List<XsInfoVO> xsInfoVO);
 
     /**
      * 根据下家编码查询

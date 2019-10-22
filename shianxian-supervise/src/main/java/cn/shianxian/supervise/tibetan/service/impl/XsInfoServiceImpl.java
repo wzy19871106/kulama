@@ -5,8 +5,8 @@ import cn.shianxian.supervise.common.utils.IncreaseUtil;
 
 import cn.shianxian.supervise.tibetan.dao.XsInfoDao;
 import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
-import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
+import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,11 +26,11 @@ public class XsInfoServiceImpl implements XsInfoService {
     private static int LENGTH = 6;
 
     @Override
-    public Result saveSalesInfo(List<XsInfoDTO> xsInfoDTO) {
+    public Result saveSalesInfo(List<XsInfoVO> xsInfoVO) {
         // 根据进货批次号排序
-        Collections.sort(xsInfoDTO, new Comparator<XsInfoDTO>() {
+        Collections.sort(xsInfoVO, new Comparator<XsInfoVO>() {
             @Override
-            public int compare(XsInfoDTO o1, XsInfoDTO o2) {
+            public int compare(XsInfoVO o1, XsInfoVO o2) {
                 return o1.getJhdm().compareTo(o2.getJhdm());
             }
         });
@@ -45,7 +45,7 @@ public class XsInfoServiceImpl implements XsInfoService {
         String increase = IncreaseUtil.addLeftZero(sequence, LENGTH);
         String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 .format(new Date());
-        for (XsInfoDTO infoDTO : xsInfoDTO) {
+        for (XsInfoVO infoDTO : xsInfoVO) {
             // 销售金额
             BigDecimal xsje = infoDTO.getXsje();
             totalAmount = xsje.add(totalAmount);
@@ -72,8 +72,8 @@ public class XsInfoServiceImpl implements XsInfoService {
 
     @Override
     public Result selectXsInfo(String xssjdm, String xsxjdm, String xschecked) {
-        XsInfoVO xsInfoVO = this.xsInfoDao.selectXsInfo(xssjdm, xsxjdm, xschecked);
-        return Result.data(xsInfoVO);
+        XsInfoDTO xsInfoDTO = this.xsInfoDao.selectXsInfo(xssjdm, xsxjdm, xschecked);
+        return Result.data(xsInfoDTO);
     }
 
 }

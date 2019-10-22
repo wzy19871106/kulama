@@ -2,113 +2,81 @@ package cn.shianxian.supervise.tibetan.vo;
 
 import lombok.Data;
 
+
 import java.math.BigDecimal;
 
 @Data
 public class XsInfoVO {
+
+    /**
+     * 销售商品编码
+     */
+    private String xsspdm;
+
     /**
      * 销售日期
      */
-    private String xs_rq;
+    private String xsrq;
 
     /**
-     *销售上家编码
+     * 销售商品名称
      */
-    private String xs_sjdm;
+    private String xsspmc;
 
     /**
-     *销售上家名称
+     * 销售重量
      */
-    private String xs_sjmc;
+    private BigDecimal xszl;
 
     /**
-     *销售下家编码
+     * 销售单价
      */
-    private String xs_xjdm;
+    private BigDecimal xsdj;
 
     /**
-     *销售下家名称
+     * 销售金额
      */
-    private String xs_xjmc;
+    private BigDecimal xsje;
 
     /**
-     *销售批次号
+     * 上家编码
      */
-    private String xs_dm;
+    private String xssjdm;
 
     /**
-     *巡视状态
+     * 上家名称
      */
-    private String xs_checked;
+    private String xssjmc;
 
     /**
-     *巡视意见
+     * 进货批次号
      */
-    private String xs_check_mark;
+    private String jhdm;
 
     /**
-     *巡查员编码
+     * 记录状态（1正常 2删除）
      */
-    private String xs_checkdm;
+    private String xsused = "0";
 
     /**
-     *巡查员名称
+     * 巡视状态（1 已巡视 0未巡视）
      */
-    private String xs_checkmc;
+    private String xschecked = "0";
 
     /**
-     *商品编码
+     * 支付方式编码（1现金 2 银行卡 3 记账）
      */
-    private String xs_spdm;
+    private String xspaydm;
 
     /**
-     *商品名称
+     * 支付方式名称
      */
-    private String xs_spmc;
+    private String xspaymc;
 
     /**
-     *重量
+     *排列序号
      */
-    private BigDecimal xs_zl;
+    private String jhindex;
 
-    /**
-     *单价
-     */
-    private BigDecimal xs_dj;
-
-    /**
-     *金额
-     */
-    private BigDecimal xs_je;
-
-    /**
-     *批次顺序号
-     */
-    private Long xs_index;
-
-    /**
-     *进货批次号
-     */
-    private String jh_dm;
-
-    /**
-     *支付方式编码
-     */
-    private String xs_paydm;
-
-    /**
-     *支付方式名称
-     */
-    private String xs_paymc;
-
-    /**
-     *总金额
-     */
-    private BigDecimal zje;
-
-    /**
-     *总重量
-     */
-    private BigDecimal zzl;
 
 }

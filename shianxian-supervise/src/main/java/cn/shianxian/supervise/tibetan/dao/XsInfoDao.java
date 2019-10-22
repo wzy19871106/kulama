@@ -12,14 +12,14 @@ public interface XsInfoDao {
     /**
      * 插入销售主表信息
      */
-    String insertSalesMainInfo(XsInfoDTO xsInfoDTO);
+    String insertSalesMainInfo(XsInfoVO xsInfoVO);
 
     /**
      * 插入销售从表信息
-     * @param xsInfoDTO
+     * @param xsInfoVO
      * @return
      */
-    String insertSalesSubInfo(XsInfoDTO xsInfoDTO);
+    String insertSalesSubInfo(XsInfoVO xsInfoVO);
 
     /**
      * 根据销售下家编码查询总金额
@@ -35,6 +35,6 @@ public interface XsInfoDao {
      * @param xschecked
      * @return
      */
-    XsInfoVO selectXsInfo(String xssjdm,String xsxjdm,String xschecked);
+    XsInfoDTO selectXsInfo(String xssjdm, String xsxjdm, String xschecked);
 
 }
