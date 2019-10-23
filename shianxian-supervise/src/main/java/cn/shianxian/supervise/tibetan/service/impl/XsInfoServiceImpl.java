@@ -7,6 +7,7 @@ import cn.shianxian.supervise.tibetan.dao.XsInfoDao;
 import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.service.XsInfoService;
+import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class XsInfoServiceImpl implements XsInfoService {
             }
         });
         HashMap<Object, Object> map = new HashMap<>();
-        // 总金额
+        // 销售总金额
         BigDecimal totalAmount = new BigDecimal(0);
 
         SEQUENCE = SEQUENCE >= 999999 ? 1 : SEQUENCE + 1;
@@ -55,19 +56,21 @@ public class XsInfoServiceImpl implements XsInfoService {
             // 销售日期
             infoDTO.setXsrq(time);
             // 销售商品编码
-            infoDTO.setXsspdm(datetime + increase);
+            infoDTO.setXsdm(datetime + increase);
+            // 插入主表
             String mainInfo = xsInfoDao.insertSalesMainInfo(infoDTO);
-            if (StringUtils.isNotBlank(mainInfo) || Integer.parseInt(mainInfo) > 0) {
-                // 进货批次号
-                infoDTO.setJhdm(increase);
-                String subInfo = xsInfoDao.insertSalesSubInfo(infoDTO);
-                if (StringUtils.isNotBlank(subInfo) || Integer.parseInt(subInfo) > 0) {
-                    map.put("xsspdm", infoDTO.getXsspdm());
-                    return Result.data(map);
-                }
-                return Result.msg("插入销售从表失败");
-            }
-            return Result.msg("插入销售主表失败");
+//            if (StringUtils.isNotBlank(mainInfo) || Integer.parseInt(mainInfo) > 0) {
+            //
+            infoDTO.setXsspdm(increase);
+            // 插入从表
+            String subInfo = xsInfoDao.insertSalesSubInfo(infoDTO);
+//                if (StringUtils.isNotBlank(subInfo) || Integer.parseInt(subInfo) > 0) {
+            map.put("xsdm", infoDTO.getXsdm());
+            return Result.data(map);
+//                }
+//                return Result.msg("插入销售从表失败");
+//            }
+//            return Result.msg("插入销售主表失败");
         }
         return Result.failMsg();
     }
@@ -80,17 +83,32 @@ public class XsInfoServiceImpl implements XsInfoService {
 
     @Override
     @Transactional
-    public Result saveAmount(List<XsInfoVO> xsInfoVO) {
-        for (XsInfoVO infoVO : xsInfoVO) {
-            // 总金额
-            BigDecimal amount = infoVO.getAmount();
-            // 买家余额
-            BigDecimal xsje = xsInfoDao.selectXsje(infoVO.getXsxjmc());
-            if (amount.compareTo(xsje) > -1) {
-                String xsInfo = xsInfoDao.updateXsInfo(infoVO);
-            }
-        }
-        return null;
+    public Result saveAmount(List<XsMainInfoVO> xsInfoVO) {
+       if (!xsInfoVO.isEmpty()){
+           for (XsMainInfoVO infoVO : xsInfoVO) {
+               // 销售总金额
+               BigDecimal amount = infoVO.getAmount();
+               // 下家金额
+               BigDecimal xsje = xsInfoDao.selectXsje(infoVO.getXsxjdm());
+               // 上家金额
+               BigDecimal sjje = xsInfoDao.selectXsje(infoVO.getXssjdm());
+
+               if (xsje.compareTo(amount) > -1) {
+                   // 更新销售主表信息
+                   xsInfoDao.updateXsMainInfo(infoVO);
+                   // 下家余额 = 下家金额 - 销售总金额
+                   BigDecimal xjye = xsje.subtract(amount);
+                   xsInfoDao.updateXjBalance(xjye,infoVO.getXsxjdm());
+
+                   // 上家余额 = 上家金额 + 销售总金额
+                   BigDecimal sjye = sjje.add(amount);
+                   xsInfoDao.updateXjBalance(sjye,infoVO.getXssjdm());
+                   return Result.successMsg();
+               }
+               return Result.msg("余额不足，交易失败！");
+           }
+       }
+        return Result.msg("参数为空！");
     }
 
 }

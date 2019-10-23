@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.shianxian.supervise.tibetan.dao.XsInfoDao">
     <select id="selectXsje" resultType="java.math.BigDecimal">
-        select xs_zje from qzgy_xs_main where xs_xjmc= #{xsxjmc}
+        select kh_money from qzgy_khda where kh_dm = #{xsxjdm}
     </select>
 
     <select id="insertSalesMainInfo" resultType="java.lang.String">
@@ -38,5 +38,12 @@
     <select id="selectXsInfo" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
         CALL Proc_XsSelect(#{xssjdm},#{xsxjdm},#{xschecked})
     </select>
+    <update id="updateXsMainInfo">
+       update qzgy_xs_main set xs_xjdm = #{xsxjdm,jdbcType=VARCHAR},xs_sjmc = #{xsxjmc,jdbcType=VARCHAR},xs_paydm = #{xspaydm,jdbcType=VARCHAR},xs_paymc = #{xsdm,jdbcType=VARCHAR},xs_used = #{xsused,jdbcType=VARCHAR}
+         where xs_dm = #{xspaymc,jdbcType=VARCHAR}
+    </update>
 
+    <update id="updateBalance">
+        update qzgy_khda set kh_money = #{khmoney} where kh_dm = #{xsxjb}
+    </update>
 </mapper>

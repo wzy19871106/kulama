@@ -2,6 +2,7 @@ package cn.shianxian.supervise.tibetan.service;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
+import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
 
 import java.util.List;
 
@@ -27,6 +28,6 @@ public interface XsInfoService {
      * @param xsInfoVO
      * @return
      */
-    Result saveAmount(List<XsInfoVO> xsInfoVO);
+    Result saveAmount(List<XsMainInfoVO> xsInfoVO);
 
 }

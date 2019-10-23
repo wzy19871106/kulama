@@ -2,6 +2,8 @@ package cn.shianxian.supervise.tibetan.dao;
 
 import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
+import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -22,7 +24,7 @@ public interface XsInfoDao {
     String insertSalesSubInfo(XsInfoVO xsInfoVO);
 
     /**
-     * 根据销售下家编码查询总金额
+     * 根据销售编码查询余额
      * @param xsxjmc
      * @return
      */
@@ -35,12 +37,19 @@ public interface XsInfoDao {
      * @param xschecked
      * @return
      */
-    XsInfoDTO selectXsInfo(String xssjdm, String xsxjdm, String xschecked);
+    XsInfoDTO selectXsInfo(@Param("xssjdm") String xssjdm, @Param("xsxjdm") String xsxjdm, @Param("xschecked") String xschecked);
 
     /**
      * 更新销售信息
      * @param xsInfoVO
      * @return
      */
-    String updateXsInfo(XsInfoVO xsInfoVO);
+    String updateXsMainInfo(XsMainInfoVO xsInfoVO);
+
+    /**
+     * 根据下家编码更新下家余额
+     * @param balance
+     * @return
+     */
+    String updateXjBalance(BigDecimal balance,String xsxjdm);
 }

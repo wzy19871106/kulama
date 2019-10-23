@@ -9,97 +9,102 @@ public class XsInfoDTO {
     /**
      * 销售日期
      */
-    private String xs_rq;
+    private String xsrq;
 
     /**
      *销售上家编码
      */
-    private String xs_sjdm;
+    private String xssjdm;
 
     /**
      *销售上家名称
      */
-    private String xs_sjmc;
+    private String xssjmc;
 
     /**
      *销售下家编码
      */
-    private String xs_xjdm;
+    private String xsxjdm;
 
     /**
      *销售下家名称
      */
-    private String xs_xjmc;
+    private String xsxjmc;
 
     /**
      *销售批次号
      */
-    private String xs_dm;
+    private String xsdm;
+
+    /**
+     * 记录状态（1正常 2删除）
+     */
+    private String xsued;
 
     /**
      *巡视状态
      */
-    private String xs_checked;
+    private String xschecked;
 
     /**
      *巡视意见
      */
-    private String xs_check_mark;
+    private String xscheckmark;
 
     /**
      *巡查员编码
      */
-    private String xs_checkdm;
+    private String xscheckdm;
 
     /**
      *巡查员名称
      */
-    private String xs_checkmc;
+    private String xscheckmc;
 
     /**
      *商品编码
      */
-    private String xs_spdm;
+    private String xsspdm;
 
     /**
      *商品名称
      */
-    private String xs_spmc;
+    private String xsspmc;
 
     /**
      *重量
      */
-    private BigDecimal xs_zl;
+    private BigDecimal xszl;
 
     /**
      *单价
      */
-    private BigDecimal xs_dj;
+    private BigDecimal xsdj;
 
     /**
      *金额
      */
-    private BigDecimal xs_je;
+    private BigDecimal xsje;
 
     /**
      *批次顺序号
      */
-    private Long xs_index;
+    private Long xsindex;
 
     /**
      *进货批次号
      */
-    private String jh_dm;
+    private String jhdm;
 
     /**
      *支付方式编码
      */
-    private String xs_paydm;
+    private String xspaydm;
 
     /**
      *支付方式名称
      */
-    private String xs_paymc;
+    private String xspaymc;
 
     /**
      *总金额

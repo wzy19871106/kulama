@@ -87,4 +87,9 @@ public class XsInfoVO {
      * 总金额
      */
     private BigDecimal amount;
+
+    /**
+     * 销售编码
+     */
+    private String xsdm;
 }
