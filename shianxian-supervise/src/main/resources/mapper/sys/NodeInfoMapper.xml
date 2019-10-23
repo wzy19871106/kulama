@@ -34,7 +34,7 @@
         #{nodeInfo.industryTag},
         #{nodeInfo.userDataUsedAuthoritySet},
         #{nodeInfo.nodeName},
-        #{nodeInfo.office}
+        #{nodeInfo.office},
         #{pages.pageSize},
         #{pages.pageNum}
         )
