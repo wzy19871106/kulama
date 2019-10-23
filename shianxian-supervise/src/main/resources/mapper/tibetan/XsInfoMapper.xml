@@ -39,8 +39,8 @@
         CALL Proc_XsSelect(#{xssjdm},#{xsxjdm},#{xschecked})
     </select>
     <update id="updateXsMainInfo">
-       update qzgy_xs_main set xs_xjdm = #{xsxjdm,jdbcType=VARCHAR},xs_sjmc = #{xsxjmc,jdbcType=VARCHAR},xs_paydm = #{xspaydm,jdbcType=VARCHAR},xs_paymc = #{xsdm,jdbcType=VARCHAR},xs_used = #{xsused,jdbcType=VARCHAR}
-         where xs_dm = #{xspaymc,jdbcType=VARCHAR}
+       update qzgy_xs_main set xs_xjdm = #{xsxjdm},xs_sjmc = #{xsxjmc},xs_paydm = #{xspaydm},xs_paymc = #{xsdm},xs_used = #{xsused}
+         where xs_dm = #{xspaymc}
     </update>
 
     <update id="updateBalance">

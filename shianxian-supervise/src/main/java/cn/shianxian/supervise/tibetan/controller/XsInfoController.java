@@ -61,7 +61,6 @@ public class XsInfoController {
     })
     public ResponseEntity selectXsInfo(String xssjdm, String xsxjdm, String xschecked) {
         Result result = this.xsInfoService.selectXsInfo(xssjdm, xsxjdm, xschecked);
-        System.out.println(result);
         return ResponseEntity.ok(result);
     }
 
