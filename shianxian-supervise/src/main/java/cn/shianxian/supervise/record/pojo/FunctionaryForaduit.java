@@ -57,6 +57,13 @@ public class FunctionaryForaduit {
     private String functionaryType;
 
     /**
+     * 负责人联系电话
+     */
+    @Column(name = "functionaryTel")
+    @Size(message = "负责人联系电话过长！", max = 30)
+    private String functionaryTel;
+
+    /**
      * 负责人图片地址标识
      */
     @Column(name = "picTag")
