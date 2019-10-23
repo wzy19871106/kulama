@@ -32,6 +32,11 @@ public interface NodeInfoService {
      */
     Result selectNodeInfo(NodeInfo nodeInfo, Pages pages);
 
+    /**
+     * 查询办事处
+     * @return
+     */
+    Result selectNodeInfoOffice();
 
     /**
      * 根据权限查询节点

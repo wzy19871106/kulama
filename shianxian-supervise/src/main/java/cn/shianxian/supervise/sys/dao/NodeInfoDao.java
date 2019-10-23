@@ -36,6 +36,11 @@ public interface NodeInfoDao extends Mapper<NodeInfo> {
      */
     List<List<?>> selectNodeInfoByLike(@Param("nodeInfo") NodeInfo nodeInfo, @Param("pages")Pages pages);
 
+    /**
+     * 查询办事处
+     * @return
+     */
+    List<String> selectNodeInfoOffice();
 
     /**
      * 根据id查询节点

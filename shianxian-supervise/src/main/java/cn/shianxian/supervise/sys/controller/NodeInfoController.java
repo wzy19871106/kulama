@@ -93,6 +93,16 @@ public class NodeInfoController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 查询办事处
+     * @return
+     */
+    @GetMapping("selectNodeInfoOffice")
+    @ApiOperation(value = "查询办事处", notes = "查询办事处")
+    public ResponseEntity<Result> selectNodeInfoOffice(){
+        Result result = nodeInfoService.selectNodeInfoOffice();
+        return ResponseEntity.ok(result);
+    }
 
     /**
      * 根据权限查询节点

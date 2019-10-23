@@ -84,4 +84,7 @@
         CALL proc_T_NodeInfo_Plan_QueryTree(#{planTag}, #{authority})
     </select>
 
+    <select id="selectNodeInfoOffice" resultType="java.lang.String">
+        select distinct bak1 from t_nodeinfo where bak1 is not null
+    </select>
 </mapper>
