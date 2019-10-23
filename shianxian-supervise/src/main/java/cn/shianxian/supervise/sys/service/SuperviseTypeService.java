@@ -48,6 +48,12 @@ public interface SuperviseTypeService {
      */
     Result selectSuperviseTypeTree(SuperviseType superviseType);
 
+    /**
+     * 查询监管类型（树形）（app）
+     * @param superviseType
+     * @return
+     */
+    Result selectSuperviseTypeTreeApp(SuperviseType superviseType);
 
     /**
      * 根据id查询监管类型

@@ -90,10 +90,15 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
     @Override
     public Result selectSuperviseTypeTree(SuperviseType superviseType) {
         String tree = this.superviseTypeDao.selectSuperviseTypeTree(superviseType);
+        return Result.data(tree);
+    }
+
+    @Override
+    public Result selectSuperviseTypeTreeApp(SuperviseType superviseType) {
+        String tree = this.superviseTypeDao.selectSuperviseTypeTree(superviseType);
         JSONArray treeJson = JSONObject.parseArray(tree);
         return Result.data(treeJson);
     }
-
 
     @Override
     public Result selectSuperviseTypeById(String id) {
