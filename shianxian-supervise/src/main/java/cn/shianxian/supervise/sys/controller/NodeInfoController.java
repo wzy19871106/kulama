@@ -84,6 +84,7 @@ public class NodeInfoController {
             @ApiImplicitParam(paramType = "query", name = "nodeName", value = "节点名称"),
             @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "industryTag", value = "节点经济行业标识"),
+            @ApiImplicitParam(paramType = "query", name = "office", value = "办事处"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })

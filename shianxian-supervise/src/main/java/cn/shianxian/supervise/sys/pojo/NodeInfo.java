@@ -65,6 +65,12 @@ public class NodeInfo {
     private Long index;
 
     /**
+     * 办事处
+     */
+    @Column(name = "bak1")
+    private String office;
+
+    /**
      * 节点经济行业标识
      */
     @Column(name = "industryTag")
