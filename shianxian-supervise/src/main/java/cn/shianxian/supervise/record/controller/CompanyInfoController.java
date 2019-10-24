@@ -148,6 +148,7 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "companyCity", value = "企业所属市"),
             @ApiImplicitParam(paramType = "query", name = "companyArea", value = "企业所属区"),
             @ApiImplicitParam(paramType = "query", name = "companyVillage", value = "企业所属乡镇"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
@@ -185,6 +186,7 @@ public class CompanyInfoController {
             @ApiImplicitParam(paramType = "query", name = "companyCity", value = "企业所属市"),
             @ApiImplicitParam(paramType = "query", name = "companyArea", value = "企业所属区"),
             @ApiImplicitParam(paramType = "query", name = "companyVillage", value = "企业所属乡镇"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })

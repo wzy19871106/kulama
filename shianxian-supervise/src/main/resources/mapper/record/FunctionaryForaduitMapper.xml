@@ -50,6 +50,7 @@
       (
       #{queryPojo.id},
       #{queryPojo.name},
+      #{queryPojo.userGroupDataAuthority},
       #{pages.pageSize},
       #{pages.pageNum}
       )
