@@ -46,7 +46,8 @@
       #{functionary.nodeName},
       #{functionary.functionaryPostition},
       #{functionary.weChatId},
-      #{functionary.key}
+      #{functionary.key},
+      #{functionary.functionaryTel}
       )
     </select>
 
