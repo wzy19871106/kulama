@@ -140,7 +140,6 @@ public class FunctionaryController {
     })
     public ResponseEntity<Result> selectFunctionaryForaduitByLike(QueryPojo queryPojo, Pages pages) {
         ResponseEntity<Result> resultResponseEntity = this.functionaryService.selectFunctionaryForaduitByLike(queryPojo, pages);
-        System.out.println(resultResponseEntity);
         return resultResponseEntity;
     }
 
