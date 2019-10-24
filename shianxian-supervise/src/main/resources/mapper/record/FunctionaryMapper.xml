@@ -9,7 +9,7 @@
       (
       #{queryPojo.id},
       #{queryPojo.name},
-      #{queryPojo.userGroupDataAuthority},
+      #{queryPojo.userDataUsedAuthoritySet},
       #{pages.pageSize},
       #{pages.pageNum}
       )

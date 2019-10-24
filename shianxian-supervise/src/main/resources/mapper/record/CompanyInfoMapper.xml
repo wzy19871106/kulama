@@ -12,7 +12,7 @@
       #{companyInfo.companyArea},
       #{companyInfo.companyVillage},
       #{companyInfo.nodeName},
-      #{companyInfo.userGroupDataAuthority},
+      #{companyInfo.userDataUsedAuthoritySet},
       #{pages.pageSize},
       #{pages.pageNum}
       )

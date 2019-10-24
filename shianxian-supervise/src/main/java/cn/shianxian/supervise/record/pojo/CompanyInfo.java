@@ -140,5 +140,5 @@ public class CompanyInfo {
      * 用户组的所拥有的数据权限
      */
     @Transient
-    private String userGroupDataAuthority;
+    private String userDataUsedAuthoritySet;
 }

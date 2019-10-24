@@ -134,12 +134,14 @@ public class FunctionaryController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
-            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "用户组的所拥有的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectFunctionaryForaduitByLike(QueryPojo queryPojo, Pages pages) {
-        return this.functionaryService.selectFunctionaryForaduitByLike(queryPojo, pages);
+        ResponseEntity<Result> resultResponseEntity = this.functionaryService.selectFunctionaryForaduitByLike(queryPojo, pages);
+        System.out.println(resultResponseEntity);
+        return resultResponseEntity;
     }
 
 
@@ -183,7 +185,7 @@ public class FunctionaryController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
-            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "用户组的所拥有的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })

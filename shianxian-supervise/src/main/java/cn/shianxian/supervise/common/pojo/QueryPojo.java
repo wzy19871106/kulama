@@ -51,5 +51,5 @@ public class QueryPojo {
     /**
      *用户组的所拥有的数据权限
      */
-    private String userGroupDataAuthority;
+    private String userDataUsedAuthoritySet;
 }
