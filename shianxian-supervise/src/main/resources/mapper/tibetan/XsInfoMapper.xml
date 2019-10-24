@@ -46,4 +46,8 @@
     <update id="updateBalance">
         update qzgy_khda set kh_money = #{khmoney} where kh_dm = #{xsxjb}
     </update>
+
+    <update id="updateCheck">
+        update qzgy_xs_main set xs_check_mark =#{xscheckmark},xs_checkdm = #{xscheckdm}, xs_checkmc = #{xscheckmc},xs_checked = 1 where xs_dm = #{xsdm}
+    </update>
 </mapper>

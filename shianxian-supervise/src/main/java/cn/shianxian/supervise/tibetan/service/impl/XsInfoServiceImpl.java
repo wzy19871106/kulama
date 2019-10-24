@@ -5,6 +5,7 @@ import cn.shianxian.supervise.common.utils.IncreaseUtil;
 
 import cn.shianxian.supervise.tibetan.dao.XsInfoDao;
 import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
+import cn.shianxian.supervise.tibetan.pojo.XsMain;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
@@ -109,6 +110,12 @@ public class XsInfoServiceImpl implements XsInfoService {
            }
        }
         return Result.msg("参数为空！");
+    }
+
+    @Override
+    public Result updateCheckByXsdm(List<XsMain> xsMains) {
+        this.xsInfoDao.updateCheck(xsMains);
+        return Result.successMsg();
     }
 
 }

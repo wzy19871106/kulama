@@ -1,12 +1,14 @@
 package cn.shianxian.supervise.tibetan.dao;
 
 import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
+import cn.shianxian.supervise.tibetan.pojo.XsMain;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Repository
 public interface XsInfoDao {
@@ -52,4 +54,11 @@ public interface XsInfoDao {
      * @return
      */
     String updateXjBalance(BigDecimal balance,String xsxjdm);
+
+    /**
+     *根据出场批次号修改巡视意见
+     * @param xsMains
+     * @return
+     */
+    String updateCheck(List<XsMain> xsMains);
 }

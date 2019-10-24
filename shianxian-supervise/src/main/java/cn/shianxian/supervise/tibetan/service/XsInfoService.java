@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.tibetan.service;
 
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.tibetan.pojo.XsMain;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
 
@@ -30,4 +31,10 @@ public interface XsInfoService {
      */
     Result saveAmount(List<XsMainInfoVO> xsInfoVO);
 
+    /**
+     * 根据出场批次号修改巡视意见
+     * @param xsMains
+     * @return
+     */
+    Result updateCheckByXsdm(List<XsMain> xsMains);
 }

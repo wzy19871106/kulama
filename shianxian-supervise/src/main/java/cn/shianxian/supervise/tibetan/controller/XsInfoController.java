@@ -1,6 +1,7 @@
 package cn.shianxian.supervise.tibetan.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
+import cn.shianxian.supervise.tibetan.pojo.XsMain;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
@@ -86,4 +87,23 @@ public class XsInfoController {
         log.info("插入销售金额:{}",xsMainInfoVO);
         return ResponseEntity.ok(result);
     }
+
+    /**
+     * 根据出场批次号修改巡视意见
+     * @param xsMains
+     * @return
+     */
+    @PutMapping("updateCheckByXsdm")
+    @ApiOperation(value = "根据出场批次号修改巡视意见", notes = "根据出场批次号修改巡视意见")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "xsdm", value = "销售批次号"),
+            @ApiImplicitParam(paramType = "query", name = "xscheckmark", value = "巡视意见"),
+            @ApiImplicitParam(paramType = "query", name = "xscheckdm", value = "巡查员编码"),
+            @ApiImplicitParam(paramType = "query", name = "xscheckmc", value = "巡查员名称")
+    })
+    public ResponseEntity<Result> updateCheckByXsdm(@RequestBody List<XsMain> xsMains){
+        Result result = this.xsInfoService.updateCheckByXsdm(xsMains);
+        return ResponseEntity.ok(result);
+    }
+
 }
