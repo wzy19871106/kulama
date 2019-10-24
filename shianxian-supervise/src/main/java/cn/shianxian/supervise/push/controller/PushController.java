@@ -64,13 +64,14 @@ public class PushController {
      */
     @PostMapping("xsendConfig")
     @ApiOperation(value = "语音消息", notes = "语音消息")
-    public Result xsendConfig(String userTal) {
+    @ApiImplicitParam(paramType = "query", name = "userTel", value = "手机号")
+    public Result xsendConfig(String userTel) {
 //        AppConfig config = ConfigLoader.load(ConfigLoader.ConfigType.Voice);
         AppConfig appConfig = new AppConfig();
         appConfig.setAppId(APP_ID);
         appConfig.setAppKey(APP_KEY);
         VoiceXSend submail = new VoiceXSend(appConfig);
-        submail.addTo(userTal);
+        submail.addTo(userTel);
         submail.addProject("XebWP");
 //        submail.addVars("name","张三");
 //        submail.addVars("code","2244");
