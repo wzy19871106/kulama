@@ -119,6 +119,12 @@ public class SuperviseInfoMainType {
     private Boolean ifVisit;
 
     /**
+     * 是否是线上监管
+     */
+    @Column(name = "ifOnline")
+    private Boolean ifOnline;
+
+    /**
      * 逻辑删除
      */
     @Column(name = "ifDelete")

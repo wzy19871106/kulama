@@ -160,4 +160,10 @@ public class SuperviseType {
      */
     @Transient
     private List<SuperviseInfoSub> unCheckedList;
+
+    /**
+     * 是否是线上监管
+     */
+    @Transient
+    private Boolean ifOnline;
 }

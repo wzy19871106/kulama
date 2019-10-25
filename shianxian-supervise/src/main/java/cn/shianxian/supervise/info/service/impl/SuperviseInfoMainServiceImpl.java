@@ -129,6 +129,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             superviseInfoMainType.setSuperviserName(superviseType.getSuperviserName());
             superviseInfoMainType.setFunctionaryTag(superviseType.getFunctionaryTag());
             superviseInfoMainType.setFunctionaryName(superviseType.getFunctionaryName());
+            superviseInfoMainType.setIfOnline(superviseType.getIfOnline());
             superviseInfoMainType.setIfVisit(superviseType.getIfVisit());
             if (StringUtils.isNotBlank(superviseType.getParentTag())) {
                 superviseInfoMainType.setParentMainIds(superviseType.getParentTag());
@@ -205,6 +206,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             superviseInfoMainType.setSuperviserName(superviseType.getSuperviserName());
             superviseInfoMainType.setFunctionaryTag(superviseType.getFunctionaryTag());
             superviseInfoMainType.setFunctionaryName(superviseType.getFunctionaryName());
+            superviseInfoMainType.setIfOnline(superviseType.getIfOnline());
             superviseInfoMainType.setIfVisit(superviseType.getIfVisit());
             if (StringUtils.isNotBlank(superviseType.getParentTag())) {
                 superviseInfoMainType.setParentMainIds(superviseType.getParentTag());

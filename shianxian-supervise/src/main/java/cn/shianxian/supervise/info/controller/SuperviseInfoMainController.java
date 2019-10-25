@@ -58,6 +58,7 @@ public class SuperviseInfoMainController {
             @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
             @ApiImplicitParam(paramType = "query", name = "picTag", value = "附件路径"),
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除"),
+            @ApiImplicitParam(paramType = "query", name = "ifOnline", value = "是否是线上监管"),
     })
     public ResponseEntity<Result> saveSuperviseInfoMain(@Valid SuperviseInfoMain superviseInfoMain) {
         log.info("保存监管业务（主表）：{}", superviseInfoMain);

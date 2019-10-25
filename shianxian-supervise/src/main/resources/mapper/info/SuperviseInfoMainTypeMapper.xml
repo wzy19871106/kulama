@@ -16,7 +16,8 @@
         #{superviseInfoMainType.functionaryTag},
         #{superviseInfoMainType.functionaryName},
         #{superviseInfoMainType.parentMainIds},
-        #{superviseInfoMainType.ifVisit}
+        #{superviseInfoMainType.ifVisit},
+        #{superviseInfoMainType.ifOnline}
         )
     </select>
 

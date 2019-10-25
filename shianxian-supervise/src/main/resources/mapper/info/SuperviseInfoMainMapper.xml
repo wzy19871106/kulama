@@ -41,7 +41,8 @@
         #{superviseInfoMain.nodeName},
         #{superviseInfoMain.createTime},
         #{superviseInfoMain.remark},
-        #{superviseInfoMain.picTag}
+        #{superviseInfoMain.picTag},
+        #{superviseInfoMain.ifOnline}
         )
     </select>
 
