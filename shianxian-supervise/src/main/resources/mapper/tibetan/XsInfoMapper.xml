@@ -36,18 +36,34 @@
     </select>
 
     <select id="selectXsInfo" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
-        CALL Proc_XsSelect(#{xssjdm},#{xsxjdm},#{xschecked})
+        CALL Proc_XsSelect(
+        #{xssjdm},
+        #{xsxjdm},
+        #{xscheckdm},
+        #{xschecksj},
+        #{xscheckxj}
+        )
     </select>
     <update id="updateXsMainInfo">
-       update qzgy_xs_main set xs_xjdm = #{xsxjdm},xs_sjmc = #{xsxjmc},xs_paydm = #{xspaydm},xs_paymc = #{xsdm},xs_used = #{xsused}
-         where xs_dm = #{xspaymc}
+       update qzgy_xs_main set xs_xjdm = #{xsxjdm},xs_sjmc = #{xsxjmc},xs_used = #{xsused}
+         where xs_dm = #{xsdm}
     </update>
 
     <update id="updateBalance">
-        update qzgy_khda set kh_money = #{khmoney} where kh_dm = #{xsxjb}
+        update qzgy_khda set kh_money = #{balance} where kh_dm = #{dm}
     </update>
 
-    <update id="updateCheck">
-        update qzgy_xs_main set xs_check_mark =#{xscheckmark},xs_checkdm = #{xscheckdm}, xs_checkmc = #{xscheckmc},xs_checked = 1 where xs_dm = #{xsdm}
-    </update>
+    <select id="updateCheck" resultType="java.lang.String">
+        CALL Proc_XsCheck(
+         #{xssjdm},
+         #{xsxjdm},
+         #{xscheckmark},
+         #{xscheckdm},
+         #{xscheckmc}
+        )
+    </select>
+
+    <select id="selectXssjdmByXsdm" resultType="java.lang.String">
+        select xs_sjdm from qzgy_xs_main where xs_dm = #{xsdm}
+    </select>
 </mapper>

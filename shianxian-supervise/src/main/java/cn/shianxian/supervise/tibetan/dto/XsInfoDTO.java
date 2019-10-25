@@ -42,9 +42,14 @@ public class XsInfoDTO {
     private String xsued;
 
     /**
-     *巡视状态
+     *上家巡视状态（1 已巡视 0未巡视）
      */
-    private String xschecked;
+    private String xschecksj;
+
+    /**
+     * 下家巡视状态（1 已巡视 0未巡视）
+     */
+    private String xscheckxj;
 
     /**
      *巡视意见

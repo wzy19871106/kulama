@@ -20,6 +20,7 @@ public interface XsInfoDao {
 
     /**
      * 插入销售从表信息
+     *
      * @param xsInfoVO
      * @return
      */
@@ -27,38 +28,47 @@ public interface XsInfoDao {
 
     /**
      * 根据销售编码查询余额
-     * @param xsxjmc
+     *
+     * @param xsxjdm
      * @return
      */
-    BigDecimal selectXsje(String xsxjmc);
+    BigDecimal selectXsje(String xsxjdm);
 
     /**
-     * 根据下家编码查询
-     * @param xssjdm
-     * @param xsxjdm
-     * @param xschecked
+     * 根据各种条件查询销售信息
+     *
      * @return
      */
-    XsInfoDTO selectXsInfo(@Param("xssjdm") String xssjdm, @Param("xsxjdm") String xsxjdm, @Param("xschecked") String xschecked);
+    XsInfoDTO selectXsInfo(XsMain xsMain);
 
     /**
      * 更新销售信息
+     *
      * @param xsInfoVO
      * @return
      */
     String updateXsMainInfo(XsMainInfoVO xsInfoVO);
 
     /**
-     * 根据下家编码更新下家余额
+     * 根据客户编码更新客户余额
+     *
      * @param balance
      * @return
      */
-    String updateXjBalance(BigDecimal balance,String xsxjdm);
+    String updateKhBalance(BigDecimal balance, String dm);
 
     /**
-     *根据出场批次号修改巡视意见
+     * 根据销售上下家编码修改巡视意见
+     *
      * @param xsMains
      * @return
      */
-    String updateCheck(List<XsMain> xsMains);
+    String updateCheck(XsMain xsMains);
+
+    /**
+     * 根据销售编码查询上家编码
+     * @param xsdm
+     * @return
+     */
+    String selectXssjdmByXsdm(String xsdm);
 }

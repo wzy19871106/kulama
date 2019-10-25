@@ -16,13 +16,11 @@ public interface XsInfoService {
     Result saveSalesInfo(List<XsInfoVO> xsInfoVO);
 
     /**
-     * 根据下家编码查询
-     * @param xssjdm
-     * @param xsxjdm
-     * @param xschecked
+     * 根据各种条件查询销售信息
+     *
      * @return
      */
-    Result selectXsInfo(String xssjdm,String xsxjdm,String xschecked);
+    Result selectXsInfo(XsMain xsMain);
 
     /**
      * 插入销售金额
@@ -32,9 +30,9 @@ public interface XsInfoService {
     Result saveAmount(List<XsMainInfoVO> xsInfoVO);
 
     /**
-     * 根据出场批次号修改巡视意见
+     * 根据销售上下家编码修改巡视意见
      * @param xsMains
      * @return
      */
-    Result updateCheckByXsdm(List<XsMain> xsMains);
+    Result updateCheckByXsdm(XsMain xsMains);
 }

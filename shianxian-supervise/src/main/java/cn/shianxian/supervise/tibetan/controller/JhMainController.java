@@ -25,7 +25,7 @@ public class JhMainController {
     private JhMainService jhMainService;
 
     /**
-     * 根据进货客户编码查询进货批次号
+     * 根据进货客户编码查询进货批次号 2
      * @param jhkhdm
      * @return
      */
@@ -38,7 +38,7 @@ public class JhMainController {
     }
 
     /**
-     * 根据进货客户编码和进货批次号查询进货信息，并排序
+     * 根据进货客户编码和进货批次号查询进货信息，并排序 3
      * @param jhkhdm
      * @param jhdm
      * @return

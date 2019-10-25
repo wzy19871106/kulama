@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("app/XsInsert")
+@RequestMapping("app/XsInfo")
 @Api(description = "销售信息控制器")
 @Slf4j
 public class XsInfoController {
@@ -26,11 +26,11 @@ public class XsInfoController {
     private XsInfoService xsInfoService;
 
     /**
-     * 插入销售信息
+     * 插入销售信息 4
      *
      * @return
      */
-    @PostMapping("saveSalesInfo")
+    @PostMapping("XsInsert")
     @ApiOperation(value = "插入销售信息", notes = "插入销售信息")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "jhdm", value = "进货批次号"),
@@ -38,7 +38,9 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query", name = "xsspmc", value = "品种"),
             @ApiImplicitParam(paramType = "query", name = "xsdj", value = "单价"),
             @ApiImplicitParam(paramType = "query", name = "xsje", value = "金额"),
-            @ApiImplicitParam(paramType = "query", name = "jhindex", value = "排列序号")
+            @ApiImplicitParam(paramType = "query", name = "jhindex", value = "排列序号"),
+            @ApiImplicitParam(paramType = "query", name = "xspaydm", value = "支付方式编码（1现金 2 银行卡 3 记账）"),
+            @ApiImplicitParam(paramType = "query", name = "xspaymc", value = "支付方式名称"),
     })
     public ResponseEntity saveSalesInfo(@RequestBody List<XsInfoVO> xsInfoVO) {
         Result result = this.xsInfoService.saveSalesInfo(xsInfoVO);
@@ -46,32 +48,32 @@ public class XsInfoController {
     }
 
     /**
-     * 查询销售信息
+     * 根据各种条件查询销售信息 7
      *
-     * @param xssjdm
-     * @param xsxjdm
-     * @param xschecked
      * @return
      */
-    @GetMapping("selectXsInfo")
-    @ApiOperation(value = "查询销售信息", notes = "查询销售信息")
+    @GetMapping("XsSelect")
+    @ApiOperation(value = "根据各种条件查询销售信息", notes = "根据各种条件查询销售信息")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "销售上家编码"),
             @ApiImplicitParam(paramType = "query", name = "xsxjdm", value = "销售下家编码"),
-            @ApiImplicitParam(paramType = "query", name = "xschecked", value = "巡视状态（1 已巡视 0未巡视）")
+            @ApiImplicitParam(paramType = "query", name = "xscheckdm", value = "巡查人员编码"),
+            @ApiImplicitParam(paramType = "query", name = "xschecksj", value = "上家巡视状态（1 已巡视 0未巡视）"),
+            @ApiImplicitParam(paramType = "query", name = "xscheckxj", value = "下家巡视状态（1 已巡视 0未巡视）"),
     })
-    public ResponseEntity selectXsInfo(String xssjdm, String xsxjdm, String xschecked) {
-        Result result = this.xsInfoService.selectXsInfo(xssjdm, xsxjdm, xschecked);
+    public ResponseEntity selectXsInfo(XsMain xsMain) {
+        Result result = this.xsInfoService.selectXsInfo(xsMain);
         return ResponseEntity.ok(result);
     }
 
     /**
-     * 插入销售金额
+     * 插入销售金额  5
+     *
      * @param xsMainInfoVO
      * @return
      */
 
-    @PostMapping("saveAmount")
+    @PostMapping("XsUpdate")
     @ApiOperation(value = "插入销售金额", notes = "插入销售金额")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "销售上家编码"),
@@ -84,24 +86,26 @@ public class XsInfoController {
     })
     public ResponseEntity saveAmount(@RequestBody List<XsMainInfoVO> xsMainInfoVO) {
         Result result = this.xsInfoService.saveAmount(xsMainInfoVO);
-        log.info("插入销售金额:{}",xsMainInfoVO);
+        log.info("插入销售金额:{}", xsMainInfoVO);
         return ResponseEntity.ok(result);
     }
 
     /**
-     * 根据出场批次号修改巡视意见
+     * 根据销售上下家编码修改巡视意见 6
+     *
      * @param xsMains
      * @return
      */
-    @PutMapping("updateCheckByXsdm")
-    @ApiOperation(value = "根据出场批次号修改巡视意见", notes = "根据出场批次号修改巡视意见")
+    @PutMapping("XsCheck")
+    @ApiOperation(value = "根据销售上下家编码修改巡视意见", notes = "根据销售上下家编码修改巡视意见")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "xsdm", value = "销售批次号"),
             @ApiImplicitParam(paramType = "query", name = "xscheckmark", value = "巡视意见"),
             @ApiImplicitParam(paramType = "query", name = "xscheckdm", value = "巡查员编码"),
-            @ApiImplicitParam(paramType = "query", name = "xscheckmc", value = "巡查员名称")
+            @ApiImplicitParam(paramType = "query", name = "xscheckmc", value = "巡查员名称"),
+            @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "销售上家编码"),
+            @ApiImplicitParam(paramType = "query", name = "xsxjdm", value = "销售下家编码"),
     })
-    public ResponseEntity<Result> updateCheckByXsdm(@RequestBody List<XsMain> xsMains){
+    public ResponseEntity<Result> updateCheckByXsdm(XsMain xsMains) {
         Result result = this.xsInfoService.updateCheckByXsdm(xsMains);
         return ResponseEntity.ok(result);
     }

@@ -54,8 +54,8 @@ public class XsInfoServiceImpl implements XsInfoService {
             BigDecimal xsje = infoDTO.getXsje();
             totalAmount = xsje.add(totalAmount);
             map.put("totalAmount", totalAmount);
-            // 销售日期
-            infoDTO.setXsrq(time);
+//            // 销售日期
+//            infoDTO.setXsrq(time);
             // 销售商品编码
             infoDTO.setXsdm(datetime + increase);
             // 插入主表
@@ -77,8 +77,8 @@ public class XsInfoServiceImpl implements XsInfoService {
     }
 
     @Override
-    public Result selectXsInfo(String xssjdm, String xsxjdm, String xschecked) {
-        XsInfoDTO xsInfoDTO = this.xsInfoDao.selectXsInfo(xssjdm, xsxjdm, xschecked);
+    public Result selectXsInfo(XsMain xsMain) {
+        XsInfoDTO xsInfoDTO = this.xsInfoDao.selectXsInfo(xsMain);
         return Result.data(xsInfoDTO);
     }
 
@@ -91,19 +91,21 @@ public class XsInfoServiceImpl implements XsInfoService {
                BigDecimal amount = infoVO.getAmount();
                // 下家金额
                BigDecimal xsje = xsInfoDao.selectXsje(infoVO.getXsxjdm());
+               // 根据销售编码查询上家编码
+               String xssjdm = xsInfoDao.selectXssjdmByXsdm(infoVO.getXsdm());
                // 上家金额
-               BigDecimal sjje = xsInfoDao.selectXsje(infoVO.getXssjdm());
+               BigDecimal sjje = xsInfoDao.selectXsje(xssjdm);
 
                if (xsje.compareTo(amount) > -1) {
                    // 更新销售主表信息
                    xsInfoDao.updateXsMainInfo(infoVO);
                    // 下家余额 = 下家金额 - 销售总金额
                    BigDecimal xjye = xsje.subtract(amount);
-                   xsInfoDao.updateXjBalance(xjye,infoVO.getXsxjdm());
+                   xsInfoDao.updateKhBalance(xjye,infoVO.getXsxjdm());
 
                    // 上家余额 = 上家金额 + 销售总金额
                    BigDecimal sjye = sjje.add(amount);
-                   xsInfoDao.updateXjBalance(sjye,infoVO.getXssjdm());
+                   xsInfoDao.updateKhBalance(sjye,xssjdm);
                    return Result.successMsg();
                }
                return Result.msg("余额不足，交易失败！");
@@ -113,7 +115,7 @@ public class XsInfoServiceImpl implements XsInfoService {
     }
 
     @Override
-    public Result updateCheckByXsdm(List<XsMain> xsMains) {
+    public Result updateCheckByXsdm(XsMain xsMains) {
         this.xsInfoDao.updateCheck(xsMains);
         return Result.successMsg();
     }

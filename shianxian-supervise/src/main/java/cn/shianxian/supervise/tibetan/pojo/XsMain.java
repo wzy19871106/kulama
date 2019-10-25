@@ -84,11 +84,11 @@ public class XsMain {
     private String xsused;
 
     /**
-     * 巡视状态（1 已巡视 0未巡视）
+     * 上家巡视状态（1 已巡视 0未巡视）
      */
-    @Column(name = "xs_checked")
+    @Column(name = "xs_checksj")
     @Size(message = "巡视状态过长！",max =1 )
-    private String xschecked;
+    private String xschecksj;
 
     /**
      * 巡视意见
@@ -124,4 +124,11 @@ public class XsMain {
     @Column(name = "xs_paymc")
     @Size(message = "支付方式名称过长！",max = 20)
     private String xspaymc;
+
+    /**
+     * 下家巡视状态（1 已巡视 0未巡视）
+     */
+    @Column(name = "xs_checkxj")
+    @Size(message = "巡视状态过长！",max =1 )
+    private String xscheckxj;
 }
