@@ -101,7 +101,7 @@ public class NodeInfoController {
      *
      * @return
      */
-    @GetMapping("selectNodeInfoByAuthority")
+    @GetMapping("selectNodeInfoByConditionAndAuthority")
     @ApiOperation(value = "查询节点(区域)", notes = "查询节点(区域)")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点标识"),
@@ -113,7 +113,7 @@ public class NodeInfoController {
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
-    public ResponseEntity<Result> selectNodeInfoByAuthority(NodeInfo nodeInfo, Pages pages) {
+    public ResponseEntity<Result> selectNodeInfoByConditionAndAuthority(NodeInfo nodeInfo, Pages pages) {
         Result result = this.nodeInfoService.selectNodeInfoByConditionAndAuthority(nodeInfo, pages);
         return ResponseEntity.ok(result);
     }
