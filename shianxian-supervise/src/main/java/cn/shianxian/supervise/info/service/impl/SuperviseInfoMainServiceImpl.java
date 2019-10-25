@@ -113,6 +113,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 superviseInfoMain.setNodeName(superviseType.getNodeName());
                 superviseInfoMain.setCreateTime(LocalDateTime.now());
                 superviseInfoMain.setPicTag("");
+                superviseInfoMain.setIfOnline(superviseType.getIfOnline());
                 // 保存监管主表
                 this.superviseInfoMainDao.saveSuperviseInfoMain(superviseInfoMain);
                 flag = false;
@@ -190,6 +191,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 superviseInfoMain.setNodeName(superviseType.getNodeName());
                 superviseInfoMain.setCreateTime(LocalDateTime.now());
                 superviseInfoMain.setPicTag("");
+                superviseInfoMain.setIfOnline(superviseType.getIfOnline());
                 // 保存监管主表
                 this.superviseInfoMainDao.saveSuperviseInfoMain(superviseInfoMain);
                 flag = false;
