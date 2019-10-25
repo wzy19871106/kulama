@@ -52,7 +52,7 @@ public class XsInfoController {
      *
      * @return
      */
-    @GetMapping("XsSelect")
+    @PostMapping("XsSelect")
     @ApiOperation(value = "根据各种条件查询销售信息", notes = "根据各种条件查询销售信息")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "销售上家编码"),
@@ -96,7 +96,7 @@ public class XsInfoController {
      * @param xsMains
      * @return
      */
-    @PutMapping("XsCheck")
+    @PostMapping("XsCheck")
     @ApiOperation(value = "根据销售上下家编码修改巡视意见", notes = "根据销售上下家编码修改巡视意见")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "xscheckmark", value = "巡视意见"),
