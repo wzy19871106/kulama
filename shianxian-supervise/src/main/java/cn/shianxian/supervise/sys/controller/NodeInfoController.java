@@ -31,6 +31,7 @@ public class NodeInfoController {
 
     /**
      * 保存、修改节点
+     *
      * @return
      */
     @PostMapping("saveOrUpdateNodeInfo")
@@ -62,6 +63,7 @@ public class NodeInfoController {
 
     /**
      * 删除节点
+     *
      * @return
      */
     @DeleteMapping("deleteNodeInfoById")
@@ -75,6 +77,7 @@ public class NodeInfoController {
 
     /**
      * 查询节点
+     *
      * @return
      */
     @GetMapping("selectNodeInfo")
@@ -94,18 +97,42 @@ public class NodeInfoController {
     }
 
     /**
+     * 查询节点(区域)
+     *
+     * @return
+     */
+    @GetMapping("selectNodeInfoByAuthority")
+    @ApiOperation(value = "查询节点(区域)", notes = "查询节点(区域)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点标识"),
+            @ApiImplicitParam(paramType = "query", name = "nodeName", value = "节点名称"),
+            @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "industryTag", value = "节点经济行业标识"),
+            @ApiImplicitParam(paramType = "query", name = "office", value = "办事处"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "所属片区"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectNodeInfoByAuthority(NodeInfo nodeInfo, Pages pages) {
+        Result result = this.nodeInfoService.selectNodeInfoByConditionAndAuthority(nodeInfo, pages);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
      * 查询办事处
+     *
      * @return
      */
     @GetMapping("selectNodeInfoOffice")
     @ApiOperation(value = "查询办事处", notes = "查询办事处")
-    public ResponseEntity<Result> selectNodeInfoOffice(){
+    public ResponseEntity<Result> selectNodeInfoOffice() {
         Result result = nodeInfoService.selectNodeInfoOffice();
         return ResponseEntity.ok(result);
     }
 
     /**
      * 根据权限查询节点
+     *
      * @return
      */
     @GetMapping("selectNodeInfoByAuthority")
@@ -119,6 +146,7 @@ public class NodeInfoController {
 
     /**
      * 查询节点（树形）
+     *
      * @return
      */
     @GetMapping("selectNodeInfoTreeByLike")
@@ -139,6 +167,7 @@ public class NodeInfoController {
 
     /**
      * 修改节点权限
+     *
      * @return
      */
     @PutMapping("updateAuthorityById")
@@ -156,6 +185,7 @@ public class NodeInfoController {
 
     /**
      * 批量赋予节点权限
+     *
      * @return
      */
     @PutMapping("batchUpdateNodeInfoAuthority")
@@ -173,6 +203,7 @@ public class NodeInfoController {
 
     /**
      * 批量清空节点权限
+     *
      * @return
      */
     @PutMapping("batchDeleteNodeInfoAuthority")
@@ -186,6 +217,7 @@ public class NodeInfoController {
 
     /**
      * 根据节点id查询节点权限
+     *
      * @return
      */
     @GetMapping("selectNodeInfoAuthorityById")
@@ -199,13 +231,14 @@ public class NodeInfoController {
 
     /**
      * 根据计划任务标识，数据权限模板标识查询节点表
+     *
      * @return
      */
     @GetMapping("selectNodeInfoByPlanTag")
     @ApiOperation(value = "根据计划任务标识，数据权限模板标识查询节点表", notes = "根据计划任务标识，数据权限模板标识查询节点表")
     @ApiImplicitParams({
-        @ApiImplicitParam(paramType = "query", name = "planTag", value = "计划任务标识"),
-        @ApiImplicitParam(paramType = "query", name = "authority", value = "数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "planTag", value = "计划任务标识"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "数据权限"),
     })
     public ResponseEntity<Result> selectNodeInfoByPlanTag(String planTag, String authority) {
         Result result = this.nodeInfoService.selectNodeInfoByPlanTag(planTag, authority);

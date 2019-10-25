@@ -33,6 +33,16 @@ public interface NodeInfoService {
     Result selectNodeInfo(NodeInfo nodeInfo, Pages pages);
 
     /**
+     * 查询节点(区域)
+     * @param nodeInfo
+     * @param pages
+     * @return
+     */
+    Result selectNodeInfoByConditionAndAuthority(NodeInfo nodeInfo, Pages pages);
+
+
+
+    /**
      * 查询办事处
      * @return
      */

@@ -40,6 +40,20 @@
         )
     </select>
 
+    <select id="selectNodeInfoByConditionAndAuthority" resultMap="nodeInfo,pageCount,totalCount">
+        CALL proc_T_NodeInfo_Query_ByConditionAndAuthority
+        (
+         #{nodeInfo.nodeTag},
+        #{nodeInfo.industryTag},
+        #{nodeInfo.userDataUsedAuthoritySet},
+        #{nodeInfo.nodeName},
+        #{nodeInfo.office},
+        #{nodeInfo.authority},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
     <select id="selectNodeInfoById" resultType="cn.shianxian.supervise.sys.pojo.NodeInfo">
         CALL proc_T_NodeInfo_Query_ByNodeTag(#{id})
     </select>

@@ -158,4 +158,10 @@ public class NodeInfo {
      */
     @Transient
     private String industryName;
+
+    /**
+     * 所属片区
+     */
+    @Transient
+    private String authority;
 }
