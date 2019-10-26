@@ -2,6 +2,7 @@ package cn.shianxian.supervise.tibetan.service;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.tibetan.pojo.XsMain;
+import cn.shianxian.supervise.tibetan.vo.XsInfoSaveVO;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
 
@@ -10,10 +11,10 @@ import java.util.List;
 public interface XsInfoService {
     /**
      *插入销售信息
-     * @param xsInfoVO
+     * @param
      * @return
      */
-    Result saveSalesInfo(List<XsInfoVO> xsInfoVO,String xspaydm,String xspaymc);
+    Result saveSalesInfo(XsInfoSaveVO xsInfoVO);
 
     /**
      * 根据各种条件查询销售信息

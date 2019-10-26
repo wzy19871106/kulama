@@ -6,6 +6,7 @@ import cn.shianxian.supervise.common.utils.IncreaseUtil;
 import cn.shianxian.supervise.tibetan.dao.XsInfoDao;
 import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
 import cn.shianxian.supervise.tibetan.pojo.XsMain;
+import cn.shianxian.supervise.tibetan.vo.XsInfoSaveVO;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
@@ -30,9 +31,9 @@ public class XsInfoServiceImpl implements XsInfoService {
 
     @Override
     @Transactional
-    public Result saveSalesInfo(List<XsInfoVO> xsInfoVO,String xspaydm,String xspaymc) {
+    public Result saveSalesInfo(XsInfoSaveVO xsInfoVO) {
         // 根据进货批次号排序
-        Collections.sort(xsInfoVO, new Comparator<XsInfoVO>() {
+        Collections.sort(xsInfoVO.getXsInfoVO(), new Comparator<XsInfoVO>() {
             @Override
             public int compare(XsInfoVO o1, XsInfoVO o2) {
                 return o1.getJhdm().compareTo(o2.getJhdm());
@@ -49,9 +50,10 @@ public class XsInfoServiceImpl implements XsInfoService {
         String increase = IncreaseUtil.addLeftZero(sequence, LENGTH);
         String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 .format(new Date());
-        for (XsInfoVO infoDTO : xsInfoVO) {
-            infoDTO.setXspaydm(xspaydm);
-            infoDTO.setXspaymc(xspaymc);
+        List<XsInfoVO> infoVOS = xsInfoVO.getXsInfoVO();
+        for (XsInfoVO infoDTO : infoVOS) {
+            infoDTO.setXspaydm(xsInfoVO.getXspaydm());
+            infoDTO.setXspaymc(xsInfoVO.getXspaymc());
             // 销售金额
             BigDecimal xsje = infoDTO.getXsje();
             totalAmount = xsje.add(totalAmount);

@@ -2,6 +2,7 @@ package cn.shianxian.supervise.tibetan.controller;
 
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.tibetan.pojo.XsMain;
+import cn.shianxian.supervise.tibetan.vo.XsInfoSaveVO;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -42,9 +44,9 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query", name = "xspaydm", value = "支付方式编码（1现金 2 银行卡 3 记账）"),
             @ApiImplicitParam(paramType = "query", name = "xspaymc", value = "支付方式名称"),
     })
-    public ResponseEntity saveSalesInfo( List<XsInfoVO> xsInfoVO,String xspaydm,String xspaymc) {
-        Result result = this.xsInfoService.saveSalesInfo(xsInfoVO,xspaydm,xspaymc);
-        log.info("插入销售信息：{}",xsInfoVO,xspaydm,xspaymc);
+    public ResponseEntity saveSalesInfo(@RequestBody @Valid XsInfoSaveVO xsInfoVO) {
+        Result result = this.xsInfoService.saveSalesInfo(xsInfoVO);
+        log.info("插入销售信息：{}", xsInfoVO);
         return ResponseEntity.ok(result);
     }
 
