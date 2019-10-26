@@ -30,7 +30,7 @@ public class XsInfoServiceImpl implements XsInfoService {
 
     @Override
     @Transactional
-    public Result saveSalesInfo(List<XsInfoVO> xsInfoVO) {
+    public Result saveSalesInfo(List<XsInfoVO> xsInfoVO,String xspaydm,String xspaymc) {
         // 根据进货批次号排序
         Collections.sort(xsInfoVO, new Comparator<XsInfoVO>() {
             @Override
@@ -50,6 +50,8 @@ public class XsInfoServiceImpl implements XsInfoService {
         String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 .format(new Date());
         for (XsInfoVO infoDTO : xsInfoVO) {
+            infoDTO.setXspaydm(xspaydm);
+            infoDTO.setXspaymc(xspaymc);
             // 销售金额
             BigDecimal xsje = infoDTO.getXsje();
             totalAmount = xsje.add(totalAmount);

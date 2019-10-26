@@ -13,7 +13,7 @@ public interface XsInfoService {
      * @param xsInfoVO
      * @return
      */
-    Result saveSalesInfo(List<XsInfoVO> xsInfoVO);
+    Result saveSalesInfo(List<XsInfoVO> xsInfoVO,String xspaydm,String xspaymc);
 
     /**
      * 根据各种条件查询销售信息
