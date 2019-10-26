@@ -54,6 +54,11 @@ public class XsInfoVO {
     private String xsxjmc;
 
     /**
+     * 下家编码
+     */
+    private String xsxjdm;
+
+    /**
      * 进货批次号
      */
     private String jhdm;
@@ -64,9 +69,14 @@ public class XsInfoVO {
     private String xsused = "0";
 
     /**
-     * 巡视状态（1 已巡视 0未巡视）
+     * 上家巡视状态（1 已巡视 0未巡视）
      */
-    private String xschecked = "0";
+    private String xschecksj = "0";
+
+    /**
+     * 下家巡视状态（1 已巡视 0未巡视）
+     */
+    private String xscheckxj = "0";
 
     /**
      * 支付方式编码（1现金 2 银行卡 3 记账）
@@ -92,4 +102,36 @@ public class XsInfoVO {
      * 销售编码
      */
     private String xsdm;
+
+    /**
+     * 销售总金额
+     */
+    private BigDecimal xszje;
+
+    /**
+     * 销售总重量
+     */
+    private BigDecimal xszzl;
+
+    /**
+     * 巡视意见
+     */
+    private String xscheckmark;
+
+    /**
+     * 巡查人员编码
+     */
+    private String xscheckdm;
+
+    /**
+     * 巡查人员名称
+     */
+    private String xscheckmc;
+
+    /**
+     * 批次顺序号
+     */
+    private String xsindex;
+
+
 }

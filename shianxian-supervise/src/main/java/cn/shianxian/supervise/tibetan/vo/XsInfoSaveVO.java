@@ -1,14 +1,15 @@
 package cn.shianxian.supervise.tibetan.vo;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
 @Setter
-public class XsInfoSaveVO {
+public class XsInfoSaveVO implements Serializable {
 
     /**
      * 销售信息

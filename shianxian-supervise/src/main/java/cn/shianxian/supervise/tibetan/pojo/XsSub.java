@@ -2,10 +2,7 @@ package cn.shianxian.supervise.tibetan.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 
@@ -74,4 +71,13 @@ public class XsSub {
     @Column(name = "jh_dm")
     @Size(message = "进货批次号", max = 20)
     private String jhdm;
+
+    @Transient
+    private String jhindex;
+
+    @Transient
+    private String xspaydm;
+
+    @Transient
+    private String xspaymc;
 }
