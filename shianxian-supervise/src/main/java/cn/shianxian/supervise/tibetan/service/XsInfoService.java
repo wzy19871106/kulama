@@ -28,7 +28,7 @@ public interface XsInfoService {
      * @param xsInfoVO
      * @return
      */
-    Result saveAmount(List<XsMainInfoVO> xsInfoVO);
+    Result saveAmount(XsMainInfoVO xsInfoVO);
 
     /**
      * 根据销售上下家编码修改巡视意见

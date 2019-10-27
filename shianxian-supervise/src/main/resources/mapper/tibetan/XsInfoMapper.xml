@@ -49,7 +49,7 @@
          where xs_dm = #{xsdm}
     </update>
 
-    <update id="updateBalance">
+    <update id="updateKhBalance">
         update qzgy_khda set kh_money = #{balance} where kh_dm = #{dm}
     </update>
 

@@ -48,6 +48,7 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query", name = "jhindex", value = "排列序号"),
             @ApiImplicitParam(paramType = "query", name = "xspaydm", value = "支付方式编码（1现金 2 银行卡 3 记账）"),
             @ApiImplicitParam(paramType = "query", name = "xspaymc", value = "支付方式名称"),
+            @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "上家编码"),
     })
     public ResponseEntity saveSalesInfo(@RequestBody XsInfoSaveVO xsInfoVO) {
         Result result = this.xsInfoService.saveSalesInfo(xsInfoVO);
@@ -92,7 +93,7 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query", name = "xsdm", value = "销售编码"),
             @ApiImplicitParam(paramType = "query", name = "amount", value = "总金额")
     })
-    public ResponseEntity saveAmount(@RequestBody List<XsMainInfoVO> xsMainInfoVO) {
+    public ResponseEntity saveAmount(@RequestBody XsMainInfoVO xsMainInfoVO) {
         Result result = this.xsInfoService.saveAmount(xsMainInfoVO);
         log.info("插入销售金额:{}", xsMainInfoVO);
         return ResponseEntity.ok(result);

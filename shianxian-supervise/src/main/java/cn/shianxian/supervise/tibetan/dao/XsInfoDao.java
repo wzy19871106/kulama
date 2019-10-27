@@ -47,7 +47,7 @@ public interface XsInfoDao {
      * @param xsInfoVO
      * @return
      */
-    String updateXsMainInfo(XsMainInfoVO xsInfoVO);
+    int updateXsMainInfo(XsMainInfoVO xsInfoVO);
 
     /**
      * 根据客户编码更新客户余额
@@ -55,7 +55,7 @@ public interface XsInfoDao {
      * @param balance
      * @return
      */
-    String updateKhBalance(BigDecimal balance, String dm);
+    int updateKhBalance(BigDecimal balance, String dm);
 
     /**
      * 根据销售上下家编码修改巡视意见

@@ -88,33 +88,33 @@ public class XsInfoServiceImpl implements XsInfoService {
 
     @Override
     @Transactional
-    public Result saveAmount(List<XsMainInfoVO> xsInfoVO) {
-       if (!xsInfoVO.isEmpty()){
-           for (XsMainInfoVO infoVO : xsInfoVO) {
-               // 销售总金额
-               BigDecimal amount = infoVO.getAmount();
-               // 下家金额
-               BigDecimal xsje = xsInfoDao.selectXsje(infoVO.getXsxjdm());
-               // 根据销售编码查询上家编码
-               String xssjdm = xsInfoDao.selectXssjdmByXsdm(infoVO.getXsdm());
-               // 上家金额
-               BigDecimal sjje = xsInfoDao.selectXsje(xssjdm);
+    public Result saveAmount(XsMainInfoVO xsInfoVO) {
+        if (xsInfoVO != null) {
+            //           for (XsMainInfoVO infoVO : xsInfoVO) {
+            // 销售总金额
+            BigDecimal amount = xsInfoVO.getAmount();
+            // 下家金额
+            BigDecimal xsje = xsInfoDao.selectXsje(xsInfoVO.getXsxjdm());
+            // 根据销售编码查询上家编码
+            String xssjdm = xsInfoDao.selectXssjdmByXsdm(xsInfoVO.getXsdm());
+            // 上家金额
+            BigDecimal sjje = xsInfoDao.selectXsje(xssjdm);
 
-               if (xsje.compareTo(amount) > -1) {
-                   // 更新销售主表信息
-                   xsInfoDao.updateXsMainInfo(infoVO);
-                   // 下家余额 = 下家金额 - 销售总金额
-                   BigDecimal xjye = xsje.subtract(amount);
-                   xsInfoDao.updateKhBalance(xjye,infoVO.getXsxjdm());
+            if (xsje.compareTo(amount) > -1) {
+                xsInfoVO.setXssjdm(xssjdm);
+                // 更新销售主表信息
+                xsInfoDao.updateXsMainInfo(xsInfoVO);
+                // 下家余额 = 下家金额 - 销售总金额
+                BigDecimal xjye = xsje.subtract(amount);
+                xsInfoDao.updateKhBalance(xjye,xsInfoVO.getXsxjdm());
 
-                   // 上家余额 = 上家金额 + 销售总金额
-                   BigDecimal sjye = sjje.add(amount);
-                   xsInfoDao.updateKhBalance(sjye,xssjdm);
-                   return Result.successMsg();
-               }
-               return Result.msg("余额不足，交易失败！");
-           }
-       }
+                // 上家余额 = 上家金额 + 销售总金额
+                BigDecimal sjye = sjje.add(amount);
+                xsInfoDao.updateKhBalance(sjye,xssjdm);
+                return Result.successMsg();
+            }
+            return Result.msg("余额不足，交易失败！");
+        }
         return Result.msg("参数为空！");
     }
 

@@ -42,8 +42,8 @@ public class XsMainInfoVO {
      */
     private String xsused = "1";
 
-//    /**
-//     * 上家编码
-//     */
-//    private String xssjdm;
+    /**
+     * 上家编码
+     */
+    private String xssjdm;
 }
