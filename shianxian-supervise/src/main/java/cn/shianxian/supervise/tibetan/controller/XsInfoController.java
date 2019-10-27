@@ -50,26 +50,9 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query", name = "xspaymc", value = "支付方式名称"),
     })
     public ResponseEntity saveSalesInfo(@RequestBody XsInfoSaveVO xsInfoVO) {
-//        System.out.println(xsInfoVO);
-////        XsInfoSaveVO xsInfoSaveVO = JSON.parseObject(xsInfoVO, XsInfoSaveVO.class);
-//        JSONObject jsonObject = JSONObject.fromObject(xsInfoVO);
-//        System.out.println(jsonObject.get("xsje"));
-//        JSONArray infoVO = jsonObject.getJSONArray("xsInfoVO");
-//        System.out.println(infoVO);
-//        List<XsInfoVO> rules = new ArrayList<XsInfoVO>();
-//        for (int i = 0; i < infoVO.size(); i++) {
-//            JSONObject object = (JSONObject) infoVO.get(i);     //将array中的数据进行逐条转换
-//            XsInfoVO rule = (XsInfoVO) JSONObject.toBean(object, XsInfoVO.class);  //通过JSONObject.toBean()方法进行对象间的转换
-//            rules.add(rule);
-//        }
-//        String jhdm = jsonObject.getString("jhdm");
-//        XsInfoVO infoVO1 = new XsInfoVO();
-//        infoVO1.setJhdm(jhdm);
-//        System.out.println(jhdm);
         Result result = this.xsInfoService.saveSalesInfo(xsInfoVO);
         log.info("插入销售信息：{}", xsInfoVO);
         return ResponseEntity.ok(result);
-//        return null;
     }
 
     /**
