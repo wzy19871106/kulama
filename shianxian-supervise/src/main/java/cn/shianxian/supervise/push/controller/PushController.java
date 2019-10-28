@@ -5,10 +5,7 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.JpushUtil;
 import cn.shianxian.supervise.push.vo.JpushVO;
 import com.submail.config.AppConfig;
-import com.submail.lib.Message;
-import com.submail.lib.MessageSend;
-import com.submail.lib.MessageTemplate;
-import com.submail.lib.VoiceXSend;
+import com.submail.lib.*;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -93,36 +90,33 @@ public class PushController {
     }
 
 
-//    /**
-//     * 短息通知
-//     *
-//     * @param userTel
-//     * @param message
-//     * @return
-//     */
-//    @PostMapping("messageSend")
-//    @ApiOperation(value = "短息通知", notes = "短息通知")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(paramType = "query", name = "userTel", value = "手机号"),
-//            @ApiImplicitParam(paramType = "query", name = "message", value = "短息通知内容")
-//    })
-//    public Result messageSend(String userTel, String message) {
-//        AppConfig appConfig = new AppConfig();
-//        appConfig.setAppId(MESSAGE_APP_ID);
-//        appConfig.setAppKey(MESSAGE_APP_KEY);
-//
-//        MessageTemplate template = new MessageTemplate(appConfig);
-//        template.putTemplateId("aahvM");
-//        template.putSmsSignature("测试短信");
-//        template.putSmsContent(message);
-//        String msg = "";
-//        try {
-//            msg = template.putTemplate();
-//        } catch (NoSuchAlgorithmException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return Result.data(msg);
-//    }
+    /**
+     * 短信通知
+     *
+     * @param userTel
+     * @return
+     */
+    @GetMapping("messageSend")
+    @ApiOperation(value = "短息通知", notes = "短息通知")
+    @ApiImplicitParam(paramType = "query", name = "userTel", value = "手机号")
+    public Result messageSend(String userTel) {
+        AppConfig appConfig = new AppConfig();
+        appConfig.setAppId(MESSAGE_APP_ID);
+        appConfig.setAppKey(MESSAGE_APP_KEY);
+        MESSAGEXsend submail = new MESSAGEXsend(appConfig);
+        submail.addTo(userTel);
+        submail.setProject("HdkFG4");
+        submail.addVar("NodeName","被监管用户：");
+        submail.addVar("Key","'http://27.115.49.59:90/JxcAppWeb/AppOpen.html");
+        String xsend = "";
+        try {
+            xsend = submail.xsend();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.info("通知短信：{}", xsend);
+        return Result.data(xsend);
+    }
 }
