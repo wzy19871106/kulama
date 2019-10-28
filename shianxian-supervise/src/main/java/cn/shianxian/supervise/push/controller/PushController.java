@@ -5,6 +5,9 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.JpushUtil;
 import cn.shianxian.supervise.push.vo.JpushVO;
 import com.submail.config.AppConfig;
+import com.submail.lib.Message;
+import com.submail.lib.MessageSend;
+import com.submail.lib.MessageTemplate;
 import com.submail.lib.VoiceXSend;
 
 import io.swagger.annotations.Api;
@@ -14,9 +17,7 @@ import io.swagger.annotations.ApiOperation;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.io.IOException;
@@ -33,8 +34,12 @@ import java.util.Map;
 @Slf4j
 public class PushController {
 
-    private static final String APP_ID = "21295";
-    private static final String APP_KEY = "57e964bb738cdb99cb8d1d9fc229b8c2";
+    private static final String VOICE_APP_ID = "21295";
+    private static final String VOICE_APP_KEY = "57e964bb738cdb99cb8d1d9fc229b8c2";
+
+    private static final String MESSAGE_APP_ID = "42304";
+    private static final String MESSAGE_APP_KEY = "d9e0564ef4cf8462c9ac702101e02f6f";
+
     /**
      * 极光推送
      */
@@ -62,14 +67,14 @@ public class PushController {
      *
      * @return
      */
-    @PostMapping("xsendConfig")
+    @GetMapping("xsendConfig")
     @ApiOperation(value = "语音消息", notes = "语音消息")
     @ApiImplicitParam(paramType = "query", name = "userTel", value = "手机号")
     public Result xsendConfig(String userTel) {
 //        AppConfig config = ConfigLoader.load(ConfigLoader.ConfigType.Voice);
         AppConfig appConfig = new AppConfig();
-        appConfig.setAppId(APP_ID);
-        appConfig.setAppKey(APP_KEY);
+        appConfig.setAppId(VOICE_APP_ID);
+        appConfig.setAppKey(VOICE_APP_KEY);
         VoiceXSend submail = new VoiceXSend(appConfig);
         submail.addTo(userTel);
         submail.addProject("XebWP");
@@ -86,4 +91,38 @@ public class PushController {
         log.info("语音：{}", xsend);
         return Result.data(xsend);
     }
+
+
+//    /**
+//     * 短息通知
+//     *
+//     * @param userTel
+//     * @param message
+//     * @return
+//     */
+//    @PostMapping("messageSend")
+//    @ApiOperation(value = "短息通知", notes = "短息通知")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(paramType = "query", name = "userTel", value = "手机号"),
+//            @ApiImplicitParam(paramType = "query", name = "message", value = "短息通知内容")
+//    })
+//    public Result messageSend(String userTel, String message) {
+//        AppConfig appConfig = new AppConfig();
+//        appConfig.setAppId(MESSAGE_APP_ID);
+//        appConfig.setAppKey(MESSAGE_APP_KEY);
+//
+//        MessageTemplate template = new MessageTemplate(appConfig);
+//        template.putTemplateId("aahvM");
+//        template.putSmsSignature("测试短信");
+//        template.putSmsContent(message);
+//        String msg = "";
+//        try {
+//            msg = template.putTemplate();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return Result.data(msg);
+//    }
 }
