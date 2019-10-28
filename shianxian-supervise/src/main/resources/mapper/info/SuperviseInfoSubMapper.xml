@@ -148,4 +148,28 @@
         CALL Proc_T_Supervise_Feedback_ByTag(#{mainIds},#{status})
     </select>
 
+    <select id="saveSuperviseInfoSubTemp" resultType="java.lang.String">
+        CALL proc_T_Supervise_Info_Sub_Temporary_Add(
+        #{superviseInfoSub.mainIds},
+        #{superviseInfoSub.nodeTag},
+        #{superviseInfoSub.superviseTypeTag},
+        #{superviseInfoSub.superviseTag},
+        #{superviseInfoSub.superviseName},
+        #{superviseInfoSub.resultTag},
+        #{superviseInfoSub.resultValue},
+        #{superviseInfoSub.score},
+        #{superviseInfoSub.advice},
+        #{superviseInfoSub.requst},
+        #{superviseInfoSub.picTag},
+        #{superviseInfoSub.createUserTag},
+        #{superviseInfoSub.lastUpdateUser},
+        #{superviseInfoSub.remark}
+        )
+    </select>
+
+    <select id="updateSuperviseInfoSub" resultType="java.lang.String">
+        CALL proc_T_Supervise_Info_Sub_Edit(
+        #{subId}
+        )
+    </select>
 </mapper>

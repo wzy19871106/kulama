@@ -4,6 +4,9 @@ import cn.shianxian.supervise.common.pojo.Pages;
 import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
+
 public interface SuperviseInfoSubService {
 
 
@@ -90,4 +93,11 @@ public interface SuperviseInfoSubService {
      * @return
      */
     Result rectify(SuperviseInfoSub superviseInfoSub);
+
+    /**
+     * 保存监管业务（临时从表）
+     * @param superviseInfoSubs
+     * @return
+     */
+    Result saveSuperviseInfoSubTemp(List<SuperviseInfoSub> superviseInfoSubs, HttpSession session);
 }

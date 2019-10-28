@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.*;
 import java.util.List;
@@ -145,6 +146,31 @@ public class SuperviseInfoMainController {
         log.info("保存监管业务（主表）：{}", superviseTypeList);
         Result result = this.superviseInfoMainService.saveSuperviseInfo(superviseTypeList);
         return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 保存监管业务(app用)
+     */
+    @PostMapping("saveSuperviseInfoApp")
+    @ApiOperation(value = "保存监管业务 app用", notes = "保存监管业务 app用")
+    public ResponseEntity<Result> saveSuperviseInfoApp(@RequestBody List<SuperviseType> superviseTypeList, HttpSession session) {
+        log.info("保存监管业务(superviseList) app用：{}", superviseTypeList);
+        Result result = this.superviseInfoMainService.saveSuperviseInfoApp(superviseTypeList, session);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * 清除session中的subId
+     *
+     * @param session
+     * @return
+     */
+    @PostMapping("removeSession")
+    @ApiOperation(value = "清除session中的subId", notes = "清除session中的subId")
+    public Result removeSession(HttpSession session) {
+        session.removeAttribute("subId");
+        return Result.successMsg();
     }
 
     /**
