@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,12 +102,15 @@ public class PushController {
     @ApiOperation(value = "短息通知", notes = "短息通知")
     @ApiImplicitParam(paramType = "query", name = "userTel", value = "手机号")
     public Result messageSend(String userTel) {
+        String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+                .format(new Date());
         AppConfig appConfig = new AppConfig();
         appConfig.setAppId(MESSAGE_APP_ID);
         appConfig.setAppKey(MESSAGE_APP_KEY);
         MESSAGEXsend submail = new MESSAGEXsend(appConfig);
         submail.addTo(userTel);
         submail.setProject("uhskD");
+        submail.addVar("OperaDate",time);
         submail.addVar("NodeName","被监管用户");
         submail.addVar("Address","http://27.115.49.59:90/JxcAppWeb/AppOpen.html");
         String xsend = "";
