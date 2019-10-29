@@ -105,7 +105,7 @@ public class PushController {
         appConfig.setAppKey(MESSAGE_APP_KEY);
         MESSAGEXsend submail = new MESSAGEXsend(appConfig);
         submail.addTo(userTel);
-        submail.setProject("HdkFG4");
+        submail.setProject("uhskD");
         submail.addVar("NodeName","被监管用户");
         submail.addVar("Address","http://27.115.49.59:90/JxcAppWeb/AppOpen.html");
         String xsend = "";
