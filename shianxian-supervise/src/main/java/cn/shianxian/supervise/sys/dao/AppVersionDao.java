@@ -1,6 +1,5 @@
 package cn.shianxian.supervise.sys.dao;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -11,4 +10,10 @@ public interface AppVersionDao {
      */
 
     String selectAppVersion();
+
+    /**
+     * 查询AppPad版本号,返回更新路径
+     * @return
+     */
+    String selectAppPadVersion();
 }

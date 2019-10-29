@@ -30,21 +30,39 @@ public class AppVersionController {
     private AppVersionService appVersionService;
 
     // 10.18.9.57 /data/apps
-    private static final String filePath = "http://sapi.dev.shianxian.cn/apps/";
-    private static final String fileName = "app-debug.apk";
+    private static final String APP_FILE_PATH = "http://sapi.dev.shianxian.cn/apps/";
+    private static final String APP_FILE_NAME = "app-debug.apk";
+    private static final String APP_PAD_FILE_NAME = "http://sapi.dev.shianxian.cn/apps/app_pad/";
+    private static final String APP_PAD_FILE_PATH = "app_pad_1.0.apk";
+
     /**
      * 根据id查询app版本号，返回文件下载路径
+     *
      * @param
      * @return http://sapi.dev.shianxian.cn/apps/app-debug.apk
      */
     @GetMapping("selectAppVersionById")
-    @ApiOperation(value = "查询app版本号,返回更新路径",notes = "查询app版本号，返回更新路径")
-    public Result selectAppVersionById(){
+    @ApiOperation(value = "查询app版本号,返回更新路径", notes = "查询app版本号，返回更新路径")
+    public Result selectAppVersionById() {
         String version = this.appVersionService.selectAppVersion();
-        Map<String,String> map = new HashMap();
-        map.put("version",version);
-        map.put("url",filePath+fileName);
+        Map<String, String> map = new HashMap();
+        map.put("version", version);
+        map.put("url", APP_FILE_PATH + APP_FILE_NAME);
         return Result.data(map);
     }
 
+    /**
+     * 查询AppPad版本号,返回更新路径
+     *
+     * @return  http://sapi.dev.shianxian.cn/apps/app_pad/app_pad_1.0.apk
+     */
+    @GetMapping("selectAppPadVersion")
+    @ApiOperation(value = "查询AppPad版本号,返回更新路径", notes = "查询AppPad版本号,返回更新路径")
+    public Result selectAppPadVersion() {
+        String version = this.appVersionService.selectAppPadVersion();
+        Map<String, String> map = new HashMap();
+        map.put("version", version);
+        map.put("url", APP_PAD_FILE_NAME + APP_PAD_FILE_PATH);
+        return Result.data(map);
+    }
 }

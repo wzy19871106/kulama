@@ -4,4 +4,8 @@
     <select id="selectAppVersion" resultType="java.lang.String">
         select app_version from t_version
     </select>
+
+    <select id="selectAppPadVersion" resultType="java.lang.String">
+        select app_pad_version from  t_version
+    </select>
 </mapper>
