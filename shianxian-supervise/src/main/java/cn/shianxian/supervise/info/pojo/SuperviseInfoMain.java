@@ -74,6 +74,12 @@ public class SuperviseInfoMain {
     private String picTag;
 
     /**
+     * 是否是线上监管
+     */
+    @Column(name = "ifOnline")
+    private Boolean ifOnline;
+
+    /**
      * 逻辑删除
      */
     @Column(name = "ifDelete")

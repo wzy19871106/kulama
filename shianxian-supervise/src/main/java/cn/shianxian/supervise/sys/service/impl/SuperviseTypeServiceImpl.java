@@ -9,6 +9,8 @@ import cn.shianxian.supervise.sys.pojo.SuperviseType;
 import cn.shianxian.supervise.sys.pojo.UserGroup;
 import cn.shianxian.supervise.sys.service.SuperviseTypeService;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +93,12 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
         return Result.data(tree);
     }
 
+    @Override
+    public Result selectSuperviseTypeTreeApp(SuperviseType superviseType) {
+        String tree = this.superviseTypeDao.selectSuperviseTypeTree(superviseType);
+        JSONArray treeJson = JSONObject.parseArray(tree);
+        return Result.data(treeJson);
+    }
 
     @Override
     public Result selectSuperviseTypeById(String id) {

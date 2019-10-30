@@ -11,7 +11,8 @@
       #{functionaryForaduit.functionaryType},
       #{functionaryForaduit.picTag},
       #{functionaryForaduit.nodeName},
-      #{functionaryForaduit.functionaryPostition}
+      #{functionaryForaduit.functionaryPostition},
+       #{functionaryForaduit.functionaryTel}
       )
     </select>
 
@@ -25,7 +26,8 @@
       #{functionaryForaduit.functionaryType},
       #{functionaryForaduit.picTag},
       #{functionaryForaduit.nodeName},
-      #{functionaryForaduit.functionaryPostition}
+      #{functionaryForaduit.functionaryPostition},
+      #{functionaryForaduit.functionaryTel}
       )
     </select>
 
@@ -48,6 +50,7 @@
       (
       #{queryPojo.id},
       #{queryPojo.name},
+      #{queryPojo.userDataUsedAuthoritySet},
       #{pages.pageSize},
       #{pages.pageNum}
       )

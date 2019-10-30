@@ -23,8 +23,8 @@ import java.util.Map;
 public class JpushUtil {
 
     // 设置好账号的app_key和masterSecret是必须的
-    private static String APP_KEY = "8d4eea39e0adc06932086f3e";
-    private static String MASTER_SECRET = "f2043b41c089a40167531c25";
+    private static final String APP_KEY = "8d4eea39e0adc06932086f3e";
+    private static final String MASTER_SECRET = "f2043b41c089a40167531c25";
 
     //极光推送>>Android
     //Map<String, String> parm是我自己传过来的参数,可以自定义参数
@@ -34,12 +34,18 @@ public class JpushUtil {
         //推送的关键,构造一个payload
         PushPayload payload = PushPayload.newBuilder()
                 .setPlatform(Platform.android())//指定android平台的用户
-                .setAudience(Audience.all())//你项目中的所有用户
-//                .setAudience(Audience.alias(parm.get("alias")))//设置别名发送,单发，点对点方式
+//                .setAudience(Audience.all())//你项目中的所有用户
+                .setAudience(Audience.alias(parm.get("alias")))//设置别名发送,单发，点对点方式
                 //.setAudience(Audience.tag("tag1"))//设置按标签发送，相当于群发
 //                .setAudience(Audience.registrationId(parm.get("id")))//registrationId指定用户
-
-                .setNotification(Notification.android(parm.get("msg"), parm.get("title"), parm))  //发送内容
+                .setNotification(Notification.newBuilder()
+                        .addPlatformNotification(IosNotification.newBuilder() //发送android
+                                .setAlert(parm.get("msg")) //消息体
+                                .setSound("test") //提示音
+                                .addExtras(parm) //附加参数
+                                .build())
+                        .build())
+//                .setNotification(Notification.android(parm.get("msg"), parm.get("title"), parm))  //发送内容
                 .setOptions(Options.newBuilder().setApnsProduction(true).setTimeToLive(7200).build())
                 // apnProduction指定开发环境 true为生产模式 false 为测试模式 (android不区分模式,ios区分模式) 不用设置也没关系
                 // TimeToLive 两个小时的缓存时间
@@ -61,7 +67,7 @@ public class JpushUtil {
 
     //极光推送>>ios
     //Map<String, String> parm是我自己传过来的参数,可以自定义参数
-    public static void jpushIOS(Map<String, String> parm) {
+    public static Result jpushIOS(Map<String, String> parm) {
 
         //创建JPushClient
         JPushClient jpushClient = new JPushClient(MASTER_SECRET, APP_KEY);
@@ -84,10 +90,13 @@ public class JpushUtil {
         try {
             PushResult pu = jpushClient.sendPush(payload);
 //            System.out.println(pu.toString());
+            return Result.data(pu);
         } catch (APIConnectionException e) {
             e.printStackTrace();
+            return Result.failMsg();
         } catch (APIRequestException e) {
             e.printStackTrace();
+            return Result.failMsg();
         }
     }
 

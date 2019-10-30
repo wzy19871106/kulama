@@ -53,6 +53,7 @@ public class SuperviseInfoMainTypeController {
             @ApiImplicitParam(paramType = "query", name = "score", value = "结果分值"),
             @ApiImplicitParam(paramType = "query", name = "status", value = "整改状态  0 无需整改 1,2,3,4.....需要整改的数量"),
             @ApiImplicitParam(paramType = "query", name = "ifVisit", value = "回访状态"),
+            @ApiImplicitParam(paramType = "query", name = "ifOnline", value = "是否是线上监管"),
             @ApiImplicitParam(paramType = "query", name = "ifDelete", value = "逻辑删除"),
     })
     public ResponseEntity<Result> saveSuperviseInfoMainType(@Valid SuperviseInfoMainType superviseInfoMainType) {

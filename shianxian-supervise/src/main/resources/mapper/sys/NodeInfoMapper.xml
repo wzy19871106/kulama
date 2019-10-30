@@ -34,6 +34,21 @@
         #{nodeInfo.industryTag},
         #{nodeInfo.userDataUsedAuthoritySet},
         #{nodeInfo.nodeName},
+        #{nodeInfo.office},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectNodeInfoByConditionAndAuthority" resultMap="nodeInfo,pageCount,totalCount">
+        CALL proc_T_NodeInfo_Query_ByConditionAndAuthority
+        (
+         #{nodeInfo.nodeTag},
+        #{nodeInfo.industryTag},
+        #{nodeInfo.userDataUsedAuthoritySet},
+        #{nodeInfo.nodeName},
+        #{nodeInfo.office},
+        #{nodeInfo.authority},
         #{pages.pageSize},
         #{pages.pageNum}
         )
@@ -83,4 +98,7 @@
         CALL proc_T_NodeInfo_Plan_QueryTree(#{planTag}, #{authority})
     </select>
 
+    <select id="selectNodeInfoOffice" resultType="java.lang.String">
+        select distinct bak1 from t_nodeinfo where bak1 is not null
+    </select>
 </mapper>

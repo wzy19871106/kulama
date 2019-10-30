@@ -64,6 +64,7 @@
       #{companyInfoForaduit.companyArea},
       #{companyInfoForaduit.companyVillage},
       #{companyInfoForaduit.nodeName},
+      #{companyInfoForaduit.userDataUsedAuthoritySet},
       #{pages.pageSize},
       #{pages.pageNum}
       )

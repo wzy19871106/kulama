@@ -3,10 +3,7 @@ package cn.shianxian.supervise.record.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
@@ -123,4 +120,9 @@ public class CompanyInfoForaduit {
     @Size(message = "退回原因过长！", max = 200)
     private String failReason;
 
+    /**
+     *用户组的所拥有的数据权限
+     */
+    @Transient
+    private String userDataUsedAuthoritySet;
 }

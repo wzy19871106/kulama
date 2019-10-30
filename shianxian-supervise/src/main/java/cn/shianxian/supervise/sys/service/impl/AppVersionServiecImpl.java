@@ -18,4 +18,10 @@ public class AppVersionServiecImpl implements AppVersionService {
         String version = this.appVersionDao.selectAppVersion();
         return version;
     }
+
+    @Override
+    public String selectAppPadVersion() {
+        String version = this.appVersionDao.selectAppPadVersion();
+        return version;
+    }
 }

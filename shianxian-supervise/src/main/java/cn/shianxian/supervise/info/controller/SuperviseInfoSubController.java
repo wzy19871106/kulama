@@ -11,12 +11,11 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 监管业务（从表）控制器
@@ -34,6 +33,7 @@ public class SuperviseInfoSubController {
 
     /**
      * 根据监管编码返回待整改的监管内容的整改意见
+     *
      * @return
      */
     @GetMapping("selectSuperviseInfoAdviceById")
@@ -47,6 +47,7 @@ public class SuperviseInfoSubController {
 
     /**
      * 保存监管业务（从表）
+     *
      * @return
      */
     @PostMapping("superviseInfoSub")
@@ -80,6 +81,7 @@ public class SuperviseInfoSubController {
 
     /**
      * 根据所选监管业务（主类型）编码查询监管明细
+     *
      * @return
      */
     @GetMapping("selectSuperviseInfoDetailById")
@@ -97,6 +99,7 @@ public class SuperviseInfoSubController {
 
     /**
      * 查询整改情况
+     *
      * @return
      */
     @GetMapping("rectify")
@@ -111,4 +114,32 @@ public class SuperviseInfoSubController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 保存监管业务（临时从表）
+     */
+    @PostMapping("saveSuperviseInfoSubTemp")
+    @ApiOperation(value = "保存监管业务（临时从表）", notes = "保存监管业务（临时从表）")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "mainIds", value = "主表外键"),
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "企业编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTag", value = "监管项目编码"),
+            @ApiImplicitParam(paramType = "query", name = "superviseName", value = "监管内容详细"),
+            @ApiImplicitParam(paramType = "query", name = "resultTag", value = "监管结果编码"),
+            @ApiImplicitParam(paramType = "query", name = "resultValue", value = "监管结果值"),
+            @ApiImplicitParam(paramType = "query", name = "score", value = "结果分值"),
+            @ApiImplicitParam(paramType = "query", name = "advice", value = "整改意见"),
+            @ApiImplicitParam(paramType = "query", name = "requst", value = "整改反馈"),
+            @ApiImplicitParam(paramType = "query", name = "picTag", value = "附件路径"),
+            @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建日期"),
+            @ApiImplicitParam(paramType = "query", name = "createUserTag", value = "创建人"),
+            @ApiImplicitParam(paramType = "query", name = "lastUpdateTime", value = "最后更新日期"),
+            @ApiImplicitParam(paramType = "query", name = "lastUpdateUser", value = "最后更新人"),
+            @ApiImplicitParam(paramType = "query", name = "status", value = "整改状态  0 无需整改 1，整改完成 2，待整改，3 整改提交，待审核4……"),
+            @ApiImplicitParam(paramType = "query", name = "remark", value = "备注"),
+    })
+    public ResponseEntity<Result> saveSuperviseInfoSubTemp(@RequestBody List<SuperviseInfoSub> superviseInfoSubs, HttpSession session) {
+        Result result = this.superviseInfoSubService.saveSuperviseInfoSubTemp(superviseInfoSubs,session);
+        return ResponseEntity.ok(result);
+    }
 }

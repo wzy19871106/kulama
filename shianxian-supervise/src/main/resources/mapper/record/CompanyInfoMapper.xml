@@ -12,6 +12,7 @@
       #{companyInfo.companyArea},
       #{companyInfo.companyVillage},
       #{companyInfo.nodeName},
+      #{companyInfo.userDataUsedAuthoritySet},
       #{pages.pageSize},
       #{pages.pageNum}
       )

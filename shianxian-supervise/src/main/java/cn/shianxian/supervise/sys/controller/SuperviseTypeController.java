@@ -112,6 +112,20 @@ public class SuperviseTypeController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 查询监管类型（树形）(app)
+     * @return
+     */
+    @GetMapping("selectSuperviseTypeTreeApp")
+    @ApiOperation(value = "查询监管类型（树形）App", notes = "查询监管类型（树形）App")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
+    })
+    public ResponseEntity<Result> selectSuperviseTypeTreeApp(SuperviseType superviseType) {
+        Result result = this.superviseTypeService.selectSuperviseTypeTreeApp(superviseType);
+        return ResponseEntity.ok(result);
+    }
 
     /**
      * 根据id查询监管类型

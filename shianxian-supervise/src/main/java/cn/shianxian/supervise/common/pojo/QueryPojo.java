@@ -47,4 +47,9 @@ public class QueryPojo {
      * 结束时间
      */
     private LocalDateTime endTime;
+
+    /**
+     *用户组的所拥有的数据权限
+     */
+    private String userDataUsedAuthoritySet;
 }

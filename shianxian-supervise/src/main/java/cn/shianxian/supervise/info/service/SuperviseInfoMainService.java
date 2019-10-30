@@ -8,6 +8,7 @@ import cn.shianxian.supervise.info.pojo.SuperviseInfoSub;
 import cn.shianxian.supervise.info.vo.SuperviseVO;
 import cn.shianxian.supervise.sys.pojo.SuperviseType;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 
@@ -85,6 +86,13 @@ public interface SuperviseInfoMainService {
      */
     Result saveSuperviseInfo(List<SuperviseType> superviseTypeList);
 
+
+    /**
+     * 保存监管业务（App用）
+     * @param superviseTypesList
+     * @return
+     */
+    Result saveSuperviseInfoApp(List<SuperviseType> superviseTypesList, HttpSession session);
 
     /**
      * 保存监管业务(未整改未监管项)

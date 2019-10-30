@@ -137,6 +137,11 @@ public class CompanyInfoFunctionaryForaduitVO {
     private String functionaryType;
 
     /**
+     * 负责人联系电话
+     */
+    private String functionaryTel;
+
+    /**
      * 负责人图片地址标识
      */
     private String functionaryPicTag;

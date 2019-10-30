@@ -71,6 +71,12 @@ public class SuperviseType {
     private Boolean ifDelete;
 
     /**
+     * 回访状态
+     */
+    @Transient
+    private Boolean ifVisit;
+
+    /**
      * 父类型名称
      */
     @Transient
@@ -154,4 +160,10 @@ public class SuperviseType {
      */
     @Transient
     private List<SuperviseInfoSub> unCheckedList;
+
+    /**
+     * 是否是线上监管
+     */
+    @Transient
+    private Boolean ifOnline;
 }

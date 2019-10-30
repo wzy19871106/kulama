@@ -44,6 +44,7 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "functionaryName", value = "负责人名称"),
             @ApiImplicitParam(paramType = "query", name = "functionaryNo", value = "负责人身份证号"),
             @ApiImplicitParam(paramType = "query", name = "functionaryType", value = "负责人类型，1管理，2普通"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTel", value = "负责人联系电话"),
             @ApiImplicitParam(paramType = "query", name = "picTag", value = "负责人图片地址标识"),
             @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号"),
             @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建时间"),
@@ -74,6 +75,7 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "functionaryName", value = "负责人名称"),
             @ApiImplicitParam(paramType = "query", name = "functionaryNo", value = "负责人身份证号"),
             @ApiImplicitParam(paramType = "query", name = "functionaryType", value = "负责人类型，1管理，2普通"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTel", value = "负责人联系电话"),
             @ApiImplicitParam(paramType = "query", name = "picTag", value = "负责人图片地址标识"),
             @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号"),
             @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建时间"),
@@ -132,11 +134,13 @@ public class FunctionaryController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
     public ResponseEntity<Result> selectFunctionaryForaduitByLike(QueryPojo queryPojo, Pages pages) {
-        return this.functionaryService.selectFunctionaryForaduitByLike(queryPojo, pages);
+        ResponseEntity<Result> resultResponseEntity = this.functionaryService.selectFunctionaryForaduitByLike(queryPojo, pages);
+        return resultResponseEntity;
     }
 
 
@@ -180,6 +184,7 @@ public class FunctionaryController {
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
+            @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
@@ -230,6 +235,7 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "functionaryName", value = "负责人名称"),
             @ApiImplicitParam(paramType = "query", name = "functionaryNo", value = "负责人身份证号"),
             @ApiImplicitParam(paramType = "query", name = "functionaryType", value = "负责人类型，1管理，2普通"),
+            @ApiImplicitParam(paramType = "query", name = "functionaryTel", value = "负责人联系电话"),
             @ApiImplicitParam(paramType = "query", name = "picTag", value = "负责人图片地址标识"),
             @ApiImplicitParam(paramType = "query", name = "index", value = "节点流水号"),
             @ApiImplicitParam(paramType = "query", name = "createTime", value = "创建时间"),

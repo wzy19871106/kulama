@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.w3c.dom.ls.LSException;
 
+import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -227,6 +228,17 @@ public class SuperviseInfoSubServiceImpl implements SuperviseInfoSubService {
             }
         }
         return Result.data(rectifyTimeList);
+    }
+
+    @Override
+    public Result saveSuperviseInfoSubTemp(List<SuperviseInfoSub> superviseInfoSubs, HttpSession session) {
+        List<String> subIds = new ArrayList<>();
+        for (SuperviseInfoSub superviseInfoSub : superviseInfoSubs) {
+            String subId = this.superviseInfoSubDao.saveSuperviseInfoSubTemp(superviseInfoSub);
+            subIds.add(subId);
+        }
+        session.setAttribute("subId",subIds);
+        return Result.successMsg();
     }
 
 }

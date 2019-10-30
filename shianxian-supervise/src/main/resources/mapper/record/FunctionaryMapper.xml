@@ -9,6 +9,7 @@
       (
       #{queryPojo.id},
       #{queryPojo.name},
+      #{queryPojo.userDataUsedAuthoritySet},
       #{pages.pageSize},
       #{pages.pageNum}
       )
@@ -45,7 +46,8 @@
       #{functionary.nodeName},
       #{functionary.functionaryPostition},
       #{functionary.weChatId},
-      #{functionary.key}
+      #{functionary.key},
+      #{functionary.functionaryTel}
       )
     </select>
 

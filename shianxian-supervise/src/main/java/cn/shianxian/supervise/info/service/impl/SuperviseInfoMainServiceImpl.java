@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -113,6 +114,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 superviseInfoMain.setNodeName(superviseType.getNodeName());
                 superviseInfoMain.setCreateTime(LocalDateTime.now());
                 superviseInfoMain.setPicTag("");
+                superviseInfoMain.setIfOnline(superviseType.getIfOnline());
                 // 保存监管主表
                 this.superviseInfoMainDao.saveSuperviseInfoMain(superviseInfoMain);
                 flag = false;
@@ -129,6 +131,8 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             superviseInfoMainType.setSuperviserName(superviseType.getSuperviserName());
             superviseInfoMainType.setFunctionaryTag(superviseType.getFunctionaryTag());
             superviseInfoMainType.setFunctionaryName(superviseType.getFunctionaryName());
+            superviseInfoMainType.setIfOnline(superviseType.getIfOnline());
+            superviseInfoMainType.setIfVisit(superviseType.getIfVisit());
             if (StringUtils.isNotBlank(superviseType.getParentTag())) {
                 superviseInfoMainType.setParentMainIds(superviseType.getParentTag());
             } else {
@@ -171,6 +175,61 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
         return Result.successMsg();
     }
 
+    @Override
+    @Transactional
+    public Result saveSuperviseInfoApp(List<SuperviseType> superviseTypesList, HttpSession session) {
+        SuperviseInfoMain superviseInfoMain = new SuperviseInfoMain();
+        boolean flag = true;
+        String mainId = UUIDGenerator.generatorUUID();
+        for (SuperviseType superviseType : superviseTypesList) {
+            if (flag) {
+                mainId = superviseType.getMainId();
+                superviseInfoMain.setMainId(mainId);
+                superviseInfoMain.setPlanTag(superviseType.getPlanTag());
+                NodeInfo nodeInfo = this.nodeInfoDao.selectByPrimaryKey(superviseType.getNodeTag());
+                superviseInfoMain.setNodeType(nodeInfo.getIndustryTag());
+                superviseInfoMain.setNodeTag(superviseType.getNodeTag());
+                superviseInfoMain.setNodeName(superviseType.getNodeName());
+                superviseInfoMain.setCreateTime(LocalDateTime.now());
+                superviseInfoMain.setPicTag("");
+                superviseInfoMain.setIfOnline(superviseType.getIfOnline());
+                // 保存监管主表
+                this.superviseInfoMainDao.saveSuperviseInfoMain(superviseInfoMain);
+                flag = false;
+            }
+            SuperviseInfoMainType superviseInfoMainType = new SuperviseInfoMainType();
+            String mainIds = UUIDGenerator.generatorUUID();
+            superviseInfoMainType.setMainIds(mainIds);
+            superviseInfoMainType.setMainId(mainId);
+            superviseInfoMainType.setNodeTag(superviseType.getNodeTag());
+            superviseInfoMainType.setSuperviseTypeTag(superviseType.getSuperviseTypeTag());
+            superviseInfoMainType.setSuperviseTeamTag(superviseType.getSuperviseTeamTag());
+            superviseInfoMainType.setSuperviseTeamName(superviseType.getSuperviseTeamName());
+            superviseInfoMainType.setSuperviserTag(superviseType.getSuperviserTag());
+            superviseInfoMainType.setSuperviserName(superviseType.getSuperviserName());
+            superviseInfoMainType.setFunctionaryTag(superviseType.getFunctionaryTag());
+            superviseInfoMainType.setFunctionaryName(superviseType.getFunctionaryName());
+            superviseInfoMainType.setIfOnline(superviseType.getIfOnline());
+            superviseInfoMainType.setIfVisit(superviseType.getIfVisit());
+            if (StringUtils.isNotBlank(superviseType.getParentTag())) {
+                superviseInfoMainType.setParentMainIds(superviseType.getParentTag());
+            } else {
+                superviseInfoMainType.setParentMainIds(null);
+            }
+            // 保存监管类型
+            this.superviseInfoMainTypeDao.saveSuperviseInfoMainType(superviseInfoMainType);
+            // session中获取subId
+            List<String> subIds = (List<String>) session.getAttribute("subId");
+            for (String subId : subIds) {
+                // 根据subId更新从表正式表
+                this.superviseInfoSubDao.updateSuperviseInfoSub(subId);
+            }
+            // 修改监管类型
+            this.superviseInfoMainTypeDao.updateSuperviseInfoMainType(superviseInfoMainType.getMainIds());
+        }
+        return Result.successMsg();
+    }
+
     @Transactional
     @Override
     public Result saveSuperviseInfoCheck(List<SuperviseType> superviseTypeList) {
@@ -188,6 +247,7 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
                 superviseInfoMain.setNodeName(superviseType.getNodeName());
                 superviseInfoMain.setCreateTime(LocalDateTime.now());
                 superviseInfoMain.setPicTag("");
+                superviseInfoMain.setIfOnline(superviseType.getIfOnline());
                 // 保存监管主表
                 this.superviseInfoMainDao.saveSuperviseInfoMain(superviseInfoMain);
                 flag = false;
@@ -204,6 +264,8 @@ public class SuperviseInfoMainServiceImpl implements SuperviseInfoMainService {
             superviseInfoMainType.setSuperviserName(superviseType.getSuperviserName());
             superviseInfoMainType.setFunctionaryTag(superviseType.getFunctionaryTag());
             superviseInfoMainType.setFunctionaryName(superviseType.getFunctionaryName());
+            superviseInfoMainType.setIfOnline(superviseType.getIfOnline());
+            superviseInfoMainType.setIfVisit(superviseType.getIfVisit());
             if (StringUtils.isNotBlank(superviseType.getParentTag())) {
                 superviseInfoMainType.setParentMainIds(superviseType.getParentTag());
             } else {
