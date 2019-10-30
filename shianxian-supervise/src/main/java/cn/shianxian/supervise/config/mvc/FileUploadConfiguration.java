@@ -17,9 +17,9 @@ public class FileUploadConfiguration {
     public MultipartConfigElement multipartConfigElement() {
         MultipartConfigFactory factory = new MultipartConfigFactory();
         // 设置文件大小限制 ,
-        factory.setMaxFileSize("20MB"); // KB,MB
+        factory.setMaxFileSize("30MB"); // KB,MB
         // 设置总上传数据总大小
-        factory.setMaxRequestSize("20MB");
+        factory.setMaxRequestSize("30MB");
         return factory.createMultipartConfig();
     }
 }
