@@ -36,4 +36,13 @@ public interface XsInfoService {
      * @return
      */
     Result updateCheckByXsdm(XsMain xsMains);
+
+    /**
+     * 根据销售编码查询是否有记录
+     * @param xsrq
+     * @param xszje
+     * @param xsdm
+     * @return
+     */
+    Result selectXsMainIfRecord(String xsrq,String xszje,String xsdm);
 }

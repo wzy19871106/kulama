@@ -56,6 +56,12 @@ public class JhSub {
     private BigDecimal jhsl;
 
     /**
+     * 进货单价
+     */
+    @Column(name = "jh_dj")
+    private BigDecimal jhdj;
+
+    /**
      * 进货金额
      */
     @Column(name = "jh_je")

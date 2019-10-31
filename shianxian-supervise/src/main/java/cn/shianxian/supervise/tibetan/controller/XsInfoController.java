@@ -69,6 +69,8 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query", name = "xscheckdm", value = "巡查人员编码"),
             @ApiImplicitParam(paramType = "query", name = "xschecksj", value = "上家巡视状态（1 已巡视 0未巡视）"),
             @ApiImplicitParam(paramType = "query", name = "xscheckxj", value = "下家巡视状态（1 已巡视 0未巡视）"),
+            @ApiImplicitParam(paramType = "query", name = "xspaydm", value = "支付方式编码（1现金 2 银行卡 3 记账）"),
+            @ApiImplicitParam(paramType = "query", name = "xsrq", value = "销售日期"),
     })
     public ResponseEntity selectXsInfo(XsMain xsMain) {
         Result result = this.xsInfoService.selectXsInfo(xsMain);
@@ -85,11 +87,8 @@ public class XsInfoController {
     @PostMapping("XsUpdate")
     @ApiOperation(value = "插入销售金额", notes = "插入销售金额")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "销售上家编码"),
             @ApiImplicitParam(paramType = "query", name = "xsxjdm", value = "销售下家编码"),
             @ApiImplicitParam(paramType = "query", name = "xsxjmc", value = "销售下家名称"),
-            @ApiImplicitParam(paramType = "query", name = "xspaydm", value = "支付方式编码"),
-            @ApiImplicitParam(paramType = "query", name = "xspaymc", value = "支付方式"),
             @ApiImplicitParam(paramType = "query", name = "xsdm", value = "销售编码"),
             @ApiImplicitParam(paramType = "query", name = "amount", value = "总金额")
     })
@@ -119,4 +118,22 @@ public class XsInfoController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 根据销售编码，销售日期，销售总金额查询是否有记录
+     * @param xsrq
+     * @param xszje
+     * @param xsdm
+     * @return
+     */
+    @PostMapping("XsSelectIfExist")
+    @ApiOperation(value = "根据销售编码查询是否有记录",notes = "根据销售编码查询是否有记录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "xsrq", value = "销售日期"),
+            @ApiImplicitParam(paramType = "query", name = "xszje", value = "销售总金额"),
+            @ApiImplicitParam(paramType = "query", name = "xsdm", value = "销售编码"),
+    })
+    public ResponseEntity<Result> selectXsMainRecord(String xsrq,String xszje,String xsdm){
+        Result result = this.xsInfoService.selectXsMainIfRecord(xsrq, xszje, xsdm);
+        return ResponseEntity.ok(result);
+    }
 }

@@ -16,7 +16,7 @@ public class KhdaServiceImpl implements KhdaService {
     @Override
     public Result selectCustomerInfoByNameAndPass(Khda khda) {
         Khda khda1 = this.khdaDao.selectCustomerInfo(khda);
-        if (khda1 != null) {
+        if (!khda1.getKhdm().isEmpty()) {
             return Result.data(khda1);
         }
         return Result.msg("登录失败");

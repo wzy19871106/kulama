@@ -41,7 +41,9 @@
         #{xsxjdm},
         #{xscheckdm},
         #{xschecksj},
-        #{xscheckxj}
+        #{xscheckxj},
+        #{xspaydm},
+        #{xsrq}
         )
     </select>
     <update id="updateXsMainInfo">
@@ -65,5 +67,13 @@
 
     <select id="selectXssjdmByXsdm" resultType="java.lang.String">
         select xs_sjdm from qzgy_xs_main where xs_dm = #{xsdm}
+    </select>
+
+    <select id="selectXsMainIfRecord" resultType="java.lang.String">
+        CALL Proc_XsSelectIfExist(
+        #{xsrq},
+        #{xszje},
+        #{xsdm}
+        )
     </select>
 </mapper>

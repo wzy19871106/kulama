@@ -82,8 +82,8 @@ public class XsInfoServiceImpl implements XsInfoService {
 
     @Override
     public Result selectXsInfo(XsMain xsMain) {
-        XsInfoDTO xsInfoDTO = this.xsInfoDao.selectXsInfo(xsMain);
-        return Result.data(xsInfoDTO);
+        List<XsInfoDTO> infoDTOS = this.xsInfoDao.selectXsInfo(xsMain);
+        return Result.data(infoDTOS);
     }
 
     @Override
@@ -122,6 +122,12 @@ public class XsInfoServiceImpl implements XsInfoService {
     public Result updateCheckByXsdm(XsMain xsMains) {
         this.xsInfoDao.updateCheck(xsMains);
         return Result.successMsg();
+    }
+
+    @Override
+    public Result selectXsMainIfRecord(String xsrq, String xszje, String xsdm) {
+        String ifRecord = this.xsInfoDao.selectXsMainIfRecord(xsrq, xszje, xsdm);
+        return Result.data(ifRecord);
     }
 
 }
