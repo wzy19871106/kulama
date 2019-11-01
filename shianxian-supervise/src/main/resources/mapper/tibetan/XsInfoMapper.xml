@@ -36,7 +36,7 @@
     </select>
 
     <select id="selectXsInfo" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
-        CALL Proc_XsSelect(
+        CALL Proc_XsMainSelect(
         #{xssjdm},
         #{xsxjdm},
         #{xscheckdm},
@@ -47,7 +47,7 @@
         )
     </select>
     <update id="updateXsMainInfo">
-       update qzgy_xs_main set xs_xjdm = #{xsxjdm},xs_sjmc = #{xsxjmc},xs_used = #{xsused}
+       update qzgy_xs_main set xs_xjdm = #{xsxjdm},xs_xjmc = #{xsxjmc},xs_used = #{xsused}
          where xs_dm = #{xsdm}
     </update>
 
