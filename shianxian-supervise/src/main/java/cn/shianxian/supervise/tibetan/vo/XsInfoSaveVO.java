@@ -25,4 +25,9 @@ public class XsInfoSaveVO implements Serializable {
      * 支付方式
      */
     private String xspaymc;
+
+    /**
+     * 销售上家编码
+     */
+    private String xssjdm;
 }

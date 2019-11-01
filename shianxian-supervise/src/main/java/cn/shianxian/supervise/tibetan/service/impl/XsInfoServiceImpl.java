@@ -6,11 +6,12 @@ import cn.shianxian.supervise.common.utils.IncreaseUtil;
 import cn.shianxian.supervise.tibetan.dao.XsInfoDao;
 import cn.shianxian.supervise.tibetan.dto.XsInfoDTO;
 import cn.shianxian.supervise.tibetan.pojo.XsMain;
+import cn.shianxian.supervise.tibetan.pojo.XsSub;
 import cn.shianxian.supervise.tibetan.vo.XsInfoSaveVO;
 import cn.shianxian.supervise.tibetan.vo.XsInfoVO;
 import cn.shianxian.supervise.tibetan.service.XsInfoService;
 import cn.shianxian.supervise.tibetan.vo.XsMainInfoVO;
-import org.apache.commons.lang3.StringUtils;
+import cn.shianxian.supervise.tibetan.vo.XsVerificationVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,9 +41,10 @@ public class XsInfoServiceImpl implements XsInfoService {
             }
         });
         HashMap<Object, Object> map = new HashMap<>();
+        ArrayList<Object> list = new ArrayList<>();
         // 销售总金额
         BigDecimal totalAmount = new BigDecimal(0);
-
+        BigDecimal totalWeight  = new BigDecimal(0);
         SEQUENCE = SEQUENCE >= 999999 ? 1 : SEQUENCE + 1;
         String datetime = new SimpleDateFormat("yyyyMMddHHmmss")
                 .format(new Date());
@@ -52,32 +54,31 @@ public class XsInfoServiceImpl implements XsInfoService {
                 .format(new Date());
         List<XsInfoVO> infoVOS = xsInfoVO.getXsInfoVO();
         for (XsInfoVO infoDTO : infoVOS) {
-            infoDTO.setXspaydm(xsInfoVO.getXspaydm());
-            infoDTO.setXspaymc(xsInfoVO.getXspaymc());
             // 销售金额
             BigDecimal xsje = infoDTO.getXsje();
+            BigDecimal xszl = infoDTO.getXszl();
+
+            totalWeight = xszl.add(totalWeight);
             totalAmount = xsje.add(totalAmount);
-            map.put("totalAmount", totalAmount);
-//            // 销售日期
-//            infoDTO.setXsrq(time);
-            // 销售商品编码
-            infoDTO.setXsdm(datetime + increase);
-            // 插入主表
-            String mainInfo = xsInfoDao.insertSalesMainInfo(infoDTO);
-//            if (StringUtils.isNotBlank(mainInfo) || Integer.parseInt(mainInfo) > 0) {
-            //
             infoDTO.setXsspdm(increase);
+            infoDTO.setXsdm(datetime + increase);
             // 插入从表
-            String subInfo = xsInfoDao.insertSalesSubInfo(infoDTO);
-//                if (StringUtils.isNotBlank(subInfo) || Integer.parseInt(subInfo) > 0) {
-            map.put("xsdm", infoDTO.getXsdm());
-            return Result.data(map);
-//                }
-//                return Result.msg("插入销售从表失败");
-//            }
-//            return Result.msg("插入销售主表失败");
+            this.xsInfoDao.insertSalesSubInfo(infoDTO);
         }
-        return Result.failMsg();
+
+        XsMain xsMain = new XsMain();
+        xsMain.setXssjdm(xsInfoVO.getXssjdm());
+        // 销售商品编码
+        xsMain.setXsdm(datetime + increase);
+        xsMain.setXszje(totalAmount);
+        xsMain.setXszzl(totalWeight);
+        xsMain.setXspaydm(xsInfoVO.getXspaydm());
+        xsMain.setXspaymc(xsInfoVO.getXspaymc());
+        // 插入主表
+        this.xsInfoDao.insertSalesMainInfo(xsMain);
+        map.put("xsdm", datetime + increase);
+        map.put("totalAmount", totalAmount);
+        return Result.data(map);
     }
 
     @Override
@@ -111,7 +112,7 @@ public class XsInfoServiceImpl implements XsInfoService {
                 // 上家余额 = 上家金额 + 销售总金额
                 BigDecimal sjye = sjje.add(amount);
                 xsInfoDao.updateKhBalance(sjye,xssjdm);
-                return Result.successMsg();
+                return Result.msg("交易成功");
             }
             return Result.msg("余额不足，交易失败！");
         }
@@ -128,6 +129,45 @@ public class XsInfoServiceImpl implements XsInfoService {
     public Result selectXsMainIfRecord(String xsrq, String xszje, String xsdm) {
         String ifRecord = this.xsInfoDao.selectXsMainIfRecord(xsrq, xszje, xsdm);
         return Result.data(ifRecord);
+    }
+
+    @Override
+    public Result selectPatrolByXsSjdm(String xssjdm) {
+        List<XsInfoDTO> xsInfoDTOS = this.xsInfoDao.selectPatrol(xssjdm);
+        return Result.data(xsInfoDTOS);
+    }
+
+    @Override
+    public Result selectVerificationCertificateByXsSjdm(String xssjdm, String xsrq) {
+        List<XsInfoDTO> xsInfoDTOS = this.xsInfoDao.selectVerificationCertificate(xssjdm, xsrq);
+        // 给前端拼JSON格式
+        XsVerificationVO xsVerificationVO = new XsVerificationVO();
+        ArrayList<XsSub> sub = new ArrayList<>();
+        // 总金额
+        BigDecimal totalAmount = new BigDecimal(0);
+        // 总重量
+        BigDecimal totalWeight = new BigDecimal(0);
+        for (XsInfoDTO xsInfoDTO : xsInfoDTOS) {
+            XsSub xsSub = new XsSub();
+            xsSub.setXsspmc(xsInfoDTO.getXsspmc());
+            xsSub.setXsdj(xsInfoDTO.getXsdj());
+            xsSub.setXszje(xsInfoDTO.getXszje());
+            BigDecimal xszje = xsInfoDTO.getXszje();
+            xsSub.setXszzl(xsInfoDTO.getXszzl());
+            BigDecimal xszzl = xsInfoDTO.getXszzl();
+            totalAmount = xszje.add(totalAmount);
+            totalWeight = xszzl.add(totalWeight);
+            sub.add(xsSub);
+
+            xsVerificationVO.setXsSub(sub);
+            xsVerificationVO.setXsrq(xsInfoDTO.getXsrq());
+            xsVerificationVO.setXsxjmc(xsInfoDTO.getXsxjmc());
+        }
+        xsVerificationVO.setXszzl(totalWeight);
+        xsVerificationVO.setXszje(totalAmount);
+        ArrayList<XsVerificationVO> list = new ArrayList<>();
+        list.add(xsVerificationVO);
+        return Result.data(list);
     }
 
 }

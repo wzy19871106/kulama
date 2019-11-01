@@ -72,12 +72,33 @@ public class XsSub {
     @Size(message = "进货批次号", max = 20)
     private String jhdm;
 
+    /**
+     * 排列序号
+     */
     @Transient
     private String jhindex;
 
+    /**
+     * 支付方式编码（1 现金 2 银行卡 3 记账）
+     */
     @Transient
     private String xspaydm;
 
+    /**
+     * 支付方式
+     */
     @Transient
     private String xspaymc;
+
+    /**
+     * 销售总金额
+     */
+    @Transient
+    private BigDecimal xszje;
+
+    /**
+     * 销售总重量
+     */
+    @Transient
+    private BigDecimal xszzl;
 }

@@ -76,4 +76,15 @@
         #{xsdm}
         )
     </select>
+
+    <select id="selectPatrol" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
+        CALL Proc_XCSelect(#{xssjdm})
+    </select>
+
+    <select id="selectVerificationCertificate" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
+        CALL Proc_XsGoodsSelect (
+        #{xssjdm},
+        #{xsrq}
+        )
+    </select>
 </mapper>

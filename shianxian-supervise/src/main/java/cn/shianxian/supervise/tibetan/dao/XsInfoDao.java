@@ -16,7 +16,7 @@ public interface XsInfoDao {
     /**
      * 插入销售主表信息
      */
-    String insertSalesMainInfo(XsInfoVO xsInfoVO);
+    String insertSalesMainInfo(XsMain xsMain);
 
     /**
      * 插入销售从表信息
@@ -80,4 +80,18 @@ public interface XsInfoDao {
      * @return
      */
     String selectXsMainIfRecord(String xsrq,String xszje,String xsdm);
+
+    /**
+     * 上家 卖家 巡查
+     * @param xssjdm
+     * @return
+     */
+    List<XsInfoDTO> selectPatrol(String xssjdm);
+
+    /**
+     * 下家 买家 验单
+     * @param xssjdm
+     * @return
+     */
+    List<XsInfoDTO> selectVerificationCertificate(String xssjdm,String xsrq);
 }

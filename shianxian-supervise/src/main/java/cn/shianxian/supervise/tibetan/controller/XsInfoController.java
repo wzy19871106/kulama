@@ -120,20 +120,54 @@ public class XsInfoController {
 
     /**
      * 根据销售编码，销售日期，销售总金额查询是否有记录
+     *
      * @param xsrq
      * @param xszje
      * @param xsdm
      * @return
      */
     @PostMapping("XsSelectIfExist")
-    @ApiOperation(value = "根据销售编码查询是否有记录",notes = "根据销售编码查询是否有记录")
+    @ApiOperation(value = "根据销售编码查询是否有记录", notes = "根据销售编码查询是否有记录")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "xsrq", value = "销售日期"),
             @ApiImplicitParam(paramType = "query", name = "xszje", value = "销售总金额"),
             @ApiImplicitParam(paramType = "query", name = "xsdm", value = "销售编码"),
     })
-    public ResponseEntity<Result> selectXsMainRecord(String xsrq,String xszje,String xsdm){
+    public ResponseEntity<Result> selectXsMainRecord(String xsrq, String xszje, String xsdm) {
         Result result = this.xsInfoService.selectXsMainIfRecord(xsrq, xszje, xsdm);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 上家 卖家 巡查
+     *
+     * @param xssjdm
+     * @return
+     */
+    @PostMapping("XCSelect")
+    @ApiOperation(value = "上家 卖家 巡查", notes = "上家 卖家 巡查")
+    @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "销售上家编码")
+    public ResponseEntity<Result> selectPatrolByXsSjdm(String xssjdm) {
+        Result result = this.xsInfoService.selectPatrolByXsSjdm(xssjdm);
+        return ResponseEntity.ok(result);
+    }
+
+
+    /**
+     * 下家 买家 验单
+     *
+     * @param xssjdm
+     * @return
+     */
+    @PostMapping("XsGoodsSelect")
+    @ApiOperation(value = "下家 买家 验单", notes = "下家 买家 验单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "销售上家编码"),
+            @ApiImplicitParam(paramType = "query", name = "xsrq", value = "销售日期"),
+    })
+    public ResponseEntity<Result> selectVerificationCertificateByXsSjdm(String xssjdm,String xsrq) {
+        Result result = this.xsInfoService.selectVerificationCertificateByXsSjdm(xssjdm, xsrq);
         return ResponseEntity.ok(result);
     }
 }

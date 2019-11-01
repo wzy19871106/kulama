@@ -35,6 +35,7 @@ public class KhdaController {
     })
     public ResponseEntity selectCustomerInfoByNameAndPass(Khda khda){
         Result result = this.khdaService.selectCustomerInfoByNameAndPass(khda);
+        log.info("用户登录：{}",khda);
         return ResponseEntity.ok(result);
     }
 }

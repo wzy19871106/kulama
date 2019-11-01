@@ -121,4 +121,23 @@ public class XsInfoDTO {
      */
     private BigDecimal zzl;
 
+    /**
+     *销售总金额
+     */
+    private BigDecimal xszje;
+
+    /**
+     *销售总重量
+     */
+    private BigDecimal xszzl;
+
+    /**
+     * 库存
+     */
+    private BigDecimal repertory;
+
+    /**
+     * 商品名称
+     */
+    private String spmc;
 }

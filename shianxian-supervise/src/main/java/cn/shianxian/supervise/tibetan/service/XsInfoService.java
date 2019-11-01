@@ -45,4 +45,21 @@ public interface XsInfoService {
      * @return
      */
     Result selectXsMainIfRecord(String xsrq,String xszje,String xsdm);
+
+
+    /**
+     *
+     * @param xssjdm
+     * @return
+     */
+    Result selectPatrolByXsSjdm(String xssjdm);
+
+
+    /**
+     * 下家 买家 验单
+     * @param xssjdm
+     * @param xsrq
+     * @return
+     */
+    Result selectVerificationCertificateByXsSjdm(String xssjdm,String xsrq);
 }
