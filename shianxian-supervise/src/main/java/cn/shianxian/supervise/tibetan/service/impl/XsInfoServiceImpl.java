@@ -68,6 +68,7 @@ public class XsInfoServiceImpl implements XsInfoService {
 
         XsMain xsMain = new XsMain();
         xsMain.setXssjdm(xsInfoVO.getXssjdm());
+        xsMain.setXssjmc(xsInfoVO.getXssjmc());
         // 销售商品编码
         xsMain.setXsdm(datetime + increase);
         xsMain.setXszje(totalAmount);

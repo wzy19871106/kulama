@@ -30,4 +30,9 @@ public class XsInfoSaveVO implements Serializable {
      * 销售上家编码
      */
     private String xssjdm;
+
+    /**
+     * 销售上家名称
+     */
+    private String xssjmc;
 }

@@ -49,6 +49,7 @@ public class XsInfoController {
             @ApiImplicitParam(paramType = "query", name = "xspaydm", value = "支付方式编码（1现金 2 银行卡 3 记账）"),
             @ApiImplicitParam(paramType = "query", name = "xspaymc", value = "支付方式名称"),
             @ApiImplicitParam(paramType = "query", name = "xssjdm", value = "上家编码"),
+            @ApiImplicitParam(paramType = "query", name = "xssjmc", value = "上家名称"),
     })
     public ResponseEntity saveSalesInfo(@RequestBody XsInfoSaveVO xsInfoVO) {
         Result result = this.xsInfoService.saveSalesInfo(xsInfoVO);
