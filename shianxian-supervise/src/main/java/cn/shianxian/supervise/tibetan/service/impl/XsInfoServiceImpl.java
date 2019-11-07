@@ -44,7 +44,7 @@ public class XsInfoServiceImpl implements XsInfoService {
         ArrayList<Object> list = new ArrayList<>();
         // 销售总金额
         BigDecimal totalAmount = new BigDecimal(0);
-        BigDecimal totalWeight  = new BigDecimal(0);
+        BigDecimal totalWeight = new BigDecimal(0);
         SEQUENCE = SEQUENCE >= 999999 ? 1 : SEQUENCE + 1;
         String datetime = new SimpleDateFormat("yyyyMMddHHmmss")
                 .format(new Date());
@@ -108,11 +108,11 @@ public class XsInfoServiceImpl implements XsInfoService {
                 xsInfoDao.updateXsMainInfo(xsInfoVO);
                 // 下家余额 = 下家金额 - 销售总金额
                 BigDecimal xjye = xsje.subtract(amount);
-                xsInfoDao.updateKhBalance(xjye,xsInfoVO.getXsxjdm());
+                xsInfoDao.updateKhBalance(xjye, xsInfoVO.getXsxjdm());
 
                 // 上家余额 = 上家金额 + 销售总金额
                 BigDecimal sjye = sjje.add(amount);
-                xsInfoDao.updateKhBalance(sjye,xssjdm);
+                xsInfoDao.updateKhBalance(sjye, xssjdm);
                 return Result.msg("交易成功");
             }
             return Result.msg("余额不足，交易失败！");
@@ -141,34 +141,37 @@ public class XsInfoServiceImpl implements XsInfoService {
     @Override
     public Result selectVerificationCertificateByXsSjdm(String xssjdm, String xsrq) {
         List<XsInfoDTO> xsInfoDTOS = this.xsInfoDao.selectVerificationCertificate(xssjdm, xsrq);
-        // 给前端拼JSON格式
-        XsVerificationVO xsVerificationVO = new XsVerificationVO();
-        ArrayList<XsSub> sub = new ArrayList<>();
-        // 总金额
-        BigDecimal totalAmount = new BigDecimal(0);
-        // 总重量
-        BigDecimal totalWeight = new BigDecimal(0);
-        for (XsInfoDTO xsInfoDTO : xsInfoDTOS) {
-            XsSub xsSub = new XsSub();
-            xsSub.setXsspmc(xsInfoDTO.getXsspmc());
-            xsSub.setXsdj(xsInfoDTO.getXsdj());
-            xsSub.setXszje(xsInfoDTO.getXszje());
-            BigDecimal xszje = xsInfoDTO.getXszje();
-            xsSub.setXszzl(xsInfoDTO.getXszzl());
-            BigDecimal xszzl = xsInfoDTO.getXszzl();
-            totalAmount = xszje.add(totalAmount);
-            totalWeight = xszzl.add(totalWeight);
-            sub.add(xsSub);
+        if (!xsInfoDTOS.isEmpty()) {
+            // 给前端拼JSON格式
+            XsVerificationVO xsVerificationVO = new XsVerificationVO();
+            ArrayList<XsSub> sub = new ArrayList<>();
+            // 总金额
+            BigDecimal totalAmount = new BigDecimal(0);
+            // 总重量
+            BigDecimal totalWeight = new BigDecimal(0);
+            for (XsInfoDTO xsInfoDTO : xsInfoDTOS) {
+                XsSub xsSub = new XsSub();
+                xsSub.setXsspmc(xsInfoDTO.getXsspmc());
+                xsSub.setXsdj(xsInfoDTO.getXsdj());
+                xsSub.setXszje(xsInfoDTO.getXszje());
+                BigDecimal xszje = xsInfoDTO.getXszje();
+                xsSub.setXszzl(xsInfoDTO.getXszzl());
+                BigDecimal xszzl = xsInfoDTO.getXszzl();
+                totalAmount = xszje.add(totalAmount);
+                totalWeight = xszzl.add(totalWeight);
+                sub.add(xsSub);
 
-            xsVerificationVO.setXsSub(sub);
-            xsVerificationVO.setXsrq(xsInfoDTO.getXsrq());
-            xsVerificationVO.setXsxjmc(xsInfoDTO.getXsxjmc());
+                xsVerificationVO.setXsSub(sub);
+                xsVerificationVO.setXsrq(xsInfoDTO.getXsrq());
+                xsVerificationVO.setXsxjmc(xsInfoDTO.getXsxjmc());
+            }
+            xsVerificationVO.setXszzl(totalWeight);
+            xsVerificationVO.setXszje(totalAmount);
+            ArrayList<XsVerificationVO> list = new ArrayList<>();
+            list.add(xsVerificationVO);
+            return Result.data(list);
         }
-        xsVerificationVO.setXszzl(totalWeight);
-        xsVerificationVO.setXszje(totalAmount);
-        ArrayList<XsVerificationVO> list = new ArrayList<>();
-        list.add(xsVerificationVO);
-        return Result.data(list);
+        return Result.data(null);
     }
 
 }
