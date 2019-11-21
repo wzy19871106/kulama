@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.info.dao.SuperviseInfoOldImportDao">
+
+    <select id="saveSuperviseInfoOldImport" resultType="java.lang.String">
+        CALL proc_T_Supervise_Info_Old_Import_Add
+        (
+        #{superviseInfoOldImport.fileName},
+        #{superviseInfoOldImport.importResult}
+        )
+    </select>
+    
+    <resultMap id="superviseInfoOldImport" type="cn.shianxian.supervise.info.pojo.SuperviseInfoOldImport"></resultMap>
+
+    <select id="selectSuperviseInfoOldImport" resultMap="superviseInfoOldImport,pageCount,totalCount">
+        CALL proc_T_Supervise_Info_Old_Import_Query_ByCondition
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+</mapper>

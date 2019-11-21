@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.tibetan.dao.JhMainDao">
+    <select id="selectPurchaseDm" resultType="java.lang.String">
+        CALL Proc_JhSelect(#{jhkhdm})
+    </select>
+
+    <select id="selectPurchaseInfo" resultType="cn.shianxian.supervise.tibetan.pojo.JhSub">
+        CALL Proc_SpSelect(
+        #{jhkhdm},
+        #{jhdm},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+</mapper>

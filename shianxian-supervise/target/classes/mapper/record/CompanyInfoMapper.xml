@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.record.dao.CompanyInfoDao">
+
+    <resultMap id="companyInfo" type="cn.shianxian.supervise.record.pojo.CompanyInfo"></resultMap>
+
+    <select id="selectCompanyInfoByLike" resultMap="companyInfo,pageCount,totalCount">
+      CALL Proc_T_CompanyInfo_Query_ByCondition
+      (
+      #{companyInfo.companyProvice},
+      #{companyInfo.companyCity},
+      #{companyInfo.companyArea},
+      #{companyInfo.companyVillage},
+      #{companyInfo.nodeName},
+      #{companyInfo.userDataUsedAuthoritySet},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
+    </select>
+
+    <select id="selectCompanyInfoById" resultType="cn.shianxian.supervise.record.pojo.CompanyInfo">
+      CALL Proc_T_CompanyInfo_Query_ByNodeTag(#{nodeTag})
+    </select>
+
+    <select id="deleteCompanyInfo" resultType="java.lang.String">
+      CALL Proc_T_CompanyInfo_Remove_ByIndex(#{index})
+    </select>
+</mapper>

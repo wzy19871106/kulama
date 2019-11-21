@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/shianxian-supervise/shianxian-supervise.iml" filepath="$PROJECT_DIR$/shianxian-supervise/shianxian-supervise.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ycjg-java3.iml" filepath="$PROJECT_DIR$/.idea/ycjg-java3.iml" />
+    </modules>
+  </component>
+</project>

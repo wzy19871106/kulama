@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.ModuleDao">
+
+    <select id="selectModuleById" resultType="cn.shianxian.supervise.sys.pojo.Module">
+        CALL Proc_T_Module_Query_ByModuleTag(#{id})
+    </select>
+
+    <select id="checkModule" resultType="java.lang.String">
+        CALL Proc_T_Module_Exist_ByModuleURLModuleTag(#{module.moduleUrl}, #{module.moduleTag})
+    </select>
+
+    <select id="insertModule" resultType="java.lang.String">
+        CALL Proc_T_Module_Add
+        (
+        #{module.parentTag},
+        #{module.moduleName},
+        #{module.moduleIcon},
+        #{module.moduleUrl},
+        #{module.moduleDescription},
+        #{module.ifMenu},
+        #{module.moduleComponent},
+        #{module.userTag}
+        )
+    </select>
+
+    <select id="updateModule" resultType="java.lang.String">
+        CALL proc_T_Module_Edit_ByModuleTag
+        (
+        #{module.moduleTag},
+        #{module.parentTag},
+        #{module.moduleName},
+        #{module.moduleIcon},
+        #{module.moduleUrl},
+        #{module.moduleDescription},
+        #{module.ifMenu},
+        #{module.moduleComponent}
+        )
+    </select>
+
+    <select id="deleteModuleById" resultType="java.lang.String">
+        CALL Proc_T_Module_Remove_ByModuleTag(#{id})
+    </select>
+
+    <resultMap id="module" type="cn.shianxian.supervise.sys.pojo.Module"></resultMap>
+
+    <select id="selectModuleByLike" resultMap="module,pageCount,totalCount">
+        CALL proc_T_Module_Query_ByCondition(#{queryPojo.parentId}, #{queryPojo.name}, #{pages.pageSize}, #{pages.pageNum})
+    </select>
+
+    <select id="selectModuleByTree" resultType="cn.shianxian.supervise.sys.pojo.Module">
+        CALL Proc_T_Module_QueryTree_ByModuleTag(#{id})
+    </select>
+
+    <select id="selectModuleTree" resultType="java.lang.String">
+        CALL proc_T_Module_QueryTreeJson()
+    </select>
+
+    <select id="selectModuleAuthorityTree" resultType="java.lang.String">
+        CALL proc_T_Module_Authority_QueryTreeJson()
+    </select>
+
+    <select id="selectModuleAuthorityDisabledTree" resultType="java.lang.String">
+        CALL proc_T_Module_Authority_QueryTreeJson2()
+    </select>
+
+    <select id="selectModuleByUserId" resultType="java.lang.String">
+        CALL Proc_T_Module_QueryTreeJson_ByUserTag(#{userTag})
+    </select>
+
+    <select id="selectModuleAuthorityByUserTag" resultType="java.lang.String">
+        CALL Proc_T_Module_Authority_QueryTreeJson_ByUserTag(#{userTag})
+    </select>
+
+</mapper>

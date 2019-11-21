@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.record.dao.FunctionaryDao">
+
+    <resultMap id="functionary" type="cn.shianxian.supervise.record.pojo.Functionary"></resultMap>
+
+    <select id="selectFunctionaryByLike" resultMap="functionary,pageCount,totalCount">
+      CALL Proc_T_Functionary_Query_ByCondition
+      (
+      #{queryPojo.id},
+      #{queryPojo.name},
+      #{queryPojo.userDataUsedAuthoritySet},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
+    </select>
+
+    <select id="selectFunctionaryByNodeTag" resultMap="functionary,pageCount,totalCount">
+      CALL Proc_T_Functionary_Query_ByNodeTag
+      (
+      #{nodeTag},
+      #{pages.pageSize},
+      #{pages.pageNum}
+      )
+    </select>
+
+    <select id="selectFunctionaryByFunctionaryTag" resultMap="functionary">
+      CALL Proc_T_Functionary_Query_ByFunctionaryTag(#{functionaryTag})
+    </select>
+
+    <select id="selectFunctionaryByWeChatId" resultMap="functionary">
+      CALL Proc_T_Functionary_Query_ByWeChatID(#{weChatId})
+    </select>
+
+    <select id="deleteFunctionary" resultType="java.lang.String">
+      CALL Proc_T_Functionary_Remove_ByIndex(#{index})
+    </select>
+
+    <select id="saveFunctionary" resultType="java.lang.String">
+      CALL Proc_T_Functionary_Add
+      (
+      #{functionary.nodeTag},
+      #{functionary.functionaryName},
+      #{functionary.functionaryNo},
+      #{functionary.picTag},
+      #{functionary.nodeName},
+      #{functionary.functionaryPostition},
+      #{functionary.weChatId},
+      #{functionary.key},
+      #{functionary.functionaryTel}
+      )
+    </select>
+
+    <select id="updateWeChatIdById" resultType="java.lang.String">
+      CALL Proc_T_Functionary_Edit_ByFunctionaryTag
+      (
+      #{functionaryTag},
+      #{weChatId},
+      #{picTag}
+      )
+    </select>
+
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.plan.dao.SupervisePlanMainDao">
+
+    <select id="selectSupervisePlanMainById" resultType="cn.shianxian.supervise.plan.pojo.SupervisePlanMain">
+        CALL proc_T_SuperviserPlan_Main_Query_ByTag(#{id})
+    </select>
+
+    <select id="insertSupervisePlanMain" resultType="java.lang.String">
+        CALL Proc_T_SuperviserPlan_Main_Add
+        (
+        #{supervisePlanMain.planName},
+        #{supervisePlanMain.startTime},
+        #{supervisePlanMain.endTime},
+        #{supervisePlanMain.ifPulic},
+        #{supervisePlanMain.remark},
+        #{supervisePlanMain.createTime},
+        #{supervisePlanMain.createUserTag},
+        #{supervisePlanMain.lastUpdateTime},
+        #{supervisePlanMain.lastUpdateUser}
+        )
+    </select>
+
+    <select id="updateSupervisePlanMain" resultType="java.lang.String">
+        CALL proc_T_SuperviserPlan_Main_Edit_ByTag
+        (
+        #{supervisePlanMain.planTag},
+        #{supervisePlanMain.planName},
+        #{supervisePlanMain.startTime},
+        #{supervisePlanMain.endTime},
+        #{supervisePlanMain.ifPulic},
+        #{supervisePlanMain.remark},
+        #{supervisePlanMain.createTime},
+        #{supervisePlanMain.createUserTag},
+        #{supervisePlanMain.lastUpdateTime},
+        #{supervisePlanMain.lastUpdateUser}
+        )
+    </select>
+
+    <select id="deleteSupervisePlanMainById" resultType="java.lang.String">
+        CALL proc_T_SuperviserPlan_Main_Remove_ByTag(#{id})
+    </select>
+
+    <resultMap id="planMain" type="cn.shianxian.supervise.plan.pojo.SupervisePlanMain"></resultMap>
+
+    <select id="selectSupervisePlanMainByLike" resultMap="planMain,pageCount,totalCount">
+        CALL proc_T_SuperviserPlan_Main_Query_ByCondition
+        (
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <resultMap id="info" type="cn.shianxian.supervise.info.vo.SuperviseInfoVO"></resultMap>
+
+    <select id="selectSupervisePlanByNode" resultMap="info,pageCount,totalCount">
+        CALL Proc_T_SuperviserPlan_Query_ByNode
+        (
+        #{nodeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSupervisePlanDetailByIds" resultMap="info">
+        CALL proc_T_Supervise_Query_ByPlanTag(#{planTag}, #{nodeTag})
+    </select>
+
+    <select id="selectSupervisePlanMainList" resultMap="planMain,pageCount,totalCount">
+        CALL Proc_T_Supervise_Query_PlanList
+        (
+        #{queryPojo.id},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+</mapper>

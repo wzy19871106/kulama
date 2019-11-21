@@ -49,7 +49,17 @@ public class QueryPojo {
     private LocalDateTime endTime;
 
     /**
-     *用户组的所拥有的数据权限
+     * 用户组的所拥有的数据权限
      */
     private String userDataUsedAuthoritySet;
+
+    /**
+     * 监管类型
+     */
+    private String superviseTypeTag;
+
+    /**
+     * 考核周期
+     */
+    private Integer period;
 }

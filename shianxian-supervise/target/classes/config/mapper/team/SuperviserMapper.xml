@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.team.dao.SuperviserDao">
+
+    <select id="selectSuperviserById" resultType="cn.shianxian.supervise.team.pojo.Superviser">
+        CALL proc_T_Superviser_Query_ByTag(#{id})
+    </select>
+
+    <select id="insertSuperviser" resultType="java.lang.String">
+        CALL Proc_T_Superviser_Add
+        (
+        #{superviser.superviserTag},
+        #{superviser.superviserName},
+        #{superviser.teamTag},
+        #{superviser.userNo},
+        #{superviser.remark},
+        #{superviser.ifUse},
+        #{superviser.picTag},
+        #{superviser.createUserTag},
+        #{superviser.lastUpdateTime},
+        #{superviser.lastUpdateUser}
+        )
+    </select>
+
+    <select id="updateSuperviser" resultType="java.lang.String">
+        CALL proc_T_Superviser_Edit_ByTag
+        (
+        #{superviser.superviserTag},
+        #{superviser.superviserName},
+        #{superviser.teamTag},
+        #{superviser.userNo},
+        #{superviser.remark},
+        #{superviser.ifUse},
+        #{superviser.lastUpdateTime},
+        #{superviser.lastUpdateUser},
+        #{superviser.picTag}
+        )
+    </select>
+
+    <select id="deleteSuperviserById" resultType="java.lang.String">
+        CALL proc_T_Superviser_Remove_ByTag(#{id})
+    </select>
+
+    <resultMap id="superviser" type="cn.shianxian.supervise.team.pojo.Superviser"></resultMap>
+
+    <select id="selectSuperviserByLike" resultMap="superviser,pageCount,totalCount">
+        CALL proc_T_Superviser_Query_ByCondition
+        (
+        #{queryPojo.parentId},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="bindSuperviser" resultType="java.lang.String">
+        CALL proc_T_Superviser_BindUser
+        (
+        #{superviser.superviserTag},
+        #{superviser.userTag}
+        )
+    </select>
+
+    <select id="unBindSuperviser" resultType="java.lang.String">
+        CALL proc_T_Superviser_UnBind_ByTag(#{superviser.superviserTag})
+    </select>
+</mapper>

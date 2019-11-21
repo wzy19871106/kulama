@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.tibetan.dao.XsInfoDao">
+    <select id="selectXsje" resultType="java.math.BigDecimal">
+        select kh_money from qzgy_khda where kh_dm = #{xsxjdm}
+    </select>
+
+    <select id="insertSalesMainInfo" resultType="java.lang.String">
+        CALL Proc_XsInsert_Main(
+        #{xssjdm,jdbcType=VARCHAR},
+        #{xssjmc,jdbcType=VARCHAR},
+        #{xsxjdm,jdbcType=VARCHAR},
+        #{xsxjmc,jdbcType=VARCHAR},
+        #{xsdm,jdbcType=VARCHAR},
+        #{xszje,jdbcType=DECIMAL},
+        #{xszzl,jdbcType=DECIMAL},
+        #{xscheckmark,jdbcType=VARCHAR},
+        #{xscheckdm,jdbcType=VARCHAR},
+        #{xscheckmc,jdbcType=VARCHAR},
+        #{xspaydm,jdbcType=VARCHAR},
+        #{xspaymc,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <select id="insertSalesSubInfo" resultType="java.lang.String">
+        CALL Proc_XsInsert_Sub(
+          #{xsdm,jdbcType=VARCHAR},
+          #{xsspdm,jdbcType=VARCHAR},
+          #{xsspmc,jdbcType=VARCHAR},
+          #{xszl,jdbcType=DECIMAL},
+          #{xsdj,jdbcType=DECIMAL},
+          #{xsje,jdbcType=DECIMAL},
+          #{xsindex,jdbcType=INTEGER},
+          #{jhdm,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <select id="selectXsInfo" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
+        CALL Proc_XsMainSelect(
+        #{xssjdm},
+        #{xsxjdm},
+        #{xscheckdm},
+        #{xschecksj},
+        #{xscheckxj},
+        #{xspaydm},
+        #{xsrq}
+        )
+    </select>
+    <update id="updateXsMainInfo">
+       update qzgy_xs_main set xs_xjdm = #{xsxjdm},xs_xjmc = #{xsxjmc},xs_used = #{xsused}
+         where xs_dm = #{xsdm}
+    </update>
+
+    <update id="updateKhBalance">
+        update qzgy_khda set kh_money = #{balance} where kh_dm = #{dm}
+    </update>
+
+    <select id="updateCheck" resultType="java.lang.String">
+        CALL Proc_XsCheck(
+         #{xssjdm},
+         #{xsxjdm},
+         #{xscheckmark},
+         #{xscheckdm},
+         #{xscheckmc}
+        )
+    </select>
+
+    <select id="selectXssjdmByXsdm" resultType="java.lang.String">
+        select xs_sjdm from qzgy_xs_main where xs_dm = #{xsdm}
+    </select>
+
+    <select id="selectXsMainIfRecord" resultType="java.lang.String">
+        CALL Proc_XsSelectIfExist(
+        #{xsrq},
+        #{xszje},
+        #{xsdm}
+        )
+    </select>
+
+    <select id="selectPatrol" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
+        CALL Proc_XCSelect(#{xssjdm})
+    </select>
+
+    <select id="selectVerificationCertificate" resultType="cn.shianxian.supervise.tibetan.dto.XsInfoDTO">
+        CALL Proc_XsGoodsSelect (
+        #{xssjdm},
+        #{xsrq}
+        )
+    </select>
+</mapper>

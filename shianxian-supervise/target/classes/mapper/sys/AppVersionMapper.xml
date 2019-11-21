@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.sys.dao.AppVersionDao">
+    <select id="selectAppVersion" resultType="java.lang.String">
+        select app_version from t_version
+    </select>
+
+    <select id="selectAppPadVersion" resultType="java.lang.String">
+        select app_pad_version from  t_version
+    </select>
+</mapper>

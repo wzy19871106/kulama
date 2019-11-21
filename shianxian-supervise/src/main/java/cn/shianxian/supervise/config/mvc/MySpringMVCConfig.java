@@ -46,6 +46,7 @@ public class MySpringMVCConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/app/XsInfo/XsSelectIfExist")
                 .excludePathPatterns("/app/XsInfo/XsGoodsSelect")
                 .excludePathPatterns("/app/XsInfo/XCSelect")
+                .excludePathPatterns("/cockpit/**")
                 // swagger2页面
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/error/");
     }

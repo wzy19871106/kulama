@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.cockpit.dao.CockpitAssessDao">
+
+    <resultMap id="cockpitAreaVO" type="cn.shianxian.supervise.cockpit.vo.CockpitAreaVO"/>
+    <resultMap id="map" type="java.util.Map"/>
+    <resultMap id="double" type="java.lang.Double"/>
+
+    <select id="selectAllArea" resultMap="cockpitAreaVO">
+        CALL Proc_jsc_QueryAllArea3()
+    </select>
+
+    <select id="selectAllSuperviseType" resultType="cn.shianxian.supervise.cockpit.vo.CockpitSuperviseTypeVO">
+        CALL Proc_jsc_QueryAllSuperviseType2()
+    </select>
+
+    <select id="selectAllAreaBySuperviseType" resultMap="cockpitAreaVO">
+        CALL Proc_jsc_QueryAllArea_BySuperviseType
+        (
+        #{id}
+        )
+    </select>
+
+    <select id="selectAssessLineAndBar" resultMap="map,double">
+        CALL Proc_jsc_QueryAssessLineAndBar
+        (
+        #{areaTag},
+        #{superviseTypeTag},
+        #{assessType}
+        )
+    </select>
+
+    <select id="selectAssessRadar" resultType="cn.shianxian.supervise.cockpit.vo.CockpitAssessRadarActualAreaScoreVO">
+        CALL Proc_jsc_QueryAssessRadar2
+        (
+        #{areaTag},
+        #{assessType}
+        )
+    </select>
+
+</mapper>

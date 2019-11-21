@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.shianxian.supervise.plan.dao.SupervisePlanSubDao">
+
+    <resultMap id="supervisePlanSubVO" type="cn.shianxian.supervise.plan.vo.SupervisePlanSubVO"></resultMap>
+
+    <select id="selectSupervisePlanSubById" resultType="cn.shianxian.supervise.plan.pojo.SupervisePlanSub">
+        CALL proc_T_SuperviserPlan_Sub_Query_ByID(#{id})
+    </select>
+
+    <select id="insertSupervisePlanSub" resultType="java.lang.String">
+        CALL Proc_T_SuperviserPlan_Sub_Add
+        (
+        #{supervisePlanSub.planTag},
+        #{supervisePlanSub.superviseTypeTag},
+        #{supervisePlanSub.superviseTime},
+        #{supervisePlanSub.nodeTag},
+        #{supervisePlanSub.nodeName},
+        #{supervisePlanSub.superviseTeamTag},
+        #{supervisePlanSub.superviseTeamName},
+        #{supervisePlanSub.createTime},
+        #{supervisePlanSub.createUserTag},
+        #{supervisePlanSub.lastUpdateTime},
+        #{supervisePlanSub.lastUpdateUser}
+        )
+    </select>
+
+    <select id="updateSupervisePlanSub" resultType="java.lang.String">
+        CALL proc_T_SuperviserPlan_Sub_Edit_ByID
+        (
+        #{supervisePlanSub.ids},
+        #{supervisePlanSub.planTag},
+        #{supervisePlanSub.superviseTypeTag},
+        #{supervisePlanSub.superviseTime},
+        #{supervisePlanSub.nodeTag},
+        #{supervisePlanSub.nodeName},
+        #{supervisePlanSub.superviseTeamTag},
+        #{supervisePlanSub.superviseTeamName},
+        #{supervisePlanSub.lastUpdateTime},
+        #{supervisePlanSub.lastUpdateUser}
+        )
+    </select>
+
+    <select id="deleteSupervisePlanSubById" resultType="java.lang.String">
+        CALL proc_T_SuperviserPlan_Sub_Remove_ByID(#{id})
+    </select>
+
+    <resultMap id="planSub" type="cn.shianxian.supervise.plan.pojo.SupervisePlanSub"></resultMap>
+
+    <select id="selectSupervisePlanSubByLike" resultMap="planSub,pageCount,totalCount">
+        CALL proc_T_SuperviserPlan_Sub_Query_ByCondition
+        (
+        #{queryPojo.parentId},
+        #{queryPojo.startTime},
+        #{queryPojo.endTime},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+    <select id="selectSupervisePlanSubList" resultMap="supervisePlanSubVO,pageCount,totalCount">
+        CALL Proc_T_Supervise_Query_PlanSubList
+        (
+        #{queryPojo.id},
+        #{queryPojo.name},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
+</mapper>
