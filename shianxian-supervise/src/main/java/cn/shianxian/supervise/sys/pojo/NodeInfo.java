@@ -128,6 +128,11 @@ public class NodeInfo {
     @Column(name = "createTime")
     private LocalDateTime createTime;
 
+    /**
+     * 创建时间
+     */
+    @Column(name = "bak2")
+    private String superviseTypeTag;
 
     /**
      * 节点所属省

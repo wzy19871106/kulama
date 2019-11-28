@@ -22,5 +22,5 @@ public interface HotpointDao {
      * @param id
      * @return
      */
-    List<HotpointStreetVO> selectStreetHotpoint(@Param("id") String id);
+    List<HotpointStreetVO> selectStreetHotpoint(@Param("id") String id, @Param("superviseTypeTag") String superviseTypeTag);
 }

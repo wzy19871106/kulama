@@ -75,6 +75,8 @@ spring:
         # 每次释放连接的最大数目
         num-tests-per-eviction-run: 1024
 
+
+
 # 虹软
 arcsoft:
   appId: 984NfMTD6XTdtHeqYsQca6Up7NtEcLAqVmG86GW9N7dr
@@ -96,7 +98,7 @@ upload:
 # 日志
 logging:
   level:
-    root: INFO
+    root: DEBUG
   config: classpath:log/logback-spring-dev.xml
 
 # 声网

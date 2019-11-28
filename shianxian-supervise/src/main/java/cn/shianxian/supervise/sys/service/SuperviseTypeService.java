@@ -101,4 +101,18 @@ public interface SuperviseTypeService {
      * @return
      */
     Result selectSuperviseTypeAllTree(SuperviseType superviseType);
+
+    /**
+     * 根据父级监管类型编码和用户数据权限查询子级监管类型信息
+     * @param superviseType
+     * @return
+     */
+    Result selectSuperviseTypeSubByParentTag(SuperviseType superviseType);
+
+    /**
+     * 根据用户数据权限查询所有顶级监管类型信息
+     * @param superviseType
+     * @return
+     */
+    Result selectTopSuperviseType(SuperviseType superviseType);
 }

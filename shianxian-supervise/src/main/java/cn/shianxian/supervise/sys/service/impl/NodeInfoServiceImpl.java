@@ -82,6 +82,12 @@ public class NodeInfoServiceImpl implements NodeInfoService {
     }
 
     @Override
+    public Result selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag(NodeInfo nodeInfo, Pages pages) {
+        List<List<?>> list = this.nodeInfoDao.selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag(nodeInfo, pages);
+        return Result.data((Long) list.get(2).get(0), list.get(0));
+    }
+
+    @Override
     public Result selectNodeInfoOffice() {
         List<String> list = this.nodeInfoDao.selectNodeInfoOffice();
         return Result.data(list);

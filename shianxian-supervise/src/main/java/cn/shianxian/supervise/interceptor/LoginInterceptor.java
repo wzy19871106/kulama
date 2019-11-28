@@ -33,37 +33,37 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 判断是否登录
-        String token = request.getHeader(Constants.SUPERVISE_TOKEN);
-        if (StringUtils.isBlank(token)) {
-            throw new CommonException(Constants.UNAUTHORIZED, "请先登录！");
-        }
-        if (request.getRequestURI().indexOf("app") == -1) {
-            String userJson = redisService.get(Constants.USER + token);
-            if (StringUtils.isBlank(userJson)) {
-                log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
-                throw new CommonException(Constants.UNAUTHORIZED, "用户已失效！请重新登录！");
-            } else {
-                // 重新设置redis时间
-                redisService.expire(token, 14400);
-                User user = JSON.parseObject(userJson, User.class);
-                // 用户信息放入本地线程
-                UserThreadLocal.setUser(user);
+//        String token = request.getHeader(Constants.SUPERVISE_TOKEN);
+//        if (StringUtils.isBlank(token)) {
+//            throw new CommonException(Constants.UNAUTHORIZED, "请先登录！");
+//        }
+//        if (request.getRequestURI().indexOf("app") == -1) {
+//            String userJson = redisService.get(Constants.USER + token);
+//            if (StringUtils.isBlank(userJson)) {
+//                log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
+//                throw new CommonException(Constants.UNAUTHORIZED, "用户已失效！请重新登录！");
+//            } else {
+//                // 重新设置redis时间
+//                redisService.expire(token, 14400);
+//                User user = JSON.parseObject(userJson, User.class);
+//                // 用户信息放入本地线程
+//                UserThreadLocal.setUser(user);
+//                return true;
+//            }
+//        } else {
+//            String functionaryJson = redisService.get(Constants.APP_USER + token);
+//            if (StringUtils.isBlank(functionaryJson)) {
+//                log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
+//                throw new CommonException(Constants.UNAUTHORIZED, "用户已失效！请重新登录！");
+//            } else {
+//                // 重新设置redis时间
+//                redisService.expire(token, 14400);
+//                Functionary functionary = JSON.parseObject(functionaryJson, Functionary.class);
+//                // 用户信息放入本地线程
+//                FunctionaryThreadLocal.setFunctionary(functionary);
                 return true;
-            }
-        } else {
-            String functionaryJson = redisService.get(Constants.APP_USER + token);
-            if (StringUtils.isBlank(functionaryJson)) {
-                log.warn("token失效：{}，用户请求uri：{}", token, request.getRequestURI());
-                throw new CommonException(Constants.UNAUTHORIZED, "用户已失效！请重新登录！");
-            } else {
-                // 重新设置redis时间
-                redisService.expire(token, 14400);
-                Functionary functionary = JSON.parseObject(functionaryJson, Functionary.class);
-                // 用户信息放入本地线程
-                FunctionaryThreadLocal.setFunctionary(functionary);
-                return true;
-            }
-        }
+//            }
+//        }
     }
 
 

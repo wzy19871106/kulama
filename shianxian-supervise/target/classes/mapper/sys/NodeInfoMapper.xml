@@ -40,10 +40,25 @@
         )
     </select>
 
+    <select id="selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag" resultMap="nodeInfo,pageCount,totalCount">
+        CALL proc_T_NodeInfo_Query_ByConditionAndAuthorityAndSuperviseTypeTag
+        (
+        #{nodeInfo.nodeTag},
+        #{nodeInfo.industryTag},
+        #{nodeInfo.userDataUsedAuthoritySet},
+        #{nodeInfo.nodeName},
+        #{nodeInfo.office},
+        #{nodeInfo.authority},
+        #{nodeInfo.superviseTypeTag},
+        #{pages.pageSize},
+        #{pages.pageNum}
+        )
+    </select>
+
     <select id="selectNodeInfoByConditionAndAuthority" resultMap="nodeInfo,pageCount,totalCount">
         CALL proc_T_NodeInfo_Query_ByConditionAndAuthority
         (
-         #{nodeInfo.nodeTag},
+        #{nodeInfo.nodeTag},
         #{nodeInfo.industryTag},
         #{nodeInfo.userDataUsedAuthoritySet},
         #{nodeInfo.nodeName},

@@ -46,4 +46,12 @@
         CALL proc_T_SuperviseType_QueryAllTreeJson_ByTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
     </select>
 
+    <select id="selectSuperviseTypeSubByParentTag" resultType="cn.shianxian.supervise.sys.pojo.SuperviseType">
+        CALL Proc_T_SuperviseType_QuerySub_BySuperviseTypeTag(#{superviseType.superviseTypeTag}, #{superviseType.userGroupDataAuthority})
+    </select>
+
+    <select id="selectTopSuperviseType" resultType="cn.shianxian.supervise.sys.pojo.SuperviseType">
+        CALL Proc_T_SuperviseType_QueryTop(#{superviseType.userGroupDataAuthority})
+    </select>
+
 </mapper>

@@ -214,4 +214,33 @@ public class SuperviseTypeController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 根据父级监管类型编码和用户数据权限查询子级监管类型信息
+     * @return
+     */
+    @GetMapping("selectSuperviseTypeSubByParentTag")
+    @ApiOperation(value = "根据父级监管类型编码和用户数据权限查询子级监管类型信息", notes = "根据父级监管类型编码和用户数据权限查询子级监管类型信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "父级监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
+    })
+    public ResponseEntity<Result> selectSuperviseTypeSubByParentTag(SuperviseType superviseType) {
+        Result result = this.superviseTypeService.selectSuperviseTypeSubByParentTag(superviseType);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * 根据用户数据权限查询所有顶级监管类型信息
+     * @return
+     */
+    @GetMapping("selectTopSuperviseType")
+    @ApiOperation(value = "根据用户数据权限查询所有顶级监管类型信息", notes = "根据用户数据权限查询所有顶级监管类型信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "userGroupDataAuthority", value = "哪些数据权限模板拥有该监管类型的数据权限"),
+    })
+    public ResponseEntity<Result> selectTopSuperviseType(SuperviseType superviseType) {
+        Result result = this.superviseTypeService.selectTopSuperviseType(superviseType);
+        return ResponseEntity.ok(result);
+    }
+
 }

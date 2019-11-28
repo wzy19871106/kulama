@@ -26,7 +26,7 @@ import java.util.List;
  */
 @SpringBootConfiguration
 @EnableSwagger2
-@Profile({"dev-local", "dev", "test", "dev2"})
+@Profile({"dev-local", "dev", "test", "dev2", "test2"})
 public class Swagger2Config {
 
 

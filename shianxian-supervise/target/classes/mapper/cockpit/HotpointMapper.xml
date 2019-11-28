@@ -5,7 +5,8 @@
     <select id="selectStreetHotpoint" resultType="cn.shianxian.supervise.cockpit.vo.HotpointStreetVO">
         CALL Proc_jsc_QueryAreaMap_ByAreaTag
         (
-        #{id}
+        #{id},
+        #{superviseTypeTag}
         )
     </select>
 

@@ -96,4 +96,19 @@ public interface SuperviseTypeDao extends Mapper<SuperviseType> {
      * @return
      */
     String selectSuperviseTypeAllTree(@Param("superviseType") SuperviseType superviseType);
+
+    /**
+     * 根据父级监管类型编码和用户数据权限查询子级监管类型信息
+     * @param superviseType
+     * @return
+     */
+    List<SuperviseType> selectSuperviseTypeSubByParentTag(@Param("superviseType") SuperviseType superviseType);
+
+    /**
+     * 根据用户数据权限查询所有顶级监管类型信息
+     * @param superviseType
+     * @return
+     */
+    List<SuperviseType> selectTopSuperviseType(@Param("superviseType") SuperviseType superviseType);
+
 }

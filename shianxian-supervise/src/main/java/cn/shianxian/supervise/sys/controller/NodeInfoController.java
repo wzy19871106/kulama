@@ -119,6 +119,29 @@ public class NodeInfoController {
     }
 
     /**
+     * 查询节点(区域，监管类型)
+     *
+     * @return
+     */
+    @GetMapping("selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag")
+    @ApiOperation(value = "查询节点(区域，监管类型)", notes = "查询节点(区域，监管类型)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "nodeTag", value = "节点标识"),
+            @ApiImplicitParam(paramType = "query", name = "nodeName", value = "节点名称"),
+            @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "industryTag", value = "节点经济行业标识"),
+            @ApiImplicitParam(paramType = "query", name = "office", value = "办事处"),
+            @ApiImplicitParam(paramType = "query", name = "authority", value = "所属片区"),
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码"),
+            @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
+            @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
+    })
+    public ResponseEntity<Result> selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag(NodeInfo nodeInfo, Pages pages) {
+        Result result = this.nodeInfoService.selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag(nodeInfo, pages);
+        return ResponseEntity.ok(result);
+    }
+
+    /**
      * 查询办事处
      *
      * @return

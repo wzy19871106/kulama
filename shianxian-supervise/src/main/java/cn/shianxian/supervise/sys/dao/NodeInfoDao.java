@@ -45,6 +45,14 @@ public interface NodeInfoDao extends Mapper<NodeInfo> {
     List<List<?>> selectNodeInfoByConditionAndAuthority(@Param("nodeInfo") NodeInfo nodeInfo, @Param("pages")Pages pages);
 
     /**
+     * 模糊查询节点（区域,监管类型）
+     * @param nodeInfo
+     * @param pages
+     * @return
+     */
+    List<List<?>> selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag(@Param("nodeInfo") NodeInfo nodeInfo, @Param("pages")Pages pages);
+
+    /**
      * 查询办事处
      * @return
      */

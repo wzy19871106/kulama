@@ -40,7 +40,13 @@ public interface NodeInfoService {
      */
     Result selectNodeInfoByConditionAndAuthority(NodeInfo nodeInfo, Pages pages);
 
-
+    /**
+     * 查询节点(区域，监管类型)
+     * @param nodeInfo
+     * @param pages
+     * @return
+     */
+    Result selectNodeInfoByConditionAndAuthorityAndSuperviseTypeTag(NodeInfo nodeInfo, Pages pages);
 
     /**
      * 查询办事处

@@ -36,14 +36,39 @@ public class CockpitController {
     private CockpitAssessService cockpitAssessService;
 
     /**
+     * 查询所有监管类型
+     *
+     * @return
+     */
+    @GetMapping("selectAllSuperviseType")
+    @ApiOperation(value = "查询所有监管类型", notes = "查询所有监管类型")
+    public ResponseEntity<Result> selectAllSuperviseType() {
+        return this.hotpointService.selectAllSuperviseType();
+    }
+
+    /**
+     * 查询所有区县
+     *
+     * @return
+     */
+    @GetMapping("selectAllArea")
+    @ApiOperation(value = "查询所有区县", notes = "查询所有区县")
+    public ResponseEntity<Result> selectAllArea() {
+        return this.hotpointService.selectAllArea();
+    }
+
+    /**
      * 查询热点图
      *
      * @return
      */
     @GetMapping("selectHotpoint")
     @ApiOperation(value = "查询热点图", notes = "查询热点图")
-    public ResponseEntity<Result> selectHotpoint() {
-        return this.hotpointService.selectHotpoint();
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "superviseTypeTag", value = "监管类型编码")
+    })
+    public ResponseEntity<Result> selectHotpoint(String superviseTypeTag) {
+        return this.hotpointService.selectHotpoint(superviseTypeTag);
     }
 
     /**

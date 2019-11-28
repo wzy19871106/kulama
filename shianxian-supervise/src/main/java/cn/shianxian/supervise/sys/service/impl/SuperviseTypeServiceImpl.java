@@ -212,5 +212,17 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
         return Result.data(tree);
     }
 
+    @Override
+    public Result selectSuperviseTypeSubByParentTag(SuperviseType superviseType) {
+        List<SuperviseType> superviseTypes = superviseTypeDao.selectSuperviseTypeSubByParentTag(superviseType);
+        return Result.data(superviseTypes);
+    }
+
+    @Override
+    public Result selectTopSuperviseType(SuperviseType superviseType) {
+        List<SuperviseType> superviseTypes = superviseTypeDao.selectTopSuperviseType(superviseType);
+        return Result.data(superviseTypes);
+    }
+
 
 }

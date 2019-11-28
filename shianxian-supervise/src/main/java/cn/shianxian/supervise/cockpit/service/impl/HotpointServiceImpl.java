@@ -1,7 +1,9 @@
 package cn.shianxian.supervise.cockpit.service.impl;
 
+import cn.shianxian.supervise.cockpit.dao.CockpitPlanTaskDao;
 import cn.shianxian.supervise.cockpit.dao.HotpointDao;
 import cn.shianxian.supervise.cockpit.service.HotpointService;
+import cn.shianxian.supervise.cockpit.vo.CockpitSuperviseTypeVO;
 import cn.shianxian.supervise.cockpit.vo.HotpointAreaVO;
 import cn.shianxian.supervise.cockpit.vo.HotpointStreetVO;
 import cn.shianxian.supervise.common.pojo.Result;
@@ -17,13 +19,15 @@ public class HotpointServiceImpl implements HotpointService {
 
     @Autowired
     private HotpointDao hotpointDao;
+    @Autowired
+    private CockpitPlanTaskDao cockpitPlanTaskDao;
 
     @Override
-    public ResponseEntity<Result> selectHotpoint() {
+    public ResponseEntity<Result> selectHotpoint(String superviseTypeTag) {
         List<HotpointAreaVO> hotpointList = hotpointDao.selectAllArea();
         for (HotpointAreaVO hotpointAreaVO : hotpointList) {
             String areaTag = hotpointAreaVO.getAreaTag();
-            List<HotpointStreetVO> hotpointStreetVOList = hotpointDao.selectStreetHotpoint(areaTag);
+            List<HotpointStreetVO> hotpointStreetVOList = hotpointDao.selectStreetHotpoint(areaTag, superviseTypeTag);
             for (HotpointStreetVO hotpointStreetVO: hotpointStreetVOList) {
                 String streetCoordinate = hotpointStreetVO.getStreetCoordinate();
                 String[] coordinateArray = streetCoordinate.split(",");
@@ -36,5 +40,17 @@ public class HotpointServiceImpl implements HotpointService {
             hotpointAreaVO.setHotpointStreetVOList(hotpointStreetVOList);
         }
         return ResponseEntity.ok(Result.data(hotpointList));
+    }
+
+    @Override
+    public ResponseEntity<Result> selectAllSuperviseType() {
+        List<CockpitSuperviseTypeVO> cockpitSuperviseTypeVOS = cockpitPlanTaskDao.selectAllSuperviseType();
+        return ResponseEntity.ok(Result.data(cockpitSuperviseTypeVOS));
+    }
+
+    @Override
+    public ResponseEntity<Result> selectAllArea() {
+        List<HotpointAreaVO> hotpointAreaVOS = hotpointDao.selectAllArea();
+        return ResponseEntity.ok(Result.data(hotpointAreaVOS));
     }
 }
