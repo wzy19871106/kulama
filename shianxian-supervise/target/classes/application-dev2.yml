@@ -11,7 +11,13 @@ server:
     basedir: ${user.home}/tomcat/tmp
     # 最大连接数
     max-connections: 2000
-
+  ssl:
+    # 证书目录
+    key-store: 3213242_yunfe.top.pfx
+    #你之前填好的密码
+    key-store-password: ET27aRlk
+    key-store-type: PKCS12
+#    key-alias: tomcat
 # spring
 spring:
   application:
@@ -90,9 +96,10 @@ baidu:
 
 # 上传配置
 upload:
-  url: http://139.224.118.134/
+  url: http://101.132.181.106:8089/
   path: /data/img/
-  vourl: https://sapi.dev.shianxian.cn/
+  imgPath: img/
+  vourl: https://101.132.181.106/
 
 # 日志
 logging:
@@ -103,7 +110,7 @@ logging:
 # 声网
 agora:
   appId: b676a4deb7964ee480fc51c72554c97e
-  appliteDir: /usr/SW/JGFB/bin
-  recordFileRootDir: /usr/SW/Agora_Recording_SDK_for_Linux_FULL/samples/java/bin
+  appliteDir: /usr/SW/JGFB/bin/
+  recordFileRootDir: /data/agoras/
   lowUdpPort: 20000
   highUdpPort: 50000

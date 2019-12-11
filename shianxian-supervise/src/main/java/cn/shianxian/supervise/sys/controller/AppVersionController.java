@@ -30,9 +30,11 @@ public class AppVersionController {
     private AppVersionService appVersionService;
 
     // 10.18.9.57 /data/apps
-    private static final String APP_FILE_PATH = "http://sapi.dev.shianxian.cn/apps/";
+//    private static final String APP_FILE_PATH = "http://sapi.dev.shianxian.cn/apps/";
+    private static final String APP_FILE_PATH = "https://101.132.181.106:8089/apps";
     private static final String APP_FILE_NAME = "app-debug.apk";
-    private static final String APP_PAD_FILE_NAME = "http://sapi.dev.shianxian.cn/apps/app_pad/";
+//    private static final String APP_PAD_FILE_NAME = "http://sapi.dev.shianxian.cn/apps/app_pad/";
+    private static final String APP_PAD_FILE_NAME = "https://101.132.181.106:8089/apps/app_pad/";
     private static final String APP_PAD_FILE_PATH = "app_pad_1.0.apk";
 
     /**

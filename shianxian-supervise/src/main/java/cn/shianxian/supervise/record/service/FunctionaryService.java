@@ -89,6 +89,12 @@ public interface FunctionaryService {
      */
     ResponseEntity<Result> selectFunctionary(Functionary functionary);
 
+    /**
+     * 根据负责人标识、微信id查询负责人备案信息
+     * @param functionary
+     * @return
+     */
+    ResponseEntity<Result> selectFunctionaryBackUp(Functionary functionary);
 
     /**
      * 根据节点流水号删除负责人申请

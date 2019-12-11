@@ -39,6 +39,13 @@ public interface FunctionaryDao extends Mapper<Functionary> {
      */
     Functionary selectFunctionaryByFunctionaryTag(@Param("functionaryTag") String functionaryTag);
 
+    /**
+     * 根据负责人标识查询负责人
+     *
+     * @param functionaryTag
+     * @return
+     */
+    Functionary selectFunctionaryBackUpByFunctionaryTag(@Param("functionaryTag") String functionaryTag);
 
     /**
      * 根据微信标识查询负责人
@@ -47,6 +54,14 @@ public interface FunctionaryDao extends Mapper<Functionary> {
      * @return
      */
     Functionary selectFunctionaryByWeChatId(@Param("weChatId") String weChatId);
+
+    /**
+     * 根据微信标识查询负责人
+     *
+     * @param weChatId
+     * @return
+     */
+    Functionary selectFunctionaryBackUpByWeChatId(@Param("weChatId") String weChatId);
 
 
     /**

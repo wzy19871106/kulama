@@ -132,4 +132,22 @@ public class Functionary {
      */
     @Transient
     private String token;
+
+    /**
+     * 身份证正面
+     */
+    @Transient
+    private String IdFont;
+
+    /**
+     * 身份证反面
+     */
+    @Transient
+    private String IdReverse;
+
+    /**
+     * 人脸识别图片
+     */
+    @Transient
+    private String facePic;
 }

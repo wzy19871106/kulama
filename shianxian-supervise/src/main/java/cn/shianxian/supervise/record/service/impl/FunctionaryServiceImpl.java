@@ -15,12 +15,16 @@ import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static cn.shianxian.supervise.common.constants.Constants.PIC_FACE;
+import static cn.shianxian.supervise.common.constants.Constants.PIC_ID_FONT;
 
 @Service
 @Slf4j
@@ -37,6 +41,14 @@ public class FunctionaryServiceImpl implements FunctionaryService {
 
     @Autowired
     private RedisService redisService;
+
+
+    @Value("${upload.url}")
+    private String uploadUrl;
+
+
+    @Value("${upload.imgPath}")
+    private String imgPath;
 
 
     @Override
@@ -133,6 +145,43 @@ public class FunctionaryServiceImpl implements FunctionaryService {
         return ResponseEntity.ok(Result.data(functionary));
     }
 
+    @Override
+    public ResponseEntity<Result> selectFunctionaryBackUp(Functionary functionary) {
+        if (StringUtils.isNotBlank(functionary.getFunctionaryTag())) {
+            functionary = this.functionaryDao.selectFunctionaryBackUpByFunctionaryTag(functionary.getFunctionaryTag());
+            functionary = setPics(functionary);
+        } else if (null != functionary.getWeChatId()) {
+            functionary = this.functionaryDao.selectFunctionaryBackUpByWeChatId(functionary.getWeChatId());
+            functionary = setPics(functionary);
+        }
+        return ResponseEntity.ok(Result.data(functionary));
+    }
+
+    /**
+     * 给负责人添加各种图片
+     * @param functionary
+     * @return
+     */
+    private Functionary setPics(Functionary functionary){
+        String picTag = functionary.getPicTag();
+        if (StringUtils.isNotBlank(picTag))
+        {
+            String[] pics = picTag.split(",");
+            for (String pic : pics) {
+                String[] picInfo = pic.split(":");
+                String picName = picInfo[0];
+                String picAddr = uploadUrl + imgPath + picInfo[1];
+                if(PIC_FACE.equals(picName)){
+                    functionary.setFacePic(picAddr);
+                } else if(PIC_ID_FONT.equals(picName)) {
+                    functionary.setIdFont(picAddr);
+                } else{
+                    functionary.setIdReverse(picAddr);
+                }
+            }
+        }
+        return functionary;
+    }
 
     @Transactional
     @Override

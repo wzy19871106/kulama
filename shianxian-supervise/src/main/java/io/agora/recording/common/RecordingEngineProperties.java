@@ -1,15 +1,10 @@
 package io.agora.recording.common;
 
-/**
- * This class returns the recording properties.
- */
-public class RecordingEngineProperties {
-    private String storageDir;
-
-    /**
-     * Get the storage directory of the recording media files and log.
-     */
-    public String getStorageDir() {
-        return storageDir;
-    }
-}
+/** The recording properties. */
+public class RecordingEngineProperties{
+	  private String storageDir;
+        /** Get the relative path of the recorded files and recording log. */
+		public String GetStorageDir(){
+	    return storageDir;
+	  }
+	}

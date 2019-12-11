@@ -107,6 +107,21 @@ public class AppFunctionaryController {
         return this.functionaryService.selectFunctionary(functionary);
     }
 
+    /**
+     * 根据负责人标识、微信id查询负责人备案信息
+     * @param functionary
+     * @return
+     */
+    @PostMapping("selectFunctionaryBackUp")
+    @ApiOperation(value = "根据负责人标识、微信id查询负责人备案信息", notes = "根据负责人标识、微信id查询负责人备案信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "functionaryTag", value = "负责人标识"),
+            @ApiImplicitParam(paramType = "query", name = "weChatId", value = "微信AppID"),
+    })
+    public ResponseEntity<Result> selectFunctionaryBackUp(Functionary functionary) {
+        return this.functionaryService.selectFunctionaryBackUp(functionary);
+    }
+
 
     /**
      * 修改企业负责人审核表

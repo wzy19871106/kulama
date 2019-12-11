@@ -57,4 +57,12 @@ public class Constants {
     /**
      * 监管项状态码=========================================
      */
+
+    /**
+     * 图片类型=========================================
+     */
+    public static final String PIC_FACE = "注册人脸";
+    public static final String PIC_ID_FONT = "正面";
+    public static final String PIC_ID_REVERSE = "反面";
+    public static final String PIC_LISENCE = "营业执照";
 }
