@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 /**
  * 企业负责人审核表
  */
-@Table(name = "t_FunctionaryForaduit")
+@Table(name = "t_functionary_foraduit")
 @Data
 public class FunctionaryForaduit {
 

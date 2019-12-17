@@ -125,4 +125,16 @@ public class CompanyInfoForaduit {
      */
     @Transient
     private String userDataUsedAuthoritySet;
+
+    /**
+     *企业类型
+     */
+    @Transient
+    private String industryName;
+
+    /**
+     *所属片区
+     */
+    @Transient
+    private String authority;
 }

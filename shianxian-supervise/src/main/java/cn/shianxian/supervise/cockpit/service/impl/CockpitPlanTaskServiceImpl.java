@@ -46,6 +46,8 @@ public class CockpitPlanTaskServiceImpl implements CockpitPlanTaskService {
             List<Object> barList = new ArrayList<>();
             barList.add(cockpitPlanDistrictBarVO.getDistrictName());
             barList.add(cockpitPlanDistrictBarVO.getPercent());
+            barList.add(cockpitPlanDistrictBarVO.getFinishTaskNum());
+            barList.add(cockpitPlanDistrictBarVO.getPlanTaskNum());
             cockpitPlanDistrictBarList.add(barList);
         }
         cockpitPlanTaskVO.setCockpitPlanDistrictBarList(cockpitPlanDistrictBarList);

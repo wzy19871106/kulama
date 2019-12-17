@@ -11,4 +11,12 @@ public interface AreaService {
      * @return
      */
     Result selectArea(QueryPojo queryPojo);
+
+    /**
+     * 查询区域
+     * @param areaTag
+     * @return
+     */
+    Result selectCompositionArea(String areaTag);
+
 }

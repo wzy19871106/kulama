@@ -62,4 +62,19 @@ public class QueryPojo {
      * 考核周期
      */
     private Integer period;
+
+    /**
+     * 企业所属市
+     */
+    private String city;
+
+    /**
+     * 企业所属区
+     */
+    private String area;
+
+    /**
+     * 企业所属县
+     */
+    private String village;
 }

@@ -135,6 +135,9 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
             @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "city", value = "市"),
+            @ApiImplicitParam(paramType = "query", name = "area", value = "区"),
+            @ApiImplicitParam(paramType = "query", name = "village", value = "县"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })
@@ -185,6 +188,9 @@ public class FunctionaryController {
             @ApiImplicitParam(paramType = "query", name = "id", value = "企业标识"),
             @ApiImplicitParam(paramType = "query", name = "name", value = "关键字"),
             @ApiImplicitParam(paramType = "query", name = "userDataUsedAuthoritySet", value = "用户组的所拥有的数据权限"),
+            @ApiImplicitParam(paramType = "query", name = "nodeCity", value = "市"),
+            @ApiImplicitParam(paramType = "query", name = "nodeArea", value = "区"),
+            @ApiImplicitParam(paramType = "query", name = "nodeVillage", value = "县"),
             @ApiImplicitParam(paramType = "query", name = "pageNum", value = "第几页"),
             @ApiImplicitParam(paramType = "query", name = "pageSize", value = "每页查询数量"),
     })

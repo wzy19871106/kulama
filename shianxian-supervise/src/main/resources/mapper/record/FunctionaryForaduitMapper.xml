@@ -51,6 +51,9 @@
       #{queryPojo.id},
       #{queryPojo.name},
       #{queryPojo.userDataUsedAuthoritySet},
+      #{queryPojo.city},
+      #{queryPojo.area},
+      #{queryPojo.village},
       #{pages.pageSize},
       #{pages.pageNum}
       )

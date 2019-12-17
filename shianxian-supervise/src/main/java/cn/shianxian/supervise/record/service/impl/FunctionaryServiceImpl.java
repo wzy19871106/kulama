@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -72,6 +73,17 @@ public class FunctionaryServiceImpl implements FunctionaryService {
     @Transactional
     @Override
     public ResponseEntity<Result> saveFunctionaryForaduit(FunctionaryForaduit functionaryForaduit) {
+        String functionaryTag = functionaryForaduit.getFunctionaryTag();
+        if (StringUtils.isNotBlank(functionaryTag)) {
+            Example e = new Example(FunctionaryForaduit.class);
+            Example.Criteria c = e.createCriteria();
+            c.andEqualTo("functionaryTag", functionaryTag);
+            c.andNotEqualTo("aduitType",0);
+            Integer num = functionaryForaduitDao.selectCountByExample(e);
+            if (num > 0){
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("申请已提交，请勿重复提交！"));
+            }
+        }
         String flag = this.functionaryForaduitDao.saveFunctionaryForaduit(functionaryForaduit);
         if ("A002".equals(flag)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Result.msg("该企业的负责人身份证已存在！"));

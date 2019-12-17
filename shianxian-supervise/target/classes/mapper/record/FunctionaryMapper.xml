@@ -10,6 +10,9 @@
       #{queryPojo.id},
       #{queryPojo.name},
       #{queryPojo.userDataUsedAuthoritySet},
+      #{queryPojo.city},
+      #{queryPojo.area},
+      #{queryPojo.village},
       #{pages.pageSize},
       #{pages.pageNum}
       )
@@ -28,8 +31,16 @@
       CALL Proc_T_Functionary_Query_ByFunctionaryTag(#{functionaryTag})
     </select>
 
+    <select id="selectFunctionaryBackUpByFunctionaryTag" resultMap="functionary">
+      CALL Proc_T_Functionary_BackUp_Query_ByFunctionaryTag(#{functionaryTag})
+    </select>
+
     <select id="selectFunctionaryByWeChatId" resultMap="functionary">
       CALL Proc_T_Functionary_Query_ByWeChatID(#{weChatId})
+    </select>
+
+    <select id="selectFunctionaryBackUpByWeChatId" resultMap="functionary">
+      CALL Proc_T_Functionary_BackUp_Query_ByWeChatID(#{weChatId})
     </select>
 
     <select id="deleteFunctionary" resultType="java.lang.String">

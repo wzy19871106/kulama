@@ -15,4 +15,14 @@ public class CockpitPlanDistrictBarVO {
      */
     private String percent;
 
+    /**
+     * 完成量
+     */
+    private String finishTaskNum;
+
+    /**
+     * 任务总量
+     */
+    private String planTaskNum;
+
 }

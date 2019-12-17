@@ -96,7 +96,7 @@ baidu:
 
 # 上传配置
 upload:
-  url: http://101.132.181.106:8089/
+  url: https://101.132.181.106:8089/
   path: /data/img/
   imgPath: img/
   vourl: https://101.132.181.106/

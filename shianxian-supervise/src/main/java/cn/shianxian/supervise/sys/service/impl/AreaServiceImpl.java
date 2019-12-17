@@ -7,6 +7,7 @@ import cn.shianxian.supervise.sys.pojo.Area;
 import cn.shianxian.supervise.sys.service.AreaService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -29,5 +30,19 @@ public class AreaServiceImpl implements AreaService {
             areaList = this.areaDao.selectAreaByParentId(queryPojo.getParentId());
         }
         return Result.data(areaList);
+    }
+
+    @Override
+    public Result selectCompositionArea(String areaTag) {
+        List<Area> citys = areaDao.selectAreaById(areaTag);
+        for (Area city : citys) {
+            List<Area> regions = areaDao.selectAreaByParentId(city.getAreaTag());
+            city.setSubAreas(regions);
+            for (Area region : regions) {
+                List<Area> countys = areaDao.selectAreaByParentId(region.getAreaTag());
+                region.setSubAreas(countys);
+            }
+        }
+        return Result.data(citys);
     }
 }

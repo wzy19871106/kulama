@@ -42,5 +42,18 @@ public class AreaController {
         return ResponseEntity.ok(result);
     }
 
+    /**
+     * 查询区域
+     * @return
+     */
+    @GetMapping("selectCompositionArea")
+    @ApiOperation(value = "查询树形区域", notes = "查询树形区域")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "areaTag", value = "areaTag")
+    })
+    public ResponseEntity<Result> selectCompositionArea(String areaTag) {
+        Result result = this.areaService.selectCompositionArea(areaTag);
+        return ResponseEntity.ok(result);
+    }
 
 }

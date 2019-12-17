@@ -2,11 +2,9 @@ package cn.shianxian.supervise.sys.pojo;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @Table(name = "t_area")
@@ -49,5 +47,9 @@ public class Area {
     @Column(name = "areaDisable")
     private String areaDisable;
 
-
+    /**
+     * 子地区
+     */
+    @Transient
+    private List<Area> subAreas;
 }

@@ -95,6 +95,7 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitAssessCompositeSuperviseTypeAreaLineVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\team\service\SuperviserService.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\tibetan\vo\XsInfoSaveVO.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\dao\CockpitDistrictDao.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\team\service\impl\SuperviserServiceImpl.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\government\dao\AnalysisDao.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\service\SuperviseInfoSubService.java
@@ -212,6 +213,7 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\service\SuperviseInfoMainTypeService.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\service\SuperviseInfoOldImportService.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\pojo\SuperviseResult.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitDistrictVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\controller\SuperviseResultController.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\controller\SuperviseTypeController.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\agora\hanlder\RecordingHandler.java

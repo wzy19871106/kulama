@@ -1,9 +1,6 @@
 package cn.shianxian.supervise.cockpit.controller;
 
-import cn.shianxian.supervise.cockpit.service.CockpitAssessService;
-import cn.shianxian.supervise.cockpit.service.CockpitMapService;
-import cn.shianxian.supervise.cockpit.service.CockpitPlanTaskService;
-import cn.shianxian.supervise.cockpit.service.HotpointService;
+import cn.shianxian.supervise.cockpit.service.*;
 import cn.shianxian.supervise.common.pojo.QueryPojo;
 import cn.shianxian.supervise.common.pojo.Result;
 import io.swagger.annotations.Api;
@@ -34,6 +31,8 @@ public class CockpitController {
     private CockpitPlanTaskService cockpitPlanTaskService;
     @Autowired
     private CockpitAssessService cockpitAssessService;
+    @Autowired
+    private CockpitDistrictService cockpitDistrictService;
 
     /**
      * 查询所有监管类型
@@ -69,6 +68,17 @@ public class CockpitController {
     })
     public ResponseEntity<Result> selectHotpoint(String superviseTypeTag) {
         return this.hotpointService.selectHotpoint(superviseTypeTag);
+    }
+
+    /**
+     * 查询监管所信息
+     *
+     * @return
+     */
+    @GetMapping("selectCockpitDistrictInfos")
+    @ApiOperation(value = "查询监管所信息", notes = "查询监管所信息")
+    public ResponseEntity<Result> selectDistrictInfo() {
+        return this.cockpitDistrictService.selectDistrictInfo();
     }
 
     /**
