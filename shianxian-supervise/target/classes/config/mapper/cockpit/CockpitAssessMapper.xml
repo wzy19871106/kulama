@@ -5,6 +5,9 @@
     <resultMap id="cockpitAreaVO" type="cn.shianxian.supervise.cockpit.vo.CockpitAreaVO"/>
     <resultMap id="map" type="java.util.Map"/>
     <resultMap id="double" type="java.lang.Double"/>
+    <resultMap id="cockpitAssessCompositeSuperviseTypeAreaBar" type="cn.shianxian.supervise.cockpit.vo.CockpitAssessCompositeSuperviseTypeAreaBar"/>
+    <resultMap id="cockpitAssessCompositeSuperviseTypeAreaLineVO" type="cn.shianxian.supervise.cockpit.vo.CockpitAssessCompositeSuperviseTypeAreaLineVO"/>
+    <resultMap id="cockpitAssessRadarActualAreaScoreVO" type="cn.shianxian.supervise.cockpit.vo.CockpitAssessRadarActualAreaScoreVO"/>
 
     <select id="selectAllArea" resultMap="cockpitAreaVO">
         CALL Proc_jsc_QueryAllArea3()
@@ -21,7 +24,7 @@
         )
     </select>
 
-    <select id="selectAssessLineAndBar" resultMap="map,double">
+    <select id="selectAssessLineAndBar" resultMap="cockpitAssessCompositeSuperviseTypeAreaBar,double,cockpitAssessRadarActualAreaScoreVO">
         CALL Proc_jsc_QueryAssessLineAndBar
         (
         #{areaTag},

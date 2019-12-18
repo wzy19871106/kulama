@@ -22,11 +22,16 @@ public class CockpitAssessCompositeSuperviseTypeAreaVO {
     /**
      * 柱状图
      */
-    private List<List<Object>> cockpitAssessCompositeSuperviseTypeAreaBarList;
+    private List<CockpitAssessCompositeSuperviseTypeAreaBar> cockpitAssessCompositeSuperviseTypeAreaBarList;
 
     /**
      * 折线图
      */
     private CockpitAssessCompositeSuperviseTypeAreaLineVO cockpitAssessCompositeSuperviseTypeAreaLineVO;
+
+    /**
+     * 雷达图
+     */
+    private CockpitAssessRadarVO cockpitAssessRadarVO;
 
 }

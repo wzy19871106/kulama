@@ -6,12 +6,7 @@ import lombok.Data;
 public class CockpitAssessNodeVO {
 
     /**
-     * 雷达图
-     */
-    private CockpitAssessRadarVO cockpitAssessRadarVO;
-
-    /**
-     * 柱状图、折线图
+     * 柱状图、折线图、雷达图
      */
     private CockpitAssessCompositeVO cockpitAssessCompositeVO;
 

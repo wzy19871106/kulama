@@ -5,6 +5,11 @@ import lombok.Data;
 @Data
 public class CockpitAssessRadarMaxVO {
 
+    public CockpitAssessRadarMaxVO(String name, Double max) {
+        this.name = name;
+        this.max = max;
+    }
+
     /**
      * 评议指标名称
      */
@@ -13,6 +18,6 @@ public class CockpitAssessRadarMaxVO {
     /**
      * 评议指标最大值
      */
-    private int max;
+    private Double max;
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +30,10 @@ public class CockpitAssessServiceImpl implements CockpitAssessService {
         List<CockpitAreaVO> cockpitAreaVOS = cockpitAssessDao.selectAllArea();
         //参与考核评议的监管类型
         List<CockpitSuperviseTypeVO> cockpitSuperviseTypeVOS = cockpitAssessDao.selectAllSuperviseType();
+        CockpitSuperviseTypeVO cockpitSuperviseTypeVO = new CockpitSuperviseTypeVO();
+        cockpitSuperviseTypeVO.setSuperviseTypeTag("ALL");
+        cockpitSuperviseTypeVO.setSuperviseTypeName("全市");
+        cockpitSuperviseTypeVOS.add(cockpitSuperviseTypeVO);
         //商户考核评议
         CockpitAssessNodeVO cockpitAssessCompanyVO = getCockpitAssessNodeVO(cockpitAreaVOS, cockpitSuperviseTypeVOS, "1");
         cockpitAssessNodeVOList.add(cockpitAssessCompanyVO);
@@ -45,43 +50,7 @@ public class CockpitAssessServiceImpl implements CockpitAssessService {
 
     private CockpitAssessNodeVO getCockpitAssessNodeVO(List<CockpitAreaVO> cockpitAreaVOS, List<CockpitSuperviseTypeVO> cockpitSuperviseTypeVOS, String assessType){
         CockpitAssessNodeVO cockpitAssessNodeVO = new CockpitAssessNodeVO();
-        //雷达图
-        CockpitAssessRadarVO cockpitAssessRadarVO = new CockpitAssessRadarVO();
-        //各区县的考核评议的最大值
-        List<CockpitAssessRadarMaxVO> cockpitAssessRadarMaxVOS;
-        if(("1").equals(assessType)){
-            cockpitAssessRadarMaxVOS = getCockpitAssessCompanyRadarMaxVOS();
-        }else{
-            cockpitAssessRadarMaxVOS = getCockpitAssessSupervisorRadarMaxVOS();
-        }
-        cockpitAssessRadarVO.setCockpitAssessRadarMaxVOList(cockpitAssessRadarMaxVOS);
-        //各区县的考核评议的实际值
-        List<CockpitAssessRadarActualAreaVO> cockpitAssessRadarActualVOS = new ArrayList<>();
-        for (CockpitAreaVO cockpitAreaVO : cockpitAreaVOS) {
-            List<Double> scoreList = new ArrayList<>();
-            CockpitAssessRadarActualAreaScoreVO cockpitAssessRadarActualAreaScoreVO = cockpitAssessDao.selectAssessRadar(cockpitAreaVO.getAreaTag(), assessType);
-            //获取非空属性值
-            if(cockpitAssessRadarActualAreaScoreVO != null)
-            {
-                for(Field field : cockpitAssessRadarActualAreaScoreVO.getClass().getDeclaredFields()) {
-                    try {
-                        field.setAccessible(true);//在用反射时访问私有变量（private修饰变量）
-                        if (field.get(cockpitAssessRadarActualAreaScoreVO) != null && !"".equals(field.get(cockpitAssessRadarActualAreaScoreVO))) {
-                            scoreList.add((Double) field.get(cockpitAssessRadarActualAreaScoreVO));
-                        }
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-            CockpitAssessRadarActualAreaVO cockpitAssessRadarActualAreaVO = new CockpitAssessRadarActualAreaVO();
-            cockpitAssessRadarActualAreaVO.setScoreList(scoreList);
-            cockpitAssessRadarActualAreaVO.setAreaName(cockpitAreaVO.getAreaName());
-            cockpitAssessRadarActualVOS.add(cockpitAssessRadarActualAreaVO);
-        }
-        cockpitAssessRadarVO.setCockpitAssessRadarActualVOList(cockpitAssessRadarActualVOS);
-
-        //柱状图、折线图
+        //柱状图、折线图、雷达图
         CockpitAssessCompositeVO cockpitAssessCompositeVO = new CockpitAssessCompositeVO();
         List<CockpitAssessCompositeSuperviseTypeVO> cockpitAssessCompositeSuperviseTypeVOS= new ArrayList<>();
         for (CockpitSuperviseTypeVO cockpitSuperviseTypeVO : cockpitSuperviseTypeVOS) {
@@ -100,21 +69,45 @@ public class CockpitAssessServiceImpl implements CockpitAssessService {
                 cockpitAssessCompositeSuperviseTypeAreaVO.setAreaName(areaName);
                 //柱状图
                 List<List<?>> lists = cockpitAssessDao.selectAssessLineAndBar(areaTag, superviseTypeTag, assessType);
-                List<Map<String,Double>> maps = (List<Map<String, Double>>) lists.get(0);
-                List<List<Object>> cockpitAssessCompositeSuperviseTypeAreaBarList = new ArrayList<>();
-                for (Map<String,Double> map : maps) {
-                    List<Object> objects = new ArrayList<>();
-                    for(Map.Entry<String, Double> vo : map.entrySet()) {
-                        objects.add(vo.getValue());
-                    }
-                    cockpitAssessCompositeSuperviseTypeAreaBarList.add(objects);
-                }
-                cockpitAssessCompositeSuperviseTypeAreaVO.setCockpitAssessCompositeSuperviseTypeAreaBarList(cockpitAssessCompositeSuperviseTypeAreaBarList);
+                List<CockpitAssessCompositeSuperviseTypeAreaBar> cockpitAssessCompositeSuperviseTypeAreaBars = (List<CockpitAssessCompositeSuperviseTypeAreaBar>) lists.get(0);
+                cockpitAssessCompositeSuperviseTypeAreaVO.setCockpitAssessCompositeSuperviseTypeAreaBarList(cockpitAssessCompositeSuperviseTypeAreaBars);
                 //折线图
                 CockpitAssessCompositeSuperviseTypeAreaLineVO cockpitAssessCompositeSuperviseTypeAreaLineVO = new CockpitAssessCompositeSuperviseTypeAreaLineVO();
-                cockpitAssessCompositeSuperviseTypeAreaLineVO.setAreaName(areaName);
                 cockpitAssessCompositeSuperviseTypeAreaLineVO.setAssessScore((List<Double>) lists.get(1));
                 cockpitAssessCompositeSuperviseTypeAreaVO.setCockpitAssessCompositeSuperviseTypeAreaLineVO(cockpitAssessCompositeSuperviseTypeAreaLineVO);
+                //雷达图
+                CockpitAssessRadarVO cockpitAssessRadarVO = new CockpitAssessRadarVO();
+                //考核评议的最大值
+                List<CockpitAssessRadarMaxVO> cockpitAssessRadarMaxVOS;
+                if(("1").equals(assessType)){
+                    cockpitAssessRadarMaxVOS = getCockpitAssessCompanyRadarMaxVOS();
+                }else{
+                    cockpitAssessRadarMaxVOS = getCockpitAssessSupervisorRadarMaxVOS();
+                }
+                cockpitAssessRadarVO.setCockpitAssessRadarMaxVOList(cockpitAssessRadarMaxVOS);
+                //考核评议的实际值
+                List<CockpitAssessRadarActualVO> cockpitAssessRadarActualVOS = new ArrayList<>();
+                CockpitAssessRadarActualAreaScoreVO cockpitAssessRadarActualAreaScoreVO = (CockpitAssessRadarActualAreaScoreVO) lists.get(2).get(0);
+                //获取非空属性值
+                if(cockpitAssessRadarActualAreaScoreVO != null)
+                {
+                    for(Field field : cockpitAssessRadarActualAreaScoreVO.getClass().getDeclaredFields()) {
+                        try {
+                            field.setAccessible(true);//在用反射时访问私有变量（private修饰变量）
+                            if (field.get(cockpitAssessRadarActualAreaScoreVO) != null && !"".equals(field.get(cockpitAssessRadarActualAreaScoreVO))) {
+                                CockpitAssessRadarActualVO cockpitAssessRadarActualVO = new CockpitAssessRadarActualVO();
+                                cockpitAssessRadarActualVO.setName(field.getName());
+                                cockpitAssessRadarActualVO.setValue((Double) field.get(cockpitAssessRadarActualAreaScoreVO));
+                                cockpitAssessRadarActualVOS.add(cockpitAssessRadarActualVO);
+                            }
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                cockpitAssessRadarVO.setCockpitAssessRadarActualVOList(cockpitAssessRadarActualVOS);
+                cockpitAssessCompositeSuperviseTypeAreaVO.setCockpitAssessRadarVO(cockpitAssessRadarVO);
+
                 cockpitAssessCompositeSuperviseTypeAreaVOS.add(cockpitAssessCompositeSuperviseTypeAreaVO);
             }
             cockpitAssessCompositeSuperviseTypeVO.setCockpitAssessCompositeSuperviseTypeAreaVOList(cockpitAssessCompositeSuperviseTypeAreaVOS);
@@ -122,7 +115,6 @@ public class CockpitAssessServiceImpl implements CockpitAssessService {
         }
         cockpitAssessCompositeVO.setCockpitAssessCompositeSuperviseTypeVOList(cockpitAssessCompositeSuperviseTypeVOS);
 
-        cockpitAssessNodeVO.setCockpitAssessRadarVO(cockpitAssessRadarVO);
         cockpitAssessNodeVO.setCockpitAssessCompositeVO(cockpitAssessCompositeVO);
 
         return cockpitAssessNodeVO;
@@ -130,37 +122,33 @@ public class CockpitAssessServiceImpl implements CockpitAssessService {
 
     private List<CockpitAssessRadarMaxVO> getCockpitAssessCompanyRadarMaxVOS(){
         List<CockpitAssessRadarMaxVO> cockpitAssessRadarMaxVOS = new ArrayList<>();
-        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO = new CockpitAssessRadarMaxVO();
-        cockpitAssessRadarMaxVO.setName("备案完整率");
-        cockpitAssessRadarMaxVO.setMax(100);
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("规范经营情况");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("及时整改率");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("问题复现率");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("整改完成率");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("呼叫响应及时情况");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO1 = new CockpitAssessRadarMaxVO("备案完整率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO1);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO2 = new CockpitAssessRadarMaxVO("规范经营情况",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO2);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO3 = new CockpitAssessRadarMaxVO("及时整改率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO3);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO4 = new CockpitAssessRadarMaxVO("问题复现率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO4);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO5 = new CockpitAssessRadarMaxVO("整改完成率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO5);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO6 = new CockpitAssessRadarMaxVO("呼叫响应及时情况",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO6);
         return cockpitAssessRadarMaxVOS;
     }
 
     private List<CockpitAssessRadarMaxVO> getCockpitAssessSupervisorRadarMaxVOS(){
         List<CockpitAssessRadarMaxVO> cockpitAssessRadarMaxVOS = new ArrayList<>();
-        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO = new CockpitAssessRadarMaxVO();
-        cockpitAssessRadarMaxVO.setName("计划任务完成率");
-        cockpitAssessRadarMaxVO.setMax(100);
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("巡查数据完整性");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("数据增长率");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("情况及时反馈率");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
-        cockpitAssessRadarMaxVO.setName("巡查次数达标率");
-        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO1 = new CockpitAssessRadarMaxVO("计划任务完成率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO1);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO2 = new CockpitAssessRadarMaxVO("巡查数据完整性",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO2);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO3 = new CockpitAssessRadarMaxVO("数据增长率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO3);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO4 = new CockpitAssessRadarMaxVO("情况及时反馈率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO4);
+        CockpitAssessRadarMaxVO cockpitAssessRadarMaxVO5 = new CockpitAssessRadarMaxVO("巡查次数达标率",100d);
+        cockpitAssessRadarMaxVOS.add(cockpitAssessRadarMaxVO5);
         return cockpitAssessRadarMaxVOS;
     }
 

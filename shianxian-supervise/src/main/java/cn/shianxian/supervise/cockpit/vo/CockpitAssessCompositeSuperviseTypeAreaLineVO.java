@@ -8,9 +8,9 @@ import java.util.List;
 public class CockpitAssessCompositeSuperviseTypeAreaLineVO {
 
     /**
-     * 区县名称
+     * 考核评议时间
      */
-    private String areaName;
+//    private List<String> assessDate;
 
     /**
      * 考核评议得分

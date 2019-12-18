@@ -20,7 +20,7 @@ public class CockpitAssessCompositeSuperviseTypeVO {
     private String superviseTypeName;
 
     /**
-     * 各监管类型下各区县的折线图、柱状图
+     * 各监管类型下各区县的折线图、柱状图、雷达图
      */
     private List<CockpitAssessCompositeSuperviseTypeAreaVO> cockpitAssessCompositeSuperviseTypeAreaVOList;
 }
