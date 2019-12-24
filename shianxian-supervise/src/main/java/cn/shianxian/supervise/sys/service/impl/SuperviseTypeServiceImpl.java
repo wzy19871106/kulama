@@ -167,7 +167,14 @@ public class SuperviseTypeServiceImpl implements SuperviseTypeService {
                     userGroup.setUserDataAuthority(a);
                     List<UserGroup> userGroupList = this.userGroupDao.select(userGroup);
                     if (!userGroupList.isEmpty()) {
-                        list.add(userGroupList.get(0).getUserGroupTag());
+                        UserGroup subUserGroup = new UserGroup();
+                        String userGroupTag = userGroupList.get(0).getUserGroupTag();
+                        subUserGroup.setParentTag(userGroupTag);
+                        List<UserGroup> subUserGroupList = this.userGroupDao.select(subUserGroup);
+                        if(subUserGroupList.isEmpty())
+                        {
+                            list.add(userGroupTag);
+                        }
                     }
                 }
             }

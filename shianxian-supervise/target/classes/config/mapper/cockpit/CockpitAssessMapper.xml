@@ -8,6 +8,7 @@
     <resultMap id="cockpitAssessCompositeSuperviseTypeAreaBar" type="cn.shianxian.supervise.cockpit.vo.CockpitAssessCompositeSuperviseTypeAreaBar"/>
     <resultMap id="cockpitAssessCompositeSuperviseTypeAreaLineVO" type="cn.shianxian.supervise.cockpit.vo.CockpitAssessCompositeSuperviseTypeAreaLineVO"/>
     <resultMap id="cockpitAssessRadarActualAreaScoreVO" type="cn.shianxian.supervise.cockpit.vo.CockpitAssessRadarActualAreaScoreVO"/>
+    <resultMap id="cockpitAssessCompositeLineVO" type="cn.shianxian.supervise.cockpit.vo.CockpitAssessCompositeLineVO"/>
 
     <select id="selectAllArea" resultMap="cockpitAreaVO">
         CALL Proc_jsc_QueryAllArea3()
@@ -24,7 +25,7 @@
         )
     </select>
 
-    <select id="selectAssessLineAndBar" resultMap="cockpitAssessCompositeSuperviseTypeAreaBar,double,cockpitAssessRadarActualAreaScoreVO">
+    <select id="selectAssessLineAndBar" resultMap="cockpitAssessCompositeSuperviseTypeAreaBar,cockpitAssessCompositeLineVO,cockpitAssessRadarActualAreaScoreVO">
         CALL Proc_jsc_QueryAssessLineAndBar
         (
         #{areaTag},

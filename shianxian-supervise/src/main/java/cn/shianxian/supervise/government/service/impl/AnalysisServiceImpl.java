@@ -5,10 +5,7 @@ import cn.shianxian.supervise.common.pojo.Result;
 import cn.shianxian.supervise.common.utils.DateUtils;
 import cn.shianxian.supervise.government.dao.AnalysisDao;
 import cn.shianxian.supervise.government.service.AnalysisService;
-import cn.shianxian.supervise.government.vo.AnalysisVO;
-import cn.shianxian.supervise.government.vo.NodeAnalysisVO;
-import cn.shianxian.supervise.government.vo.PieVO;
-import cn.shianxian.supervise.government.vo.TypeColumnVO;
+import cn.shianxian.supervise.government.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -79,18 +76,25 @@ public class AnalysisServiceImpl implements AnalysisService {
 
     @Override
     public ResponseEntity<Result> selectRadar(QueryPojo queryPojo) {
-        AnalysisVO company = this.analysisDao.selectCompanyRadar(queryPojo);
-        AnalysisVO industry = this.analysisDao.selectIndustryRadar(queryPojo);
+        List<RadarVO> company = this.analysisDao.selectCompanyRadar(queryPojo);
+        List<RadarVO> industry = this.analysisDao.selectIndustryRadar(queryPojo);
+        List<RadarVO> max = this.analysisDao.selectMaxRadar(queryPojo);
         Map<String, Object> map = new HashMap<>();
         map.put("company", company);
         map.put("industry", industry);
+        map.put("max", max);
         return ResponseEntity.ok(Result.data(map));
     }
-
 
     @Override
     public ResponseEntity<Result> selectPie(QueryPojo queryPojo) {
         List<PieVO> list = this.analysisDao.selectPie(queryPojo);
+        return ResponseEntity.ok(Result.data(list));
+    }
+
+    @Override
+    public ResponseEntity<Result> selectPieType(QueryPojo queryPojo) {
+        List<PieTypeVO> list = this.analysisDao.selectPieType(queryPojo);
         return ResponseEntity.ok(Result.data(list));
     }
 

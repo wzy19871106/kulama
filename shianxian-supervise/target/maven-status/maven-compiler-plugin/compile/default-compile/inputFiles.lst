@@ -12,6 +12,7 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\dto\AuthorityDTO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\common\utils\CommonUtils.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\dto\NodeFunctionaryDTO.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitAssessCompositeSuperviseTypeAreaBar.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\pojo\SuperviseInfoMainType.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\service\impl\AreaServiceImpl.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\tibetan\controller\JhMainController.java
@@ -40,6 +41,7 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\service\impl\SuperviseInfoMainTypeServiceImpl.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitAssessVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\face\service\impl\FaceRecognitionServiceImpl.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\government\vo\RadarVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\service\impl\SuperviseInfoOldServiceImpl.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\tibetan\controller\XsInfoController.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\government\pojo\Columned.java
@@ -71,6 +73,7 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\app\controller\AppMapController.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\controller\MapController.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\pojo\Role.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\service\impl\CockpitDistrictServiceImpl.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\common\utils\DateUtils.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\service\impl\CockpitMapServiceImpl.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\io\agora\recording\RecordingEventHandler.java
@@ -142,10 +145,12 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\dao\SuperviseInfoMainTypeDao.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\config\mybatis\MybatisConfig.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\government\service\ColumnedService.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitAssessCompositeLineVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitAssessRadarActualAreaScoreVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\common\pojo\QueryPojo.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\face\dao\FaceRecognitionDao.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\tibetan\service\impl\KhdaServiceImpl.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitAssessRadarActualVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\controller\SuperviseInfoMainController.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\vo\CockpitAssessCompositeVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\plan\service\impl\SupervisePlanSubServiceImpl.java
@@ -171,6 +176,7 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\service\impl\SuperviseServiceImpl.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\tibetan\dao\KhdaDao.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\record\pojo\FunctionaryForaduit.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\government\vo\PieTypeVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\config\cors\CorsConfig.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\common\pojo\Pages.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\app\controller\AppNodeInfoController.java
@@ -239,6 +245,7 @@ D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\superv
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\pojo\SuperviseInfoSub.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\app\controller\AppSuperviseInfoController.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\dao\UserDao.java
+D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\cockpit\service\CockpitDistrictService.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\info\vo\SuperviseInfoTreeVO.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\sys\pojo\Industry.java
 D:\Work\JavaProject\kulama\shianxian-supervise\src\main\java\cn\shianxian\supervise\record\vo\CompanyInfoFunctionaryForaduitVO.java

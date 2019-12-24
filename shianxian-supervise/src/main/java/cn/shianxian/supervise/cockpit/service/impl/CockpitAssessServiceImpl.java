@@ -73,7 +73,15 @@ public class CockpitAssessServiceImpl implements CockpitAssessService {
                 cockpitAssessCompositeSuperviseTypeAreaVO.setCockpitAssessCompositeSuperviseTypeAreaBarList(cockpitAssessCompositeSuperviseTypeAreaBars);
                 //折线图
                 CockpitAssessCompositeSuperviseTypeAreaLineVO cockpitAssessCompositeSuperviseTypeAreaLineVO = new CockpitAssessCompositeSuperviseTypeAreaLineVO();
-                cockpitAssessCompositeSuperviseTypeAreaLineVO.setAssessScore((List<Double>) lists.get(1));
+                List<CockpitAssessCompositeLineVO> cockpitAssessCompositeLineVOS = (List<CockpitAssessCompositeLineVO>) lists.get(1);
+                List<Integer> times = new ArrayList<>();
+                List<Double> scores = new ArrayList<>();
+                for (CockpitAssessCompositeLineVO cockpitAssessCompositeLineVO: cockpitAssessCompositeLineVOS) {
+                    times.add(cockpitAssessCompositeLineVO.getAssessTime());
+                    scores.add(cockpitAssessCompositeLineVO.getAssessScore());
+                }
+                cockpitAssessCompositeSuperviseTypeAreaLineVO.setAssessTime(times);
+                cockpitAssessCompositeSuperviseTypeAreaLineVO.setAssessScore(scores);
                 cockpitAssessCompositeSuperviseTypeAreaVO.setCockpitAssessCompositeSuperviseTypeAreaLineVO(cockpitAssessCompositeSuperviseTypeAreaLineVO);
                 //雷达图
                 CockpitAssessRadarVO cockpitAssessRadarVO = new CockpitAssessRadarVO();

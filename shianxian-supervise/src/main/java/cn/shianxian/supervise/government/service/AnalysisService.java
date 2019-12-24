@@ -46,6 +46,13 @@ public interface AnalysisService {
      */
     ResponseEntity<Result> selectPie(QueryPojo queryPojo);
 
+    /**
+     * 根据监管类型分组查询当年的数据饼图
+     * @param queryPojo
+     * @return
+     */
+    ResponseEntity<Result> selectPieType(QueryPojo queryPojo);
+
 
     /**
      * 监管类型分析

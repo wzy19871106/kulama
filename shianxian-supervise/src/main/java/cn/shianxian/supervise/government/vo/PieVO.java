@@ -15,6 +15,10 @@ public class PieVO {
      */
     private String superviseName;
 
+    /**
+     * 监管数量
+     */
+    private Integer superviseNum;
 
     /**
      * 百分比

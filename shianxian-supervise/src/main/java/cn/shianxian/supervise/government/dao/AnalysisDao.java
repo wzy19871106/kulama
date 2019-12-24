@@ -1,10 +1,7 @@
 package cn.shianxian.supervise.government.dao;
 
 import cn.shianxian.supervise.common.pojo.QueryPojo;
-import cn.shianxian.supervise.government.vo.AnalysisVO;
-import cn.shianxian.supervise.government.vo.NodeAnalysisVO;
-import cn.shianxian.supervise.government.vo.PieVO;
-import cn.shianxian.supervise.government.vo.TypeColumnVO;
+import cn.shianxian.supervise.government.vo.*;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +25,7 @@ public interface AnalysisDao {
      * @param queryPojo
      * @return
      */
-    AnalysisVO selectCompanyRadar(@Param("queryPojo") QueryPojo queryPojo);
+    List<RadarVO> selectCompanyRadar(@Param("queryPojo") QueryPojo queryPojo);
 
 
     /**
@@ -46,7 +43,15 @@ public interface AnalysisDao {
      * @param queryPojo
      * @return
      */
-    AnalysisVO selectIndustryRadar(@Param("queryPojo") QueryPojo queryPojo);
+    List<RadarVO> selectIndustryRadar(@Param("queryPojo") QueryPojo queryPojo);
+
+    /**
+     * 根据时间段，企业编码，返回所需汇总数据(雷达图最大值)
+     *
+     * @param queryPojo
+     * @return
+     */
+    List<RadarVO> selectMaxRadar(@Param("queryPojo") QueryPojo queryPojo);
 
 
     /**
@@ -74,6 +79,12 @@ public interface AnalysisDao {
      */
     List<PieVO> selectPie(@Param("queryPojo") QueryPojo queryPojo);
 
+    /**
+     * 根据监管内容分组查询当年的数据饼图
+     * @param queryPojo
+     * @return
+     */
+    List<PieTypeVO> selectPieType(@Param("queryPojo") QueryPojo queryPojo);
 
     /**
      * 监管类型分析

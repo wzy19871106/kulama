@@ -10,7 +10,7 @@ public class CockpitAssessCompositeSuperviseTypeAreaLineVO {
     /**
      * 考核评议时间
      */
-//    private List<String> assessDate;
+    private List<Integer> assessTime;
 
     /**
      * 考核评议得分

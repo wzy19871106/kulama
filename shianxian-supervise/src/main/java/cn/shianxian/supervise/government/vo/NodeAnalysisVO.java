@@ -27,12 +27,12 @@ public class NodeAnalysisVO {
     private Long superviseTypeNum;
 
     /**
-     * 需要整改的状态
+     * 已整改数
      */
     private Long completeStatus;
 
     /**
-     * 所有的状态
+     * 需整改数
      */
     private Long allStatus;
 
@@ -50,4 +50,9 @@ public class NodeAnalysisVO {
      * 总分数
      */
     private Double score;
+
+    /**
+     *  企业类型
+     */
+    private String industryName;
 }
